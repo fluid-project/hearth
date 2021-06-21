@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace InclusiveDesign\Hearth\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class HearthCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'hearth';
 
     public $description = 'My command';
 

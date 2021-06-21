@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace InclusiveDesign\Hearth\Tests;
 
 class ExampleTest extends TestCase
 {

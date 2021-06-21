@@ -1,17 +1,17 @@
 {
-    "name": "vendor_slug/package_slug",
-    "description": ":package_description",
+    "name": "inclusive-design/hearth",
+    "description": "Simple starter kit for the Laravel framework.",
     "keywords": [
-        ":vendor_name",
+        "inclusive-design",
         "laravel",
-        "package_slug"
+        "hearth"
     ],
-    "homepage": "https://github.com/vendor_slug/package_slug",
+    "homepage": "https://github.com/inclusive-design/hearth",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "OCAD University",
+            "email": "idrc@ocadu.ca",
             "role": "Developer"
         }
     ],
@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "InclusiveDesign\\Hearth\\": "src",
+            "InclusiveDesign\\Hearth\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "InclusiveDesign\\Hearth\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -50,10 +50,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "InclusiveDesign\\Hearth\\HearthServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\SkeletonFacade"
+                "Hearth": "InclusiveDesign\\Hearth\\HearthFacade"
             }
         }
     },
