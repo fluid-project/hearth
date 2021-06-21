@@ -2,9 +2,9 @@
 
 namespace InclusiveDesign\Hearth;
 
+use InclusiveDesign\Hearth\Commands\HearthCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use InclusiveDesign\Hearth\Commands\HearthCommand;
 
 class HearthServiceProvider extends PackageServiceProvider
 {
