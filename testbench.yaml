@@ -1,2 +1,2 @@
 providers:
-  - InclusiveDesign\Hearth\HearthServiceProvider
+  - FluidProject\Hearth\HearthServiceProvider

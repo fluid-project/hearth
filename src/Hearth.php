@@ -1,6 +1,6 @@
 <?php
 
-namespace InclusiveDesign\Hearth;
+namespace FluidProject\Hearth;
 
 class Hearth
 {

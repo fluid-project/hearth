@@ -1,9 +1,9 @@
 <?php
 
-namespace InclusiveDesign\Hearth\Tests;
+namespace FluidProject\Hearth\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use InclusiveDesign\Hearth\HearthServiceProvider;
+use FluidProject\Hearth\HearthServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'InclusiveDesign\\Hearth\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'FluidProject\\Hearth\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

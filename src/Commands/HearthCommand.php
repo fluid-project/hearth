@@ -1,6 +1,6 @@
 <?php
 
-namespace InclusiveDesign\Hearth\Commands;
+namespace FluidProject\Hearth\Commands;
 
 use Illuminate\Console\Command;
 

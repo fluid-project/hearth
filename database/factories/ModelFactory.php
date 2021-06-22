@@ -1,6 +1,6 @@
 <?php
 
-namespace InclusiveDesign\Hearth\Database\Factories;
+namespace FluidProject\Hearth\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

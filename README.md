@@ -1,48 +1,41 @@
-# Simple starter kit for the Laravel framework.
+# Hearth
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/inclusive-design/hearth.svg?style=flat-square)](https://packagist.org/packages/inclusive-design/hearth)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/inclusive-design/hearth/run-tests?label=tests)](https://github.com/inclusive-design/hearth/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/inclusive-design/hearth/Check%20&%20fix%20styling?label=code%20style)](https://github.com/inclusive-design/hearth/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/inclusive-design/hearth.svg?style=flat-square)](https://packagist.org/packages/inclusive-design/hearth)
+A simple starter kit for the Laravel framework.
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/fluid-project/hearth.svg?style=flat-square)](https://packagist.org/packages/fluid-project/hearth)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fluid-project/hearth/run-tests?label=tests)](https://github.com/fluid-project/hearth/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/fluid-project/hearth/Check%20&%20fix%20styling?label=code%20style)](https://github.com/fluid-project/hearth/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/fluid-project/hearth.svg?style=flat-square)](https://packagist.org/packages/fluid-project/hearth)
 
 ---
-This repo can be used as to scaffold a Laravel package. Follow these steps to get started:
 
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this hearth
-2. Run "./configure-hearth.sh" to run a script that will replace all placeholders throughout all the files
-3. Remove this block of text.
-4. Have fun creating your package.
-5. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
+Hearth is a simple starter kit for the Laravel framework. It provides a few things out of the box:
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/hearth.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/hearth)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+- [ ] A user model with login, registration, email verification, and optional two-factor authentication.
+- [ ] An organization model.
+- [ ] A membership model which reflects users' roles within organizations.
+- [ ] An invitation model which allows users to be invited to join organizations.
+- [ ] Multilingual support, including localized routes.
+- [ ] Bare bones views which can be published and customized as needed.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require inclusive-design/hearth
+composer require fluid-project/hearth
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="InclusiveDesign\Hearth\HearthServiceProvider" --tag="hearth-migrations"
+php artisan vendor:publish --provider="FluidProject\Hearth\HearthServiceProvider" --tag="hearth-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="InclusiveDesign\Hearth\HearthServiceProvider" --tag="hearth-config"
+php artisan vendor:publish --provider="FluidProject\Hearth\HearthServiceProvider" --tag="hearth-config"
 ```
 
 This is the contents of the published config file:
@@ -54,10 +47,7 @@ return [
 
 ## Usage
 
-```php
-$hearth = new InclusiveDesign\Hearth();
-echo $hearth->echoPhrase('Hello, Spatie!');
-```
+TODO.
 
 ## Testing
 
@@ -79,9 +69,9 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [OCAD University](https://github.com/inclusive-design)
+- [OCAD University](https://github.com/fluid-project)
 - [All Contributors](../../contributors)
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The BSD 3-Clause License. Please see [License File](LICENSE.md) for more information.

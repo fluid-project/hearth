@@ -1,8 +1,8 @@
 <?php
 
-namespace InclusiveDesign\Hearth;
+namespace FluidProject\Hearth;
 
-use InclusiveDesign\Hearth\Commands\HearthCommand;
+use FluidProject\Hearth\Commands\HearthCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

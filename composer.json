@@ -1,12 +1,12 @@
 {
-    "name": "inclusive-design/hearth",
+    "name": "fluid-project/hearth",
     "description": "Simple starter kit for the Laravel framework.",
     "keywords": [
-        "inclusive-design",
+        "fluid-project",
         "laravel",
         "hearth"
     ],
-    "homepage": "https://github.com/inclusive-design/hearth",
+    "homepage": "https://github.com/fluid-project/hearth",
     "license": "MIT",
     "authors": [
         {
@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "InclusiveDesign\\Hearth\\": "src",
-            "InclusiveDesign\\Hearth\\Database\\Factories\\": "database/factories"
+            "FluidProject\\Hearth\\": "src",
+            "FluidProject\\Hearth\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "InclusiveDesign\\Hearth\\Tests\\": "tests"
+            "FluidProject\\Hearth\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -50,10 +50,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "InclusiveDesign\\Hearth\\HearthServiceProvider"
+                "FluidProject\\Hearth\\HearthServiceProvider"
             ],
             "aliases": {
-                "Hearth": "InclusiveDesign\\Hearth\\HearthFacade"
+                "Hearth": "FluidProject\\Hearth\\HearthFacade"
             }
         }
     },

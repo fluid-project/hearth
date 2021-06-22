@@ -1,6 +1,6 @@
 <?php
 
-namespace InclusiveDesign\Hearth\Tests;
+namespace FluidProject\Hearth\Tests;
 
 class ExampleTest extends TestCase
 {
