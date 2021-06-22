@@ -2,8 +2,8 @@
 
 namespace FluidProject\Hearth\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use FluidProject\Hearth\HearthServiceProvider;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
