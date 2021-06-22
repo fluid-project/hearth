@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.4|^8.0",
         "chinleung/laravel-locales": "^1.2",
         "chinleung/laravel-multilingual-routes": "^2.7",
         "illuminate/contracts": "^8.37",
