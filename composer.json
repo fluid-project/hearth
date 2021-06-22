@@ -16,9 +16,12 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.4.3",
-        "illuminate/contracts": "^8.37"
+        "php": "^7.3|^8.0",
+        "chinleung/laravel-locales": "^1.2",
+        "chinleung/laravel-multilingual-routes": "^2.7",
+        "illuminate/contracts": "^8.37",
+        "laravel/fortify": "^1.7",
+        "spatie/laravel-package-tools": "^1.4.3"
     },
     "require-dev": {
         "brianium/paratest": "^6.2",
