@@ -1,6 +1,6 @@
 <?php
 
-namespace FluidProject\Hearth\Commands;
+namespace Hearth\Commands;
 
 use Illuminate\Console\Command;
 

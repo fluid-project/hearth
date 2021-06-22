@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "FluidProject\\Hearth\\": "src",
-            "FluidProject\\Hearth\\Database\\Factories\\": "database/factories"
+            "Hearth\\": "src",
+            "Hearth\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "FluidProject\\Hearth\\Tests\\": "tests"
+            "Hearth\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -50,10 +50,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "FluidProject\\Hearth\\HearthServiceProvider"
+                "Hearth\\HearthServiceProvider"
             ],
             "aliases": {
-                "Hearth": "FluidProject\\Hearth\\HearthFacade"
+                "Hearth": "Hearth\\HearthFacade"
             }
         }
     },

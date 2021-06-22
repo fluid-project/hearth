@@ -1,8 +1,8 @@
 <?php
 
-namespace FluidProject\Hearth;
+namespace Hearth;
 
-use FluidProject\Hearth\Commands\HearthCommand;
+use Hearth\Commands\HearthCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

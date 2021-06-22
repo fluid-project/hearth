@@ -1,11 +1,11 @@
 <?php
 
-namespace FluidProject\Hearth;
+namespace Hearth;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \FluidProject\Hearth\Hearth
+ * @see \Hearth\Hearth
  */
 class HearthFacade extends Facade
 {

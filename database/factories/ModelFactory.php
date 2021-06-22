@@ -1,6 +1,6 @@
 <?php
 
-namespace FluidProject\Hearth\Database\Factories;
+namespace Hearth\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

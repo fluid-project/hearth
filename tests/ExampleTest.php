@@ -1,6 +1,6 @@
 <?php
 
-namespace FluidProject\Hearth\Tests;
+namespace Hearth\Tests;
 
 class ExampleTest extends TestCase
 {

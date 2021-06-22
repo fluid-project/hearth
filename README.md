@@ -29,13 +29,13 @@ composer require fluid-project/hearth
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="FluidProject\Hearth\HearthServiceProvider" --tag="hearth-migrations"
+php artisan vendor:publish --provider="Hearth\HearthServiceProvider" --tag="hearth-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="FluidProject\Hearth\HearthServiceProvider" --tag="hearth-config"
+php artisan vendor:publish --provider="Hearth\HearthServiceProvider" --tag="hearth-config"
 ```
 
 This is the contents of the published config file:

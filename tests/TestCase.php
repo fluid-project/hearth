@@ -1,8 +1,8 @@
 <?php
 
-namespace FluidProject\Hearth\Tests;
+namespace Hearth\Tests;
 
-use FluidProject\Hearth\HearthServiceProvider;
+use Hearth\HearthServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'FluidProject\\Hearth\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Hearth\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
