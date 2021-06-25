@@ -19,7 +19,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->name('hearth')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_hearth_table')
+            ->hasMigration('2014_10_12_000000_create_users_table')
             ->hasCommand(HearthCommand::class);
     }
 }

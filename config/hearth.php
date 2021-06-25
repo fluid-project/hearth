@@ -1,5 +1,5 @@
 <?php
-// config for InclusiveDesign/ClassName
+// config for Hearth/Hearth
 return [
 
 ];
