@@ -22,7 +22,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasCommand(HearthCommand::class);
     }
 
-    public function boot()
+    public function bootingPackage()
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
