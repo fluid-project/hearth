@@ -19,7 +19,16 @@ class HearthServiceProvider extends PackageServiceProvider
             ->name('hearth')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigrations(['create_users_table'])
             ->hasCommand(HearthCommand::class);
+    }
+
+    public function boot()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../database/migrations/create_users_table.php.stub' =>
+                    database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            ], 'migrations');
+        }
     }
 }
