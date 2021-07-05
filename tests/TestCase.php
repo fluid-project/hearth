@@ -26,7 +26,7 @@ class TestCase extends Orchestra
             FortifyServiceProvider::class,
             HearthServiceProvider::class,
             LaravelLocalesServiceProvider::class,
-            MultilingualRoutesServiceProvider::class
+            MultilingualRoutesServiceProvider::class,
         ];
     }
 
