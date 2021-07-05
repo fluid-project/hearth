@@ -16,11 +16,11 @@ class HearthCommand extends Command
         $this->callSilent('vendor:publish', ['--provider' => 'Laravel\Fortify\FortifyServiceProvider']);
         $this->callSilent('vendor:publish', [
             '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
-            '--tag' => 'config'
+            '--tag' => 'config',
         ]);
         $this->callSilent('vendor:publish', [
             '--provider' => 'ChinLeung\MultilingualRoutes\MultilingualRoutesServiceProvider',
-            '--tag' => 'config'
+            '--tag' => 'config',
         ]);
     }
 }
