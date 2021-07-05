@@ -24,11 +24,13 @@ class HearthServiceProvider extends PackageServiceProvider
 
     public function packageBooted()
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../database/migrations/create_users_table.php.stub' =>
-                    database_path('migrations/2014_10_12_000000_create_users_table.php'),
-            ], 'hearth-migrations');
+        if (! $this->app->runningInConsole()) {
+            return;
         }
+
+        $this->publishes([
+            __DIR__ . '/../database/migrations/create_users_table.php.stub' =>
+                database_path('migrations/2014_10_12_000000_create_users_table.php'),
+        ], 'hearth-migrations');
     }
 }
