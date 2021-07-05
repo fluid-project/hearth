@@ -19,6 +19,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->name('hearth')
             ->hasConfigFile()
             ->hasViews()
+            ->hasRoutes(['fortify'])
             ->hasCommand(HearthCommand::class);
     }
 
