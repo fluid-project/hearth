@@ -13,7 +13,7 @@ class HearthCommand extends Command
 
     public function handle()
     {
-        $this->callSilent('vendor:publish', ['--tag' => 'Hearth\HearthServiceProvider', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--provider' => 'Hearth\HearthServiceProvider', '--force' => true]);
         $this->callSilent('vendor:publish', ['--provider' => 'Laravel\Fortify\FortifyServiceProvider']);
         $this->callSilent('vendor:publish', [
             '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
