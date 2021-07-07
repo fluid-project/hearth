@@ -29,7 +29,7 @@ class HearthCommand extends Command
             '// \Illuminate\Session\Middleware\AuthenticateSession::class,',
             <<<EOT
             \Illuminate\Session\Middleware\AuthenticateSession::class,
-            \ChinLeung\MultilingualRoutes\DetectRequestLocale::class,
+                        \ChinLeung\MultilingualRoutes\DetectRequestLocale::class,
             EOT,
             app_path('Http/Kernel.php')
         );
