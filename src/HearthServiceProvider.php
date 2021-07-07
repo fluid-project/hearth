@@ -21,7 +21,7 @@ class HearthServiceProvider extends PackageServiceProvider
                 'fortify',
                 'hearth',
                 'laravel-multilingual-routes',
-                'locales'])
+                'locales', ])
             ->hasViews()
             ->hasCommand(HearthCommand::class);
     }
