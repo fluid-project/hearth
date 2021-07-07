@@ -27,7 +27,7 @@ class HearthCommand extends Command
         // AuthenticateSession Middleware...
         $this->replaceInFile(
             '// \Illuminate\Session\Middleware\AuthenticateSession::class,',
-            "            \Illuminate\Session\Middleware\AuthenticateSession::class,
+            "\Illuminate\Session\Middleware\AuthenticateSession::class,
             \ChinLeung\MultilingualRoutes\DetectRequestLocale::class,",
             app_path('Http/Kernel.php')
         );
