@@ -32,15 +32,44 @@ class HearthCommand extends Command
             app_path('Http/Kernel.php')
         );
 
+        // RedirectToPreferredLocale Middleware...
+        $this->replaceInFile(
+            "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,",
+            "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+            'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
+            app_path('Http/Kernel.php')
+        );
+
         (new Filesystem())->ensureDirectoryExists(app_path('Actions/Fortify'));
 
-        copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUser.php', app_path('Actions/Fortify/CreateNewUser.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Fortify/PasswordValidationRules.php', app_path('Actions/Fortify/PasswordValidationRules.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Fortify/ResetUserPassword.php', app_path('Actions/Fortify/ResetUserPassword.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Fortify/UpdateUserPassword.php', app_path('Actions/Fortify/UpdateUserPassword.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Fortify/UpdateUserProfileInformation.php', app_path('Actions/Fortify/UpdateUserProfileInformation.php'));
+        copy(
+            __DIR__ . '/../../stubs/app/Actions/Fortify/CreateNewUser.php',
+            app_path('Actions/Fortify/CreateNewUser.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/app/Actions/Fortify/PasswordValidationRules.php',
+            app_path('Actions/Fortify/PasswordValidationRules.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/app/Actions/Fortify/UpdateUserPassword.php',
+            app_path('Actions/Fortify/UpdateUserPassword.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/app/Actions/Fortify/UpdateUserProfileInformation.php',
+            app_path('Actions/Fortify/UpdateUserProfileInformation.php')
+        );
 
-        copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
+        copy(__DIR__ . '/../../stubs/app/Models/User.php', app_path('Models/User.php'));
+
+        copy(
+            __DIR__ . '/../../stubs/app/Http/Middleware/RedirectToPreferredLocale.php',
+            app_path('Http/Middleware/RedirectToPreferredLocale.php')
+        );
+
+        copy(
+            __DIR__ . '/../../stubs/routes/fortify.php',
+            base_path('routes/fortify.php')
+        );
     }
 
     /**
