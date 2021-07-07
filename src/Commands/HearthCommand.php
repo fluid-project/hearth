@@ -19,10 +19,6 @@ class HearthCommand extends Command
             '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
             '--tag' => 'config',
         ]);
-        $this->callSilent('vendor:publish', [
-            '--provider' => 'ChinLeung\MultilingualRoutes\MultilingualRoutesServiceProvider',
-            '--tag' => 'config',
-        ]);
 
         // AuthenticateSession Middleware...
         $this->replaceInFile(
