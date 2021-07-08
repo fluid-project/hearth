@@ -2,10 +2,10 @@
 
 A simple starter kit for the Laravel framework.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/fluid-project/hearth.svg?style=flat-square)](https://packagist.org/packages/fluid-project/hearth)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/fluid-project/hearth.svg)](https://packagist.org/packages/fluid-project/hearth)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fluid-project/hearth/run-tests?label=tests)](https://github.com/fluid-project/hearth/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/fluid-project/hearth/Check%20&%20fix%20styling?label=code%20style)](https://github.com/fluid-project/hearth/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/fluid-project/hearth.svg?style=flat-square)](https://packagist.org/packages/fluid-project/hearth)
+[![Total Downloads](https://img.shields.io/packagist/dt/fluid-project/hearth.svg)](https://packagist.org/packages/fluid-project/hearth)
 
 ---
 
@@ -15,6 +15,7 @@ Hearth is a simple starter kit for the Laravel framework. It provides a few thin
 - [ ] An organization model.
 - [ ] A membership model which reflects users' roles within organizations.
 - [ ] An invitation model which allows users to be invited to join organizations.
+- [ ] A resource model supporting creation of and access to a library of open educational resources in a wide range of formats.
 - [ ] Multilingual support, including localized routes.
 - [ ] Bare bones views which can be published and customized as needed.
 
@@ -26,23 +27,20 @@ You can install the package via composer:
 composer require fluid-project/hearth
 ```
 
-You can publish and run the migrations with:
+After installing the Hearth package, you can use the `hearth:install` command to
+install the Hearth scaffolding within your Laravel application:
 
 ```bash
-php artisan vendor:publish --provider="Hearth\HearthServiceProvider" --tag="hearth-migrations"
+php artisan hearth:install
+```
+
+After installing Hearth, you will need to install and build your NPM dependencies
+and run your database migrations:
+
+```bash
+npm install
+npm run dev
 php artisan migrate
-```
-
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="Hearth\HearthServiceProvider" --tag="hearth-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
 ```
 
 ## Usage
