@@ -23,7 +23,14 @@ class HearthCommand extends Command
         // AuthenticateSession Middleware...
         $this->replaceInFile(
             '// \Illuminate\Session\Middleware\AuthenticateSession::class,',
-            "\Illuminate\Session\Middleware\AuthenticateSession::class,
+            "\Illuminate\Session\Middleware\AuthenticateSession::class,",
+            app_path('Http/Kernel.php')
+        );
+
+        // DetectRequestLocale Middleware...
+        $this->replaceInFile(
+            '\Illuminate\Routing\Middleware\SubstituteBindings::class,',
+            "\Illuminate\Routing\Middleware\SubstituteBindings::class,
             \ChinLeung\MultilingualRoutes\DetectRequestLocale::class,",
             app_path('Http/Kernel.php')
         );
@@ -32,40 +39,62 @@ class HearthCommand extends Command
         $this->replaceInFile(
             "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,",
             "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-            'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
+        'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
             app_path('Http/Kernel.php')
         );
 
         (new Filesystem())->ensureDirectoryExists(app_path('Actions/Fortify'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Requests'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Requests/Auth'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Responses'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
 
-        copy(
-            __DIR__ . '/../../stubs/app/Actions/Fortify/CreateNewUser.php',
-            app_path('Actions/Fortify/CreateNewUser.php')
-        );
-        copy(
-            __DIR__ . '/../../stubs/app/Actions/Fortify/PasswordValidationRules.php',
-            app_path('Actions/Fortify/PasswordValidationRules.php')
-        );
-        copy(
-            __DIR__ . '/../../stubs/app/Actions/Fortify/UpdateUserPassword.php',
-            app_path('Actions/Fortify/UpdateUserPassword.php')
-        );
-        copy(
-            __DIR__ . '/../../stubs/app/Actions/Fortify/UpdateUserProfileInformation.php',
-            app_path('Actions/Fortify/UpdateUserProfileInformation.php')
-        );
+        // App stubs...
+        $app_stubs = [
+            'Actions/Fortify/CreateNewUser.php',
+            'Actions/Fortify/PasswordValidationRules.php',
+            'Actions/Fortify/UpdateUserPassword.php',
+            'Actions/Fortify/UpdateUserProfileInformation.php',
+            'Http/Controllers/UserController.php',
+            'Http/Controllers/VerifyEmailController.php',
+            'Http/Middleware/Authenticate.php',
+            'Http/Middleware/RedirectIfAuthenticated.php',
+            'Http/Middleware/RedirectToPreferredLocale.php',
+            'Models/User.php',
+            'Policies/UserPolicy.php',
+            'Requests/Auth/LoginRequest.php',
+            'Requests/DestroyUserRequest.php',
+            'Responses/LoginResponse.php',
+            'Responses/PasswordResetResponse.php',
+            'Responses/RegisterResponse.php',
+            'Responses/TwoFactorLoginResponse.php',
+            'Rules/Password.php',
+        ];
 
-        copy(__DIR__ . '/../../stubs/app/Models/User.php', app_path('Models/User.php'));
+        foreach ($app_stubs as $path) {
+            copy(__DIR__ . "/../../stubs/app/{$path}", app_path($path));
+        }
 
-        copy(
-            __DIR__ . '/../../stubs/app/Http/Middleware/RedirectToPreferredLocale.php',
-            app_path('Http/Middleware/RedirectToPreferredLocale.php')
-        );
+        // Config stubs...
+        $config_stubs = [
+            'fortify.php',
+            'laravel-multilingual-routes.php',
+            'locales.php',
+        ];
 
-        copy(
-            __DIR__ . '/../../stubs/routes/fortify.php',
-            base_path('routes/fortify.php')
-        );
+        foreach ($config_stubs as $config) {
+            copy(__DIR__ . "/../../stubs/config/{$config}", base_path("config/{$config}"));
+        }
+
+        // Route stubs...
+        $route_stubs = [
+            'fortify.php',
+        ];
+
+        foreach ($route_stubs as $route) {
+            copy(__DIR__ . "/../../stubs/routes/{$route}", base_path("routes/{$route}"));
+        }
     }
 
     /**
