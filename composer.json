@@ -1,12 +1,12 @@
 {
-    "name": "greatislander/hearth",
+    "name": "fluid-project/hearth",
     "description": "Simple starter kit for the Laravel framework.",
     "keywords": [
         "fluid-project",
         "laravel",
         "hearth"
     ],
-    "homepage": "https://github.com/greatislander/hearth",
+    "homepage": "https://github.com/fluid-project/hearth",
     "license": "MIT",
     "authors": [
         {
