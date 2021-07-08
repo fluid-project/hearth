@@ -29,8 +29,8 @@ class HearthCommand extends Command
 
         // DetectRequestLocale Middleware...
         $this->replaceInFile(
-            '\Illuminate\Routing\Middleware\SubstituteBindings::class,',
-            "\Illuminate\Routing\Middleware\SubstituteBindings::class,
+            '\App\Http\Middleware\VerifyCsrfToken::class,',
+            "\App\Http\Middleware\VerifyCsrfToken::class,
             \ChinLeung\MultilingualRoutes\DetectRequestLocale::class,",
             app_path('Http/Kernel.php')
         );
