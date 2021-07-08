@@ -13,6 +13,7 @@ class HearthCommand extends Command
 
     public function handle()
     {
+        // Publish vendor files...
         $this->callSilent('vendor:publish', ['--provider' => 'Hearth\HearthServiceProvider', '--force' => true]);
         $this->callSilent('vendor:publish', ['--provider' => 'Laravel\Fortify\FortifyServiceProvider']);
         $this->callSilent('vendor:publish', [
@@ -43,6 +44,7 @@ class HearthCommand extends Command
             app_path('Http/Kernel.php')
         );
 
+        // Ensure folders are in place...
         (new Filesystem())->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
         (new Filesystem())->ensureDirectoryExists(app_path('Requests'));
