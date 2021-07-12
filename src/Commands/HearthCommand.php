@@ -60,6 +60,7 @@ class HearthCommand extends Command
         (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
         (new Filesystem())->ensureDirectoryExists(app_path('View/Components'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/auth'));
+        (new Filesystem())->ensureDirectoryExists(base_path('resources/views/components'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/errors'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/layouts'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/partials'));
@@ -129,6 +130,12 @@ class HearthCommand extends Command
             'auth/register.blade.php',
             'auth/reset-password.blade.php',
             'auth/verify-email.blade.php',
+            'components/brand.blade.php',
+            'components/dropdown-link.blade.php',
+            'components/dropdown.blade.php',
+            'components/language-switcher.blade.php',
+            'components/nav-link.blade.php',
+            'components/navigation.blade.php',
             'errors/401.blade.php',
             'errors/403.blade.php',
             'errors/404.blade.php',
@@ -157,6 +164,7 @@ class HearthCommand extends Command
         $components = [
             'AppLayout.php',
             'GuestLayout.php',
+            'LanguageSwitcher.php',
         ];
 
         foreach ($components as $component) {
