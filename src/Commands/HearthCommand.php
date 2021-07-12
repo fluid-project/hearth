@@ -51,6 +51,7 @@ class HearthCommand extends Command
         (new Filesystem())->ensureDirectoryExists(app_path('Http/Responses'));
         (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
         (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
+        (new Filesystem())->ensureDirectoryExists(app_path('View/Components'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/auth'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/errors'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/layouts'));
@@ -143,6 +144,16 @@ class HearthCommand extends Command
 
         foreach ($views as $view) {
             copy(__DIR__ . "/../../stubs/resources/views/{$view}", base_path("resources/views/{$view}"));
+        }
+
+        // View components...
+        $components = [
+            'AppLayout.php',
+            'GuestLayout.php',
+        ];
+
+        foreach ($components as $component) {
+            copy(__DIR__ . "/../../stubs/app/{$component}", app_path("View/Components/{$component}"));
         }
     }
 
