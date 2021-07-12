@@ -18,17 +18,17 @@
 
             <!-- Password -->
             <div class="field">
-                <x-label for="password" :value="__('hearth::auth.label_password')" />
+                <x-hearth-label for="password" :value="__('hearth::auth.label_password')" />
 
-                <x-input id="password"
+                <x-hearth-input id="password"
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
             </div>
 
-            <x-button>
+            <x-hearth-button>
                 {{ __('hearth::Confirm') }}
-            </x-button>
+            </x-hearth-button>
         </form>
     </x-auth-card>
 </x-guest-layout>

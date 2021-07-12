@@ -11,9 +11,9 @@
         </div>
 
         @if (session('status') == 'verification-link-sent')
-            <x-alert type="success">
+            <x-hearth-alert type="success">
                 {{ __('hearth::auth.verification_sent') }}
-            </x-alert>
+            </x-hearth-alert>
         @endif
 
         <div>
@@ -21,9 +21,9 @@
                 @csrf
 
                 <div>
-                    <x-button>
+                    <x-hearth-button>
                         {{ __('hearth::auth.resend_verification_email') }}
-                    </x-button>
+                    </x-hearth-button>
                 </div>
             </form>
 

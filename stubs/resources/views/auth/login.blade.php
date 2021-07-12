@@ -17,16 +17,16 @@
 
             <!-- Email Address -->
             <div class="field">
-                <x-label for="email" :value="__('hearth::forms.label_email')" />
+                <x-hearth-label for="email" :value="__('hearth::forms.label_email')" />
 
-                <x-input id="email" type="email" name="email" :value="old('email')" required autofocus />
+                <x-hearth-input id="email" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
             <!-- Password -->
             <div class="field">
-                <x-label for="password" :value="__('hearth::auth.label_password')" />
+                <x-hearth-label for="password" :value="__('hearth::auth.label_password')" />
 
-                <x-input id="password"
+                <x-hearth-input id="password"
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
@@ -48,9 +48,9 @@
             </p>
             @endif
 
-            <x-button>
+            <x-hearth-button>
                 {{ __('hearth::auth.sign_in') }}
-            </x-button>
+            </x-hearth-button>
         </form>
     </x-auth-card>
 </x-guest-layout>

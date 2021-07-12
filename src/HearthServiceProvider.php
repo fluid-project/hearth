@@ -20,6 +20,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasTranslations()
             ->hasViews()
+            ->hasViewComponents('hearth', [Alert::class, LocaleSelect::class, Select::class])
             ->hasCommand(HearthCommand::class);
     }
 
