@@ -26,15 +26,8 @@ class UserController extends Controller
      */
     public function edit()
     {
-        $themes = [];
-
-        foreach (config('themes') as $theme) {
-            $themes[$theme] = __('themes.' . $theme);
-        }
-
         return view('users.edit', [
             'user' => Auth::user(),
-            'themes' => $themes
         ]);
     }
 
@@ -62,7 +55,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        flash(__('user.destroy_succeeded'), 'success');
+        flash(__('hearth::user.destroy_succeeded'), 'success');
 
         return redirect(localized_route('welcome'));
     }

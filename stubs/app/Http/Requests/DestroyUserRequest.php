@@ -42,7 +42,7 @@ class DestroyUserRequest extends FormRequest
             if (!Hash::check($this->current_password, $this->user()->password)) {
                 $validator->errors()->add(
                     'current_password',
-                    __('The provided password does not match your current password.')
+                    __('hearth::The provided password does not match your current password.')
                 );
             }
         })->validateWithBag('destroyAccount');

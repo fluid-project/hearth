@@ -99,13 +99,45 @@ class HearthCommand extends Command
             copy(__DIR__ . "/../../stubs/routes/{$route}", base_path("routes/{$route}"));
         }
 
-        // Factories…
+        // Factories...
         $factories = [
             'UserFactory.php',
         ];
 
         foreach ($factories as $factory) {
             copy(__DIR__ . "/../../database/factories/{$factory}", base_path("database/factories/{$factory}"));
+        }
+
+        // Views...
+        $views = [
+            'auth/confirm-password.blade.php',
+            'auth/forgot-password.blade.php',
+            'auth/login.blade.php',
+            'auth/register.blade.php',
+            'auth/reset-password.blade.php',
+            'auth/verify-email.blade.php',
+            'errors/401.blade.php',
+            'errors/403.blade.php',
+            'errors/404.blade.php',
+            'errors/419.blade.php',
+            'errors/429.blade.php',
+            'errors/500.blade.php',
+            'errors/503.blade.php',
+            'errors/errorpage.blade.php',
+            'layouts/app.blade.php',
+            'layouts/banner.blade.php',
+            'layouts/guest.blade.php',
+            'partials/flash-messages.blade.php',
+            'partials/head.blade.php',
+            'partials/validation-errors.blade.php',
+            'users/admin.blade.php',
+            'users/edit.blade.php',
+            'dashboard.blade.php',
+            'welcome.blade.php',
+        ];
+
+        foreach ($views as $view) {
+            copy(__DIR__ . "/../../stubs/resources/views/{$view}", base_path("resources/views/{$view}"));
         }
     }
 
