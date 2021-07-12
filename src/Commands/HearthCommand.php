@@ -51,6 +51,11 @@ class HearthCommand extends Command
         (new Filesystem())->ensureDirectoryExists(app_path('Http/Responses'));
         (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
         (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
+        (new Filesystem())->ensureDirectoryExists(app_path('resources/views/auth'));
+        (new Filesystem())->ensureDirectoryExists(app_path('resources/views/errors'));
+        (new Filesystem())->ensureDirectoryExists(app_path('resources/views/layouts'));
+        (new Filesystem())->ensureDirectoryExists(app_path('resources/views/partials'));
+        (new Filesystem())->ensureDirectoryExists(app_path('resources/views/users'));
 
         // App stubs...
         $app_stubs = [
