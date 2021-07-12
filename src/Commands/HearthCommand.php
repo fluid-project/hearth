@@ -153,7 +153,7 @@ class HearthCommand extends Command
         ];
 
         foreach ($components as $component) {
-            copy(__DIR__ . "/../../stubs/app/{$component}", app_path("View/Components/{$component}"));
+            copy(__DIR__ . "/../../stubs/app/View/Components/{$component}", app_path("View/Components/{$component}"));
         }
     }
 
