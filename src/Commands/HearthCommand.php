@@ -92,6 +92,7 @@ class HearthCommand extends Command
         // Route stubs...
         $route_stubs = [
             'fortify.php',
+            'web.php',
         ];
 
         foreach ($route_stubs as $route) {
