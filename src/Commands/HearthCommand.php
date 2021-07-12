@@ -97,6 +97,15 @@ class HearthCommand extends Command
         foreach ($route_stubs as $route) {
             copy(__DIR__ . "/../../stubs/routes/{$route}", base_path("routes/{$route}"));
         }
+
+        // Factories…
+        $factories = [
+            'UserFactory.php',
+        ];
+
+        foreach ($factories as $factory) {
+            copy(__DIR__ . "/../../database/factories/{$factory}", base_path("database/factories/{$factory}"));
+        }
     }
 
     /**
