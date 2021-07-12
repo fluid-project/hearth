@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="no-js">
     <head>
-        {{-- @include('partials.head') --}}
+        @include('partials.head')
     </head>
     <body>
-        {{-- @include('layouts.banner') --}}
+        @include('layouts.banner')
 
         <!-- Main Content -->
         <main>
@@ -15,7 +15,7 @@
                 </header>
 
                 <!-- Flash Messages -->
-                {{-- @include('partials.flash-messages') --}}
+                @include('partials.flash-messages')
 
                 <!-- Page Content -->
                 <div class="content flow">

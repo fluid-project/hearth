@@ -21,6 +21,13 @@ class HearthCommand extends Command
             '--tag' => 'config',
         ]);
 
+        // Name...
+        $this->replaceInFile(
+            "env('APP_NAME', 'Laravel')",
+            "env('APP_NAME', 'Hearth')",
+            base_path('config/app.php')
+        );
+
         // AuthenticateSession Middleware...
         $this->replaceInFile(
             '// \Illuminate\Session\Middleware\AuthenticateSession::class,',

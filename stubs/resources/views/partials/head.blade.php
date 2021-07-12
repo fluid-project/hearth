@@ -3,7 +3,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>{{ config('app.name', 'Hearth') }}</title>
-<meta name="description" content="Accessibility in Action supports processes where people with disabilities have the power to make sure that policies, programs, and services by federally regulated entities are accessible to them and respect their human rights.">
+<meta name="description" content="Hearth is a simple starter kit for the Laravel framework.">
 <meta name="theme-color" content="#fff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)">
 
