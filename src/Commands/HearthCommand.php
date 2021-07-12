@@ -46,10 +46,10 @@ class HearthCommand extends Command
 
         // Ensure folders are in place...
         (new Filesystem())->ensureDirectoryExists(app_path('Actions/Fortify'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Http/Requests'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Http/Requests/Auth'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Http/Responses'));
         (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
-        (new Filesystem())->ensureDirectoryExists(app_path('Requests'));
-        (new Filesystem())->ensureDirectoryExists(app_path('Requests/Auth'));
-        (new Filesystem())->ensureDirectoryExists(app_path('Responses'));
         (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
 
         // App stubs...
