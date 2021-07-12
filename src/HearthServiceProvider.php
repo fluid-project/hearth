@@ -20,7 +20,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasTranslations()
             ->hasViews()
-            ->hasViewComponents('hearth', [Alert::class, LocaleSelect::class, Select::class])
+            ->hasViewComponents('hearth', [\Hearth\ViewComponents\Alert::class, \Hearth\ViewComponents\LocaleSelect::class, \Hearth\ViewComponents\Select::class])
             ->hasCommand(HearthCommand::class);
     }
 
@@ -34,5 +34,9 @@ class HearthServiceProvider extends PackageServiceProvider
             __DIR__ . '/../database/migrations/create_users_table.php.stub' =>
                 database_path('migrations/2014_10_12_000000_create_users_table.php'),
         ], 'hearth-migrations');
+
+        $this->publishes([
+            __DIR__ . '/Components' => app_path("View/Components/vendor/hearth"),
+        ], "hearth-components");
     }
 }
