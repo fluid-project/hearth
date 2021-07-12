@@ -22,7 +22,7 @@
         "illuminate/contracts": "^8.37",
         "laravel/fortify": "^1.7",
         "spatie/laravel-package-tools": "^1.9",
-        "spatie/laravel-sluggable": "^3.1"
+        "spatie/laravel-sluggable": "^2.6|^3.1"
     },
     "require-dev": {
         "brianium/paratest": "^6.2",
