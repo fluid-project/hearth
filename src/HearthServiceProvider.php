@@ -23,6 +23,11 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasCommand(HearthCommand::class);
     }
 
+    public function bootingPackage()
+    {
+        $this->configureComponents();
+    }
+
     public function packageBooted()
     {
         if (! $this->app->runningInConsole()) {
@@ -37,5 +42,33 @@ class HearthServiceProvider extends PackageServiceProvider
         $this->publishes([
             __DIR__ . '/Components' => app_path("View/Components/vendor/hearth"),
         ], "hearth-components");
+    }
+
+    /**
+     * Configure the Hearth Blade components.
+     *
+     * @return void
+     */
+    protected function configureComponents()
+    {
+        $this->callAfterResolving(BladeCompiler::class, function () {
+            $this->registerComponent('alert');
+            $this->registerComponent('button');
+            $this->registerComponent('input');
+            $this->registerComponent('label');
+            $this->registerComponent('locale-select');
+            $this->registerComponent('select');
+        });
+    }
+
+    /**
+     * Register the given component.
+     *
+     * @param  string  $component
+     * @return void
+     */
+    protected function registerComponent(string $component)
+    {
+        Blade::component('hearth::components.' . $component, 'hearth-' . $component);
     }
 }
