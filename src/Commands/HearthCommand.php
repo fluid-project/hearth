@@ -128,7 +128,7 @@ class HearthCommand extends Command
         }
 
         // Views...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/', resources_path('views'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
 
         // View components...
         $components = [
@@ -145,8 +145,8 @@ class HearthCommand extends Command
         copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         // Assets...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/css/', resources_path('css'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/js/', resources_path('js'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
 
 
         $this->line('');
