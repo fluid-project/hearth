@@ -5,7 +5,6 @@ namespace Hearth\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Symfony\Component\Process\Process;
 
 class HearthCommand extends Command
 {
