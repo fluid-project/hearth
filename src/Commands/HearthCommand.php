@@ -65,6 +65,7 @@ class HearthCommand extends Command
         (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
         (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
         (new Filesystem())->ensureDirectoryExists(app_path('View/Components'));
+        (new Filesystem())->ensureDirectoryExists(base_path('resources/lang/fr'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/auth'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/components'));
         (new Filesystem())->ensureDirectoryExists(base_path('resources/views/errors'));
