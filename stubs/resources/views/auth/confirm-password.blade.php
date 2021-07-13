@@ -7,7 +7,7 @@
         </x-slot>
 
         <div>
-            {{ __('auth.confirm_intro') }}
+            {{ __('hearth::auth.confirm_intro') }}
         </div>
 
         <!-- Validation Errors -->
@@ -18,7 +18,7 @@
 
             <!-- Password -->
             <div class="field">
-                <x-hearth-label for="password" :value="__('auth.label_password')" />
+                <x-hearth-label for="password" :value="__('hearth::auth.label_password')" />
 
                 <x-hearth-input id="password"
                                 type="password"
@@ -27,7 +27,7 @@
             </div>
 
             <x-hearth-button>
-                {{ __('auth.action_confirm') }}
+                {{ __('hearth::auth.action_confirm') }}
             </x-hearth-button>
         </form>
     </x-auth-card>

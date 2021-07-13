@@ -16,21 +16,21 @@
 
             <!-- Name -->
             <div class="field">
-                <x-hearth-label for="name" :value="__('user.label_name')" />
+                <x-hearth-label for="name" :value="__('hearth::user.label_name')" />
 
                 <x-hearth-input id="name" type="text" name="name" :value="old('name')" required autofocus />
             </div>
 
             <!-- Email Address -->
             <div class="field">
-                <x-hearth-label for="email" :value="__('forms.label_email')" />
+                <x-hearth-label for="email" :value="__('hearth::forms.label_email')" />
 
                 <x-hearth-input id="email" type="email" name="email" :value="old('email')" required />
             </div>
 
             <!-- Password -->
             <div class="field">
-                <x-hearth-label for="password" :value="__('auth.label_password')" />
+                <x-hearth-label for="password" :value="__('hearth::auth.label_password')" />
 
                 <x-hearth-input id="password"
                                 type="password"
@@ -40,7 +40,7 @@
 
             <!-- Confirm Password -->
             <div class="field">
-                <x-hearth-label for="password_confirmation" :value="__('auth.label_password_confirmation')" />
+                <x-hearth-label for="password_confirmation" :value="__('hearth::auth.label_password_confirmation')" />
 
                 <x-hearth-input id="password_confirmation"
                                 type="password"
@@ -49,12 +49,12 @@
 
             <div class="field">
                 <a href="{{ localized_route('login') }}">
-                    {{ __('auth.existing_account_prompt') }}
+                    {{ __('hearth::auth.existing_account_prompt') }}
                 </a>
             </div>
 
             <x-hearth-button>
-                {{ __('auth.create_your_account') }}
+                {{ __('hearth::auth.create_your_account') }}
             </x-hearth-button>
         </form>
     </x-auth-card>

@@ -4,5 +4,5 @@
     </x-slot>
 
     <p>@yield('message')</p>
-    <p><a href="{{ localized_route('welcome') }}" rel="home">{{ __('errors.return_home') }}</a></p>
+    <p><a href="{{ localized_route('welcome') }}" rel="home">{{ __('hearth::errors.return_home') }}</a></p>
 </x-app-layout>

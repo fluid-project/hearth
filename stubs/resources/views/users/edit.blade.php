@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1>
-            {{ __('user.settings') }}
+            {{ __('hearth::user.settings') }}
         </h1>
     </x-slot>
 
@@ -12,7 +12,7 @@
         @csrf
         @method('PUT')
         <div class="field">
-            <x-hearth-label for="name" :value="__('user.label_name')" />
+            <x-hearth-label for="name" :value="__('hearth::user.label_name')" />
             <x-hearth-input id="name" type="name" name="name" :value="old('name', $user->name)" required />
             @error('name', 'updateProfileInformation')
             <x-validation-error>{{ $message }}</x-validation-error>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="field">
-            <x-hearth-label for="email" :value="__('forms.label_email')" />
+            <x-hearth-label for="email" :value="__('hearth::forms.label_email')" />
             <x-hearth-input id="email" type="email" name="email" :value="old('email', $user->email)" required />
             @error('email', 'updateProfileInformation')
             <x-validation-error>{{ $message }}</x-validation-error>
@@ -28,12 +28,12 @@
         </div>
 
         <div class="field">
-            <x-hearth-label for="locale" :value="__('user.label_locale')" />
+            <x-hearth-label for="locale" :value="__('hearth::user.label_locale')" />
             <x-hearth-locale-select :selected="old('locale', $user->locale)" />
         </div>
 
         <x-hearth-button>
-            {{ __('forms.save_changes') }}
+            {{ __('hearth::forms.save_changes') }}
         </x-hearth-button>
     </form>
 </x-app-layout>

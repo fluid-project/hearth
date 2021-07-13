@@ -14,17 +14,30 @@ class HearthCommand extends Command
     public function handle()
     {
         // Publish vendor files...
-        $this->callSilent('vendor:publish', ['--provider' => 'Hearth\HearthServiceProvider', '--force' => true]);
         $this->callSilent('vendor:publish', ['--provider' => 'Laravel\Fortify\FortifyServiceProvider']);
         $this->callSilent('vendor:publish', [
             '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
             '--tag' => 'config',
         ]);
 
+        // Install NPM packages...
+        $this->updateNodePackages(function ($packages) {
+            return [
+                '@accessibility-in-action/looseleaf' => '^1.3',
+                'alpinejs' => '^3.0',
+                'modern-css-reset' => '^1.4',
+            ] + $packages;
+        });
+
+        $this->updateNodePackages(function ($packages) {
+            return [
+                'chokidar' => '^3.5',
+            ] + $packages;
+        }, true);
+
         // Name...
         $this->replaceInFile('APP_NAME=Laravel', 'APP_NAME=Hearth', base_path('.env'));
         $this->replaceInFile('APP_NAME=Laravel', 'APP_NAME=Hearth', base_path('.env.example'));
-
 
         // AuthenticateSession Middleware...
         $this->replaceInFile(
@@ -34,12 +47,7 @@ class HearthCommand extends Command
         );
 
         // DetectRequestLocale Middleware...
-        $this->replaceInFile(
-            '\App\Http\Middleware\VerifyCsrfToken::class,',
-            "\App\Http\Middleware\VerifyCsrfToken::class,
-            \ChinLeung\MultilingualRoutes\DetectRequestLocale::class,",
-            app_path('Http/Kernel.php')
-        );
+        $this->installMiddlewareAfter('VerifyCsrfToken::class', '\ChinLeung\MultilingualRoutes\DetectRequestLocale::class');
 
         // RedirectToPreferredLocale Middleware...
         $this->replaceInFile(
@@ -50,12 +58,7 @@ class HearthCommand extends Command
         );
 
         // FortifyServiceProvider...
-        $this->replaceInFile(
-            'App\Providers\RouteServiceProvider::class,',
-            "App\Providers\RouteServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class,",
-            config_path('app.php')
-        );
+        $this->installServiceProviderAfter('RouteServiceProvider', 'FortifyServiceProvider');
 
         // Ensure folders are in place...
         (new Filesystem())->ensureDirectoryExists(app_path('Actions/Fortify'));
@@ -65,13 +68,6 @@ class HearthCommand extends Command
         (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
         (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
         (new Filesystem())->ensureDirectoryExists(app_path('View/Components'));
-        (new Filesystem())->ensureDirectoryExists(base_path('resources/lang/fr'));
-        (new Filesystem())->ensureDirectoryExists(base_path('resources/views/auth'));
-        (new Filesystem())->ensureDirectoryExists(base_path('resources/views/components'));
-        (new Filesystem())->ensureDirectoryExists(base_path('resources/views/errors'));
-        (new Filesystem())->ensureDirectoryExists(base_path('resources/views/layouts'));
-        (new Filesystem())->ensureDirectoryExists(base_path('resources/views/partials'));
-        (new Filesystem())->ensureDirectoryExists(base_path('resources/views/users'));
 
         // App stubs...
         $app_stubs = [
@@ -130,67 +126,8 @@ class HearthCommand extends Command
             copy(__DIR__ . "/../../database/factories/{$factory}", base_path("database/factories/{$factory}"));
         }
 
-        // Translations...
-        $translations = [
-            'alert.php',
-            'auth.php',
-            'dashboard.php',
-            'errors.php',
-            'forms.php',
-            'mail.php',
-            'passwords.php',
-            'routes.php',
-            'user.php',
-            'validation.php',
-            'welcome.php',
-        ];
-
-        foreach ($translations as $translation) {
-            copy(__DIR__ . "/../../stubs/resources/lang/en/{$translation}", base_path("resources/lang/en/{$translation}"));
-            copy(__DIR__ . "/../../stubs/resources/lang/fr/{$translation}", base_path("resources/lang/fr/{$translation}"));
-        }
-
         // Views...
-        $views = [
-            'auth/confirm-password.blade.php',
-            'auth/forgot-password.blade.php',
-            'auth/login.blade.php',
-            'auth/register.blade.php',
-            'auth/reset-password.blade.php',
-            'auth/verify-email.blade.php',
-            'components/auth-card.blade.php',
-            'components/auth-session-status.blade.php',
-            'components/auth-validation-errors.blade.php',
-            'components/brand.blade.php',
-            'components/dropdown-link.blade.php',
-            'components/dropdown.blade.php',
-            'components/language-switcher.blade.php',
-            'components/nav-link.blade.php',
-            'components/navigation.blade.php',
-            'components/validation-error.blade.php',
-            'errors/401.blade.php',
-            'errors/403.blade.php',
-            'errors/404.blade.php',
-            'errors/419.blade.php',
-            'errors/429.blade.php',
-            'errors/500.blade.php',
-            'errors/503.blade.php',
-            'errors/errorpage.blade.php',
-            'layouts/app.blade.php',
-            'layouts/banner.blade.php',
-            'layouts/guest.blade.php',
-            'partials/flash-messages.blade.php',
-            'partials/head.blade.php',
-            'partials/validation-errors.blade.php',
-            'users/admin.blade.php',
-            'users/edit.blade.php',
-            'dashboard.blade.php',
-            'welcome.blade.php',
-        ];
-
-        foreach ($views as $view) {
-            copy(__DIR__ . "/../../stubs/resources/views/{$view}", base_path("resources/views/{$view}"));
-        }
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/', resources_path('views'));
 
         // View components...
         $components = [
@@ -202,6 +139,137 @@ class HearthCommand extends Command
         foreach ($components as $component) {
             copy(__DIR__ . "/../../stubs/app/View/Components/{$component}", app_path("View/Components/{$component}"));
         }
+
+        // Mix configuration...
+        copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
+
+        // Assets...
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/css/', resources_path('css'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/js/', resources_path('js'));
+
+
+        $this->line('');
+        $this->info('Inertia scaffolding installed successfully.');
+        $this->comment('Please execute "npm install && npm run dev" to build your assets.');
+    }
+
+    /**
+     * Install the service provider in the application configuration file.
+     *
+     * @param  string  $after
+     * @param  string  $name
+     * @return void
+     */
+    protected function installServiceProviderAfter($after, $name)
+    {
+        if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\'.$name.'::class')) {
+            file_put_contents(config_path('app.php'), str_replace(
+                'App\\Providers\\'.$after.'::class,',
+                'App\\Providers\\'.$after.'::class,'.PHP_EOL.'        App\\Providers\\'.$name.'::class,',
+                $appConfig
+            ));
+        }
+    }
+
+    /**
+     * Install the middleware to a group in the application Http Kernel.
+     *
+     * @param  string  $after
+     * @param  string  $name
+     * @param  string  $group
+     * @return void
+     */
+    protected function installMiddlewareAfter($after, $name, $group = 'web')
+    {
+        $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
+
+        $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['), '];');
+        $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
+
+        if (! Str::contains($middlewareGroup, $name)) {
+            $modifiedMiddlewareGroup = str_replace(
+                $after.',',
+                $after.','.PHP_EOL.'            '.$name.',',
+                $middlewareGroup,
+            );
+
+            file_put_contents(app_path('Http/Kernel.php'), str_replace(
+                $middlewareGroups,
+                str_replace($middlewareGroup, $modifiedMiddlewareGroup, $middlewareGroups),
+                $httpKernel
+            ));
+        }
+    }
+
+    /**
+     * Installs the given Composer Packages into the application.
+     *
+     * @param  mixed  $packages
+     * @return void
+     */
+    protected function requireComposerPackages($packages)
+    {
+        $composer = $this->option('composer');
+
+        if ($composer !== 'global') {
+            $command = ['php', $composer, 'require'];
+        }
+
+        $command = array_merge(
+            $command ?? ['composer', 'require'],
+            is_array($packages) ? $packages : func_get_args()
+        );
+
+        (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
+    }
+
+    /**
+     * Update the "package.json" file.
+     *
+     * @param  callable  $callback
+     * @param  bool  $dev
+     * @return void
+     */
+    protected static function updateNodePackages(callable $callback, $dev = true)
+    {
+        if (! file_exists(base_path('package.json'))) {
+            return;
+        }
+
+        $configurationKey = $dev ? 'devDependencies' : 'dependencies';
+
+        $packages = json_decode(file_get_contents(base_path('package.json')), true);
+
+        $packages[$configurationKey] = $callback(
+            array_key_exists($configurationKey, $packages) ? $packages[$configurationKey] : [],
+            $configurationKey
+        );
+
+        ksort($packages[$configurationKey]);
+
+        file_put_contents(
+            base_path('package.json'),
+            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL
+        );
+    }
+
+    /**
+     * Delete the "node_modules" directory and remove the associated lock files.
+     *
+     * @return void
+     */
+    protected static function flushNodeModules()
+    {
+        tap(new Filesystem, function ($files) {
+            $files->deleteDirectory(base_path('node_modules'));
+
+            $files->delete(base_path('yarn.lock'));
+            $files->delete(base_path('package-lock.json'));
+        });
     }
 
     /**
