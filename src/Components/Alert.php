@@ -30,7 +30,7 @@ class Alert extends Component
     {
         $this->type = $type;
 
-        $this->title = $title ? $title : __("hearth::alert." . $type);
+        $this->title = $title ? $title : __("alert." . $type);
     }
 
     /**

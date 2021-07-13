@@ -129,6 +129,26 @@ class HearthCommand extends Command
             copy(__DIR__ . "/../../database/factories/{$factory}", base_path("database/factories/{$factory}"));
         }
 
+        // Translations...
+        $translations = [
+            'alert.php',
+            'auth.php',
+            'dashboard.php',
+            'errors.php',
+            'forms.php',
+            'mail.php',
+            'passwords.php',
+            'routes.php',
+            'user.php',
+            'validation.php',
+            'welcome.php',
+        ];
+
+        foreach ($translations as $translation) {
+            copy(__DIR__ . "/../../stubs/resources/lang/en/{$translation}", base_path("resources/lang/en/{$translation}"));
+            copy(__DIR__ . "/../../stubs/resources/lang/fr/{$translation}", base_path("resources/lang/fr/{$translation}"));
+        }
+
         // Views...
         $views = [
             'auth/confirm-password.blade.php',
