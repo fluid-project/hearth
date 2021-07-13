@@ -34,7 +34,7 @@ class HearthCommand extends Command
             return [
                 'chokidar' => '^3.5',
                 'sass' => '^1.35',
-                'sass-loader' => '^12.1'
+                'sass-loader' => '^12.1',
             ] + $packages;
         }, true);
 
