@@ -39,6 +39,6 @@ class Select extends Component
      */
     public function render()
     {
-        return View::make('components.select');
+        return View::make('hearth::components.select');
     }
 }

@@ -43,6 +43,6 @@ class LocaleSelect extends Component
      */
     public function render()
     {
-        return View::make('components.locale-select');
+        return View::make('hearth::components.locale-select');
     }
 }

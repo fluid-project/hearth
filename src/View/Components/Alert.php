@@ -40,6 +40,6 @@ class Alert extends Component
      */
     public function render()
     {
-        return View::make('components.alert');
+        return View::make('hearth::components.alert');
     }
 }
