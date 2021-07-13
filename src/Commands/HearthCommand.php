@@ -53,8 +53,8 @@ class HearthCommand extends Command
         $this->replaceInFile(
             'App\Providers\RouteServiceProvider::class,',
             "App\Providers\RouteServiceProvider::class,
-            App\Providers\FortifyServiceProvider::class,",
-            base_path('config/app.php')
+        App\Providers\FortifyServiceProvider::class,",
+            config_path('app.php')
         );
 
         // Ensure folders are in place...
