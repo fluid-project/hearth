@@ -1,21 +1,21 @@
 <?php
 
-namespace Hearth\Components;
+namespace Hearth\View\Components;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 
-class LocaleSelect extends Component
+class Select extends Component
 {
     /**
-     * The list of locales.
+     * The select options.
      *
      * @var array
      */
-    public $locales;
+    public $options;
 
     /**
-     * The selected locale.
+     * The selected option.
      *
      * @var string
      */
@@ -26,13 +26,9 @@ class LocaleSelect extends Component
      *
      * @return void
      */
-    public function __construct($selected = "")
+    public function __construct($options, $selected = "")
     {
-        $this->locales = [
-            'en' => 'English',
-            'fr' => 'Français',
-        ];
-
+        $this->options = $options;
         $this->selected = $selected;
     }
 
@@ -43,6 +39,6 @@ class LocaleSelect extends Component
      */
     public function render()
     {
-        return View::make('components.locale-select');
+        return View::make('components.select');
     }
 }
