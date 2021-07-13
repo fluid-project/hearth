@@ -3,6 +3,8 @@
 namespace Hearth;
 
 use Hearth\Commands\HearthCommand;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\View\Compilers\BladeCompiler;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
