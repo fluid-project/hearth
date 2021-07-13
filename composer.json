@@ -21,6 +21,7 @@
         "chinleung/laravel-multilingual-routes": "^2.7",
         "illuminate/contracts": "^8.37",
         "laravel/fortify": "^1.7",
+        "spatie/laravel-flash": "^1.8",
         "spatie/laravel-package-tools": "^1.9",
         "spatie/laravel-sluggable": "^2.6|^3.1"
     },
