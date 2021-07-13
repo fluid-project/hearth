@@ -22,11 +22,9 @@ class HearthCommand extends Command
         ]);
 
         // Name...
-        $this->replaceInFile(
-            "env('APP_NAME', 'Laravel')",
-            "env('APP_NAME', 'Hearth')",
-            base_path('config/app.php')
-        );
+        $this->replaceInFile('APP_NAME=Laravel', 'APP_NAME=Hearth', base_path('.env'));
+        $this->replaceInFile('APP_NAME=Laravel', 'APP_NAME=Hearth', base_path('.env.example'));
+
 
         // AuthenticateSession Middleware...
         $this->replaceInFile(
@@ -49,6 +47,14 @@ class HearthCommand extends Command
             "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
             app_path('Http/Kernel.php')
+        );
+
+        // FortifyServiceProvider...
+        $this->replaceInFile(
+            'App\Providers\RouteServiceProvider::class,',
+            "App\Providers\RouteServiceProvider::class,
+            App\Providers\FortifyServiceProvider::class,",
+            base_path('config/app.php')
         );
 
         // Ensure folders are in place...
