@@ -132,7 +132,7 @@ class HearthCommand extends Command
             'auth/verify-email.blade.php',
             'components/auth-card.blade.php',
             'components/auth-session-status.blade.php',
-            'components/auth-validation-erros.blade.php',
+            'components/auth-validation-errors.blade.php',
             'components/brand.blade.php',
             'components/dropdown-link.blade.php',
             'components/dropdown.blade.php',
