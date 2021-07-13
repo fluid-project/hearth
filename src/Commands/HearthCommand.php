@@ -33,6 +33,8 @@ class HearthCommand extends Command
         $this->updateNodePackages(function ($packages) {
             return [
                 'chokidar' => '^3.5',
+                'sass' => '^1.35',
+                'sass-loader' => '^12.1'
             ] + $packages;
         }, true);
 
@@ -150,7 +152,7 @@ class HearthCommand extends Command
 
 
         $this->line('');
-        $this->info('Inertia scaffolding installed successfully.');
+        $this->info('Hearth scaffolding installed successfully.');
         $this->comment('Please execute "npm install && npm run dev" to build your assets.');
     }
 
