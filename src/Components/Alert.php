@@ -2,6 +2,7 @@
 
 namespace Hearth\Components;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 
 class Alert extends Component
@@ -35,10 +36,10 @@ class Alert extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function render()
     {
-        return view('components.alert');
+        return View::make('components.alert');
     }
 }
