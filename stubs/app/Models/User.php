@@ -16,16 +16,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphedByMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class User extends Authenticatable implements HasLocalePreference, MustVerifyEmail
 {
-    use CascadesDeletes;
     use HasFactory;
     use HasSlug;
-    use HasTranslations;
     use Notifiable;
 
     /**
@@ -38,7 +35,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
         'email',
         'password',
         'locale',
-        'theme'
     ];
 
     /**
@@ -59,15 +55,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    /**
-     * The attributes that are translatable.
-     *
-     * @var array
-     */
-    public $translatable = [];
-
-    protected $cascadeDeletes = ['organizations'];
 
     /**
      * Get the options for generating the slug.
@@ -97,43 +84,5 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     public function preferredLocale()
     {
         return $this->locale;
-    }
-
-    /**
-     * Get the consultant profile associated with the user.
-     */
-    public function profile(): HasOne
-    {
-        return $this->hasOne(Profile::class);
-    }
-
-    /**
-     * Get the user's memberships.
-     */
-    public function memberships(): HasMany
-    {
-        return $this->hasMany(Membership::class);
-    }
-
-    /**
-     * Determine if the user is a member of a given memberable.
-     *
-     * @param mixed $memberable
-     * @return bool
-     */
-    public function isMemberOf($memberable)
-    {
-        return $memberable->hasUserWithEmail($this->email);
-    }
-
-    /**
-     * Determine if the user is an administrator of a given memberable.
-     *
-     * @param mixed $memberable
-     * @return bool
-     */
-    public function isAdministratorOf($memberable)
-    {
-        return $memberable->hasAdministratorWithEmail($this->email);
     }
 }

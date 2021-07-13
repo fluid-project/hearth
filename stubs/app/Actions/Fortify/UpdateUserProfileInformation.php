@@ -29,10 +29,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 Rule::unique('users')->ignore($user->id),
             ],
             'locale' => ['required', Rule::in(['en', 'fr'])],
-            'theme' => ['required', Rule::in(config('themes'))],
         ])->validateWithBag('updateProfileInformation');
 
-        if ($input['email'] !== $user->email &&
+        if (
+            $input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail
         ) {
             $this->updateVerifiedUser($user, $input);
@@ -41,7 +41,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'locale' => $input['locale'],
-                'theme' => $input['theme']
             ])->save();
         }
 

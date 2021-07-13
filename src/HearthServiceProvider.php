@@ -20,7 +20,6 @@ class HearthServiceProvider extends PackageServiceProvider
         $package
             ->name('hearth')
             ->hasConfigFile()
-            ->hasTranslations()
             ->hasViews()
             ->hasCommand(HearthCommand::class);
     }
