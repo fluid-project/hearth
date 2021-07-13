@@ -21,13 +21,15 @@ Hearth is a simple starter kit for the Laravel framework. It provides a few thin
 
 ## Installation
 
-You can install the package via composer:
+You may use Composer to install Hearth into your new Laravel project:
 
 ```bash
 composer require fluid-project/hearth
 ```
 
-After installing the Hearth package, you can use the `hearth:install` command to
+_Note: attempting to install Hearth into an existing Laravel application will result in unexpected behaviour._
+
+After installing the Hearth package, you can use the `hearth:install` Artisan command to
 install the Hearth scaffolding within your Laravel application:
 
 ```bash
