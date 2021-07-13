@@ -85,6 +85,7 @@ class HearthCommand extends Command
             'Http/Responses/TwoFactorLoginResponse.php',
             'Models/User.php',
             'Policies/UserPolicy.php',
+            'Providers/FortifyServiceProvider.php',
             'Rules/Password.php',
         ];
 
