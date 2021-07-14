@@ -36,7 +36,6 @@ class HearthCommand extends Command
 
         $this->updateNodePackages(function ($packages) {
             return [
-                'chokidar' => '^3.5',
                 'sass' => '^1.35',
                 'sass-loader' => '^12.1',
             ] + $packages;
