@@ -2,6 +2,7 @@
 
 namespace Hearth\View\Components;
 
+use CommerceGuys\Intl\Language\LanguageRepository;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 
@@ -28,10 +29,18 @@ class LocaleSelect extends Component
      */
     public function __construct($selected = "")
     {
-        $this->locales = [
-            'en' => 'English',
-            'fr' => 'Français',
-        ];
+        $languages = new LanguageRepository();
+
+        $locales = config('locales.supported', [
+            'en',
+            'fr',
+        ]);
+
+        $this->locales = [];
+
+        foreach ($locales as $locale) {
+            $this->locales[$locale] = $languages->get($locale, $locale)->getName();
+        }
 
         $this->selected = $selected;
     }
