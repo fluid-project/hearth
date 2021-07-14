@@ -20,6 +20,10 @@ class HearthCommand extends Command
             '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
             '--tag' => 'config',
         ]);
+        $this->callSilent('vendor:publish', [
+            '--provider' => 'Spatie\GoogleFonts\GoogleFontsServiceProvider',
+            '--tag' => 'google-fonts-config',
+        ]);
 
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
@@ -142,6 +146,13 @@ class HearthCommand extends Command
         foreach ($components as $component) {
             copy(__DIR__ . "/../../stubs/app/View/Components/{$component}", app_path("View/Components/{$component}"));
         }
+
+        // Fonts...
+        $this->replaceInFile(
+            'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400;1,700',
+            'https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+            config_path('google-fonts.php')
+        );
 
         // Mix configuration...
         copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
