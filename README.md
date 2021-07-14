@@ -36,13 +36,14 @@ install the Hearth scaffolding within your Laravel application:
 php artisan hearth:install
 ```
 
-After installing Hearth, you will need to install and build your NPM dependencies
-and run your database migrations:
+After installing Hearth, you will need to install and build your NPM dependencies, run your database migrations and link
+public storage:
 
 ```bash
 npm install
 npm run dev
 php artisan migrate
+php artisan storage:link
 ```
 
 ## Usage
