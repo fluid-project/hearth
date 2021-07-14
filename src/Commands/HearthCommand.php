@@ -36,6 +36,7 @@ class HearthCommand extends Command
 
         $this->updateNodePackages(function ($packages) {
             return [
+                'resolve-url-loader' => '^4.0.0',
                 'sass' => '^1.35',
                 'sass-loader' => '^12.1',
             ] + $packages;
