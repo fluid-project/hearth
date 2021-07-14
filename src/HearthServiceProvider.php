@@ -13,13 +13,17 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class HearthServiceProvider extends PackageServiceProvider
 {
+    /**
+     * Configure the PackageServiceProvider.
+     *
+     * @see https://github.com/spatie/laravel-package-tools
+     *
+     * @param \Spatie\LaravelPackageTools\Package $package
+     *
+     * @return void
+     */
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('hearth')
             ->hasConfigFile()
@@ -28,11 +32,25 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasCommand(HearthCommand::class);
     }
 
+    /**
+     * Custom logic which should be run at the start of the boot method of PackageServiceProvider
+     *
+     * @see https://github.com/spatie/laravel-package-tools#using-lifecycle-hooks
+     *
+     * @return void
+     */
     public function bootingPackage()
     {
         $this->configureComponents();
     }
 
+    /**
+     * Custom logic which should be run at the end of the boot method of PackageServiceProvider
+     *
+     * @see https://github.com/spatie/laravel-package-tools#using-lifecycle-hooks
+     *
+     * @return void
+     */
     public function packageBooted()
     {
         if (! $this->app->runningInConsole()) {
@@ -72,6 +90,7 @@ class HearthServiceProvider extends PackageServiceProvider
      * Register the given component.
      *
      * @param  string  $component
+     *
      * @return void
      */
     protected function registerComponent(string $component)
