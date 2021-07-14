@@ -28,18 +28,16 @@ class LanguageSwitcher extends Component
      */
     public function __construct()
     {
-        $languages = new LanguageRepository();
-
-        $locales = config('locales.supported', [
-            'en-ca',
-            'fr-ca',
-        ]);
-
-        $this->locales = [];
-
-        foreach ($locales as $locale) {
-            $this->locales[$locale] = $languages->get($locale, $locale)->getName();
-        }
+        $this->locales = [
+            'en' => [
+                'code' => 'en-CA',
+                'name' => 'English',
+            ],
+            'fr' => [
+                'code' => 'fr-CA',
+                'name' => 'Français',
+            ],
+        ];
     }
 
     /**

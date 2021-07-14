@@ -32,8 +32,8 @@ class LocaleSelect extends Component
         $languages = new LanguageRepository();
 
         $locales = config('locales.supported', [
-            'en-ca',
-            'fr-ca',
+            'en',
+            'fr',
         ]);
 
         $this->locales = [];

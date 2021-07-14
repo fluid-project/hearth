@@ -12,7 +12,7 @@
         <form method="POST" action="{{ localized_route('register') }}">
             @csrf
 
-            <x-hearth-input id="locale" type="hidden" name="locale" value="{{ locale() ?: 'en-ca' }}" />
+            <x-hearth-input id="locale" type="hidden" name="locale" value="{{ locale() ?: 'en' }}" />
 
             <!-- Name -->
             <div class="field">
