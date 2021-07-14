@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\VerifyEmailController;
+use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Features;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\ConfirmablePasswordController;
 use Laravel\Fortify\Http\Controllers\EmailVerificationNotificationController;
@@ -9,9 +12,6 @@ use Laravel\Fortify\Http\Controllers\PasswordController;
 use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 use Laravel\Fortify\Http\Controllers\ProfileInformationController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
-use App\Http\Controllers\VerifyEmailController;
-use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Features;
 
 Route::group(['middleware' => config('fortify.middleware', ['web'])], function () {
     if (Features::enabled(Features::registration())) {

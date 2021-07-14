@@ -60,7 +60,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'name' => $input['name'],
             'email' => $input['email'],
             'email_verified_at' => null,
-            'locale' => $input['locale']
+            'locale' => $input['locale'],
         ])->save();
 
         $user->sendEmailVerificationNotification();
