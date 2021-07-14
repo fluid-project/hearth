@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
 Route::group(['middleware' => config('fortify.middleware', ['web'])], function () {
-    $enableViews = config('fortify.views', true);
-
     if (Features::enabled(Features::registration())) {
         Route::multilingual('/register', [RegisteredUserController::class, 'create'])
             ->middleware('guest')
@@ -26,11 +24,9 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
             ->middleware('guest');
     }
 
-    if ($enableViews) {
-        Route::multilingual('/login', [AuthenticatedSessionController::class, 'create'])
-            ->middleware('guest')
-            ->name('login');
-    }
+    Route::multilingual('/login', [AuthenticatedSessionController::class, 'create'])
+        ->middleware('guest')
+        ->name('login');
 
     $limiter = config('fortify.limiters.login');
 
@@ -47,16 +43,14 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
         ->name('logout');
 
     if (Features::enabled(Features::resetPasswords())) {
-        if ($enableViews) {
-            Route::multilingual('/forgot-password', [PasswordResetLinkController::class, 'create'])
-                ->middleware('guest')
-                ->name('password.request');
+        Route::multilingual('/forgot-password', [PasswordResetLinkController::class, 'create'])
+            ->middleware('guest')
+            ->name('password.request');
 
 
-            Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
-                ->middleware('guest')
-                ->name('password.reset');
-        }
+        Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+            ->middleware('guest')
+            ->name('password.reset');
 
         Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
         ->middleware('guest')
@@ -69,11 +63,9 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     }
 
     if (Features::enabled(Features::emailVerification())) {
-        if ($enableViews) {
-            Route::multilingual('/verify-email', [EmailVerificationPromptController::class, '__invoke'])
-                ->middleware('auth')
-                ->name('verification.notice');
-        }
+        Route::multilingual('/verify-email', [EmailVerificationPromptController::class, '__invoke'])
+            ->middleware('auth')
+            ->name('verification.notice');
 
         Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
             ->middleware(['auth', 'signed', 'throttle:6,1'])
@@ -98,11 +90,9 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
             ->name('user-password.update');
     }
 
-    if ($enableViews) {
-        Route::multilingual('/confirm-password', [ConfirmablePasswordController::class, 'show'])
-            ->middleware('auth')
-            ->name('password.confirm');
-    }
+    Route::multilingual('/confirm-password', [ConfirmablePasswordController::class, 'show'])
+        ->middleware('auth')
+        ->name('password.confirm');
 
     Route::multilingual('/confirm-password', [ConfirmablePasswordController::class, 'store'])
         ->method('post')
