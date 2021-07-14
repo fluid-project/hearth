@@ -75,3 +75,13 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## License
 
 The BSD 3-Clause License. Please see [License File](LICENSE.md) for more information.
+
+## Third Party Software in Hearth
+
+Hearth is based on other publicly available software, categorized by license:
+
+### MIT License
+
+- [Laravel Breeze](https://github.com/laravel/breeze)
+- [Laravel Jetstream](https://github.com/laravel/jetstream)
+- [Laravel Package Skeleton](https://github.com/spatie/package-skeleton-laravel)
