@@ -1,7 +1,8 @@
 <?php
 
-namespace App\View\Components;
+namespace Hearth\View\Components;
 
+use CommerceGuys\Intl\Language\LanguageRepository;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
@@ -28,16 +29,18 @@ class LanguageSwitcher extends Component
      */
     public function __construct()
     {
-        $this->locales = [
-            'en' => [
-                'code' => 'en-CA',
-                'name' => 'English',
-            ],
-            'fr' => [
-                'code' => 'fr-CA',
-                'name' => 'Français',
-            ],
-        ];
+        $languages = new LanguageRepository();
+
+        $locales = config('locales.supported', [
+            'en',
+            'fr',
+        ]);
+
+        $this->locales = [];
+
+        foreach ($locales as $locale) {
+            $this->locales[$locale] = $languages->get($locale, $locale)->getName();
+        }
     }
 
     /**

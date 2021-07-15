@@ -55,5 +55,5 @@
     @endauth
 
     <!-- Language Switcher -->
-    <x-language-switcher />
+    <x-hearth-language-switcher />
 </nav>

@@ -140,7 +140,6 @@ class HearthCommand extends Command
         $components = [
             'AppLayout.php',
             'GuestLayout.php',
-            'LanguageSwitcher.php',
         ];
 
         foreach ($components as $component) {

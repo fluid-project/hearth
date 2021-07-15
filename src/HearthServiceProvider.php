@@ -4,6 +4,7 @@ namespace Hearth;
 
 use Hearth\Commands\HearthCommand;
 use Hearth\View\Components\Alert;
+use Hearth\View\Components\LanguageSwitcher;
 use Hearth\View\Components\LocaleSelect;
 use Hearth\View\Components\Select;
 use Illuminate\Support\Facades\Blade;
@@ -75,12 +76,14 @@ class HearthServiceProvider extends PackageServiceProvider
             $this->registerComponent('button');
             $this->registerComponent('input');
             $this->registerComponent('label');
+            $this->registerComponent('language-switcher');
             $this->registerComponent('locale-select');
             $this->registerComponent('select');
         });
 
         $this->loadViewComponentsAs('hearth', [
             Alert::class,
+            LanguageSwitcher::class,
             LocaleSelect::class,
             Select::class,
         ]);
