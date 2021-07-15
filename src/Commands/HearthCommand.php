@@ -161,6 +161,9 @@ class HearthCommand extends Command
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
 
+        // Language files...
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/lang/', resource_path('lang'));
+
 
         $this->line('');
         $this->info('Hearth scaffolding installed successfully.');

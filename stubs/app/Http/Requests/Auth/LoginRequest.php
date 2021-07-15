@@ -49,7 +49,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => __('hearth::auth.failed'),
+                'email' => __('auth.failed'),
             ]);
         }
 
