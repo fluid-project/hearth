@@ -4,6 +4,7 @@ namespace Hearth\View\Components;
 
 use CommerceGuys\Intl\Language\LanguageRepository;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 
 class LanguageSwitcher extends Component
@@ -50,13 +51,6 @@ class LanguageSwitcher extends Component
      */
     public function render()
     {
-        return view('components.language-switcher');
-    }
-
-    public function getLocalizedRoute($locale)
-    {
-        return Route::currentRouteName()
-            ? current_route($locale)
-            : localized_route('welcome', [], $locale);
+        return View::make('hearth::components.language-switcher');
     }
 }
