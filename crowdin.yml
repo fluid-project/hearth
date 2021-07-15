@@ -1,3 +1,6 @@
 files:
   - source: /resources/lang/en/*.php
     translation: /resources/lang/%two_letters_code%/%file_name%.php
+pull_request_title: "chore(l10n): update translations"
+commit_message: "chore(l10n): translate %original_file_name% into %language%"
+append_commit_message: false
