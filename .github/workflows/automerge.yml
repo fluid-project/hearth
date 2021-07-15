@@ -1,0 +1,17 @@
+name: Automerge localizations
+
+on: [pull_request]
+
+jobs:
+  automerge:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Automerge localizations
+        uses: "pascalgn/automerge-action@v0.14.2"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_LABELS: localization
+          MERGE_METHOD: squash
+          MERGE_COMMIT_MESSAGE: pull-request-title
