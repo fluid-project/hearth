@@ -28,7 +28,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'max:255',
                 Rule::unique('users')->ignore($user->id),
             ],
-            'locale' => ['required', Rule::in(['en', 'fr'])],
+            'locale' => ['required', Rule::in(config('locales.supported', ['en', 'fr']))],
         ])->validateWithBag('updateProfileInformation');
 
         if (
