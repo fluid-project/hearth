@@ -157,6 +157,7 @@ class HearthCommand extends Command
         copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         // Assets...
+        (new Filesystem())->delete(resource_path('css/app.css'));
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
 
