@@ -1,3 +1,6 @@
 <?php
 
-return [];
+return [
+    'title' => 'Dashboard',
+    'welcome' => 'Welcome, :name!'
+];
