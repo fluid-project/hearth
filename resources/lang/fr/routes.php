@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'dashboard' => 'dashboard',
-    'logout' => 'logout',
-    'login' => 'login',
-    'register' => 'register',
+    'dashboard' => 'tableau-de-bord',
+    'logout' => 'se-deconnecter',
+    'login' => 'se-connecter',
+    'register' => 'inscription',
 ];
