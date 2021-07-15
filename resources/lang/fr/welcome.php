@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'intro' => 'Welcome to Hearth!',
-    'details' => 'Make yourself at home.',
+    'intro' => 'Bienvenue chez Hearth!',
+    'details' => 'Faites-vous comme chez vous.',
 ];
