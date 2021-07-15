@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'save_changes' => 'Save changes',
-    'label_email' => 'Email address',
-    'errors_found' => 'Errors found',
-    'errors_found_message' => 'Sorry, some errors were found in your submission. Please correct these errors and try again.'
+    'save_changes' => 'Sauvegarder les modifications',
+    'label_email' => 'Adresse e-mail',
+    'errors_found' => 'Erreurs trouvées',
+    'errors_found_message' => 'Désolé, certaines erreurs ont été trouvées dans votre envoi. Veuillez corriger ces erreurs et réessayer.'
 ];
