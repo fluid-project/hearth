@@ -50,8 +50,8 @@ php artisan storage:link
 
 In order to test emails (for example, using Mailhog with [Laravel Sail](https://laravel.com/docs/8.x/sail#previewing-emails)),
 you must update your Laravel application's `.env` file's `MAIL_FROM_ADDRESS` environment variable with a
-properly-formatted email address. For local development, this might be `admin@laravel.test` (assuming your local
- application is accessible at `http://laravel.test`).
+properly-formatted email address. For local development, this might be `noreply@hearth.test` (assuming your local
+ application is accessible at `http://hearth.test`).
 
 ## Usage
 
