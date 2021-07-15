@@ -16,12 +16,16 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "chinleung/laravel-locales": "^1.2",
         "chinleung/laravel-multilingual-routes": "^2.7",
+        "commerceguys/intl": "^1.1",
         "illuminate/contracts": "^8.37",
         "laravel/fortify": "^1.7",
-        "spatie/laravel-package-tools": "^1.4.3"
+        "spatie/laravel-flash": "^1.8",
+        "spatie/laravel-google-fonts": "^1.0",
+        "spatie/laravel-package-tools": "^1.9",
+        "spatie/laravel-sluggable": "^3.1"
     },
     "require-dev": {
         "brianium/paratest": "^6.2",

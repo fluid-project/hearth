@@ -1,2 +1,2 @@
 providers:
-  - FluidProject\Hearth\HearthServiceProvider
+  - Hearth\HearthServiceProvider

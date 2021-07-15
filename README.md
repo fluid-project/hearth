@@ -21,27 +21,37 @@ Hearth is a simple starter kit for the Laravel framework. It provides a few thin
 
 ## Installation
 
-You can install the package via composer:
+You may use Composer to install Hearth into your new Laravel project:
 
 ```bash
 composer require fluid-project/hearth
 ```
 
-After installing the Hearth package, you can use the `hearth:install` command to
+_Note: attempting to install Hearth into an existing Laravel application will result in unexpected behaviour._
+
+After installing the Hearth package, you can use the `hearth:install` Artisan command to
 install the Hearth scaffolding within your Laravel application:
 
 ```bash
 php artisan hearth:install
 ```
 
-After installing Hearth, you will need to install and build your NPM dependencies
-and run your database migrations:
+After installing Hearth, you will need to install and build your NPM dependencies, run your database migrations and link
+public storage:
 
 ```bash
 npm install
 npm run dev
 php artisan migrate
+php artisan storage:link
 ```
+
+### Emails
+
+In order to test emails (for example, using Mailhog with [Laravel Sail](https://laravel.com/docs/8.x/sail#previewing-emails)),
+you must update your Laravel application's `.env` file's `MAIL_FROM_ADDRESS` environment variable with a
+properly-formatted email address. For local development, this might be `noreply@hearth.test` (assuming your local
+ application is accessible at `http://hearth.test`).
 
 ## Usage
 
@@ -73,3 +83,13 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## License
 
 The BSD 3-Clause License. Please see [License File](LICENSE.md) for more information.
+
+## Third Party Software in Hearth
+
+Hearth is based on other publicly available software, categorized by license:
+
+### MIT License
+
+- [Laravel Breeze](https://github.com/laravel/breeze)
+- [Laravel Jetstream](https://github.com/laravel/jetstream)
+- [Laravel Package Skeleton](https://github.com/spatie/package-skeleton-laravel)

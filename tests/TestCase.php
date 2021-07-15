@@ -2,8 +2,11 @@
 
 namespace Hearth\Tests;
 
+use ChinLeung\LaravelLocales\LaravelLocalesServiceProvider;
+use ChinLeung\MultilingualRoutes\MultilingualRoutesServiceProvider;
 use Hearth\HearthServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Laravel\Fortify\FortifyServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -20,7 +23,10 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
+            FortifyServiceProvider::class,
             HearthServiceProvider::class,
+            LaravelLocalesServiceProvider::class,
+            MultilingualRoutesServiceProvider::class,
         ];
     }
 
@@ -28,9 +34,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_hearth_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+        include_once __DIR__.'/../database/migrations/create_users_table.php.stub';
+        (new \CreateUsersTable())->up();
     }
 }

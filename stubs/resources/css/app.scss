@@ -1,0 +1,132 @@
+@import "modern-css-reset";
+@import "@accessibility-in-action/looseleaf";
+
+// Banner
+@media (min-width: 768px) {
+    [role="banner"] .wrapper {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-block: var(--step-2);
+    }
+}
+
+// Alert
+.alert {
+    border: var(--ll-border-thin);
+    border-radius: var(--ll-border-radius);
+    padding: var(--step-0) var(--step-1);
+
+    .title {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        font-weight: 700;
+    }
+}
+
+// Authentication Card
+.auth-card {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+
+    > * {
+        max-width: calc(65ch / 2);
+        width: 100%;
+    }
+}
+
+.auth-card__logo {
+    text-align: center;
+}
+
+// Brand
+.brand {
+    font-size: var(--step-2);
+}
+
+// Dropdown
+.dropdown .dropdown__content {
+    background-color: var(--ll-background-color);
+    border: var(--ll-border-thin);
+    border-radius: var(--ll-border-radius);
+    padding: var(--step--5) var(--step--4);
+    text-align: start;
+}
+
+@media (min-width: 768px) {
+    .dropdown {
+        position: relative;
+
+        .dropdown__content {
+            height: auto;
+            inset-inline-end: 0;
+            position: absolute;
+            text-align: end;
+            white-space: nowrap;
+            width: auto;
+        }
+    }
+}
+
+// Navigation
+nav {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: var(--step-2);
+}
+
+nav ul {
+    margin: 0;
+    padding-inline-start: 0;
+}
+
+nav ul > li {
+    padding-inline-start: 0;
+}
+
+nav ul > li::before {
+    display: none;
+}
+
+nav > * + * {
+    margin-block-start: var(--step--2);
+}
+
+nav .link {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+nav .icon {
+    height: 1em;
+    margin-inline-end: 0.125em;
+    width: 1em;
+}
+
+@media (min-width: 768px) {
+    nav {
+        flex-direction: row;
+        margin-block-start: 0;
+        margin-inline-start: auto;
+    }
+
+    nav > * + * {
+        margin-block-start: 0;
+        margin-inline-start: var(--step--2);
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: row;
+    }
+
+    nav ul > li + li {
+        margin-inline-start: var(--step--2);
+    }
+}
