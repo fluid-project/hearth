@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'settings' => 'Settings',
-    'account' => 'Account',
-    'label_name' => 'Full name',
-    'label_locale' => 'Preferred language',
-    'delete_account' => 'Delete account',
-    'delete_account_intro' => 'Your account will be deleted and cannot be recovered. If you still want to delete your account, please enter your current password to proceed.',
-    'action_delete_account' => 'Delete my account',
-    'settings_update_succeeded' => 'Your settings have been saved.',
-    'destroy_succeeded' => 'Your account has been deleted.',
+    'settings' => 'Paramètres',
+    'account' => 'Compte',
+    'label_name' => 'Nom complet',
+    'label_locale' => 'Langue préférée',
+    'delete_account' => 'Supprimer le compte',
+    'delete_account_intro' => 'Votre compte sera supprimé et ne pourra pas être récupéré. Si vous souhaitez toujours supprimer votre compte, veuillez entrer votre mot de passe actuel pour continuer.',
+    'action_delete_account' => 'Supprimer le compte',
+    'settings_update_succeeded' => 'Vos paramètres ont été enregistrés.',
+    'destroy_succeeded' => 'Votre compte a été supprimé.',
 ];
