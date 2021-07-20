@@ -15,6 +15,7 @@ class HearthCommand extends Command
     public function handle()
     {
         // Publish vendor files...
+        $this->callSilent('vendor:publish', ['--provider' => 'Hearth\HearthServiceProvider', '--tag' => 'hearth-migrations']);
         $this->callSilent('vendor:publish', ['--provider' => 'Laravel\Fortify\FortifyServiceProvider']);
         $this->callSilent('vendor:publish', [
             '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
