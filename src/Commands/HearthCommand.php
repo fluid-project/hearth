@@ -64,6 +64,12 @@ class HearthCommand extends Command
         'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
             app_path('Http/Kernel.php')
         );
+        // RequirePassword Middleware...
+        $this->replaceInFile(
+            '\Illuminate\Auth\Middleware\RequirePassword::class',
+            '\App\Http\Middleware\RequirePassword::class',
+            app_path('Http/Kernel.php')
+        );
 
         // FortifyServiceProvider...
         $this->installServiceProviderAfter('RouteServiceProvider', 'FortifyServiceProvider');
