@@ -58,6 +58,16 @@
         </em>
     </p>
 
+    @if ($user->twoFactorAuthEnabled())
+    <form action="{{ route('two-factor.disable') }}" method="post">
+        @csrf
+        @method('DELETE')
+
+        <x-hearth-button>
+            {{ __('hearth::user.action_disable_two_factor_auth') }}
+        </x-hearth-button>
+    </form>
+    @else
     <form action="{{ route('two-factor.enable') }}" method="post">
         @csrf
 
@@ -65,11 +75,12 @@
             {{ __('hearth::user.action_enable_two_factor_auth') }}
         </x-hearth-button>
     </form>
+    @endif
 
     @if (session('status') == 'two-factor-authentication-enabled')
     <p>{{ __('hearth::user.two_factor_auth_enabled') }}</p>
     <div>{!! request()->user()->twoFactorQrCodeSvg() !!}</div>
-    <div>{!! request()->user()->recoveryCodes() !!}</div>
+    {{-- <div>{!! request()->user()->recoveryCodes() !!}</div> --}}
     @endif
 
     @endif
@@ -78,9 +89,9 @@
 
     <p>{{ __('hearth::user.delete_account_intro') }}</p>
 
-    <form action="{{ localized_route('users.destroy') }}" method="POST" novalidate>
+    <form action="{{ localized_route('users.destroy') }}" method="post" novalidate>
         @csrf
-        @method('DELETE')
+        @method('delete')
 
         <div class="field">
             <x-hearth-label for="current_password" :value="__('hearth::auth.label_current_password')" />

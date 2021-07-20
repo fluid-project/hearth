@@ -10,6 +10,7 @@ return [
     'two_factor_auth_disabled' => 'You have not enabled two-factor authentication.',
     'two_factor_auth_enabled' => 'You have enabled two-factor authentication.',
     'action_enable_two_factor_auth' => 'Enable two-factor authentication',
+    'action_disable_two_factor_auth' => 'Disable two-factor authentication',
     'delete_account' => 'Delete account',
     'delete_account_intro' => 'Your account will be deleted and cannot be recovered. If you still want to delete your account, please enter your current password to proceed.',
     'action_delete_account' => 'Delete my account',

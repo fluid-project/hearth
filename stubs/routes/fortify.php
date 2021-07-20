@@ -123,7 +123,8 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
             ->name('two-factor.enable');
 
         Route::delete('/user/two-factor-authentication', [TwoFactorAuthenticationController::class, 'destroy'])
-            ->middleware($twoFactorMiddleware);
+            ->middleware($twoFactorMiddleware)
+            ->name('two-factor.disable');
 
         Route::get('/user/two-factor-qr-code', [TwoFactorQrCodeController::class, 'show'])
             ->middleware($twoFactorMiddleware);

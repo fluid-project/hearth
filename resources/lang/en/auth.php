@@ -36,5 +36,6 @@ return [
     'verification_intro' => 'Please verify your email address by clicking on the link we emailed to you. If you didn’t receive the email, we will gladly send you another.',
     'verification_sent' => 'A new verification link has been sent to the email address you provided.',
     'resend_verification_email' => 'Resend verification email',
-    'verification_succeeded' => 'Your email address has been verified.'
+    'verification_succeeded' => 'Your email address has been verified.',
+    'two_factor_auth_code' => 'Two-factor code'
 ];
