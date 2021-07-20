@@ -94,6 +94,7 @@ class HearthCommand extends Command
             'Http/Middleware/Authenticate.php',
             'Http/Middleware/RedirectIfAuthenticated.php',
             'Http/Middleware/RedirectToPreferredLocale.php',
+            'Http/Middleware/RequirePassword.php',
             'Http/Requests/Auth/LoginRequest.php',
             'Http/Requests/DestroyUserRequest.php',
             'Http/Responses/LoginResponse.php',
