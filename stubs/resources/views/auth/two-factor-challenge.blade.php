@@ -12,7 +12,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors :errors="$errors" />
 
-        <form method="POST" action="/two-factor-challenge">
+        <form method="POST" action="{{ localized_route('two-factor.login') }}">
             @csrf
 
             <!-- Two-Factor Code -->
