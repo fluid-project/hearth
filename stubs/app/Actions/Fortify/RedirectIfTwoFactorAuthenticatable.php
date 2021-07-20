@@ -1,8 +1,8 @@
 <?php namespace App\Fortify\Actions;
 
-use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticable as RedirectIfTwoFactorAuthenticableAction;
+use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable as RedirectIfTwoFactorAuthenticatableAction;
 
-class RedirectIfTwoFactorAuthenticable extends RedirectIfTwoFactorAuthenticableAction
+class RedirectIfTwoFactorAuthenticatable extends RedirectIfTwoFactorAuthenticatableAction
 {
     /**
      * Get the two factor authentication enabled response.
