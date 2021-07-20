@@ -1,4 +1,4 @@
-<?php namespace App\Fortify\Actions;
+<?php namespace App\Actions\Fortify;
 
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable as RedirectIfTwoFactorAuthenticatableAction;
 
