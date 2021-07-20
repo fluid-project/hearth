@@ -9,6 +9,8 @@ return [
     'two_factor_auth_intro' => 'Add additional security to your account using two-factor authentication.',
     'two_factor_auth_disabled' => 'You have not enabled two-factor authentication.',
     'two_factor_auth_enabled' => 'You have enabled two-factor authentication.',
+    'two_factor_auth_qr_code' => 'Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application.',
+    'two_factor_auth_recovery_codes' => 'Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.',
     'action_enable_two_factor_auth' => 'Enable two-factor authentication',
     'action_disable_two_factor_auth' => 'Disable two-factor authentication',
     'delete_account' => 'Delete account',

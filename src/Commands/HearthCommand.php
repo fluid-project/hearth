@@ -87,6 +87,7 @@ class HearthCommand extends Command
         $app_stubs = [
             'Actions/Fortify/CreateNewUser.php',
             'Actions/Fortify/PasswordValidationRules.php',
+            'Actions/Fortify/RedirectIfTwoFactorAuthenticable.php',
             'Actions/Fortify/UpdateUserPassword.php',
             'Actions/Fortify/UpdateUserProfileInformation.php',
             'Http/Controllers/UserController.php',

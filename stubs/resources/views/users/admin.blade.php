@@ -48,17 +48,18 @@
 
     <p>{{ __('hearth::user.two_factor_auth_intro') }}</p>
 
-    <p>
-        <em>
-        @if ($user->twoFactorAuthEnabled())
-        {{ __('hearth::user.two_factor_auth_enabled') }}
-        @else
-        {{ __('hearth::user.two_factor_auth_disabled') }}
-        @endif
-        </em>
-    </p>
-
     @if ($user->twoFactorAuthEnabled())
+    <p>{{ __('hearth::user.two_factor_auth_enabled') }}</p>
+
+    @if (session('status') == 'two-factor-authentication-enabled')
+    <p>{{ __('hearth::user.two_factor_auth_qr_code') }}</p>
+    <div>{!! request()->user()->twoFactorQrCodeSvg() !!}</div>
+    <p>{{ __('hearth::user.two_factor_auth_recovery_codes') }}</p>
+    <div>@foreach (request()->user()->recoveryCodes() as $code)
+        <pre>{{ $code }}</pre>
+    @endforeach</div>
+    @endif
+
     <form action="{{ route('two-factor.disable') }}" method="post">
         @csrf
         @method('DELETE')
@@ -68,6 +69,8 @@
         </x-hearth-button>
     </form>
     @else
+    <p>{{ __('hearth::user.two_factor_auth_disabled') }}</p>
+
     <form action="{{ route('two-factor.enable') }}" method="post">
         @csrf
 
@@ -75,12 +78,6 @@
             {{ __('hearth::user.action_enable_two_factor_auth') }}
         </x-hearth-button>
     </form>
-    @endif
-
-    @if (session('status') == 'two-factor-authentication-enabled')
-    <p>{{ __('hearth::user.two_factor_auth_enabled') }}</p>
-    <div>{!! request()->user()->twoFactorQrCodeSvg() !!}</div>
-    {{-- <div>{!! request()->user()->recoveryCodes() !!}</div> --}}
     @endif
 
     @endif

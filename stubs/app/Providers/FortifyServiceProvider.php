@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Actions\Fortify\RedirectIfTwoFactorAuthenticable;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
@@ -63,6 +64,15 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::confirmPasswordView(fn () => view('auth.confirm-password'));
         Fortify::twoFactorChallengeView(fn () => view('auth.two-factor-challenge'));
         Fortify::verifyEmailView(fn () => view('auth.verify-email'));
+
+        Fortify::authenticateThrough(function (Request $request) {
+            return array_filter([
+                    config('fortify.limiters.login') ? null : EnsureLoginIsNotThrottled::class,
+                    RedirectIfTwoFactorAuthenticatable::class,
+                    AttemptToAuthenticate::class,
+                    PrepareAuthenticatedSession::class,
+            ]);
+        });
     }
 
     /**
