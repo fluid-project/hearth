@@ -118,7 +118,7 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
             ? ['auth', 'password.confirm']
             : ['auth'];
 
-         Route::post('/user/two-factor-authentication', [TwoFactorAuthenticationController::class, 'store'])
+        Route::post('/user/two-factor-authentication', [TwoFactorAuthenticationController::class, 'store'])
             ->middleware($twoFactorMiddleware)
             ->name('two-factor.enable');
 

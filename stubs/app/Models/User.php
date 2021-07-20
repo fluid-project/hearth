@@ -88,6 +88,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
      */
     public function twoFactorAuthEnabled()
     {
-        return !is_null($this->two_factor_secret);
+        return ! is_null($this->two_factor_secret);
     }
 }
