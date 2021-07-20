@@ -58,7 +58,7 @@
         </em>
     </p>
 
-    <form action="{{ localized_route('two-factor.enable') }}" method="post">
+    <form action="{{ route('two-factor.enable') }}" method="post">
         @csrf
 
         <x-hearth-button>
