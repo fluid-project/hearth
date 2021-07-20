@@ -50,7 +50,7 @@
 
     <p>
         <em>
-        @if ($user->twoFactorEnabled())
+        @if ($user->twoFactorAuthEnabled())
         {{ __('hearth::user.two_factor_auth_enabled') }}
         @else
         {{ __('hearth::user.two_factor_auth_disabled') }}
