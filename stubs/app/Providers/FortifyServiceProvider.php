@@ -24,6 +24,7 @@ use Laravel\Fortify\Contracts\PasswordResetResponse as PasswordResetResponseCont
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 use Laravel\Fortify\Contracts\TwoFactorChallengeResponse as TwoFactorChallengeResponseContract;
 use Laravel\Fortify\Contracts\TwoFactorLoginResponse as TwoFactorLoginResponseContract;
+use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -71,7 +72,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::authenticateThrough(function (Request $request) {
             return array_filter([
                     config('fortify.limiters.login') ? null : EnsureLoginIsNotThrottled::class,
-                    RedirectIfTwoFactorAuthenticatable::class,
+                    Features::enabled(Features::twoFactorAuthentication()) ? RedirectIfTwoFactorAuthenticatable::class : null,
                     AttemptToAuthenticate::class,
                     PrepareAuthenticatedSession::class,
             ]);
