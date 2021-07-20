@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class HearthCommand extends Command
 {
-    public $signature = 'hearth:install';
+    public $signature = 'hearth:install {--two-factor}';
 
     public $description = 'Install Hearth.';
 
@@ -164,6 +164,9 @@ class HearthCommand extends Command
         // Language files...
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/lang/', resource_path('lang'));
 
+        if ($this->option('two-factor')) {
+            copy(__DIR__ . "/../../stubs/config/fortify-two-factor.php", base_path("config/fortify.php"));
+        }
 
         $this->line('');
         $this->info('Hearth scaffolding installed successfully.');

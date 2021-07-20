@@ -43,6 +43,37 @@
         </x-hearth-button>
     </form>
 
+    @if(Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+    <h2>{{ __('hearth::user.two_factor_auth') }}</h2>
+
+    <p>{{ __('hearth::user.two_factor_auth_intro') }}</p>
+
+    <p>
+        <em>
+        @if ($user->twoFactorEnabled())
+        {{ __('hearth::user.two_factor_auth_enabled') }}
+        @else
+        {{ __('hearth::user.two_factor_auth_disabled') }}
+        @endif
+        </em>
+    </p>
+
+    <form action="{{ localized_route('two-factor.enable') }}" method="post">
+        @csrf
+
+        <x-hearth-button>
+            {{ __('hearth::user.action_enable_two_factor_auth') }}
+        </x-hearth-button>
+    </form>
+
+    @if (session('status') == 'two-factor-authentication-enabled')
+    <p>{{ __('hearth::user.two_factor_auth_enabled') }}</p>
+    <div>{!! request()->user()->twoFactorQrCodeSvg() !!}</div>
+    <div>{!! request()->user()->recoveryCodes() !!}</div>
+    @endif
+
+    @endif
+
     <h2>{{ __('hearth::user.delete_account') }}</h2>
 
     <p>{{ __('hearth::user.delete_account_intro') }}</p>
