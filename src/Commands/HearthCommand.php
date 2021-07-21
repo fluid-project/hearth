@@ -58,12 +58,15 @@ class HearthCommand extends Command
         $this->installMiddlewareAfter('VerifyCsrfToken::class', '\ChinLeung\MultilingualRoutes\DetectRequestLocale::class');
 
         // RedirectToPreferredLocale Middleware...
-        $this->replaceInFile(
-            "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,",
-            "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
-            app_path('Http/Kernel.php')
-        );
+        if (! Str::contains(file_get_contents(app_path('Http/Kernel.php')), '\App\Http\Middleware\RedirectToPreferredLocale::class')) {
+            $this->replaceInFile(
+                "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,",
+                "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+            'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
+                app_path('Http/Kernel.php')
+            );
+        }
+
         // RequirePassword Middleware...
         $this->replaceInFile(
             '\Illuminate\Auth\Middleware\RequirePassword::class',
