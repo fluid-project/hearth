@@ -43,4 +43,5 @@ return [
     'two_factor_auth_recovery_code_intro' => 'Please enter one of your saved recovery codes to complete the sign in process.',
     'label_two_factor_auth_recovery_code' => 'Recovery code',
     'two_factor_auth_action_use_code' => 'Use an authentication code',
+    'invalid_two_factor_auth_code' => 'The provided two-factor authentication code was not valid.'
 ];

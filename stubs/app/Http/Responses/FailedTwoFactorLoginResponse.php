@@ -15,7 +15,7 @@ class FailedTwoFactorLoginResponse implements FailedTwoFactorLoginResponseContra
      */
     public function toResponse($request)
     {
-        $message = __('The provided two factor authentication code was invalid.');
+        $message = __('hearth::auth.invalid_two_factor_auth_code');
 
         if ($request->wantsJson()) {
             throw ValidationException::withMessages([
@@ -23,6 +23,6 @@ class FailedTwoFactorLoginResponse implements FailedTwoFactorLoginResponseContra
             ]);
         }
 
-        return redirect()->route($request->user->locale . '.login')->withErrors(['email' => $message]);
+        return redirect()->route(locale() . '.login')->withErrors(['email' => $message]);
     }
 }
