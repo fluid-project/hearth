@@ -7,6 +7,7 @@ use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Http\Responses\FailedTwoFactorLoginResponse;
 use App\Http\Responses\LoginResponse;
 use App\Http\Responses\PasswordResetResponse;
 use App\Http\Responses\RegisterResponse;
@@ -19,6 +20,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Actions\AttemptToAuthenticate;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
+use Laravel\Fortify\Contracts\FailedTwoFactorLoginResponse as FailedTwoFactorLoginResponseContract;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use Laravel\Fortify\Contracts\PasswordResetResponse as PasswordResetResponseContract;
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
@@ -84,6 +86,10 @@ class FortifyServiceProvider extends ServiceProvider
      */
     protected function registerResponseBindings()
     {
+        $this->app->singleton(
+            FailedTwoFactorLoginResponseContract::class,
+            FailedTwoFactorLoginResponse::class
+        );
         $this->app->singleton(
             LoginResponseContract::class,
             LoginResponse::class

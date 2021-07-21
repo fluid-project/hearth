@@ -12,7 +12,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors :errors="$errors" />
 
-        <form method="POST" action="{{ localized_route('two-factor.login') }}" x-data="{ recovery: false }">
+        <form method="POST" action="{{ localized_route('two-factor.login') }}" x-data="{ recovery: false }" novalidate>
             @csrf
 
             <p x-show="! recovery">
@@ -21,7 +21,7 @@
 
             <!-- Two-Factor Code -->
             <div class="field" x-show="! recovery">
-                <x-hearth-label for="code" :value="__('hearth::auth.two_factor_auth_code')" />
+                <x-hearth-label for="code" :value="__('hearth::auth.label_two_factor_auth_code')" />
 
                 <x-hearth-input id="code"
                                 type="text"
@@ -42,7 +42,7 @@
 
             <!-- Recovery Code -->
             <div class="field" x-show="recovery">
-                <x-hearth-label for="recovery_code" :value="__('hearth::auth.two_factor_auth_recovery_code')" />
+                <x-hearth-label for="recovery_code" :value="__('hearth::auth.label_two_factor_auth_recovery_code')" />
 
                 <x-hearth-input id="recovery_code"
                                 type="text"
