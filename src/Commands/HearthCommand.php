@@ -98,6 +98,7 @@ class HearthCommand extends Command
             'Http/Middleware/RequirePassword.php',
             'Http/Requests/Auth/LoginRequest.php',
             'Http/Requests/DestroyUserRequest.php',
+            'Http/Responses/FailedTwoFactorLoginResponse.php',
             'Http/Responses/LoginResponse.php',
             'Http/Responses/PasswordResetResponse.php',
             'Http/Responses/RegisterResponse.php',
