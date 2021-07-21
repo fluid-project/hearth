@@ -1,6 +1,11 @@
 @import "modern-css-reset";
 @import "@accessibility-in-action/looseleaf";
 
+// Alpine helpers
+[x-cloak] {
+    display: none !important;
+}
+
 // Banner
 @media (min-width: 768px) {
     [role="banner"] .wrapper {
@@ -71,6 +76,16 @@
             width: auto;
         }
     }
+}
+
+// Modal
+.modal {
+    display: block;
+    margin-top: 0em;
+}
+
+.modal > * + * {
+    margin-block-start: 2em;
 }
 
 // Navigation

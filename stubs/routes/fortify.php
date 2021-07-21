@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\ConfirmablePasswordController;
+use Laravel\Fortify\Http\Controllers\ConfirmedPasswordStatusController;
 use Laravel\Fortify\Http\Controllers\EmailVerificationNotificationController;
 use Laravel\Fortify\Http\Controllers\EmailVerificationPromptController;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
@@ -97,6 +98,10 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     Route::multilingual('/confirm-password', [ConfirmablePasswordController::class, 'show'])
         ->middleware('auth')
         ->name('password.confirm');
+
+    Route::get('/confirmed-password-status', [ConfirmedPasswordStatusController::class, 'show'])
+        ->middleware(['auth'])
+        ->name('password.confirmation');
 
     Route::multilingual('/confirm-password', [ConfirmablePasswordController::class, 'store'])
         ->method('post')
