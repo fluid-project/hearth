@@ -12,19 +12,47 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors :errors="$errors" />
 
-        <form method="POST" action="{{ localized_route('two-factor.login') }}">
+        <form method="POST" action="{{ localized_route('two-factor.login') }}" x-data="{ recovery: false }">
             @csrf
 
+            <p x-show="! recovery">
+                {{ __('hearth::auth.two_factor_auth_code_intro') }}
+            </p>
+
             <!-- Two-Factor Code -->
-            <div class="field">
+            <div class="field" x-show="! recovery">
                 <x-hearth-label for="code" :value="__('hearth::auth.two_factor_auth_code')" />
 
                 <x-hearth-input id="code"
                                 type="text"
                                 name="code"
                                 inputmode="numeric"
-                                required autocomplete="one-time-code" />
+                                required
+                                autofocus
+                                autocomplete="one-time-code" />
             </div>
+
+            <p x-show="! recovery">
+                <x-hearth-button type="button" class="link" @click="recovery = ! recovery">{{ __('hearth::auth.two_factor_auth_action_use_recovery_code') }}</x-hearth-button>
+            </p>
+
+            <p x-show="recovery">
+                {{ __('hearth::auth.two_factor_auth_recovery_code_intro') }}
+            </p>
+
+            <!-- Recovery Code -->
+            <div class="field" x-show="recovery">
+                <x-hearth-label for="recovery_code" :value="__('hearth::auth.two_factor_auth_recovery_code')" />
+
+                <x-hearth-input id="recovery_code"
+                                type="text"
+                                name="recovery_code"
+                                autocomplete="one-time-code" />
+            </div>
+
+            <p x-show="recovery">
+                <x-hearth-button type="button" class="link" @click="recovery = ! recovery">{{ __('hearth::auth.two_factor_auth_action_use_code') }}</x-hearth-button>
+            </p>
 
             <x-hearth-button>
                 {{ __('hearth::auth.sign_in') }}

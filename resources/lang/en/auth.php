@@ -37,5 +37,10 @@ return [
     'verification_sent' => 'A new verification link has been sent to the email address you provided.',
     'resend_verification_email' => 'Resend verification email',
     'verification_succeeded' => 'Your email address has been verified.',
-    'two_factor_auth_code' => 'Two-factor code'
+    'two_factor_auth_code_intro' => 'Please enter the code provided by your authenticator application to complete the sign in process.',
+    'label_two_factor_auth_code' => 'Authentication code',
+    'two_factor_auth_action_use_recovery_code' => 'Use a recovery code',
+    'two_factor_auth_recovery_code_intro' => 'Please enter one of your saved recovery codes to complete the sign in process.',
+    'label_two_factor_auth_recovery_code' => 'Recovery code',
+    'two_factor_auth_action_use_code' => 'Use an authentication code',
 ];
