@@ -2,6 +2,8 @@ require("./bootstrap");
 
 import Alpine from 'alpinejs'
 
-window.Alpine = Alpine;
+import confirmsPassword from './confirmsPassword.js';
+
+Alpine.data('confirmsPassword', confirmsPassword)
 
 Alpine.start();

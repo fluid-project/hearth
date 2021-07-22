@@ -44,7 +44,7 @@
     </form>
 
     @if(Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-    <div x-data="requiresConfirmation()">
+    <div class="flow" x-data="confirmsPassword('{{ route('password.confirmation') }}', '{{ localized_route('password.confirm') }}')">
         <h2>{{ __('hearth::user.two_factor_auth') }}</h2>
 
         <p>{{ __('hearth::user.two_factor_auth_intro') }}</p>
@@ -63,7 +63,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('two-factor.disable') }}" method="post" @submit.prevent="toggleTwoFactorAuth">
+            <form action="{{ route('two-factor.disable') }}" method="post" @submit.prevent="submitForm">
                 @csrf
                 @method('DELETE')
 
@@ -74,7 +74,7 @@
         @else
             <p>{{ __('hearth::user.two_factor_auth_disabled') }}</p>
 
-            <form action="{{ route('two-factor.enable') }}" method="post" @submit.prevent="toggleTwoFactorAuth">
+            <form action="{{ route('two-factor.enable') }}" method="post" @submit.prevent="submitForm">
                 @csrf
 
                 <x-hearth-button>
@@ -82,58 +82,23 @@
                 </x-hearth-button>
             </form>
         @endif
-        <div class="modal flow" x-show="showingModal">
-            <p>To continue, please confirm your password.</p>
+        <div class="modal-wrapper" x-show="showingModal">
+            <div class="modal flow" @keydown.escape.window="hideModal()" @click.away="hideModal()">
+                <p>{{ __('hearth::auth.confirm_intro') }}</p>
 
-            <div class="field">
-                <x-hearth-label for="password" :value="__('hearth::auth.label_password')" />
-                <x-hearth-input id="password" type="password" name="password" required x-ref="password" />
-                <template x-cloak x-if="validationError">
-                    <x-validation-error>{{ __('validation.current_password') }}</x-validation-error>
-                </template>
+                <div class="field">
+                    <x-hearth-label for="password" :value="__('hearth::auth.label_password')" />
+                    <x-hearth-input id="password" type="password" name="password" required x-ref="password" />
+                    <template x-cloak x-if="validationError">
+                        <x-validation-error>{{ __('validation.current_password') }}</x-validation-error>
+                    </template>
+                </div>
+
+                <button type="button" @click="cancel">Cancel</button>
+                <button type="button" @click="confirmPassword">Confirm password</button>
             </div>
-
-            <button type="button" @click="confirmPassword">Confirm password</button>
-         </div>
+        </div>
     </div>
-    <script>
-        function requiresConfirmation() {
-            return {
-                confirmedPassword: false,
-                targetForm: false,
-                showingModal: false,
-                validationError: false,
-                init() {
-                    axios.get("{{ route('password.confirmation') }}").then(response => {
-                        if (response.data.confirmed) {
-                            this.confirmedPassword = true;
-                        }
-                    });
-                },
-                toggleTwoFactorAuth: function(event) {
-                    if (this.confirmedPassword === true) {
-                        event.target.submit();
-                    } else {
-                        this.targetForm = event.target;
-                        this.showingModal = true;
-                    }
-                },
-                confirmPassword: function(event) {
-                    axios.post("{{ localized_route('password.confirm') }}", {
-                        password: this.$refs.password.value,
-                    }).then(() => {
-                        this.confirmPassword = true;
-                        this.showingModal = false;
-                        this.validationError = false;
-                        this.targetForm.submit();
-                    }).catch(() => {
-                        this.$refs.password.focus();
-                        this.validationError = true;
-                    });
-                }
-            }
-        }
-    </script>
     @endif
 
     <h2>{{ __('hearth::user.delete_account') }}</h2>

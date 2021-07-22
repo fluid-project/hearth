@@ -33,7 +33,7 @@ class HearthCommand extends Command
                 'alpinejs' => '^3.0',
                 'modern-css-reset' => '^1.4',
             ] + $packages;
-        });
+        }, false);
 
         $this->updateNodePackages(function ($packages) {
             return [
@@ -41,7 +41,7 @@ class HearthCommand extends Command
                 'sass' => '^1.35',
                 'sass-loader' => '^12.1',
             ] + $packages;
-        }, true);
+        });
 
         // Name...
         $this->replaceInFile('APP_NAME=Laravel', 'APP_NAME=Hearth', base_path('.env'));
