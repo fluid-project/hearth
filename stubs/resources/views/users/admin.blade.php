@@ -56,11 +56,10 @@
                 <p>{{ __('hearth::user.two_factor_auth_qr_code') }}</p>
                 <div>{!! request()->user()->twoFactorQrCodeSvg() !!}</div>
                 <p>{{ __('hearth::user.two_factor_auth_recovery_codes') }}</p>
-                <div>
-                @foreach (request()->user()->recoveryCodes() as $code)
-                    <pre>{{ $code }}</pre>
-                @endforeach
-                </div>
+                <pre>
+@foreach (request()->user()->recoveryCodes() as $code)
+{{ $code }}
+@endforeach</pre>
             @endif
 
             <form action="{{ route('two-factor.disable') }}" method="post" @submit.prevent="submitForm">
@@ -95,7 +94,7 @@
                 </div>
 
                 <button type="button" @click="cancel">Cancel</button>
-                <button type="button" @click="confirmPassword">Confirm password</button>
+                <button type="button" @click="confirmPassword">Confirm</button>
             </div>
         </div>
     </div>
