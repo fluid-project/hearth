@@ -55,6 +55,8 @@
             @if (session('status') == 'two-factor-authentication-enabled')
                 <p>{{ __('hearth::user.two_factor_auth_qr_code') }}</p>
                 <div>{!! request()->user()->twoFactorQrCodeSvg() !!}</div>
+            @endif
+            @if (session('status') == 'two-factor-authentication-enabled' || session('status') == 'recovery-codes-generated')
                 <p>{{ __('hearth::user.two_factor_auth_recovery_codes') }}</p>
                 <pre>
 @foreach (request()->user()->recoveryCodes() as $code)
