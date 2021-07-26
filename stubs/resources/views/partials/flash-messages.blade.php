@@ -16,6 +16,24 @@
 </x-hearth-alert>
 @endif
 
+@if(session('status') === 'two-factor-authentication-enabled')
+<x-hearth-alert type="success">
+    <p>{{ __('hearth::user.two_factor_auth_enabled') }}</p>
+</x-hearth-alert>
+@endif
+
+@if(session('status') === 'recovery-codes-generated')
+<x-hearth-alert type="success">
+    <p>{{ __('hearth::user.two_factor_auth_recovery_codes_regenerated') }}</p>
+</x-hearth-alert>
+@endif
+
+@if(session('status') === 'two-factor-authentication-disabled')
+<x-hearth-alert type="success">
+    <p>{{ __('hearth::user.two_factor_auth_disabled') }}</p>
+</x-hearth-alert>
+@endif
+
 @auth
 @unless(Auth::user()->hasVerifiedEmail())
     <x-hearth-alert type="notice">

@@ -81,7 +81,7 @@
                 </x-hearth-button>
             </form>
         @else
-            <p>{{ __('hearth::user.two_factor_auth_disabled') }}</p>
+            <p>{{ __('hearth::user.two_factor_auth_not_enabled') }}</p>
 
             <form action="{{ route('two-factor.enable') }}" method="post" @submit.prevent="submitForm">
                 @csrf
