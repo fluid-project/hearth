@@ -47,7 +47,7 @@
     <div class="flow" x-data="confirmsPassword('{{ route('password.confirmation') }}', '{{ localized_route('password.confirm') }}')">
         <h2>{{ __('hearth::user.two_factor_auth') }}</h2>
 
-        <p>{{ __('hearth::user.two_factor_auth_intro') }}</p>
+        <p><em>{{ __('hearth::user.two_factor_auth_intro') }}</em></p>
 
         @if ($user->twoFactorAuthEnabled())
             <p>{{ __('hearth::user.two_factor_auth_enabled') }}</p>
@@ -61,6 +61,14 @@
 {{ $code }}
 @endforeach</pre>
             @endif
+
+            <form action="{{ route('two-factor.regenerate') }}" method="post" @submit.prevent="submitForm">
+                @csrf
+
+                <x-hearth-button>
+                    {{ __('hearth::user.action_regenerate_two_factor_auth_recovery_codes') }}
+                </x-hearth-button>
+            </form>
 
             <form action="{{ route('two-factor.disable') }}" method="post" @submit.prevent="submitForm">
                 @csrf

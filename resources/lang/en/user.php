@@ -13,6 +13,7 @@ return [
     'two_factor_auth_recovery_codes' => 'Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.',
     'action_enable_two_factor_auth' => 'Enable two-factor authentication',
     'action_disable_two_factor_auth' => 'Disable two-factor authentication',
+    'action_regenerate_two_factor_auth_recovery_codes' => 'Regenerate recovery codes',
     'delete_account' => 'Delete account',
     'delete_account_intro' => 'Your account will be deleted and cannot be recovered. If you still want to delete your account, please enter your current password to proceed.',
     'action_delete_account' => 'Delete my account',
