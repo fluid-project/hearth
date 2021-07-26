@@ -2,5 +2,5 @@
 
 return [
     'title' => 'Dashboard',
-    'welcome' => 'Welcome, :name!'
+    'welcome' => 'Welcome, :name!',
 ];
