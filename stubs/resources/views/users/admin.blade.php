@@ -44,7 +44,7 @@
     </form>
 
     @if(Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-    <div class="flow" x-data="confirmsPassword('{{ route('password.confirmation') }}', '{{ localized_route('password.confirm') }}')">
+    <x-hearth-password-confirmation>
         <h2>{{ __('hearth::user.two_factor_auth') }}</h2>
 
         <p><em>{{ __('hearth::user.two_factor_auth_intro') }}</em></p>
@@ -91,23 +91,7 @@
                 </x-hearth-button>
             </form>
         @endif
-        <div class="modal-wrapper" x-show="showingModal">
-            <div class="modal flow" @keydown.escape.window="hideModal()" @click.away="hideModal()">
-                <p>{{ __('hearth::auth.confirm_intro') }}</p>
-
-                <div class="field">
-                    <x-hearth-label for="password" :value="__('hearth::auth.label_password')" />
-                    <x-hearth-input id="password" type="password" name="password" required x-ref="password" />
-                    <template x-cloak x-if="validationError">
-                        <x-validation-error>{{ __('validation.current_password') }}</x-validation-error>
-                    </template>
-                </div>
-
-                <button type="button" @click="cancel">{{ __('hearth::auth.action_cancel') }}</button>
-                <button type="button" @click="confirmPassword">{{ __('hearth::auth.action_confirm') }}</button>
-            </div>
-        </div>
-    </div>
+    </x-hearth-password-confirmation>
     @endif
 
     <h2>{{ __('hearth::user.delete_account') }}</h2>
