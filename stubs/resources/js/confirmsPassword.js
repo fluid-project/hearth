@@ -25,6 +25,9 @@ export default (confirmedPasswordStatusRoute = false, confirmPasswordRoute = fal
     },
     showModal: function() {
         this.showingModal = true;
+        const scrollY = window.scrollY;
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollY}px`;
         this.$nextTick(() => {
             const elems = document.querySelectorAll('a, button, input, select, textarea, [contenteditable]');
             Array.prototype.forEach.call(elems, elem => {
@@ -37,6 +40,10 @@ export default (confirmedPasswordStatusRoute = false, confirmPasswordRoute = fal
     },
     hideModal: function() {
         this.showingModal = false;
+        const scrollY = document.body.style.top;
+        document.body.style.position = "";
+        document.body.style.top = "";
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
         const elems = document.querySelectorAll('a, button, input, select, textarea, [contenteditable]');
         Array.prototype.forEach.call(elems, elem => {
             if (!elem.closest(".modal")) {

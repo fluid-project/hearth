@@ -22,6 +22,7 @@ return [
     'create_your_account' => 'Create your account',
     'label_current_password' => 'Current password',
     'change_password' => 'Change password',
+    'action_cancel' => 'Cancel',
     'action_confirm' => 'Confirm',
     'password_change_succeeded' => 'Your password has been changed.',
     'label_remember_me' => 'Remember me',

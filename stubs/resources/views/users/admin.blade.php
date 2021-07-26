@@ -101,8 +101,8 @@
                     </template>
                 </div>
 
-                <button type="button" @click="cancel">Cancel</button>
-                <button type="button" @click="confirmPassword">Confirm</button>
+                <button type="button" @click="cancel">{{ __('hearth::auth.action_cancel') }}</button>
+                <button type="button" @click="confirmPassword">{{ __('hearth::auth.action_confirm') }}</button>
             </div>
         </div>
     </div>
