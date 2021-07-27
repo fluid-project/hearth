@@ -33,13 +33,13 @@ class PasswordConfirmation extends Component
      *
      * @return void
      */
-    public function __construct($message, $cancel, $confirm)
+    public function __construct($message = null, $cancel = null, $confirm = null)
     {
-        $this->message = $message;
+        $this->message = $message ?? __('hearth::auth.confirm_intro');
 
-        $this->cancel = $cancel;
+        $this->cancel = $cancel ?? __('hearth::auth.action_cancel');
 
-        $this->confirm = $confirm;
+        $this->confirm = $confirm ?? __('hearth::auth.action_confirm');
     }
 
     /**

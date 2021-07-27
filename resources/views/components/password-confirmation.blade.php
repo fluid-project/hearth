@@ -1,8 +1,8 @@
-<div {{ $attributes->merge(['class' => 'flow']) }} x-data="confirmsPassword('{{ route('password.confirmation') }}', '{{ localized_route('password.confirm') }}')">
+<div {{ $attributes->merge(['class' => 'flow']) }} x-data="confirmPassword('{{ route('password.confirmation') }}', '{{ localized_route('password.confirm') }}')">
     {{ $slot }}
     <div class="modal-wrapper" x-show="showingModal">
         <div class="modal flow" @keydown.escape.window="hideModal()" @click.away="hideModal()">
-            <p>{{ $message ?? __('hearth::auth.confirm_intro') }}</p>
+            <p>{{ $message }}</p>
 
             <div class="field">
                 <x-hearth-label for="password" :value="__('hearth::auth.label_password')" />
@@ -12,8 +12,8 @@
                 </template>
             </div>
 
-            <button type="button" @click="cancel">{{ $cancel ?? __('hearth::auth.action_cancel') }}</button>
-            <button type="button" @click="confirmPassword">{{ $confirm ?? __('hearth::auth.action_confirm') }}</button>
+            <button type="button" @click="cancel">{{ $cancel }}</button>
+            <button type="button" @click="confirmPassword">{{ $confirm }}</button>
         </div>
     </div>
 </div>
