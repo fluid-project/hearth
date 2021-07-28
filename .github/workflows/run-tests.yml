@@ -31,7 +31,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-          coverage: none
+          coverage: pcov
 
       - name: Setup problem matchers
         run: |
@@ -44,4 +44,15 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run:  composer test
+        if: matrix.os != ubuntu-latest || matrix.php != 8.0 || matrix.stability != prefer-stable
+
+      - name: Execute tests with code coverage
+        run: |
+          composer require pcov/clobber
+          vendor/bin/pcov clobber
+          composer test-coverage
+        if: matrix.os == ubuntu-latest || matrix.php == 8.0 || matrix.stability == prefer-stable
+
+
+
