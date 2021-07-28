@@ -50,8 +50,7 @@ jobs:
         if: ${{ matrix.os != 'ubuntu-latest' || matrix.php != 8.0 || matrix.stability != 'prefer-stable' }}
 
       - name: Execute tests with code coverage
-        run: composer test-coverage
+        run: |
+          composer test-coverage
+          bash <(curl -s https://codecov.io/bash)
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.php == 8.0 && matrix.stability == 'prefer-stable' }}
-
-
-
