@@ -13,7 +13,8 @@ A simple starter kit for the Laravel framework.
 
 Hearth is a simple starter kit for the Laravel framework. It provides a few things out of the box:
 
-- [ ] A user model with login, registration, email verification, and optional two-factor authentication.
+- [x] A user model with login, registration, email verification
+- [ ] Optional two-factor authentication support for users.
 - [ ] An organization model.
 - [ ] A membership model which reflects users' roles within organizations.
 - [ ] An invitation model which allows users to be invited to join organizations.
