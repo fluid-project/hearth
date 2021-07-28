@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Invitation;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Notifications\Notifiable;
 use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 use Spatie\Sluggable\HasSlug;
@@ -28,7 +26,7 @@ class Organization extends Model
     protected $fillable = [
         'name',
         'locality',
-        'region'
+        'region',
     ];
 
     protected $cascadeDeletes = ['users'];
