@@ -44,7 +44,7 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
-        run:  composer test
+        run: composer test
         if: matrix.os != "ubuntu-latest" || matrix.php != 8.0 || matrix.stability != "prefer-stable"
 
       - name: Execute tests with code coverage
