@@ -121,7 +121,6 @@ class HearthCommand extends Command
             'fortify.php',
             'laravel-multilingual-routes.php',
             'locales.php',
-            'regions.php',
         ];
 
         foreach ($config_stubs as $config) {
