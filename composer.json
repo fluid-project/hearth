@@ -51,7 +51,7 @@
         "fix": "php-cs-fixer fix --config=.php_cs.dist.php --allow-risky=yes",
         "psalm": "vendor/bin/psalm",
         "test": "vendor/bin/testbench package:test --parallel --no-coverage",
-        "test-coverage": "vendor/bin/phpunit  --coverage-clover coverage.xml"
+        "test-coverage": "vendor/bin/phpunit --coverage-clover coverage.xml"
     },
     "config": {
         "sort-packages": true
