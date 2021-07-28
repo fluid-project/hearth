@@ -35,9 +35,9 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testbench');
 
         config()->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
 
         include_once __DIR__.'/../database/migrations/create_users_table.php.stub';
