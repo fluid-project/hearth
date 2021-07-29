@@ -15,7 +15,7 @@ if (! function_exists('get_region_name')) {
     {
         $subdivisionRepository = new SubdivisionRepository();
 
-        $subdivision = $subdivisionRepository->get("{$country}-{$region}");
+        $subdivision = $subdivisionRepository->get("{$country}-{$code}");
 
         return ($locale === $subdivision->getLocale()) ? $subdivision->getLocalName() : $subdivision->getName();
     }
