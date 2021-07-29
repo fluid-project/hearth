@@ -24,3 +24,25 @@ if (! function_exists('get_regions')) {
         return $regions;
     }
 }
+
+if (! function_exists('get_region_codes')) {
+    /**
+     * Retrieve an array of administrative subdivision codes within a country or countries.
+     *
+     * @param array $countries An array of ISO 3166-1 alpha-2 country codes.
+     *
+     * @return array
+     */
+    function get_region_codes($countries = ['CA'])
+    {
+        $subdivisionRepository = new SubdivisionRepository();
+
+        $regions = [];
+
+        foreach ($subdivisionRepository->getAll($countries) as $region) {
+            $regions[] = $region->getCode();
+        }
+
+        return $regions;
+    }
+}

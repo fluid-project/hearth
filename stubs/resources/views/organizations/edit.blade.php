@@ -136,7 +136,7 @@
         @method('DELETE')
 
         <div class="field">
-            <x-hearth-label for="current_password" :value="__('auth.label_current_password')" />
+            <x-hearth-label for="current_password" :value="__('hearth::auth.label_current_password')" />
             <x-hearth-input id="current_password" type="password" name="current_password" required />
             @error('current_password', 'destroyOrganization')
             <x-validation-error>{{ $message }}</x-validation-error>
