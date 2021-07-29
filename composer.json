@@ -55,15 +55,15 @@
         "psr-4": {
             "Hearth\\": "src",
             "Hearth\\Database\\Factories\\": "database/factories"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Hearth\\Tests\\": "tests"
         },
         "files": [
             "src/helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hearth\\Tests\\": "tests"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
