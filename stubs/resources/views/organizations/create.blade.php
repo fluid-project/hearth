@@ -22,7 +22,7 @@
         </div>
         <div class="field">
             <x-hearth-label for="region" :value="__('forms.label_region')" />
-            <x-hearth-select required />
+            <x-hearth-select required :options="config('hearth.regions.ca')"/>
         </div>
 
         <x-hearth-button>{{ __('organization.action_create') }}</x-hearth-button>
