@@ -74,10 +74,6 @@ class OrganizationController extends Controller
     {
         $roles = [];
 
-        foreach ($subdivisionRepository->getAll(['CA']) as $region) {
-            $regions[$region->getCode()] = locale() === 'en' ? $region->getName() : $region->getLocalName();
-        }
-
         foreach (config('hearth.roles') as $role) {
             $roles[$role] = __('roles.' . $role);
         }
