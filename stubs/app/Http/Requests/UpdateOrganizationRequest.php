@@ -40,7 +40,7 @@ class UpdateOrganizationRequest extends FormRequest
             'locality' => ['required', 'string', 'max:255'],
             'region' => [
                 'required',
-                Rule::in(config('regions')),
+                Rule::in(config('hearth.regions.ca')),
             ],
         ];
     }
