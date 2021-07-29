@@ -10,7 +10,7 @@ if (! function_exists('get_region_name')) {
      * @param array $countries An array of ISO 3166-1 alpha-2 country codes.
      * @param string $locale An ISO 639-1 language code.
      *
-     * @return string The name of the administrative subdivision.
+     * @return null|string The name of the administrative subdivision, if found.
      */
     function get_region_name($code, $countries = ['CA'], $locale = 'en')
     {
@@ -18,7 +18,11 @@ if (! function_exists('get_region_name')) {
 
         $subdivision = $subdivisionRepository->get($code, $countries);
 
-        return ($locale === $subdivision->getLocale()) ? $subdivision->getLocalName() : $subdivision->getName();
+        if ($subdivision) {
+            return ($locale === $subdivision->getLocale()) ? $subdivision->getLocalName() : $subdivision->getName();
+        }
+
+        return null;
     }
 }
 
