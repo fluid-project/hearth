@@ -26,9 +26,17 @@ class OrganizationController extends Controller
      */
     public function create()
     {
+        $regions = [];
+
+        foreach (config('hearth.regions.ca') as $region) {
+            $regions[$region] = __('regions.' . $region);
+        }
+
         $this->authorize('create', Organization::class);
 
-        return view('organizations.create');
+        return view('organizations.create', [
+            'regions' => $regions
+        ]);
     }
 
     /**
@@ -70,14 +78,20 @@ class OrganizationController extends Controller
      */
     public function edit(Organization $organization)
     {
+        $regions = [];
         $roles = [];
 
-        foreach (config('roles') as $role) {
+        foreach (config('hearth.regions.ca') as $region) {
+            $regions[$region] = __('regions.' . $region);
+        }
+
+        foreach (config('hearth.roles') as $role) {
             $roles[$role] = __('roles.' . $role);
         }
 
         return view('organizations.edit', [
             'organization' => $organization,
+            'regions' => $regions,
             'roles' => $roles,
         ]);
     }

@@ -23,8 +23,8 @@
         </div>
         <div class="field">
             <x-hearth-label for="region" :value="__('forms.label_region')" />
-            <x-hearth-region-select :selected="old('region', $organization->region)" required />
-        </div>
+            <x-hearth-select id="region" name="region" :selected="old('region', $organization->region)" required :options="config('hearth.regions.ca')"/>
+            </div>
 
         <x-hearth-button>{{ __('forms.save_changes') }}</x-hearth-button>
     </form>
@@ -114,7 +114,7 @@
         </div>
         <div class="field">
             <x-hearth-label for="role" :value="__('organization.member_role')" />
-            <x-select id="role" type="role" name="role" :options="$roles" :selected="old('role')" required />
+            <x-hearth-select id="role" type="role" name="role" :options="$roles" :selected="old('role')" required />
             @error('role', 'inviteOrganizationMember')
             <x-validation-error>{{ $message }}</x-validation-error>
             @enderror

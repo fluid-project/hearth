@@ -35,7 +35,7 @@ class CreateInvitationRequest extends FormRequest
                     ->where('inviteable_type', $inviteable_type)
                     ->where('inviteable_id', $inviteable_id);
             })],
-            'role' => ['required', 'string', Rule::in(config('roles'))],
+            'role' => ['required', 'string', Rule::in(config('hearth.roles'))],
         ];
     }
 

@@ -32,7 +32,7 @@ class UpdateMembership
                 'role' => [
                     'required',
                     'string',
-                    Rule::in(config('roles')),
+                    Rule::in(config('hearth.roles')),
                 ],
             ]
         );
