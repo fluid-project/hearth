@@ -35,7 +35,7 @@ class OrganizationController extends Controller
         $this->authorize('create', Organization::class);
 
         return view('organizations.create', [
-            'regions' => $regions
+            'regions' => $regions,
         ]);
     }
 
