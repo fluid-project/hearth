@@ -19,6 +19,7 @@
         "php": "^8.0",
         "chinleung/laravel-locales": "^1.2",
         "chinleung/laravel-multilingual-routes": "^2.7",
+        "commerceguys/addressing": "^1.2",
         "commerceguys/intl": "^1.1",
         "illuminate/contracts": "^8.37",
         "laravel/fortify": "^1.7",
@@ -37,6 +38,19 @@
         "spatie/laravel-ray": "^1.9",
         "vimeo/psalm": "^4.4"
     },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {
+                "Hearth": "Hearth\\HearthFacade"
+            },
+            "providers": [
+                "Hearth\\HearthServiceProvider"
+            ]
+        }
+    },
     "autoload": {
         "psr-4": {
             "Hearth\\": "src",
@@ -46,27 +60,17 @@
     "autoload-dev": {
         "psr-4": {
             "Hearth\\Tests\\": "tests"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "fix": "php-cs-fixer fix --config=.php_cs.dist.php --allow-risky=yes",
         "psalm": "vendor/bin/psalm",
         "test": "vendor/bin/phpunit --no-coverage",
         "test-coverage": "vendor/bin/phpunit --coverage-clover coverage.xml"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Hearth\\HearthServiceProvider"
-            ],
-            "aliases": {
-                "Hearth": "Hearth\\HearthFacade"
-            }
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

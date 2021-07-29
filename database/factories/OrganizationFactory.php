@@ -21,7 +21,7 @@ class OrganizationFactory extends Factory
      */
     public function definition()
     {
-        $regions = config('hearth.regions.ca');
+        $regions = get_regions(['CA'], config('app.locale'));
 
         return [
             'name' => $this->faker->company(),
