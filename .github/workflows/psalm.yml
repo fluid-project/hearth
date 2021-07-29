@@ -2,6 +2,12 @@ name: Psalm
 
 on:
   push:
+    branches: [main]
+    paths:
+      - '**.php'
+      - 'psalm.xml.dist'
+  pull_request:
+    branches: [main]
     paths:
       - '**.php'
       - 'psalm.xml.dist'
