@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Organization;
 use App\Http\Requests\CreateOrganizationRequest;
-use App\Http\Requests\UpdateOrganizationRequest;
 use App\Http\Requests\DestroyOrganizationRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateOrganizationRequest;
+use App\Models\Organization;
 
 class OrganizationController extends Controller
 {
@@ -79,7 +78,7 @@ class OrganizationController extends Controller
 
         return view('organizations.edit', [
             'organization' => $organization,
-            'roles' => $roles
+            'roles' => $roles,
         ]);
     }
 

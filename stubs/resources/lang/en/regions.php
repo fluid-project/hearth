@@ -23,5 +23,5 @@ return [
     'pe' => 'Prince Edward Island',
     'qc' => 'Quebec',
     'sk' => 'Saskatchewan',
-    'yt' => 'Yukon'
+    'yt' => 'Yukon',
 ];

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Actions\DestroyMembership;
 use App\Actions\UpdateMembership;
 use App\Models\Membership;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class MembershipController extends Controller
@@ -28,7 +27,7 @@ class MembershipController extends Controller
             'membership' => $membership,
             'user' => $membership->user,
             'memberable' => $membership->memberable(),
-            'roles' => $roles
+            'roles' => $roles,
         ]);
     }
 
