@@ -23,7 +23,7 @@
         </div>
         <div class="field">
             <x-hearth-label for="region" :value="__('forms.label_region')" />
-            <x-region-select :selected="old('region', $organization->region)" required />
+            <x-hearth-region-select :selected="old('region', $organization->region)" required />
         </div>
 
         <x-hearth-button>{{ __('forms.save_changes') }}</x-hearth-button>
