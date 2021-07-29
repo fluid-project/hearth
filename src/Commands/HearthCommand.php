@@ -82,17 +82,24 @@ class HearthCommand extends Command
         (new Filesystem())->ensureDirectoryExists(app_path('Http/Requests'));
         (new Filesystem())->ensureDirectoryExists(app_path('Http/Requests/Auth'));
         (new Filesystem())->ensureDirectoryExists(app_path('Http/Responses'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Mail'));
         (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
         (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
         (new Filesystem())->ensureDirectoryExists(app_path('View/Components'));
 
         // App stubs...
         $app_stubs = [
+            'Actions/AcceptInvitation.php',
+            'Actions/DestroyMembership.php',
+            'Actions/UpdateMembership.php',
             'Actions/Fortify/CreateNewUser.php',
             'Actions/Fortify/PasswordValidationRules.php',
             'Actions/Fortify/RedirectIfTwoFactorAuthenticatable.php',
             'Actions/Fortify/UpdateUserPassword.php',
             'Actions/Fortify/UpdateUserProfileInformation.php',
+            'Http/Controllers/InvitationController.php',
+            'Http/Controllers/MembershipController.php',
+            'Http/Controllers/OrganizationController.php',
             'Http/Controllers/UserController.php',
             'Http/Controllers/VerifyEmailController.php',
             'Http/Middleware/Authenticate.php',
@@ -101,17 +108,24 @@ class HearthCommand extends Command
             'Http/Middleware/RequirePassword.php',
             'Http/Requests/Auth/LoginRequest.php',
             'Http/Requests/DestroyUserRequest.php',
+            'Http/Requests/CreateInvitationRequest.php',
+            'Http/Requests/CreateOrganizationRequest.php',
+            'Http/Requests/DestroyOrganizationRequest.php',
+            'Http/Requests/UpdateOrganizationRequest.php',
             'Http/Responses/FailedTwoFactorLoginResponse.php',
             'Http/Responses/LoginResponse.php',
             'Http/Responses/PasswordResetResponse.php',
             'Http/Responses/RegisterResponse.php',
             'Http/Responses/TwoFactorLoginResponse.php',
+            '/Mail/Invitation.php',
             'Models/User.php',
             'Models/Organization.php',
             'Models/Membership.php',
             'Models/Invitation.php',
+            'Policies/OrganizationPolicy.php',
             'Policies/UserPolicy.php',
             'Providers/FortifyServiceProvider.php',
+            'Rules/NotLastAdmin.php',
             'Rules/Password.php',
         ];
 
@@ -142,6 +156,8 @@ class HearthCommand extends Command
 
         // Factories...
         $factories = [
+            'InvitationFactory.php',
+            'OrganizationFactory.php',
             'UserFactory.php',
         ];
 
