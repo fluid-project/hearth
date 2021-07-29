@@ -2,12 +2,6 @@
 
 use CommerceGuys\Addressing\Subdivision\SubdivisionRepository;
 
-$subdivisionRepository = new SubdivisionRepository();
-
-$subdivision = $subdivisionRepository->get('CA-ON', ["CA"]);
-
-ray($subdivision);
-
 if (! function_exists('get_region_name')) {
     /**
      * Get the name of an administrative subdivision from its code.
