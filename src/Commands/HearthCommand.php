@@ -178,6 +178,8 @@ class HearthCommand extends Command
             'RegistrationTest.php',
         ];
 
+        (new Filesystem())->delete(base_path('tests/Feature/ExampleTest.php'));
+
         foreach ($test_stubs as $test) {
             copy(__DIR__ . "/../../stubs/tests/{$test}", base_path("tests/Feature/{$test}"));
         }

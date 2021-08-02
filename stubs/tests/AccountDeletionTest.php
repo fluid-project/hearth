@@ -14,14 +14,14 @@ class AccountDeletionTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/en/login', [
+        $response = $this->post(localized_route('login'), [
             'email' => $user->email,
             'password' => 'password',
         ]);
 
         $this->assertAuthenticated();
 
-        $response = $this->from('/en/account/admin')->delete('/en/account/delete', [
+        $response = $this->from(localized_route('users.admin'))->delete(localized_route('users.destroy'), [
             'current_password' => 'password',
         ]);
 
@@ -34,14 +34,14 @@ class AccountDeletionTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/en/login', [
+        $response = $this->post(localized_route('login'), [
             'email' => $user->email,
             'password' => 'password',
         ]);
 
         $this->assertAuthenticated();
 
-        $response = $this->from('/en/account/admin')->delete('/en/account/delete', [
+        $response = $this->from(localized_route('users.admin'))->delete(localized_route('users.destroy'), [
             'current_password' => 'wrong_password',
         ]);
 
@@ -52,8 +52,8 @@ class AccountDeletionTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->delete('/en/account/delete');
+        $response = $this->delete(localized_route('users.destroy'));
 
-        $response->assertRedirect('/en/login');
+        $response->assertRedirect(localized_route('login'));
     }
 }

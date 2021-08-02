@@ -8,7 +8,6 @@ use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
-
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -20,16 +19,16 @@ class OrganizationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get('/en/organizations/create');
+        $response = $this->actingAs($user)->get(localized_route('organizations.create'));
         $response->assertStatus(200);
 
-        $response = $this->actingAs($user)->post('/en/organizations/create', [
+        $response = $this->actingAs($user)->post(localized_route('organizations.create'), [
             'name' => $user->name . ' Consulting',
             'locality' => 'Truro',
             'region' => 'NS',
         ]);
 
-        $url = '/en/organizations/' . Str::slug($user->name . ' Consulting');
+        $url = localized_route('organizations.show', ['organization' => Str::slug($user->name . ' Consulting')]);
 
         $response->assertSessionHasNoErrors();
 
@@ -386,7 +385,7 @@ class OrganizationTest extends TestCase
             ->hasAttached($user, ['role' => 'admin'])
             ->create();
 
-        $response = $this->post('/en/login', [
+        $response = $this->post(localized_route('login'), [
             'email' => $user->email,
             'password' => 'password',
         ]);
@@ -395,7 +394,7 @@ class OrganizationTest extends TestCase
             'current_password' => 'password',
         ]);
 
-        $response->assertRedirect('/en/dashboard');
+        $response->assertRedirect(localized_route('dashboard'));
     }
 
     public function test_users_with_admin_role_can_not_delete_organizations_with_wrong_password()
@@ -405,7 +404,7 @@ class OrganizationTest extends TestCase
             ->hasAttached($user, ['role' => 'admin'])
             ->create();
 
-        $response = $this->post('/en/login', [
+        $response = $this->post(localized_route('login'), [
             'email' => $user->email,
             'password' => 'password',
         ]);
@@ -425,7 +424,7 @@ class OrganizationTest extends TestCase
             ->hasAttached($user, ['role' => 'member'])
             ->create();
 
-        $response = $this->post('/en/login', [
+        $response = $this->post(localized_route('login'), [
             'email' => $user->email,
             'password' => 'password',
         ]);
@@ -450,7 +449,7 @@ class OrganizationTest extends TestCase
             ->hasAttached($other_user, ['role' => 'admin'])
             ->create();
 
-        $response = $this->post('/en/login', [
+        $response = $this->post(localized_route('login'), [
             'email' => $user->email,
             'password' => 'password',
         ]);
@@ -467,12 +466,12 @@ class OrganizationTest extends TestCase
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
 
-        $response = $this->post('/en/login', [
+        $response = $this->post(localized_route('login'), [
             'email' => $user->email,
             'password' => 'password',
         ]);
 
-        $response = $this->get('/en/organizations');
+        $response = $this->get(localized_route('organizations.index'));
         $response->assertStatus(200);
 
         $response = $this->get(localized_route('organizations.show', $organization));
@@ -483,10 +482,10 @@ class OrganizationTest extends TestCase
     {
         $organization = Organization::factory()->create();
 
-        $response = $this->get('/en/organizations');
-        $response->assertRedirect('/en/login');
+        $response = $this->get(localized_route('organizations.index'));
+        $response->assertRedirect(localized_route('login'));
 
         $response = $this->get(localized_route('organizations.show', $organization));
-        $response->assertRedirect('/en/login');
+        $response->assertRedirect(localized_route('login'));
     }
 }
