@@ -165,6 +165,9 @@ class HearthCommand extends Command
             copy(__DIR__ . "/../../database/factories/{$factory}", base_path("database/factories/{$factory}"));
         }
 
+        // Tests...
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/tests/Features/', base_path('tests'));
+
         // Views...
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
 
