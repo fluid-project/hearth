@@ -10,11 +10,13 @@ use Illuminate\Database\Eloquent\Relations\MorphedByMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class User extends Authenticatable implements HasLocalePreference, MustVerifyEmail
 {
+    use CascadesDeletes;
     use HasFactory;
     use HasSlug;
     use Notifiable;
@@ -53,7 +55,14 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
         'email_verified_at' => 'datetime',
     ];
 
-    protected $cascadeDeletes = ['organizations'];
+    /**
+     * The relationships that should be deleted when a user is deleted.
+     *
+     * @var array
+     */
+    protected $cascadeDeletes = [
+        'organizations',
+    ];
 
     /**
      * Get the options for generating the slug.

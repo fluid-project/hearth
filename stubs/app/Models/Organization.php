@@ -29,7 +29,14 @@ class Organization extends Model
         'region',
     ];
 
-    protected $cascadeDeletes = ['users'];
+    /**
+     * The relationships that should be deleted when an organization is deleted.
+     *
+     * @var array
+     */
+    protected $cascadeDeletes = [
+        'users',
+    ];
 
     /**
      * Get the options for generating the slug.
@@ -49,16 +56,6 @@ class Organization extends Model
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-
-    /**
-     * Get the full namespaced class for the model.
-     *
-     * @return string
-     */
-    public function getModelClass()
-    {
-        return 'App\Models\Organization';
     }
 
     /**

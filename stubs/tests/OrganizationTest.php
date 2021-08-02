@@ -182,7 +182,7 @@ class OrganizationTest extends TestCase
             ->from(localized_route('organizations.edit', ['organization' => $organization]))
             ->post(localized_route('invitations.create'), [
                 'inviteable_id' => $organization->id,
-                'inviteable_type' => $organization->getModelClass(),
+                'inviteable_type' => get_class($organization),
                 'email' => 'newuser@here.com',
                 'role' => 'member',
             ]);
@@ -203,7 +203,7 @@ class OrganizationTest extends TestCase
             ->from(localized_route('organizations.edit', ['organization' => $organization]))
             ->post(localized_route('invitations.create'), [
                 'inviteable_id' => $organization->id,
-                'inviteable_type' => $organization->getModelClass(),
+                'inviteable_type' => get_class($organization),
                 'email' => 'newuser@here.com',
                 'role' => 'member',
             ]);
@@ -219,7 +219,7 @@ class OrganizationTest extends TestCase
             ->create();
         $invitation = Invitation::factory()->create([
             'inviteable_id' => $organization->id,
-            'inviteable_type' => $organization->getModelClass(),
+            'inviteable_type' => get_class($organization),
             'email' => 'me@here.com',
         ]);
 
@@ -240,7 +240,7 @@ class OrganizationTest extends TestCase
             ->create();
         $invitation = Invitation::factory()->create([
             'inviteable_id' => $organization->id,
-            'inviteable_type' => $organization->getModelClass(),
+            'inviteable_type' => get_class($organization),
             'email' => 'me@here.com',
         ]);
 
@@ -267,7 +267,7 @@ class OrganizationTest extends TestCase
             ->from(localized_route('organizations.edit', ['organization' => $organization]))
             ->post(localized_route('invitations.create'), [
                 'inviteable_id' => $organization->id,
-                'inviteable_type' => $organization->getModelClass(),
+                'inviteable_type' => get_class($organization),
                 'email' => $other_user->email,
                 'role' => 'member',
             ]);
@@ -282,7 +282,7 @@ class OrganizationTest extends TestCase
         $organization = Organization::factory()->create();
         $invitation = Invitation::factory()->create([
             'inviteable_id' => $organization->id,
-            'inviteable_type' => $organization->getModelClass(),
+            'inviteable_type' => get_class($organization),
             'email' => $user->email,
         ]);
 
@@ -299,7 +299,7 @@ class OrganizationTest extends TestCase
         $organization = Organization::factory()->create();
         $invitation = Invitation::factory()->create([
             'inviteable_id' => $organization->id,
-            'inviteable_type' => $organization->getModelClass(),
+            'inviteable_type' => get_class($organization),
             'email' => 'me@here.com',
         ]);
 

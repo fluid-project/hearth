@@ -104,7 +104,7 @@
     <form action="{{ localized_route('invitations.create') }}" method="POST" novalidate>
         @csrf
         <x-hearth-input type="hidden" name="inviteable_id" :value="$organization->id"></x-hearth-input>
-        <x-hearth-input type="hidden" name="inviteable_type" :value="$organization->getModelClass()"></x-hearth-input>
+        <x-hearth-input type="hidden" name="inviteable_type" :value="get_class($organization)"></x-hearth-input>
         <div class="field">
             <x-hearth-label for="email" :value="__('forms.label_email')" />
             <x-hearth-input id="email" type="email" name="email" :value="old('email')" required />

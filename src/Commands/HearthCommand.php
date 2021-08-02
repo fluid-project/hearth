@@ -166,7 +166,21 @@ class HearthCommand extends Command
         }
 
         // Tests...
-        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/tests/Features/', base_path('tests'));
+        $test_stubs = [
+            'AccountDeletionTest.php',
+            'AuthenticationTest.php',
+            'EmailVerificationTest.php',
+            'LocalizationTest.php',
+            'OrganizationTest.php',
+            'PasswordChangeTest.php',
+            'PasswordConfirmationTest.php',
+            'PasswordResetTest.php',
+            'RegistrationTest.php',
+        ];
+
+        foreach ($test_stubs as $test) {
+            copy(__DIR__ . "/../../stubs/tests/{$test}", base_path("tests/Feature/{$test}"));
+        }
 
         // Views...
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
