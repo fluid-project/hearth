@@ -176,6 +176,7 @@ class HearthCommand extends Command
             'PasswordConfirmationTest.php',
             'PasswordResetTest.php',
             'RegistrationTest.php',
+            'TwoFactorAuthenticationTest.php',
         ];
 
         (new Filesystem())->delete(base_path('tests/Feature/ExampleTest.php'));
