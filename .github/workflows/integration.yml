@@ -53,7 +53,7 @@ jobs:
         run: |
           cd tests/integration
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-          composer require fluid-project/hearth:dev-${{ env.hearth_version }}
+          composer require fluid-project/hearth:dev-${{ env.hearth_version }} --with-all-dependencies --no-interaction
           php artisan hearth:install --two-factor
 
       - name: Run tests
