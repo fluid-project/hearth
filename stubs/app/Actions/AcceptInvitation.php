@@ -58,7 +58,7 @@ class AcceptInvitation
     {
         return [
             'email' => ['required', 'email', 'exists:users'],
-            'role' => ['required', 'string', Rule::in(config('hearth.roles'))],
+            'role' => ['required', 'string', Rule::in(config('hearth.organizations.roles'))],
         ];
     }
 

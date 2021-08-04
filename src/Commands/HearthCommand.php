@@ -229,8 +229,10 @@ class HearthCommand extends Command
 
         if ($this->option('organizations')) {
             $this->replaceInFile(
-                "'organizations' => false,",
-                "'organizations' => true,",
+                "'organizations' => [
+        'enabled' => false,",
+                "'organizations' => [
+        'enabled' => true,",
                 config_path('hearth.php')
             );
         }

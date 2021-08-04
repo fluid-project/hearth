@@ -17,6 +17,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_can_create_organizations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get(localized_route('organizations.create'));
@@ -37,6 +41,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_with_admin_role_can_edit_organizations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $organization = Organization::factory()
             ->hasAttached($user, ['role' => 'admin'])
@@ -55,6 +63,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_without_admin_role_can_not_edit_organizations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $organization = Organization::factory()
             ->hasAttached($user, ['role' => 'member'])
@@ -73,6 +85,10 @@ class OrganizationTest extends TestCase
 
     public function test_non_members_can_not_edit_organizations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $other_user = User::factory()->create();
 
@@ -97,6 +113,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_with_admin_role_can_update_other_member_roles()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $other_user = User::factory()->create();
 
@@ -121,6 +141,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_without_admin_role_can_not_update_member_roles()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
 
         $organization = Organization::factory()
@@ -144,6 +168,10 @@ class OrganizationTest extends TestCase
 
     public function test_only_administrator_can_not_downgrade_their_role()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $other_user = User::factory()->create();
 
@@ -170,6 +198,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_with_admin_role_can_invite_members()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
 
         $organization = Organization::factory()
@@ -191,6 +223,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_without_admin_role_can_not_invite_members()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
 
         $organization = Organization::factory()
@@ -212,6 +248,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_with_admin_role_can_cancel_invitations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $organization = Organization::factory()
             ->hasAttached($user, ['role' => 'admin'])
@@ -233,6 +273,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_without_admin_role_can_not_cancel_invitations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $organization = Organization::factory()
             ->hasAttached($user, ['role' => 'member'])
@@ -253,6 +297,10 @@ class OrganizationTest extends TestCase
 
     public function test_existing_members_cannot_be_invited()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $other_user = User::factory()->create();
 
@@ -277,6 +325,10 @@ class OrganizationTest extends TestCase
 
     public function test_invitation_can_be_accepted()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
         $invitation = Invitation::factory()->create([
@@ -295,6 +347,10 @@ class OrganizationTest extends TestCase
 
     public function test_invitation_cannot_be_accepted_unless_account_exists()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $organization = Organization::factory()->create();
         $invitation = Invitation::factory()->create([
             'inviteable_id' => $organization->id,
@@ -311,6 +367,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_with_admin_role_can_remove_members()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $other_user = User::factory()->create();
 
@@ -335,6 +395,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_without_admin_role_can_not_remove_members()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $other_user = User::factory()->create();
 
@@ -358,6 +422,10 @@ class OrganizationTest extends TestCase
 
     public function test_only_administrator_can_not_remove_themself()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
 
         $organization = Organization::factory()
@@ -380,6 +448,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_with_admin_role_can_delete_organizations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $organization = Organization::factory()
             ->hasAttached($user, ['role' => 'admin'])
@@ -399,6 +471,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_with_admin_role_can_not_delete_organizations_with_wrong_password()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $organization = Organization::factory()
             ->hasAttached($user, ['role' => 'admin'])
@@ -419,6 +495,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_without_admin_role_can_not_delete_organizations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $organization = Organization::factory()
             ->hasAttached($user, ['role' => 'member'])
@@ -438,6 +518,10 @@ class OrganizationTest extends TestCase
 
     public function test_non_members_can_not_delete_organizations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $other_user = User::factory()->create();
 
@@ -463,6 +547,10 @@ class OrganizationTest extends TestCase
 
     public function test_users_can_view_organizations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
 
@@ -480,6 +568,10 @@ class OrganizationTest extends TestCase
 
     public function test_guests_can_not_view_organizations()
     {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
         $organization = Organization::factory()->create();
 
         $response = $this->get(localized_route('organizations.index'));

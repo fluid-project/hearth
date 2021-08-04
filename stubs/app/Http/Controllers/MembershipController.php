@@ -19,7 +19,7 @@ class MembershipController extends Controller
     {
         $roles = [];
 
-        foreach (config('hearth.roles') as $role) {
+        foreach (config('hearth.organizations.roles') as $role) {
             $roles[$role] = __('roles.' . $role);
         }
 

@@ -2,9 +2,11 @@
 
 // Config for Hearth.
 return [
-    'organizations' => false,
-    'roles' => [
-        'member',
-        'admin',
+    'organizations' => [
+        'enabled' => false,
+        'roles' => [
+            'member',
+            'admin',
+        ],
     ],
 ];
