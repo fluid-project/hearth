@@ -32,7 +32,7 @@ jobs:
       - name: Create test database
         run: |
           sudo systemctl start mysql.service
-          mysqladmin create aina --user="root" --password="root"
+          mysqladmin create laravel --user="root" --password="root"
 
       - name: Create project
         run: |
@@ -48,7 +48,7 @@ jobs:
           echo "hearth_version=main" >> $GITHUB_ENV
         if: github.event_name != 'pull_request'
 
-      - name: Install hearth
+      - name: Install Hearth
         run: |
           cd tests/integration
           composer require fluid-project/hearth:dev-${{ env.hearth_version }} --no-interaction
