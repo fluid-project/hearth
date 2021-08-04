@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class HearthCommand extends Command
 {
-    public $signature = 'hearth:install {--two-factor}';
+    public $signature = 'hearth:install {--two-factor} {--organizations}';
 
     public $description = 'Install Hearth.';
 

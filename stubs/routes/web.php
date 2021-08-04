@@ -36,6 +36,8 @@ Route::multilingual('/account/delete', [UserController::class, 'destroy'])
     ->middleware(['auth'])
     ->name('users.destroy');
 
-require __DIR__ . '/organizations.php';
+if (config('hearth.organizations')) {
+    require __DIR__ . '/organizations.php';
+}
 
 require __DIR__ . '/fortify.php';
