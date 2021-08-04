@@ -2,26 +2,9 @@
 
 // Config for Hearth.
 return [
-    'regions' => [
-        'ca' => [
-            'ab',
-            'bc',
-            'mb',
-            'nb',
-            'nl',
-            'ns',
-            'nt',
-            'nu',
-            'on',
-            'pe',
-            'qc',
-            'sk',
-            'yt',
-        ],
-    ],
+    'organizations' => false,
     'roles' => [
         'member',
         'admin',
     ],
 ];
-

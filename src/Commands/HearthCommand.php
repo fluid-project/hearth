@@ -15,7 +15,8 @@ class HearthCommand extends Command
     public function handle()
     {
         // Publish vendor files...
-        $this->callSilent('vendor:publish', ['--provider' => 'Hearth\HearthServiceProvider', '--tag' => 'hearth-migrations', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'hearth-config', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'hearth-migrations', '--force' => true]);
         $this->callSilent('vendor:publish', ['--provider' => 'Laravel\Fortify\FortifyServiceProvider']);
         $this->callSilent('vendor:publish', [
             '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
@@ -217,11 +218,20 @@ class HearthCommand extends Command
         // Language files...
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/lang/', resource_path('lang'));
 
+        // Enable two-factor authentication
         if ($this->option('two-factor')) {
             $this->replaceInFile(
                 "// Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
                 "Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
                 config_path('fortify.php')
+            );
+        }
+
+        if ($this->option('organizations')) {
+            $this->replaceInFile(
+                "'organizations' => false,",
+                "'organizations' => true,",
+                config_path('hearth.php')
             );
         }
 
