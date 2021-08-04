@@ -36,7 +36,7 @@ jobs:
 
       - name: Determine Hearth version
         run: |
-          echo "hearth_version=${{ github.base_ref }}" >> $GITHUB_ENV
+          echo "hearth_version=${{ github.head_ref }}" >> $GITHUB_ENV
         if: github.event_name == 'pull_request'
 
       - name: Determine Hearth version
@@ -47,6 +47,7 @@ jobs:
       - name: Install hearth
         run: |
           cd tests/integration
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
           composer require fluid-project/hearth:dev-${{ env.hearth_version }}
           php artisan hearth:install --two-factor
           vendor/bin/phpunit
