@@ -15,9 +15,8 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         php: [8.0]
         laravel: [8]
-        stability: [prefer-lowest, prefer-stable]
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -52,8 +51,7 @@ jobs:
       - name: Install hearth
         run: |
           cd tests/integration
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-          composer require fluid-project/hearth:dev-${{ env.hearth_version }} --with-all-dependencies --no-interaction
+          composer require fluid-project/hearth:dev-${{ env.hearth_version }} --no-interaction
           php artisan hearth:install --two-factor
 
       - name: Run tests
