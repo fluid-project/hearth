@@ -219,12 +219,8 @@ class HearthCommand extends Command
 
         if ($this->option('two-factor')) {
             $this->replaceInFile(
-                "// Features::twoFactorAuthentication([
-                    //     'confirmPassword' => true,
-                    // ]),",
-                "Features::twoFactorAuthentication([
-                       'confirmPassword' => true,
-                    ]),",
+                "// Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
+                "Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
                 config_path('fortify.php')
             );
         }
