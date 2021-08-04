@@ -218,7 +218,15 @@ class HearthCommand extends Command
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/lang/', resource_path('lang'));
 
         if ($this->option('two-factor')) {
-            copy(__DIR__ . "/../../stubs/config/fortify-two-factor.php", base_path("config/fortify.php"));
+            $this->replaceInFile(
+                "// Features::twoFactorAuthentication([
+                    //     'confirmPassword' => true,
+                    // ]),",
+                "Features::twoFactorAuthentication([
+                       'confirmPassword' => true,
+                    ]),",
+                config_path('fortify.php')
+            );
         }
 
         $this->line('');
