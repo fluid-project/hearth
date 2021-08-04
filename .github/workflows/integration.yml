@@ -59,5 +59,6 @@ jobs:
           DB_PASSWORD: root
           DB_HOST: localhost
         run: |
+          cd tests/integration
           php artisan migrate
           vendor/bin/phpunit
