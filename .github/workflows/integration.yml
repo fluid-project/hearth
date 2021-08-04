@@ -53,6 +53,8 @@ jobs:
           cd tests/integration
           composer require fluid-project/hearth:dev-${{ env.hearth_version }} --no-interaction
           php artisan hearth:install --two-factor
+          npm install
+          npm run production
 
       - name: Run tests
         env:
