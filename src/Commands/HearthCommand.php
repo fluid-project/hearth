@@ -167,6 +167,8 @@ class HearthCommand extends Command
         // Language files...
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/lang/', resource_path('lang'));
 
+        // Prompt for additional languages...
+        $this->maybeAddLocale();
 
         $this->line('');
         $this->info('Hearth scaffolding installed successfully.');
