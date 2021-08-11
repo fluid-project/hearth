@@ -22,6 +22,7 @@ return [
     'create_your_account' => 'Create your account',
     'label_current_password' => 'Current password',
     'change_password' => 'Change password',
+    'action_cancel' => 'Cancel',
     'action_confirm' => 'Confirm',
     'password_change_succeeded' => 'Your password has been changed.',
     'label_remember_me' => 'Remember me',
@@ -36,5 +37,12 @@ return [
     'verification_intro' => 'Please verify your email address by clicking on the link we emailed to you. If you didn’t receive the email, we will gladly send you another.',
     'verification_sent' => 'A new verification link has been sent to the email address you provided.',
     'resend_verification_email' => 'Resend verification email',
-    'verification_succeeded' => 'Your email address has been verified.'
+    'verification_succeeded' => 'Your email address has been verified.',
+    'two_factor_auth_code_intro' => 'Please enter the code provided by your authenticator application to complete the sign in process.',
+    'label_two_factor_auth_code' => 'Authentication code',
+    'two_factor_auth_action_use_recovery_code' => 'Use a recovery code',
+    'two_factor_auth_recovery_code_intro' => 'Please enter one of your saved recovery codes to complete the sign in process.',
+    'label_two_factor_auth_recovery_code' => 'Recovery code',
+    'two_factor_auth_action_use_code' => 'Use an authentication code',
+    'invalid_two_factor_auth_code' => 'The provided two-factor authentication code was not valid.',
 ];

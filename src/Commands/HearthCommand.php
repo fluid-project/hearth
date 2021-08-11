@@ -9,13 +9,14 @@ use Illuminate\Support\Str;
 
 class HearthCommand extends Command
 {
-    public $signature = 'hearth:install';
+    public $signature = 'hearth:install {--two-factor}';
 
     public $description = 'Install Hearth.';
 
     public function handle()
     {
         // Publish vendor files...
+        $this->callSilent('vendor:publish', ['--provider' => 'Hearth\HearthServiceProvider', '--tag' => 'hearth-migrations', '--force' => true]);
         $this->callSilent('vendor:publish', ['--provider' => 'Laravel\Fortify\FortifyServiceProvider']);
         $this->callSilent('vendor:publish', [
             '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
@@ -29,11 +30,11 @@ class HearthCommand extends Command
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@accessibility-in-action/looseleaf' => '^1.3',
+                '@accessibility-in-action/looseleaf' => '^1.4',
                 'alpinejs' => '^3.0',
                 'modern-css-reset' => '^1.4',
             ] + $packages;
-        });
+        }, false);
 
         $this->updateNodePackages(function ($packages) {
             return [
@@ -41,7 +42,7 @@ class HearthCommand extends Command
                 'sass' => '^1.35',
                 'sass-loader' => '^12.1',
             ] + $packages;
-        }, true);
+        });
 
         // Name...
         $this->replaceInFile('APP_NAME=Laravel', 'APP_NAME=Hearth', base_path('.env'));
@@ -58,10 +59,19 @@ class HearthCommand extends Command
         $this->installMiddlewareAfter('VerifyCsrfToken::class', '\ChinLeung\MultilingualRoutes\DetectRequestLocale::class');
 
         // RedirectToPreferredLocale Middleware...
+        if (! Str::contains(file_get_contents(app_path('Http/Kernel.php')), '\App\Http\Middleware\RedirectToPreferredLocale::class')) {
+            $this->replaceInFile(
+                "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,",
+                "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+            'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
+                app_path('Http/Kernel.php')
+            );
+        }
+
+        // RequirePassword Middleware...
         $this->replaceInFile(
-            "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,",
-            "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
+            '\Illuminate\Auth\Middleware\RequirePassword::class',
+            '\App\Http\Middleware\RequirePassword::class',
             app_path('Http/Kernel.php')
         );
 
@@ -81,6 +91,7 @@ class HearthCommand extends Command
         $app_stubs = [
             'Actions/Fortify/CreateNewUser.php',
             'Actions/Fortify/PasswordValidationRules.php',
+            'Actions/Fortify/RedirectIfTwoFactorAuthenticatable.php',
             'Actions/Fortify/UpdateUserPassword.php',
             'Actions/Fortify/UpdateUserProfileInformation.php',
             'Http/Controllers/UserController.php',
@@ -88,8 +99,10 @@ class HearthCommand extends Command
             'Http/Middleware/Authenticate.php',
             'Http/Middleware/RedirectIfAuthenticated.php',
             'Http/Middleware/RedirectToPreferredLocale.php',
+            'Http/Middleware/RequirePassword.php',
             'Http/Requests/Auth/LoginRequest.php',
             'Http/Requests/DestroyUserRequest.php',
+            'Http/Responses/FailedTwoFactorLoginResponse.php',
             'Http/Responses/LoginResponse.php',
             'Http/Responses/PasswordResetResponse.php',
             'Http/Responses/RegisterResponse.php',
@@ -167,6 +180,10 @@ class HearthCommand extends Command
 
         // Language files...
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/lang/', resource_path('lang'));
+
+        if ($this->option('two-factor')) {
+            copy(__DIR__ . "/../../stubs/config/fortify-two-factor.php", base_path("config/fortify.php"));
+        }
 
         $this->line('');
         $this->info('Hearth scaffolding installed successfully.');

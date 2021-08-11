@@ -6,6 +6,7 @@ use Hearth\Commands\HearthCommand;
 use Hearth\View\Components\Alert;
 use Hearth\View\Components\LanguageSwitcher;
 use Hearth\View\Components\LocaleSelect;
+use Hearth\View\Components\PasswordConfirmation;
 use Hearth\View\Components\Select;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Compilers\BladeCompiler;
@@ -85,6 +86,7 @@ class HearthServiceProvider extends PackageServiceProvider
             Alert::class,
             LanguageSwitcher::class,
             LocaleSelect::class,
+            PasswordConfirmation::class,
             Select::class,
         ]);
     }

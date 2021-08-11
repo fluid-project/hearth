@@ -5,6 +5,7 @@ A simple starter kit for the Laravel framework.
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/fluid-project/hearth.svg)](https://packagist.org/packages/fluid-project/hearth)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fluid-project/hearth/run-tests?label=tests)](https://github.com/fluid-project/hearth/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/fluid-project/hearth/Check%20&%20fix%20styling?label=code%20style)](https://github.com/fluid-project/hearth/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![Code coverage status](https://img.shields.io/codecov/c/github/fluid-project/hearth?flag=flag_name&token=jyzyzAaPSx)](https://app.codecov.io/gh/fluid-project/hearth/)
 [![Localization status](https://badges.crowdin.net/laravel-hearth/localized.svg)](https://crowdin.com/project/laravel-hearth)
 [![Total Downloads](https://img.shields.io/packagist/dt/fluid-project/hearth.svg)](https://packagist.org/packages/fluid-project/hearth)
 
@@ -12,7 +13,8 @@ A simple starter kit for the Laravel framework.
 
 Hearth is a simple starter kit for the Laravel framework. It provides a few things out of the box:
 
-- [ ] A user model with login, registration, email verification, and optional two-factor authentication.
+- [x] A user model with login, registration, email verification
+- [ ] Optional two-factor authentication support for users.
 - [ ] An organization model.
 - [ ] A membership model which reflects users' roles within organizations.
 - [ ] An invitation model which allows users to be invited to join organizations.

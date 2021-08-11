@@ -7,6 +7,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -15,6 +16,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     use HasFactory;
     use HasSlug;
     use Notifiable;
+    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +38,8 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
     /**
@@ -75,5 +79,15 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     public function preferredLocale()
     {
         return $this->locale;
+    }
+
+    /**
+     * Is two-factor authentication enabled for this user?
+     *
+     * @return bool
+     */
+    public function twoFactorAuthEnabled()
+    {
+        return ! is_null($this->two_factor_secret);
     }
 }
