@@ -2,6 +2,7 @@
 
 namespace Hearth\Commands;
 
+use CommerceGuys\Intl\Language\LanguageRepository;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -111,8 +112,11 @@ class HearthCommand extends Command
         ];
 
         foreach ($config_stubs as $config) {
-            copy(__DIR__ . "/../../stubs/config/{$config}", base_path("config/{$config}"));
+            copy(__DIR__ . "/../../stubs/config/{$config}", config_path($config));
         }
+
+        // Add languages
+        $this->maybeAddLocale();
 
         // Route stubs...
         $route_stubs = [
@@ -164,10 +168,37 @@ class HearthCommand extends Command
         // Language files...
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/lang/', resource_path('lang'));
 
-
         $this->line('');
         $this->info('Hearth scaffolding installed successfully.');
         $this->comment('Please execute "npm install && npm run dev" to build your assets.');
+    }
+
+    /**
+     * Add a new locale to config/locales.php based on user input.
+     *
+     * @param  string  $after
+     * @return void
+     */
+    protected function maybeAddLocale($after = 'en')
+    {
+        if ($this->confirm('Do you want to add support for an additional locale?', true)) {
+            $languages = (new LanguageRepository())->getList();
+
+            $language = $this->anticipate('Choose a language', $languages);
+
+            $language_code = array_search($language, $languages);
+
+            $this->replaceInFile(
+                "'{$after}',",
+                "'{$after}',
+        '{$language_code}',",
+                config_path('locales.php')
+            );
+
+            $this->info("{$language} added to locales!");
+
+            $this->maybeAddLocale($language_code);
+        }
     }
 
     /**
