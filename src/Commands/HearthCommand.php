@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class HearthCommand extends Command
 {
-    public $signature = 'hearth:install {--two-factor} {--organizations}';
+    public $signature = 'hearth:install {--two-factor} {--organizations} {--no-interaction}';
 
     public $description = 'Install Hearth.';
 
@@ -147,7 +147,9 @@ class HearthCommand extends Command
         }
 
         // Add languages
-        $this->maybeAddLocale();
+        if (!$this->option('no-interaction')) {
+            $this->maybeAddLocale();
+        }
 
         // Route stubs...
         $route_stubs = [
