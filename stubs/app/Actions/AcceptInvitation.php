@@ -57,7 +57,13 @@ class AcceptInvitation
     protected function rules()
     {
         return [
-            'email' => ['required', 'email', 'exists:users'],
+            'email' => [
+                'required',
+                'email',
+                Rule::exists('users')->where(function ($query) {
+                    return $query->where('email', Auth::user()->email);
+                }),
+            ],
             'role' => ['required', 'string', Rule::in(config('hearth.organizations.roles'))],
         ];
     }

@@ -52,7 +52,7 @@ Route::multilingual('/invitations/create', [InvitationController::class, 'create
     ->name('invitations.create');
 
 Route::get('/invitations/{invitation}', [InvitationController::class, 'accept'])
-    ->middleware(['signed'])
+    ->middleware(['auth', 'signed'])
     ->name('invitations.accept');
 
 Route::delete('/invitations/{invitation}/cancel', [InvitationController::class, 'destroy'])
