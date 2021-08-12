@@ -31,6 +31,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasTranslations()
+            ->hasMigrations(['create_organizations_table', 'create_memberships_table', 'create_invitations_table'])
             ->hasCommand(HearthCommand::class);
     }
 

@@ -1,6 +1,12 @@
 <?php
 
-// config for Hearth/Hearth
+// Config for Hearth.
 return [
-
+    'organizations' => [
+        'enabled' => false,
+        'roles' => [
+            'member',
+            'admin',
+        ],
+    ],
 ];

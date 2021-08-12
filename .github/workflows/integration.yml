@@ -1,0 +1,71 @@
+name: Run integration tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.0]
+        laravel: [8]
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Create test database
+        run: |
+          sudo systemctl start mysql.service
+          mysqladmin create laravel --user="root" --password="root"
+
+      - name: Create project
+        run: |
+          composer create-project --prefer-dist laravel/laravel:^${{ matrix.laravel }} tests/integration --no-interaction
+
+      - name: Determine Hearth version
+        run: |
+          echo "hearth_version=${{ github.head_ref }}" >> $GITHUB_ENV
+        if: github.event_name == 'pull_request'
+
+      - name: Determine Hearth version
+        run: |
+          echo "hearth_version=main" >> $GITHUB_ENV
+        if: github.event_name != 'pull_request'
+
+      - name: Configure Composer repository
+        run: |
+          cd tests/integration
+          composer config repositories.head vcs https://github.com/${{ github.event.pull_request.head.repo.full_name }}
+        if: github.event_name == 'pull_request'
+
+      - name: Install Hearth
+        run: |
+          cd tests/integration
+          composer require fluid-project/hearth:dev-${{ env.hearth_version }} --no-interaction
+          php artisan hearth:install --two-factor
+          npm install
+          npm run production
+
+      - name: Run tests
+        env:
+          DB_PASSWORD: root
+          DB_HOST: localhost
+        run: |
+          cd tests/integration
+          php artisan migrate
+          vendor/bin/phpunit

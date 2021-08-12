@@ -9,14 +9,15 @@ use Illuminate\Support\Str;
 
 class HearthCommand extends Command
 {
-    public $signature = 'hearth:install {--two-factor}';
+    public $signature = 'hearth:install {--two-factor} {--organizations}';
 
     public $description = 'Install Hearth.';
 
     public function handle()
     {
         // Publish vendor files...
-        $this->callSilent('vendor:publish', ['--provider' => 'Hearth\HearthServiceProvider', '--tag' => 'hearth-migrations', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'hearth-config', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'hearth-migrations', '--force' => true]);
         $this->callSilent('vendor:publish', ['--provider' => 'Laravel\Fortify\FortifyServiceProvider']);
         $this->callSilent('vendor:publish', [
             '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
@@ -83,17 +84,24 @@ class HearthCommand extends Command
         (new Filesystem())->ensureDirectoryExists(app_path('Http/Requests'));
         (new Filesystem())->ensureDirectoryExists(app_path('Http/Requests/Auth'));
         (new Filesystem())->ensureDirectoryExists(app_path('Http/Responses'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Mail'));
         (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
         (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
         (new Filesystem())->ensureDirectoryExists(app_path('View/Components'));
 
         // App stubs...
         $app_stubs = [
+            'Actions/AcceptInvitation.php',
+            'Actions/DestroyMembership.php',
+            'Actions/UpdateMembership.php',
             'Actions/Fortify/CreateNewUser.php',
             'Actions/Fortify/PasswordValidationRules.php',
             'Actions/Fortify/RedirectIfTwoFactorAuthenticatable.php',
             'Actions/Fortify/UpdateUserPassword.php',
             'Actions/Fortify/UpdateUserProfileInformation.php',
+            'Http/Controllers/InvitationController.php',
+            'Http/Controllers/MembershipController.php',
+            'Http/Controllers/OrganizationController.php',
             'Http/Controllers/UserController.php',
             'Http/Controllers/VerifyEmailController.php',
             'Http/Middleware/Authenticate.php',
@@ -102,14 +110,24 @@ class HearthCommand extends Command
             'Http/Middleware/RequirePassword.php',
             'Http/Requests/Auth/LoginRequest.php',
             'Http/Requests/DestroyUserRequest.php',
+            'Http/Requests/CreateInvitationRequest.php',
+            'Http/Requests/CreateOrganizationRequest.php',
+            'Http/Requests/DestroyOrganizationRequest.php',
+            'Http/Requests/UpdateOrganizationRequest.php',
             'Http/Responses/FailedTwoFactorLoginResponse.php',
             'Http/Responses/LoginResponse.php',
             'Http/Responses/PasswordResetResponse.php',
             'Http/Responses/RegisterResponse.php',
             'Http/Responses/TwoFactorLoginResponse.php',
+            '/Mail/Invitation.php',
             'Models/User.php',
+            'Models/Organization.php',
+            'Models/Membership.php',
+            'Models/Invitation.php',
+            'Policies/OrganizationPolicy.php',
             'Policies/UserPolicy.php',
             'Providers/FortifyServiceProvider.php',
+            'Rules/NotLastAdmin.php',
             'Rules/Password.php',
         ];
 
@@ -134,6 +152,7 @@ class HearthCommand extends Command
         // Route stubs...
         $route_stubs = [
             'fortify.php',
+            'organizations.php',
             'web.php',
         ];
 
@@ -143,11 +162,33 @@ class HearthCommand extends Command
 
         // Factories...
         $factories = [
+            'InvitationFactory.php',
+            'OrganizationFactory.php',
             'UserFactory.php',
         ];
 
         foreach ($factories as $factory) {
             copy(__DIR__ . "/../../database/factories/{$factory}", base_path("database/factories/{$factory}"));
+        }
+
+        // Tests...
+        $test_stubs = [
+            'AccountDeletionTest.php',
+            'AuthenticationTest.php',
+            'EmailVerificationTest.php',
+            'LocalizationTest.php',
+            'OrganizationTest.php',
+            'PasswordChangeTest.php',
+            'PasswordConfirmationTest.php',
+            'PasswordResetTest.php',
+            'RegistrationTest.php',
+            'TwoFactorAuthenticationTest.php',
+        ];
+
+        (new Filesystem())->delete(base_path('tests/Feature/ExampleTest.php'));
+
+        foreach ($test_stubs as $test) {
+            copy(__DIR__ . "/../../stubs/tests/{$test}", base_path("tests/Feature/{$test}"));
         }
 
         // Views...
@@ -181,8 +222,23 @@ class HearthCommand extends Command
         // Language files...
         (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/lang/', resource_path('lang'));
 
+        // Enable two-factor authentication
         if ($this->option('two-factor')) {
-            copy(__DIR__ . "/../../stubs/config/fortify-two-factor.php", base_path("config/fortify.php"));
+            $this->replaceInFile(
+                "// Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
+                "Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
+                config_path('fortify.php')
+            );
+        }
+
+        if ($this->option('organizations')) {
+            $this->replaceInFile(
+                "'organizations' => [
+        'enabled' => false,",
+                "'organizations' => [
+        'enabled' => true,",
+                config_path('hearth.php')
+            );
         }
 
         $this->line('');

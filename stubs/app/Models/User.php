@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class User extends Authenticatable implements HasLocalePreference, MustVerifyEmail
 {
+    use CascadesDeletes;
     use HasFactory;
     use HasSlug;
     use Notifiable;
@@ -52,6 +54,15 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     ];
 
     /**
+     * The relationships that should be deleted when a user is deleted.
+     *
+     * @var array
+     */
+    protected $cascadeDeletes = [
+        'organizations',
+    ];
+
+    /**
      * Get the options for generating the slug.
      */
     public function getSlugOptions(): SlugOptions
@@ -79,6 +90,48 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     public function preferredLocale()
     {
         return $this->locale;
+    }
+
+    /**
+     * Get the user's memberships.
+     */
+    public function memberships()
+    {
+        return $this->hasMany(Membership::class);
+    }
+
+    /**
+     * Get the consulting organizations that belong to this user.
+     */
+    public function organizations()
+    {
+        return $this->morphedByMany(Organization::class, 'membership')
+            ->using('\App\Models\Membership')
+            ->withPivot('id')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    /**
+     * Determine if the user is a member of a given memberable.
+     *
+     * @param mixed $memberable
+     * @return bool
+     */
+    public function isMemberOf($memberable)
+    {
+        return $memberable->hasUserWithEmail($this->email);
+    }
+
+    /**
+     * Determine if the user is an administrator of a given memberable.
+     *
+     * @param mixed $memberable
+     * @return bool
+     */
+    public function isAdministratorOf($memberable)
+    {
+        return $memberable->hasAdministratorWithEmail($this->email);
     }
 
     /**
