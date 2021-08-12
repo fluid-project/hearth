@@ -4,8 +4,6 @@ namespace Hearth\Tests;
 
 class HelpersTest extends TestCase
 {
-
-
     public function test_get_region_name_in_default_locale()
     {
         $result = get_region_name('NS', ['CA']);
