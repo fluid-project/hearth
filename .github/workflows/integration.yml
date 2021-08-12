@@ -48,13 +48,13 @@ jobs:
         if: github.event_name != 'pull_request'
 
       - name: DEBUG echo repository
-        run: echo "${{ github.event }}"
+        run: echo "${{ github.event.repo }}"
 
       - name: Configure Composer repository
         run: |
           cd tests/integration
           composer config repositories.fork vcs https://github.com/${{ github.repository }}
-        if: github.repository != 'fluid-project/hearth'
+        if: github.event_name == 'pull_request'
 
       - name: Install Hearth
         run: |
