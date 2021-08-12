@@ -48,7 +48,7 @@ jobs:
         if: github.event_name != 'pull_request'
 
       - name: DEBUG echo repository
-        run: echo "${{ github.repository }}"
+        run: echo "${{ github.event }}"
 
       - name: Configure Composer repository
         run: |
