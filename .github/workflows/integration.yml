@@ -47,6 +47,9 @@ jobs:
           echo "hearth_version=main" >> $GITHUB_ENV
         if: github.event_name != 'pull_request'
 
+      - name: DEBUG echo repository
+        run: echo "${{ github.repository }}"
+
       - name: Configure Composer repository
         run: |
           cd tests/integration
