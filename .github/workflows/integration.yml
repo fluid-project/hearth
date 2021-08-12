@@ -3,6 +3,8 @@ name: Run integration tests
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   integration-test:
@@ -44,6 +46,12 @@ jobs:
         run: |
           echo "hearth_version=main" >> $GITHUB_ENV
         if: github.event_name != 'pull_request'
+
+      - name: Configure Composer repository
+        run: |
+          cd tests/integration
+          composer config repositories.fork vcs https://github.com/${{ github.repository }}
+        if: github.repository != 'fluid-project/hearth'
 
       - name: Install Hearth
         run: |
