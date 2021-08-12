@@ -147,7 +147,7 @@ class HearthCommand extends Command
         }
 
         // Add languages
-        if (!$this->option('no-interaction')) {
+        if (! $this->option('no-interaction')) {
             $this->maybeAddLocale();
         }
 
