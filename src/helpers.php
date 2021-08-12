@@ -39,7 +39,7 @@ if (! function_exists('get_regions')) {
     {
         $subdivisionRepository = new SubdivisionRepository();
 
-        $regions = [];
+        $regions = ['' => ''];
 
         foreach ($subdivisionRepository->getAll($countries) as $region) {
             $regions[$region->getCode()] = ($locale === $region->getLocale()) ? $region->getLocalName() : $region->getName();
