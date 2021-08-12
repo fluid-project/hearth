@@ -44,7 +44,7 @@ class AcceptInvitation
             'email' => $email,
             'role' => $role,
         ], $this->rules(), [
-            'email.exists' => __('invitation.user_with_email_not_found'),
+            'email.exists' => __('invitation.email_not_valid', ['email' => $email]),
         ])->after(
             $this->ensureUserIsNotAlreadyAMember($inviteable, $email)
         )->validateWithBag('acceptInvitation');
