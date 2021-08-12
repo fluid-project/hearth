@@ -36,18 +36,20 @@ class AcceptInvitation
      * @param  mixed  $inviteable
      * @param  string  $email
      * @param  string|null  $role
-     * @return void
+     * @return void|\Illuminate\Http\RedirectResponse
      */
     protected function validate($inviteable, string $email, ?string $role)
     {
-        Validator::make([
-            'email' => $email,
-            'role' => $role,
-        ], $this->rules(), [
-            'email.exists' => __('invitation.email_not_valid', ['email' => $email]),
-        ])->after(
-            $this->ensureUserIsNotAlreadyAMember($inviteable, $email)
-        )->validateWithBag('acceptInvitation');
+        Validator::make(
+            [
+                "email" => $email,
+                "role" => $role,
+            ],
+            $this->rules()
+        )
+            ->after($this->ensureInviteeIsNotAlreadyAMember($inviteable, $email))
+            ->after($this->ensureCurrentUserIsInvitee(Auth::user(), $email))
+            ->validateWithBag("acceptInvitation");
     }
 
     /**
@@ -58,13 +60,7 @@ class AcceptInvitation
     protected function rules()
     {
         return [
-            'email' => [
-                'required',
-                'email',
-                Rule::exists('users')->where(function ($query) {
-                    return $query->where('email', Auth::user()->email);
-                }),
-            ],
+            'email' => ['required', 'email'],
             'role' => ['required', 'string', Rule::in(config('hearth.organizations.roles'))],
         ];
     }
@@ -76,7 +72,7 @@ class AcceptInvitation
      * @param  string  $email
      * @return \Closure
      */
-    protected function ensureUserIsNotAlreadyAMember($inviteable, string $email)
+    protected function ensureInviteeIsNotAlreadyAMember($inviteable, string $email)
     {
         return function ($validator) use ($inviteable, $email) {
             $validator->errors()->addIf(
@@ -84,6 +80,25 @@ class AcceptInvitation
                 'email',
                 __('invitation.invited_user_already_belongs_to_team')
             );
+        };
+    }
+
+    /**
+     * Ensure that the authenticated user is the user who was invited.
+     *
+     * @param  \App\Models\User  $user
+     * @param  string  $email
+     * @return \Closure
+     */
+    protected function ensureCurrentUserIsInvitee(User $user, string $email)
+    {
+        return function ($validator) use ($user, $email) {
+            if ($user->email !== $email) {
+                $validator->errors()->add(
+                    'email',
+                    __('invitation.email_not_valid', ['email' => $email])
+                );
+            }
         };
     }
 }
