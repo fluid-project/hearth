@@ -147,7 +147,9 @@ class HearthCommand extends Command
         }
 
         // Add languages
-        $this->maybeAddLocale();
+        if (! $this->option('no-interaction')) {
+            $this->maybeAddLocale();
+        }
 
         // Route stubs...
         $route_stubs = [
