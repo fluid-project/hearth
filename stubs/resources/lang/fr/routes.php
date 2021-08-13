@@ -1,6 +1,9 @@
 <?php
 
 return [
-    'dashboard' => 'tableau-de-bord',
-    'logout' => 'se-deconnecter',
+    'dashboard' => 'dashboard',
+    'logout' => 'logout',
+    'login' => 'login',
+    'register' => 'register',
+    'verification.verify' => '/verify-email/{id}/{hash}',
 ];
