@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -94,16 +96,22 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Get the user's memberships.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
      */
-    public function memberships()
+    public function memberships(): HasMany
     {
         return $this->hasMany(Membership::class);
     }
 
     /**
      * Get the consulting organizations that belong to this user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     *
      */
-    public function organizations()
+    public function organizations(): MorphToMany
     {
         return $this->morphedByMany(Organization::class, 'membership')
             ->using('\App\Models\Membership')
