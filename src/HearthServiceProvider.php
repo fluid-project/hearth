@@ -28,13 +28,11 @@ class HearthServiceProvider extends PackageServiceProvider
             ->name('hearth')
             ->hasConfigFile()
             ->hasViews()
-            ->hasViewComponents('hearth', [
-                Alert::class,
-                LanguageSwitcher::class,
-                LocaleSelect::class,
-                PasswordConfirmation::class,
-                Select::class,
-            ])
+            ->hasViewComponent('hearth', Alert::class)
+            ->hasViewComponent('hearth', LanguageSwitcher::class)
+            ->hasViewComponent('hearth', LocaleSelect::class)
+            ->hasViewComponent('hearth', PasswordConfirmation::class)
+            ->hasViewComponent('hearth', Select::class)
             ->hasTranslations()
             ->hasMigrations(['create_organizations_table', 'create_memberships_table', 'create_invitations_table'])
             ->hasCommand(HearthCommand::class);
