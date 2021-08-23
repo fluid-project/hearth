@@ -31,7 +31,7 @@ class HearthCommand extends Command
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@accessibility-in-action/looseleaf' => '^1.4',
+                '@fluid-project/looseleaf' => '^1.6',
                 'alpinejs' => '^3.0',
                 'modern-css-reset' => '^1.4',
             ] + $packages;
