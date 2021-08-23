@@ -8,8 +8,6 @@ use Hearth\Components\LanguageSwitcher;
 use Hearth\Components\LocaleSelect;
 use Hearth\Components\PasswordConfirmation;
 use Hearth\Components\Select;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\View\Compilers\BladeCompiler;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -35,7 +33,7 @@ class HearthServiceProvider extends PackageServiceProvider
                 LanguageSwitcher::class,
                 LocaleSelect::class,
                 PasswordConfirmation::class,
-                Select::class
+                Select::class,
             ])
             ->hasTranslations()
             ->hasMigrations(['create_organizations_table', 'create_memberships_table', 'create_invitations_table'])
