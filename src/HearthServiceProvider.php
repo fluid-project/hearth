@@ -4,6 +4,9 @@ namespace Hearth;
 
 use Hearth\Commands\HearthCommand;
 use Hearth\Components\Alert;
+use Hearth\Components\Button;
+use Hearth\Components\Input;
+use Hearth\Components\Label;
 use Hearth\Components\LanguageSwitcher;
 use Hearth\Components\LocaleSelect;
 use Hearth\Components\PasswordConfirmation;
@@ -29,6 +32,9 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasViewComponent('hearth', Alert::class)
+            ->hasViewComponent('hearth', Button::class)
+            ->hasViewComponent('hearth', Input::class)
+            ->hasViewComponent('hearth', Label::class)
             ->hasViewComponent('hearth', LanguageSwitcher::class)
             ->hasViewComponent('hearth', LocaleSelect::class)
             ->hasViewComponent('hearth', PasswordConfirmation::class)
