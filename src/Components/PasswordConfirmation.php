@@ -1,6 +1,6 @@
 <?php
 
-namespace Hearth\View\Components;
+namespace Hearth\Components;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;

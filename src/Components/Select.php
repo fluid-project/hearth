@@ -1,36 +1,35 @@
 <?php
 
-namespace Hearth\View\Components;
+namespace Hearth\Components;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 
-class Alert extends Component
+class Select extends Component
 {
     /**
-     * The alert type.
+     * The select options.
      *
-     * @var string
+     * @var array
      */
-    public $type;
+    public $options;
 
     /**
-     * The alert title.
+     * The selected option.
      *
      * @var string
      */
-    public $title;
+    public $selected;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title = false, $type = "notice")
+    public function __construct($options, $selected = "")
     {
-        $this->type = $type;
-
-        $this->title = $title ? $title : __("hearth::alert." . $type);
+        $this->options = $options;
+        $this->selected = $selected;
     }
 
     /**
@@ -40,6 +39,6 @@ class Alert extends Component
      */
     public function render()
     {
-        return View::make('hearth::components.alert');
+        return View::make('hearth::components.select');
     }
 }

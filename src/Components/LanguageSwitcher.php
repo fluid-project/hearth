@@ -1,12 +1,13 @@
 <?php
 
-namespace Hearth\View\Components;
+namespace Hearth\Components;
 
 use CommerceGuys\Intl\Language\LanguageRepository;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 
-class LocaleSelect extends Component
+class LanguageSwitcher extends Component
 {
     /**
      * The list of locales.
@@ -16,18 +17,18 @@ class LocaleSelect extends Component
     public $locales;
 
     /**
-     * The selected locale.
+     * The route targeted by links in the language switcher.
      *
      * @var string
      */
-    public $selected;
+    public $target;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($selected = "")
+    public function __construct()
     {
         $languages = new LanguageRepository();
 
@@ -41,17 +42,15 @@ class LocaleSelect extends Component
         foreach ($locales as $locale) {
             $this->locales[$locale] = $languages->get($locale, $locale)->getName();
         }
-
-        $this->selected = $selected;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View|string
      */
     public function render()
     {
-        return View::make('hearth::components.locale-select');
+        return View::make('hearth::components.language-switcher');
     }
 }
