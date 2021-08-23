@@ -2,8 +2,8 @@
 
 namespace Hearth\Components;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class Select extends Component
 {
@@ -34,11 +34,9 @@ class Select extends Component
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function render()
+    public function render(): View
     {
-        return View::make('hearth::components.select');
+        return view('hearth::components.select');
     }
 }

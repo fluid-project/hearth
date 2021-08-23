@@ -3,8 +3,8 @@
 namespace Hearth\Components;
 
 use CommerceGuys\Intl\Language\LanguageRepository;
-use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class LocaleSelect extends Component
 {
@@ -47,11 +47,9 @@ class LocaleSelect extends Component
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function render()
+    public function render(): View
     {
-        return View::make('hearth::components.locale-select');
+        return view('hearth::components.locale-select');
     }
 }

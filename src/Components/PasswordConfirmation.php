@@ -2,8 +2,8 @@
 
 namespace Hearth\Components;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class PasswordConfirmation extends Component
 {
@@ -44,11 +44,9 @@ class PasswordConfirmation extends Component
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function render()
+    public function render(): View
     {
-        return View::make('hearth::components.password-confirmation');
+        return view('hearth::components.password-confirmation');
     }
 }
