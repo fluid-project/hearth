@@ -8,12 +8,22 @@ use Illuminate\View\View;
 class Hint extends Component
 {
     /**
+     * The name of the associated form input.
+     *
+     * @var string
+     */
+    public $for;
+
+    /**
      * Create a new component instance.
+     *
+     * @param string $for The name of the associated form input.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($for)
     {
+        $this->for = $for;
     }
 
     /**
