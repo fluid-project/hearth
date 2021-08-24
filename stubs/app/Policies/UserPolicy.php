@@ -14,9 +14,10 @@ class UserPolicy
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User  $user
-     * @return mixed
+     *
+     * @return void
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): void
     {
         //
     }
@@ -26,9 +27,10 @@ class UserPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $model
-     * @return mixed
+     *
+     * @return void
      */
-    public function view(User $user, User $model)
+    public function view(User $user, User $model): void
     {
         //
     }
@@ -37,9 +39,10 @@ class UserPolicy
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
-     * @return mixed
+     *
+     * @return void
      */
-    public function create(User $user)
+    public function create(User $user): void
     {
         //
     }
@@ -77,9 +80,10 @@ class UserPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $model
-     * @return mixed
+     *
+     * @return void
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, User $model): void
     {
         //
     }
@@ -89,9 +93,10 @@ class UserPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $model
-     * @return mixed
+     *
+     * @return void
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, User $model): void
     {
         //
     }
