@@ -2,9 +2,9 @@
 
 namespace Hearth\Components;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ViewErrorBag;
 use Illuminate\View\Component;
-use Illuminate\View\View;
 
 class Input extends Component
 {
