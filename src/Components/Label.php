@@ -10,7 +10,7 @@ class Label extends Component
     /**
      * The label for the form input.
      *
-     * @var string
+     * @var null|string
      */
     public $value;
 
@@ -21,7 +21,7 @@ class Label extends Component
      *
      * @return void
      */
-    public function __construct($value = false)
+    public function __construct($value = null)
     {
         $this->value = $value;
     }

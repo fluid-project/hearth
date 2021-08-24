@@ -1,3 +1,3 @@
 <label {{ $attributes->merge([]) }}>
-    {{ $value ? $value : $slot }}
+    {{ $value ?? $slot }}
 </label>
