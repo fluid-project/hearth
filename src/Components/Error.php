@@ -8,12 +8,31 @@ use Illuminate\View\View;
 class Error extends Component
 {
     /**
+     * The name of the associated form input.
+     *
+     * @var string
+     */
+    public $for;
+
+    /**
+     * The error bag to search for errors.
+     *
+     * @var string
+     */
+    public $bag;
+
+    /**
      * Create a new component instance.
+     *
+     * @param string $for The name of the associated form input.
+     * @param string $bag The error bag.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($for, $bag = 'default')
     {
+        $this->for = $for;
+        $this->bag = $bag;
     }
 
     /**

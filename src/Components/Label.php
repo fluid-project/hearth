@@ -8,12 +8,22 @@ use Illuminate\View\View;
 class Label extends Component
 {
     /**
+     * The label for the form input.
+     *
+     * @var string
+     */
+    public $value;
+
+    /**
      * Create a new component instance.
+     *
+     * @param string $value The label for the form input.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($value = false)
     {
+        $this->value = $value;
     }
 
     /**

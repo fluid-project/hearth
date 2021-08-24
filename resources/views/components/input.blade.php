@@ -1,5 +1,11 @@
-@props(['disabled' => false, 'hinted' => false])
-
-<input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge([
-    'aria-describedby' => $describedBy ? $describedBy : false
-]) !!}>
+<input
+    {!! $attributes->merge([
+        'name' => $name,
+        'id' => $id,
+    ]) !!}
+    {{ $required ? 'required' : '' }}
+    {{ $autofocus ? 'autofocus' : '' }}
+    {{ $disabled ? 'disabled' : '' }}
+    {{ $describedBy() ? 'aria-describedby=' . $describedBy() : '' }}
+    {{ $invalid ? 'aria-invalid=true' : '' }}
+>

@@ -1,5 +1,3 @@
-@props(['value'])
-
 <label {{ $attributes->merge([]) }}>
-    {{ $value ?? $slot }}
+    {{ $value ? $value : $slot }}
 </label>

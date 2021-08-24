@@ -11,16 +11,30 @@ class Input extends Component
     /**
      * The name of the form input.
      *
-     * @var string
+     * @var null|string
      */
     public $name;
 
     /**
+     * The id of the form input.
+     *
+     * @var null|string
+     */
+    public $id;
+
+    /**
      * The error bag associated with the form input.
      *
-     * @var string
+     * @var null|string
      */
     public $bag;
+
+    /**
+     * Whether the form input has validation errors.
+     *
+     * @var bool
+     */
+    public $invalid;
 
     /**
      * Whether the form input has a hint associated with it.
@@ -29,17 +43,54 @@ class Input extends Component
      */
     public $hinted;
 
+
+    /**
+     * Whether the form input is disabled.
+     *
+     * @var bool
+     */
+    public $disabled;
+
+    /**
+     * Whether the form input is required.
+     *
+     * @var bool
+     */
+    public $required;
+
+    /**
+     * Whether the form input is autofocusable.
+     *
+     * @var bool
+     */
+    public $autofocus;
+
     /**
      * Create a new component instance.
      *
+     * @param string $name The name of the form input.
+     * @param string $bag The error bag associated with the form input.
+     * @param bool $hinted Whether the form input has a hint associated with it.
+     *
      * @return void
      */
-    public function __construct($name, $bag = 'default', $hinted = false)
-    {
+    public function __construct(
+        $name,
+        $id = null,
+        $bag = 'default',
+        $hinted = false,
+        $required = false,
+        $disabled = false,
+        $autofocus = false
+    ) {
         $this->name = $name;
+        $this->id = $id ?? $this->name;
         $this->bag = $bag;
         $this->hinted = $hinted;
-        $this->invalid = $this->hasError($this->name, $this->bag);
+        $this->invalid = $this->hasErrors($this->name, $this->bag);
+        $this->required = $required;
+        $this->disabled = $disabled;
+        $this->autofocus = $autofocus;
     }
 
     /**
@@ -50,7 +101,7 @@ class Input extends Component
      *
      * @return bool
      */
-    public function hasError($name, $bag)
+    public function hasErrors($name, $bag)
     {
         $errors = View::shared('errors', function () {
             return request()->session()->get('errors', new ViewErrorBag);
@@ -66,17 +117,17 @@ class Input extends Component
      */
     public function describedBy()
     {
-        $describedBy = [];
+        $descriptors = [];
 
         if ($this->hinted) {
-            $describedBy[] = $this->name . '-hint';
+            $descriptors[] = $this->name . '-hint';
         }
 
         if ($this->invalid) {
-            $describedBy[] = $this->name . '-error';
+            $descriptors[] = $this->name . '-error';
         }
 
-        return implode(' ', $describedBy);
+        return implode(' ', $descriptors);
     }
 
     /**
