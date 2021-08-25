@@ -94,5 +94,6 @@ Hearth is based on other publicly available software, categorized by license:
 ### MIT License
 
 - [Laravel Breeze](https://github.com/laravel/breeze)
+- [Laravel Form Components](https://github.com/rawilk/laravel-form-components)
 - [Laravel Jetstream](https://github.com/laravel/jetstream)
 - [Laravel Package Skeleton](https://github.com/spatie/package-skeleton-laravel)
