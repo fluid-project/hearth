@@ -6,7 +6,10 @@ on:
 
 jobs:
   release-please:
+    if: github.repository == 'fluid-project/hearth'
+
     runs-on: ubuntu-latest
+
     steps:
       - uses: GoogleCloudPlatform/release-please-action@v2
         id: release

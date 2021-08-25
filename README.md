@@ -14,13 +14,13 @@ A simple starter kit for the Laravel framework.
 Hearth is a simple starter kit for the Laravel framework. It provides a few things out of the box:
 
 - [x] A user model with login, registration, email verification
-- [ ] Optional two-factor authentication support for users.
-- [ ] An organization model.
-- [ ] A membership model which reflects users' roles within organizations.
-- [ ] An invitation model which allows users to be invited to join organizations.
+- [x] Optional two-factor authentication support for users.
+- [x] An organization model.
+- [x] A membership model which reflects users' roles within organizations.
+- [x] An invitation model which allows users to be invited to join organizations.
 - [ ] A resource model supporting creation of and access to a library of open educational resources in a wide range of formats.
-- [ ] Multilingual support, including localized routes.
-- [ ] Bare bones views which can be published and customized as needed.
+- [x] Multilingual support, including localized routes.
+- [x] Bare bones views which can be published and customized as needed.
 
 ## Installation
 
@@ -94,5 +94,6 @@ Hearth is based on other publicly available software, categorized by license:
 ### MIT License
 
 - [Laravel Breeze](https://github.com/laravel/breeze)
+- [Laravel Form Components](https://github.com/rawilk/laravel-form-components)
 - [Laravel Jetstream](https://github.com/laravel/jetstream)
 - [Laravel Package Skeleton](https://github.com/spatie/package-skeleton-laravel)

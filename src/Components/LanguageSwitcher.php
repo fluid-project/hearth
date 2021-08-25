@@ -1,11 +1,11 @@
 <?php
 
-namespace Hearth\View\Components;
+namespace Hearth\Components;
 
 use CommerceGuys\Intl\Language\LanguageRepository;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class LanguageSwitcher extends Component
 {
@@ -46,11 +46,9 @@ class LanguageSwitcher extends Component
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|string
      */
-    public function render()
+    public function render(): View
     {
-        return View::make('hearth::components.language-switcher');
+        return view('hearth::components.language-switcher');
     }
 }
