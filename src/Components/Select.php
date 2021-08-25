@@ -2,12 +2,15 @@
 
 namespace Hearth\Components;
 
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ViewErrorBag;
+use Hearth\Traits\AriaDescribable;
+use Hearth\Traits\HandlesValidation;
 use Illuminate\View\Component;
 
 class Select extends Component
 {
+    use AriaDescribable;
+    use HandlesValidation;
+
     /**
      * The name of the form input.
      *
@@ -103,43 +106,6 @@ class Select extends Component
         $this->required = $required;
         $this->disabled = $disabled;
         $this->autofocus = $autofocus;
-    }
-
-    /**
-     * Determine whether the form input has any errors.
-     *
-     * @param string $name The name of the form input.
-     * @param string $bag The error bag associated with the form input.
-     *
-     * @return bool
-     */
-    public function hasErrors($name, $bag)
-    {
-        $errors = View::shared('errors', function () {
-            return request()->session()->get('errors', new ViewErrorBag);
-        });
-
-        return $errors->getBag($bag)->has($name);
-    }
-
-    /**
-     * Generate the aria-describedby attribute for the form input.
-     *
-     * @return string
-     */
-    public function describedBy()
-    {
-        $descriptors = [];
-
-        if ($this->hinted) {
-            $descriptors[] = $this->name . '-hint';
-        }
-
-        if ($this->invalid) {
-            $descriptors[] = $this->name . '-error';
-        }
-
-        return implode(' ', $descriptors);
     }
 
     /**
