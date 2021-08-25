@@ -256,7 +256,9 @@ class HearthCommand extends Command
      */
     protected function maybeAddLocale($after = 'en')
     {
-        if ($this->confirm('Do you want to add support for an additional locale?', true)) {
+        $continue = $this->choice('Do you want to add support for an additional locale?', ['yes', 'no'], 0);
+
+        if ($continue === 'yes') {
             $languages = (new LanguageRepository())->getList();
 
             $language = $this->anticipate('Choose a language', $languages);
