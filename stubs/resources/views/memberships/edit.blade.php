@@ -13,12 +13,12 @@
     <form action="{{ localized_route('memberships.update', $membership) }}" method="POST" novalidate>
         @csrf
         @method('PUT')
-        <fieldset>
+        <fieldset @error('role') class="field--error" @enderror>
             <legend>{{ __('organization.label_user_role') }}</legend>
             @foreach($roles as $role => $label)
             <div class="field">
-                <input type="radio" id="role-{{ $role }}" name="role" value="{{ $role }}" @if ($role === $membership->role) checked @endif />
-                <label for="role-{{ $role }}">{{ $label }}</label>
+                <x-hearth-input type="radio" name="role" id="role-{{ $role }}" value="{{ $role }}" {{ ($role === $membership->role) ? 'checked' : '' }} />
+                <x-hearth-label for="role-{{ $role }}">{{ $label }}</label>
             </div>
             @endforeach
         </fieldset>
