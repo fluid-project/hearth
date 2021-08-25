@@ -6,3 +6,4 @@ repos:
   hooks:
   - id: php-cs-fixer
     args: ["--config=.php_cs.dist.php", "--allow-risky=yes"]
+  - id: php-unit
