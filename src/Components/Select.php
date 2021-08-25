@@ -2,8 +2,9 @@
 
 namespace Hearth\Components;
 
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ViewErrorBag;
 use Illuminate\View\Component;
-use Illuminate\View\View;
 
 class Select extends Component
 {
@@ -15,7 +16,7 @@ class Select extends Component
     public $name;
 
     /**
-     * The select options.
+     * The form input's options.
      *
      * @var array
      */
@@ -105,9 +106,28 @@ class Select extends Component
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Determine whether the form input has any errors.
+     *
+     * @param string $name The name of the form input.
+     * @param string $bag The error bag associated with the form input.
+     *
+     * @return bool
      */
-    public function render(): View
+    public function hasErrors($name, $bag)
+    {
+        $errors = View::shared('errors', function () {
+            return request()->session()->get('errors', new ViewErrorBag);
+        });
+
+        return $errors->getBag($bag)->has($name);
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function render()
     {
         return view('hearth::components.select');
     }
