@@ -59,7 +59,7 @@ class Input extends Component
     public $required;
 
     /**
-     * Whether the form input is autofocusable.
+     * Whether the form input is should be autofocused.
      *
      * @var bool
      */
@@ -71,6 +71,9 @@ class Input extends Component
      * @param string $name The name of the form input.
      * @param string $bag The error bag associated with the form input.
      * @param bool $hinted Whether the form input has a hint associated with it.
+     * @param bool $required Whether the form input is required.
+     * @param bool $disabled Whether the form input is disabled.
+     * @param bool $autofocus Whether the form input is should be autofocused.
      *
      * @return void
      */
