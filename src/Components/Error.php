@@ -15,6 +15,13 @@ class Error extends Component
     public $for;
 
     /**
+     * The name of the field which produces the error, if different than the form input name.
+     *
+     * @var string
+     */
+    public $field;
+
+    /**
      * The error bag to search for errors.
      *
      * @var string
@@ -29,9 +36,10 @@ class Error extends Component
      *
      * @return void
      */
-    public function __construct($for, $bag = 'default')
+    public function __construct($for, $bag = 'default', $field = null)
     {
         $this->for = $for;
+        $this->field = $field ?? $for;
         $this->bag = $bag;
     }
 

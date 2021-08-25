@@ -1,4 +1,4 @@
-@error($for, $bag)
+@error($field, $bag)
 <p class="field__error" id="{{ $for }}-error">
     {{ $message }}
 </p>
