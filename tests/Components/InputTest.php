@@ -2,6 +2,7 @@
 
 namespace Hearth\Tests\Components;
 
+use Hearth\Components\Input;
 use Hearth\Tests\TestCase;
 
 class InputTest extends TestCase
@@ -9,8 +10,8 @@ class InputTest extends TestCase
     public function test_input_component_renders()
     {
         $view = $this->withViewErrors([])
-            ->blade(
-                '<x-hearth-input :name="$name" />',
+            ->component(
+                Input::class,
                 ['name' => 'fname']
             );
 
@@ -21,9 +22,9 @@ class InputTest extends TestCase
     public function test_input_component_references_hint()
     {
         $view = $this->withViewErrors([])
-            ->blade(
-                '<x-hearth-input :name="$name" hinted />',
-                ['name' => 'fname']
+            ->component(
+                Input::class,
+                ['name' => 'fname', 'hinted' => true]
             );
 
         $view->assertSee('aria-describedby="fname-hint"', false);
@@ -32,8 +33,8 @@ class InputTest extends TestCase
     public function test_input_component_handles_validation_error()
     {
         $view = $this->withViewErrors(['fname' => 'You must enter your full name.'])
-            ->blade(
-                '<x-hearth-input :name="$name" />',
+            ->component(
+                Input::class,
                 ['name' => 'fname']
             );
 
