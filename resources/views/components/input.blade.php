@@ -6,6 +6,6 @@
     {{ $required ? 'required' : '' }}
     {{ $autofocus ? 'autofocus' : '' }}
     {{ $disabled ? 'disabled' : '' }}
-    {{ $describedBy() ? 'aria-describedby=' . $describedBy() : '' }}
-    {{ $invalid ? 'aria-invalid=true' : '' }}
+    {!! $describedBy() ? 'aria-describedby="' . $describedBy() . '"' : '' !!}
+    {!! $invalid ? 'aria-invalid="true"' : '' !!}
 >
