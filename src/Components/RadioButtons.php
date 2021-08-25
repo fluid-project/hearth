@@ -2,13 +2,20 @@
 
 namespace Hearth\Components;
 
-use Illuminate\View\Component;
 use Illuminate\View\View;
+use Illuminate\View\Component;
 
-class Select extends Component
+class RadioButtons extends Component
 {
     /**
-     * The select options.
+     * The name of the radio buttons as used in form submission.
+     *
+     * @var string
+     */
+    public $name;
+
+    /**
+     * The radio button options.
      *
      * @var array
      */
@@ -17,7 +24,7 @@ class Select extends Component
     /**
      * The selected option.
      *
-     * @var string
+     * @var null|string
      */
     public $selected;
 
@@ -26,8 +33,9 @@ class Select extends Component
      *
      * @return void
      */
-    public function __construct($options, $selected = null)
+    public function __construct($name, $options, $selected = null)
     {
+        $this->name = $name;
         $this->options = $options;
         $this->selected = $selected;
     }
@@ -37,6 +45,6 @@ class Select extends Component
      */
     public function render(): View
     {
-        return view('hearth::components.select');
+        return view('hearth::components.radio-buttons');
     }
 }

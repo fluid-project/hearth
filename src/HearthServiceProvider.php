@@ -12,6 +12,7 @@ use Hearth\Components\Label;
 use Hearth\Components\LanguageSwitcher;
 use Hearth\Components\LocaleSelect;
 use Hearth\Components\PasswordConfirmation;
+use Hearth\Components\RadioButtons;
 use Hearth\Components\Select;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -42,6 +43,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasViewComponent('hearth', LanguageSwitcher::class)
             ->hasViewComponent('hearth', LocaleSelect::class)
             ->hasViewComponent('hearth', PasswordConfirmation::class)
+            ->hasViewComponent('hearth', RadioButtons::class)
             ->hasViewComponent('hearth', Select::class)
             ->hasTranslations()
             ->hasMigrations(['create_organizations_table', 'create_memberships_table', 'create_invitations_table'])
