@@ -2,8 +2,8 @@
 
 namespace Hearth\Components;
 
-use Illuminate\View\Component;
 use Illuminate\View\View;
+use Illuminate\View\Component;
 
 class Alert extends Component
 {
