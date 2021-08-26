@@ -116,7 +116,7 @@ class LocaleSelect extends Component
         $this->locales = [];
 
         foreach ($locales as $locale) {
-            $this->locales[$locale] = get_locale_name($locale, $locale, false);
+            $this->locales[$locale] = get_locale_name($locale, $locale);
         }
 
         $this->selected = $selected;
