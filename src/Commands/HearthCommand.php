@@ -173,6 +173,7 @@ class HearthCommand extends Command
         $factories = [
             'InvitationFactory.php',
             'OrganizationFactory.php',
+            'ResourceFactory.php',
             'UserFactory.php',
         ];
 
