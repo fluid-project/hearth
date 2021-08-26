@@ -57,5 +57,8 @@ class HelpersTest extends TestCase
 
         $result = get_locale_name('en', 'fr', false);
         $this->assertEquals('anglais', $result);
+
+        $result = get_locale_name('zz');
+        $this->assertNull($result);
     }
 }

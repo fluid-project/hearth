@@ -86,10 +86,12 @@ if (! function_exists('get_locale_name')) {
     {
         $languages = new LanguageRepository();
 
-        $language = $languages->get($code, $locale);
+        try {
+            $language = $languages->get($code, $locale);
 
-        if ($language) {
             return $capitalize ? Str::ucfirst($language->getName()) : $language->getName();
+        } catch (CommerceGuys\Intl\Exception\UnknownLanguageException $e) {
+            return null;
         }
 
         return null;
