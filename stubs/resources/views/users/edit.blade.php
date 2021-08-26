@@ -27,7 +27,7 @@
 
         <div class="field @error('locale', 'updateProfileInformation') field--error @enderror">
             <x-hearth-label for="locale" :value="__('hearth::user.label_locale')" />
-            <x-hearth-locale-select :selected="old('locale', $user->locale)" />
+            <x-hearth-locale-select name="locale" :selected="old('locale', $user->locale)" />
             <x-hearth-error for="locale" bag="updateProfileInformation" />
         </div>
 

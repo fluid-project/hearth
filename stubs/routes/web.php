@@ -40,4 +40,8 @@ if (config('hearth.organizations.enabled')) {
     require __DIR__ . '/organizations.php';
 }
 
+if (config('hearth.resources.enabled')) {
+    require __DIR__ . '/resources.php';
+}
+
 require __DIR__ . '/fortify.php';

@@ -88,6 +88,7 @@ class Select extends Component
      * @return void
      */
     public function __construct(
+        $name,
         $options,
         $selected = null,
         $id = null,
@@ -97,6 +98,7 @@ class Select extends Component
         $disabled = false,
         $autofocus = false
     ) {
+        $this->name = $name;
         $this->options = $options;
         $this->selected = $selected;
         $this->id = $id ?? $this->name;

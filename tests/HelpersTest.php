@@ -46,4 +46,19 @@ class HelpersTest extends TestCase
         $result = get_region_codes(['CA']);
         $this->assertContains('NS', $result);
     }
+
+    public function test_get_locale_name()
+    {
+        $result = get_locale_name('fr');
+        $this->assertEquals('French', $result);
+
+        $result = get_locale_name('en', 'fr');
+        $this->assertEquals('Anglais', $result);
+
+        $result = get_locale_name('en', 'fr', false);
+        $this->assertEquals('anglais', $result);
+
+        $result = get_locale_name('zz');
+        $this->assertNull($result);
+    }
 }

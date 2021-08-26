@@ -48,7 +48,12 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasViewComponent('hearth', Select::class)
             ->hasViewComponent('hearth', Textarea::class)
             ->hasTranslations()
-            ->hasMigrations(['create_organizations_table', 'create_memberships_table', 'create_invitations_table'])
+            ->hasMigrations([
+                'create_organizations_table',
+                'create_memberships_table',
+                'create_invitations_table',
+                'create_resources_table',
+            ])
             ->hasCommand(HearthCommand::class);
     }
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class HearthCommand extends Command
 {
-    public $signature = 'hearth:install {--two-factor} {--organizations}';
+    public $signature = 'hearth:install {--two-factor} {--organizations} {--resources}';
 
     public $description = 'Install Hearth.';
 
@@ -102,6 +102,7 @@ class HearthCommand extends Command
             'Http/Controllers/InvitationController.php',
             'Http/Controllers/MembershipController.php',
             'Http/Controllers/OrganizationController.php',
+            'Http/Controllers/ResourceController.php',
             'Http/Controllers/UserController.php',
             'Http/Controllers/VerifyEmailController.php',
             'Http/Middleware/Authenticate.php',
@@ -114,17 +115,22 @@ class HearthCommand extends Command
             'Http/Requests/CreateOrganizationRequest.php',
             'Http/Requests/DestroyOrganizationRequest.php',
             'Http/Requests/UpdateOrganizationRequest.php',
+            'Http/Requests/CreateResourceRequest.php',
+            'Http/Requests/DestroyResourceRequest.php',
+            'Http/Requests/UpdateResourceRequest.php',
             'Http/Responses/FailedTwoFactorLoginResponse.php',
             'Http/Responses/LoginResponse.php',
             'Http/Responses/PasswordResetResponse.php',
             'Http/Responses/RegisterResponse.php',
             'Http/Responses/TwoFactorLoginResponse.php',
-            '/Mail/Invitation.php',
+            'Mail/Invitation.php',
             'Models/User.php',
             'Models/Organization.php',
             'Models/Membership.php',
+            'Models/Resource.php',
             'Models/Invitation.php',
             'Policies/OrganizationPolicy.php',
+            'Policies/ResourcePolicy.php',
             'Policies/UserPolicy.php',
             'Providers/FortifyServiceProvider.php',
             'Rules/NotLastAdmin.php',
@@ -155,6 +161,7 @@ class HearthCommand extends Command
         $route_stubs = [
             'fortify.php',
             'organizations.php',
+            'resources.php',
             'web.php',
         ];
 
@@ -166,6 +173,7 @@ class HearthCommand extends Command
         $factories = [
             'InvitationFactory.php',
             'OrganizationFactory.php',
+            'ResourceFactory.php',
             'UserFactory.php',
         ];
 
@@ -184,6 +192,7 @@ class HearthCommand extends Command
             'PasswordConfirmationTest.php',
             'PasswordResetTest.php',
             'RegistrationTest.php',
+            'ResourceTest.php',
             'TwoFactorAuthenticationTest.php',
         ];
 
@@ -238,6 +247,16 @@ class HearthCommand extends Command
                 "'organizations' => [
         'enabled' => false,",
                 "'organizations' => [
+        'enabled' => true,",
+                config_path('hearth.php')
+            );
+        }
+
+        if ($this->option('resources')) {
+            $this->replaceInFile(
+                "'resources' => [
+        'enabled' => false,",
+                "'resources' => [
         'enabled' => true,",
                 config_path('hearth.php')
             );
