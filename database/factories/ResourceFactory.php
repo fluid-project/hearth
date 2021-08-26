@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class ResourceFactory extends Factory
 {
@@ -22,13 +22,12 @@ class ResourceFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->words(5, true);
+        $title = $this->faker->words(3, true);
 
         return [
             'title' => $title,
-            'slug' => Str::slug($title),
             'language' => config('app.locale'),
-            'summary' => $this->faker->paragraphs(3),
+            'summary' => $this->faker->sentence(),
             'user_id' => User::factory(),
         ];
     }

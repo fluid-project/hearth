@@ -192,6 +192,7 @@ class HearthCommand extends Command
             'PasswordConfirmationTest.php',
             'PasswordResetTest.php',
             'RegistrationTest.php',
+            'ResourceTest.php',
             'TwoFactorAuthenticationTest.php',
         ];
 
