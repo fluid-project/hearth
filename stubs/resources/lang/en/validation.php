@@ -138,6 +138,9 @@ return [
         'membership' => [
             'not_last_admin' => 'There must be at least one administrator.',
         ],
+        'resource' => [
+            'title_exists' => 'A resource with this title already exists.',
+        ],
     ],
 
     /*

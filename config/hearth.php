@@ -9,4 +9,7 @@ return [
             'admin',
         ],
     ],
+    'resources' => [
+        'enabled' => false,
+    ],
 ];
