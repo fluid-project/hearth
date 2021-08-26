@@ -2,25 +2,25 @@
 
 A simple starter kit for the Laravel framework.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/fluid-project/hearth.svg)](https://packagist.org/packages/fluid-project/hearth)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fluid-project/hearth/run-tests?label=tests)](https://github.com/fluid-project/hearth/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/fluid-project/hearth/Check%20&%20fix%20styling?label=code%20style)](https://github.com/fluid-project/hearth/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Code coverage status](https://img.shields.io/codecov/c/github/fluid-project/hearth?flag=flag_name&token=jyzyzAaPSx)](https://app.codecov.io/gh/fluid-project/hearth/)
+[![Latest Version on Packagist](https://badgen.net/packagist/v/fluid-project/hearth/)](https://packagist.org/packages/fluid-project/hearth)
+[![GitHub Tests Action Status](https://badgen.net/github/checks/fluid-project/hearth/main/test?label=tests)](https://github.com/fluid-project/hearth/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://badgen.net/github/checks/fluid-project/hearth/main/php-cs-fixer?label=code%20style)](https://github.com/fluid-project/hearth/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![Code coverage status](https://badgen.net/codecov/c/github/fluid-project/hearth)](https://app.codecov.io/gh/fluid-project/hearth/)
 [![Localization status](https://badges.crowdin.net/laravel-hearth/localized.svg)](https://crowdin.com/project/laravel-hearth)
-[![Total Downloads](https://img.shields.io/packagist/dt/fluid-project/hearth.svg)](https://packagist.org/packages/fluid-project/hearth)
+[![Total Downloads](https://badgen.net/packagist/dt/fluid-project/hearth)](https://packagist.org/packages/fluid-project/hearth)
 
 ---
 
 Hearth is a simple starter kit for the Laravel framework. It provides a few things out of the box:
 
-- [x] A user model with login, registration, email verification
-- [x] Optional two-factor authentication support for users.
-- [x] An organization model.
-- [x] A membership model which reflects users' roles within organizations.
-- [x] An invitation model which allows users to be invited to join organizations.
-- [ ] A resource model supporting creation of and access to a library of open educational resources in a wide range of formats.
-- [x] Multilingual support, including localized routes.
-- [x] Bare bones views which can be published and customized as needed.
+- A user model with login, registration, email verification
+- Optional two-factor authentication support for users.
+- An organization model.
+- A membership model which reflects users' roles within organizations.
+- An invitation model which allows users to be invited to join organizations.
+- A resource model supporting creation of and access to a library of open educational resources in a wide range of formats.
+- Multilingual support, including localized routes.
+- Bare bones views which can be published and customized as needed.
 
 ## Installation
 
