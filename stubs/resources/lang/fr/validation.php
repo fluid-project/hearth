@@ -136,7 +136,10 @@ return [
 
     'custom' => [
         'membership' => [
-            'not_last_admin' => 'There must be at least one administrator.',
+            'not_last_admin' => 'Il faut avoir au moins un administrateur.',
+        ],
+        'resource' => [
+            'title_exists' => 'Une ressource avec ce titre existe déjà.',
         ],
     ],
 

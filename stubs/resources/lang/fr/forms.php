@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'save_changes' => 'Save changes',
-    'label_email' => 'Email address',
-    'label_locality' => 'City or town',
-    'label_region' => 'Province or territory',
-    'errors_found' => 'Errors found',
-    'errors_found_message' => 'Sorry, some errors were found in your submission. Please correct these errors and try again.',
+    'save_changes' => 'Sauvegarder les modifications',
+    'label_email' => 'Adresse e-mail',
+    'label_locality' => 'Ville',
+    'label_region' => 'Province ou territoire',
+    'errors_found' => 'Erreurs trouvées',
+    'errors_found_message' => 'Désolé, certaines erreurs ont été trouvées dans votre envoi. Veuillez corriger ces erreurs et réessayer.',
 ];

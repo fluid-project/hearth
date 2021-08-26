@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'role_update_succeeded' => ':user’s role has been updated.',
-    'remove_member_succeeded' => ':user has been removed from :memberable.',
-    'edit_user_role_title' => 'Edit :user’s role',
-    'edit_user_role_intro' => 'Modifying the role will change :user’s privileges for their :memberable membership.',
+    'role_update_succeeded' => 'Le rôle de :user a été mis à jour.',
+    'remove_member_succeeded' => ':user a été enlevé de :memberable.',
+    'edit_user_role_title' => 'Modifier le rôle de :user',
+    'edit_user_role_intro' => 'La modification du rôle changera les privilèges de :user pour leur adhésion.',
 ];
