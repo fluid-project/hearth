@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'dashboard' => 'dashboard',
-    'logout' => 'logout',
-    'login' => 'login',
-    'register' => 'register',
-    'verification.verify' => '/verify-email/{id}/{hash}',
+    'dashboard' => 'tableau-de-bord',
+    'logout' => 'se-deconnecter',
+    'login' => 'se-connecter',
+    'register' => 'inscription',
+    'verification.verify' => '/verification-de-courriel/{id}/{hash}',
 ];
