@@ -93,7 +93,5 @@ if (! function_exists('get_locale_name')) {
         } catch (CommerceGuys\Intl\Exception\UnknownLanguageException $e) {
             return null;
         }
-
-        return null;
     }
 }
