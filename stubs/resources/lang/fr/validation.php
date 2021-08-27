@@ -139,7 +139,7 @@ return [
             'not_last_admin' => 'Il faut avoir au moins un administrateur.',
         ],
         'organization' => [
-            'name_exists' => 'Une organisation avec ce nom existe déjà.',
+            'name_exists' => 'An organization with this name already exists.',
         ],
         'resource' => [
             'title_exists' => 'Une ressource avec ce titre existe déjà.',
