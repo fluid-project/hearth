@@ -47,9 +47,9 @@ class Textarea extends Component
     public $invalid;
 
     /**
-     * Whether the form input has a hint associated with it.
+     * Whether the form input has a hint associated with it, or the id of the hint.
      *
-     * @var bool
+     * @var bool|string
      */
     public $hinted;
 
@@ -80,7 +80,7 @@ class Textarea extends Component
      *
      * @param string $name The name of the form input.
      * @param string $bag The error bag associated with the form input.
-     * @param bool $hinted Whether the form input has a hint associated with it.
+     * @param bool|string $hinted Whether the form input has a hint associated with it, or the id of the hint.
      * @param bool $required Whether the form input is required.
      * @param bool $disabled Whether the form input is disabled.
      * @param bool $autofocus Whether the form input is should be autofocused.

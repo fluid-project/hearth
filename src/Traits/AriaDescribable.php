@@ -14,7 +14,7 @@ trait AriaDescribable
         $descriptors = [];
 
         if ($this->hinted) {
-            $descriptors[] = $this->name . '-hint';
+            $descriptors[] = ($this->hinted === true) ? $this->name . '-hint' : $this->hinted;
         }
 
         if ($this->invalid) {
