@@ -12,7 +12,7 @@ class ResourceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -22,7 +22,7 @@ class ResourceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -50,7 +50,7 @@ class ResourceController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(Resource $resource)
     {
@@ -61,7 +61,7 @@ class ResourceController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Resource  $resource
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(Resource $resource)
     {
@@ -82,7 +82,7 @@ class ResourceController extends Controller
 
         flash(__('resource.update_succeeded'), 'success');
 
-        return redirect(localized_route('resources.show', $resource));
+        return redirect(\localized_route('resources.show', $resource));
     }
 
     /**
@@ -98,6 +98,6 @@ class ResourceController extends Controller
 
         flash(__('resource.destroy_succeeded'), 'success');
 
-        return redirect(localized_route('dashboard'));
+        return redirect(\localized_route('dashboard'));
     }
 }
