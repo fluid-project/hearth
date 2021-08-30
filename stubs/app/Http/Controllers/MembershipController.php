@@ -48,12 +48,12 @@ class MembershipController extends Controller
 
         if ($request->user()->id === $membership->user->id && $request->input('role') !== 'admin') {
             return redirect(
-                localized_route($membership->memberable()->getRoutePrefix() . '.show', $membership->memberable())
+                \localized_route($membership->memberable()->getRoutePrefix() . '.show', $membership->memberable())
             );
         }
 
         return redirect(
-            localized_route($membership->memberable()->getRoutePrefix() . '.edit', $membership->memberable())
+            \localized_route($membership->memberable()->getRoutePrefix() . '.edit', $membership->memberable())
         );
     }
 
@@ -73,12 +73,12 @@ class MembershipController extends Controller
 
         if ($request->user()->id === $membership->user->id) {
             return redirect(
-                localized_route($membership->memberable()->getRoutePrefix() . '.show', $membership->memberable())
+                \localized_route($membership->memberable()->getRoutePrefix() . '.show', $membership->memberable())
             );
         }
 
         return redirect(
-            localized_route($membership->memberable()->getRoutePrefix() . '.edit', $membership->memberable())
+            \localized_route($membership->memberable()->getRoutePrefix() . '.edit', $membership->memberable())
         );
     }
 }
