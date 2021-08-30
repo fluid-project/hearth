@@ -33,7 +33,6 @@ class HearthCommand extends Command
             return [
                 '@fluid-project/looseleaf' => '^1.6',
                 'alpinejs' => '^3.0',
-                'modern-css-reset' => '^1.4',
             ] + $packages;
         }, false);
 
