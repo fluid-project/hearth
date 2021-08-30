@@ -1,5 +1,14 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/fluid-project/hearth/compare/v1.0.0...v1.0.1) (2021-08-30)
+
+
+### Bug Fixes
+
+* add correct return types for resource controller ([#52](https://www.github.com/fluid-project/hearth/issues/52)) ([5d07a48](https://www.github.com/fluid-project/hearth/commit/5d07a48e7308634eceb240f631f130ed5ca3d285))
+* call localization helpers from global namespace ([#54](https://www.github.com/fluid-project/hearth/issues/54)) ([9ba7d45](https://www.github.com/fluid-project/hearth/commit/9ba7d45ee6bef7337f8c21579bd419bc0f8585d5))
+* change fallback application name to Hearth, add rel='home' to brand ([#55](https://www.github.com/fluid-project/hearth/issues/55)) ([f4b3228](https://www.github.com/fluid-project/hearth/commit/f4b3228a0c5409d37a49144cde028ea5c6a9060c))
+
 ## 1.0.0 (2021-08-26)
 
 
