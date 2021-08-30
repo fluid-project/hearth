@@ -39,7 +39,7 @@ class CreateNewUser implements CreatesNewUsers
             ]
         )->validate();
 
-        Cookie::queue('locale', locale());
+        Cookie::queue('locale', \locale());
 
         return User::create([
             'name' => $input['name'],

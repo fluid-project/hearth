@@ -56,6 +56,6 @@ class UserController extends Controller
 
         flash(__('hearth::user.destroy_succeeded'), 'success');
 
-        return redirect(localized_route('welcome'));
+        return redirect(\localized_route('welcome'));
     }
 }
