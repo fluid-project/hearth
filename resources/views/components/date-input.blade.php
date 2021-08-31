@@ -20,8 +20,8 @@
 
     <input type="hidden" name="{{ $name }}" x-model="date" />
 
-    @if($hinted)
-    <x-hearth-hint :for="$name">{{ $hintString }}</x-heart-hint>
+    @if($hint)
+    <x-hearth-hint :for="$name">{{ $hint }}</x-heart-hint>
     @endif
 
     <div x-show="error">

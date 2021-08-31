@@ -31,7 +31,7 @@ class DateInputTest extends TestCase
                 [
                     'name' => 'birthday',
                     'label' => 'Your birthday',
-                    'hintString' => 'If you add your birthday to your account, we\'ll send you a treat!',
+                    'hint' => 'If you add your birthday to your account, we\'ll send you a treat!',
                 ]
             );
 
@@ -46,7 +46,7 @@ class DateInputTest extends TestCase
                 [
                     'name' => 'birthday',
                     'label' => 'Your birthday',
-                    'hintString' => 'If you add your birthday to your account, we\'ll send you a treat!',
+                    'hint' => 'If you add your birthday to your account, we\'ll send you a treat!',
                 ]
             );
 
