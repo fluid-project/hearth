@@ -176,15 +176,30 @@ nav .icon {
     }
 }
 
-// FIXME
-html:focus-within {
-    scroll-behavior: auto;
+// Date Input
+.date {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-body {
+.date .field + .field {
+    margin-inline-start: var(--step-0);
+}
+
+.date .field--year input {
+    width: 6ch;
+}
+
+.date .field--day input {
+    width: 4ch;
+}
+
+.date .field--month select {
+    display: block;
+    width: auto;
+}
+
+.date legend,
+.date .field__hint {
     width: 100%;
-}
-
-form > [type="hidden"] + * {
-    margin-block-start: 0;
 }

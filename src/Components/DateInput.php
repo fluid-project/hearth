@@ -6,7 +6,7 @@ use Hearth\Traits\AriaDescribable;
 use Hearth\Traits\HandlesValidation;
 use Illuminate\View\Component;
 
-class Textarea extends Component
+class DateInput extends Component
 {
     use AriaDescribable;
     use HandlesValidation;
@@ -19,18 +19,25 @@ class Textarea extends Component
     public $name;
 
     /**
+     * The label of the form input.
+     *
+     * @var string
+     */
+    public $label;
+
+    /**
+     * The value of the form input.
+     *
+     * @var string
+     */
+    public $value;
+
+    /**
      * The id of the form input.
      *
      * @var null|string
      */
     public $id;
-
-    /**
-     * The value of the form input.
-     *
-     * @var null|string
-     */
-    public $value;
 
     /**
      * The error bag associated with the form input.
@@ -47,12 +54,18 @@ class Textarea extends Component
     public $invalid;
 
     /**
-     * Whether the form input has a hint associated with it, or the id of the hint.
+     * Whether the form input has a hint associated with it.
      *
-     * @var bool|string
+     * @var bool
      */
     public $hinted;
 
+    /**
+     * The hint for the form input.
+     *
+     * @var null|string
+     */
+    public $hint;
 
     /**
      * Whether the form input is disabled.
@@ -69,11 +82,11 @@ class Textarea extends Component
     public $required;
 
     /**
-     * Whether the form input is should be autofocused.
+     * An array of months, localized.
      *
-     * @var bool
+     * @var array
      */
-    public $autofocus;
+    public $months;
 
     /**
      * Create a new component instance.
@@ -82,23 +95,39 @@ class Textarea extends Component
      */
     public function __construct(
         $name,
+        $label,
+        $value = '',
         $id = null,
-        $value = null,
         $bag = 'default',
         $hinted = false,
+        $hint = null,
         $required = false,
-        $disabled = false,
-        $autofocus = false
+        $disabled = false
     ) {
         $this->name = $name;
-        $this->id = $id ?? $this->name;
+        $this->label = $label;
         $this->value = $value;
+        $this->id = $id ?? $this->name;
         $this->bag = $bag;
-        $this->hinted = $hinted;
+        $this->hinted = $hint !== null;
+        $this->hint = $hint;
         $this->invalid = $this->hasErrors($this->name, $this->bag);
         $this->required = $required;
         $this->disabled = $disabled;
-        $this->autofocus = $autofocus;
+        $this->months = [
+            '01' => __('forms.month_january'),
+            '02' => __('forms.month_february'),
+            '03' => __('forms.month_march'),
+            '04' => __('forms.month_april'),
+            '05' => __('forms.month_may'),
+            '06' => __('forms.month_june'),
+            '07' => __('forms.month_july'),
+            '08' => __('forms.month_august'),
+            '09' => __('forms.month_september'),
+            '10' => __('forms.month_october'),
+            '11' => __('forms.month_november'),
+            '12' => __('forms.month_december'),
+        ];
     }
 
     /**
@@ -108,6 +137,6 @@ class Textarea extends Component
      */
     public function render()
     {
-        return view('hearth::components.textarea');
+        return view('hearth::components.date-input', ['months' => $this->months]);
     }
 }

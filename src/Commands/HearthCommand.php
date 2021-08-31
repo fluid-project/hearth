@@ -33,6 +33,7 @@ class HearthCommand extends Command
             return [
                 '@fluid-project/looseleaf' => '^1.6',
                 'alpinejs' => '^3.0',
+                'luxon' => '^2.0',
             ] + $packages;
         }, false);
 
