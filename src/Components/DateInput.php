@@ -54,11 +54,18 @@ class DateInput extends Component
     public $invalid;
 
     /**
-     * Whether the form input has a hint associated with it, or the id of the hint.
+     * Whether the form input has a hint associated with it.
      *
-     * @var bool|string
+     * @var bool
      */
     public $hinted;
+
+    /**
+     * The hint string for the form input.
+     *
+     * @var null|string
+     */
+    public $hintString;
 
     /**
      * Whether the form input is disabled.
@@ -92,7 +99,8 @@ class DateInput extends Component
         $value = '',
         $id = null,
         $bag = 'default',
-        $hinted = null,
+        $hinted = false,
+        $hintString = null,
         $required = false,
         $disabled = false
     ) {
@@ -101,7 +109,8 @@ class DateInput extends Component
         $this->value = $value;
         $this->id = $id ?? $this->name;
         $this->bag = $bag;
-        $this->hinted = $hinted;
+        $this->hinted = $hintString !== null;
+        $this->hintString = $hintString;
         $this->invalid = $this->hasErrors($this->name, $this->bag);
         $this->required = $required;
         $this->disabled = $disabled;
