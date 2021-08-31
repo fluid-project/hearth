@@ -40,12 +40,11 @@ class Input extends Component
     public $invalid;
 
     /**
-     * Whether the form input has a hint associated with it.
+     * Whether the form input has a hint associated with it, or the id of the hint.
      *
-     * @var bool
+     * @var bool|string
      */
     public $hinted;
-
 
     /**
      * Whether the form input is disabled.

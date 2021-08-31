@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="{{ localized_route('welcome') }}">
-                {{ config('app.name', 'Accessibility in Action') }}
+                {{ config('app.name', 'Hearth') }}
             </a>
         </x-slot>
 

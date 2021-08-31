@@ -30,6 +30,17 @@ class InputTest extends TestCase
         $view->assertSee('aria-describedby="fname-hint"', false);
     }
 
+    public function test_input_component_references_supplied_hint_id()
+    {
+        $view = $this->withViewErrors([])
+            ->component(
+                Input::class,
+                ['name' => 'fname', 'hinted' => 'my-hint']
+            );
+
+        $view->assertSee('aria-describedby="my-hint"', false);
+    }
+
     public function test_input_component_handles_validation_error()
     {
         $view = $this->withViewErrors(['fname' => 'You must enter your full name.'])
