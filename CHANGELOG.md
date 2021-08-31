@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/fluid-project/hearth/compare/v1.0.0...v1.1.0) (2021-08-31)
+
+
+### Features
+
+* accept optional id reference for hinted inputs (fix [#50](https://www.github.com/fluid-project/hearth/issues/50)) ([#59](https://www.github.com/fluid-project/hearth/issues/59)) ([90f9e54](https://www.github.com/fluid-project/hearth/commit/90f9e54db6872ebe1e847d4b425f9ed8819ce252))
+* add slot support to hearth-error component ([892fbb2](https://www.github.com/fluid-project/hearth/commit/892fbb2adc7aad9df0c0337a43b104d4a2de3bb1))
+* implement date input (resolves [#58](https://www.github.com/fluid-project/hearth/issues/58)) ([#60](https://www.github.com/fluid-project/hearth/issues/60)) ([3e520a5](https://www.github.com/fluid-project/hearth/commit/3e520a53a5bf765e3923af8824963d39a2b28db8))
+* replace validation-error component with hearth-error ([#56](https://www.github.com/fluid-project/hearth/issues/56)) ([892fbb2](https://www.github.com/fluid-project/hearth/commit/892fbb2adc7aad9df0c0337a43b104d4a2de3bb1))
+
+
+### Bug Fixes
+
+* add correct return types for resource controller ([#52](https://www.github.com/fluid-project/hearth/issues/52)) ([5d07a48](https://www.github.com/fluid-project/hearth/commit/5d07a48e7308634eceb240f631f130ed5ca3d285))
+* call localization helpers from global namespace ([#54](https://www.github.com/fluid-project/hearth/issues/54)) ([9ba7d45](https://www.github.com/fluid-project/hearth/commit/9ba7d45ee6bef7337f8c21579bd419bc0f8585d5))
+* change fallback application name to Hearth, add rel='home' to brand ([#55](https://www.github.com/fluid-project/hearth/issues/55)) ([f4b3228](https://www.github.com/fluid-project/hearth/commit/f4b3228a0c5409d37a49144cde028ea5c6a9060c))
+
 ## 1.0.0 (2021-08-26)
 
 
