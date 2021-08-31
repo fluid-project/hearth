@@ -47,11 +47,18 @@ class DateInput extends Component
     public $bag;
 
     /**
-     * Whether the form input has a hint associated with it.
+     * Whether the form input has validation errors.
      *
-     * @var null|string
+     * @var bool
      */
-    public $hint;
+    public $invalid;
+
+    /**
+     * Whether the form input has a hint associated with it, or the id of the hint.
+     *
+     * @var bool|string
+     */
+    public $hinted;
 
     /**
      * Whether the form input is disabled.
@@ -70,7 +77,7 @@ class DateInput extends Component
     /**
      * An array of months, localized.
      *
-     * @var bool
+     * @var array
      */
     public $months;
 
@@ -85,7 +92,7 @@ class DateInput extends Component
         $value = '',
         $id = null,
         $bag = 'default',
-        $hint = null,
+        $hinted = null,
         $required = false,
         $disabled = false
     ) {
@@ -94,9 +101,10 @@ class DateInput extends Component
         $this->value = $value;
         $this->id = $id ?? $this->name;
         $this->bag = $bag;
-        $this->hint = $hint;
+        $this->hinted = $hinted;
         $this->invalid = $this->hasErrors($this->name, $this->bag);
         $this->required = $required;
+        $this->disabled = $disabled;
         $this->months = [
             '01' => __('forms.month_january'),
             '02' => __('forms.month_february'),
