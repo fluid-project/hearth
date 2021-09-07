@@ -3,6 +3,10 @@
         {{ $label ?? __('forms.label_date') }}
     </legend>
 
+    @if($hint)
+    <x-hearth-hint :for="$name">{{ $hint }}</x-heart-hint>
+    @endif
+
     <div class="field field--year">
         <x-hearth-label :for="$name . '_year'" :value="__('forms.label_year')" />
         <x-hearth-input :name="$name . '_year'" pattern="[0-9]*" inputmode="numeric" :required="$required" :disabled="$disabled" :aria-describedby="$describedBy()" :aria-invalid="$invalid ? 'true' : 'false'" x-bind:aria-invalid="error.toString()" x-bind:aria-describedby="error ? '{{ $hinted ? $name . '-hint ' . $name . '-error' : $name . '-error' }}' : '{{ $hinted ? $name . '-hint' : '' }}'" x-model="year" x-on:blur="componentsToDate()" />
@@ -19,10 +23,6 @@
     </div>
 
     <input type="hidden" name="{{ $name }}" x-model="date" />
-
-    @if($hint)
-    <x-hearth-hint :for="$name">{{ $hint }}</x-heart-hint>
-    @endif
 
     <div x-show="error">
         <x-hearth-error :for="$name">{{ __('validation.date', ['attribute' => strtolower($label)]) }}</x-hearth-error>
