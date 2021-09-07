@@ -7,7 +7,7 @@ use Hearth\Tests\TestCase;
 
 class DateInputTest extends TestCase
 {
-    public function test_input_component_renders()
+    public function test_date_input_component_renders()
     {
         $view = $this->withViewErrors([])
             ->component(
@@ -23,7 +23,7 @@ class DateInputTest extends TestCase
         $view->assertSee('id="birthday_day"', false);
     }
 
-    public function test_input_component_references_hint()
+    public function test_date_input_component_references_hint()
     {
         $view = $this->withViewErrors([])
             ->component(
@@ -38,7 +38,7 @@ class DateInputTest extends TestCase
         $view->assertSee('aria-describedby="birthday-hint"', false);
     }
 
-    public function test_input_component_handles_validation_error()
+    public function test_date_input_component_handles_validation_error()
     {
         $view = $this->withViewErrors(['birthday' => 'You entered a date that does not exist!'])
             ->component(
