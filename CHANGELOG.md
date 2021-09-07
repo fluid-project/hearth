@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/fluid-project/hearth/compare/v1.1.0...v1.2.0) (2021-09-07)
+
+
+### Features
+
+* add hint association and attribute passthrough for radio buttons ([#72](https://www.github.com/fluid-project/hearth/issues/72)) ([848853d](https://www.github.com/fluid-project/hearth/commit/848853d96752ddb56f1616c6d35c8496c731d757))
+
+
+### Bug Fixes
+
+* call locales helper in global namespace ([#66](https://www.github.com/fluid-project/hearth/issues/66)) ([b313221](https://www.github.com/fluid-project/hearth/commit/b31322122b1f579bb67c8e8de185ef51b57fafbd))
+* don't trigger date validation unless all fields are populated ([#67](https://www.github.com/fluid-project/hearth/issues/67)) ([ce8b6ce](https://www.github.com/fluid-project/hearth/commit/ce8b6cee5503cd10898074a41c6fe83cbf018866)), closes [#63](https://www.github.com/fluid-project/hearth/issues/63)
+* move date input hint position above fields ([#71](https://www.github.com/fluid-project/hearth/issues/71)) ([73ff22f](https://www.github.com/fluid-project/hearth/commit/73ff22fb5e94bb053536c9c7bb398565b24d4be8))
+
 ## [1.1.0](https://www.github.com/fluid-project/hearth/compare/v1.0.0...v1.1.0) (2021-08-31)
 
 
