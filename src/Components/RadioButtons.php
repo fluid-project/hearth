@@ -2,17 +2,29 @@
 
 namespace Hearth\Components;
 
+use Hearth\Traits\AriaDescribable;
+use Hearth\Traits\HandlesValidation;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
 class RadioButtons extends Component
 {
+    use AriaDescribable;
+    use HandlesValidation;
+
     /**
      * The name of the radio buttons as used in form submission.
      *
      * @var string
      */
     public $name;
+
+    /**
+     * The error bag associated with the form input.
+     *
+     * @var null|string
+     */
+    public $bag;
 
     /**
      * The radio button options.
@@ -29,15 +41,32 @@ class RadioButtons extends Component
     public $selected;
 
     /**
+     * Whether the form input has validation errors.
+     *
+     * @var bool
+     */
+    public $invalid;
+
+    /**
+     * Whether the radio buttons have a hint associated with them, or the id of the hint.
+     *
+     * @var bool|string
+     */
+    public $hinted;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $options, $selected = null)
+    public function __construct($name, $options, $selected = null, $bag = 'default', $hinted = false)
     {
         $this->name = $name;
         $this->options = $options;
         $this->selected = $selected;
+        $this->bag = $bag;
+        $this->hinted = $hinted;
+        $this->invalid = $this->hasErrors($this->name, $this->bag);
     }
 
     /**
