@@ -4,7 +4,7 @@
             <p>{{ __('hearth::forms.errors_found_message') }}</p>
             <ul>
             @foreach ($bag->all() as $error)
-                <li>{{ $error }}</li>
+                <li>{!! $error !!}</li>
             @endforeach
             </ul>
         </x-hearth-alert>
