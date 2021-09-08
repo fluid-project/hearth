@@ -282,17 +282,23 @@ class HearthCommand extends Command
 
             $language = $this->anticipate('Choose a language', $languages);
 
-            $language_code = array_search($language, $languages);
+            if (in_array($language, array_keys($languages))) {
+                $language_code = $language;
+            } elseif ($language) {
+                $language_code = array_search($language, $languages);
+            } else {
+                $language_code = false;
+            }
 
             if ($language_code) {
                 $this->replaceInFile(
                     "'{$after}',",
                     "'{$after}',
-            '{$language_code}',",
+        '{$language_code}',",
                     config_path('locales.php')
                 );
 
-                $this->info("{$language} added to locales!");
+                $this->info("{$languages[$language_code]} added to locales!");
             } else {
                 $language_code = $after;
                 $this->error('You selected an invalid locale. Please try again, or type "no" to proceed without adding more locales.');
