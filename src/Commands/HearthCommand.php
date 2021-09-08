@@ -301,7 +301,7 @@ class HearthCommand extends Command
                 $this->info("{$languages[$language_code]} added to locales!");
             } else {
                 $language_code = $after;
-                $this->error('You selected an invalid locale. Please try again, or type "no" to proceed without adding more locales.');
+                $this->error('You entered an invalid locale code. Please try again, or type "no" to proceed without adding more locales.');
             }
 
             $this->maybeAddLocale($language_code);
