@@ -273,25 +273,30 @@ class HearthCommand extends Command
      * @param  string  $after
      * @return void
      */
-    protected function maybeAddLocale($after = 'en')
+    protected function maybeAddLocale($after = 'fr')
     {
-        $continue = $this->choice('Do you want to add support for an additional locale?', ['yes', 'no']);
+        $continue = $this->confirm('Do you want to add support for an additional locale?', true);
 
-        if ($continue === 'yes') {
+        if ($continue) {
             $languages = (new LanguageRepository())->getList();
 
             $language = $this->anticipate('Choose a language', $languages);
 
             $language_code = array_search($language, $languages);
 
-            $this->replaceInFile(
-                "'{$after}',",
-                "'{$after}',
-        '{$language_code}',",
-                config_path('locales.php')
-            );
+            if ($language_code) {
+                $this->replaceInFile(
+                    "'{$after}',",
+                    "'{$after}',
+            '{$language_code}',",
+                    config_path('locales.php')
+                );
 
-            $this->info("{$language} added to locales!");
+                $this->info("{$language} added to locales!");
+            } else {
+                $language_code = $after;
+                $this->error('You selected an invalid locale. Please try again, or type "no" to proceed without adding more locales.');
+            }
 
             $this->maybeAddLocale($language_code);
         }
