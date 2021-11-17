@@ -200,6 +200,7 @@ nav .icon {
 }
 
 .date legend,
-.date .field__hint {
+.date .field__hint,
+.date [x-show="error"] {
     width: 100%;
 }
