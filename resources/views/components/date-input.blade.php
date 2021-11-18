@@ -1,4 +1,4 @@
-<fieldset id="{{ $name }}" x-bind:class="error ? 'date field--error' : 'date'" x-data="dateInput()" x-init="dateToComponents('{{ $value ?? '' }}')">
+<fieldset id="{{ $name }}" x-bind:class="error ? 'date field--error' : 'date'" x-data="dateInput()" x-init="dateToComponents('{{ $value ?? '' }}', 'true')">
     <legend>
         {{ $label ?? __('forms.label_date') }}
     </legend>
