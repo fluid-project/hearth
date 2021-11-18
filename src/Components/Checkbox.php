@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class Checkbox extends Component
 {
@@ -18,11 +19,9 @@ class Checkbox extends Component
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
      */
-    public function render()
+    public function render(): View
     {
-        return view('components.checkbox');
+        return view('hearth::components.checkbox');
     }
 }
