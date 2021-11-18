@@ -1,4 +1,4 @@
-<input
+<input type="checkbox"
     {!! $attributes->merge([
         'name' => $name,
         'id' => $id,
