@@ -2,16 +2,16 @@
 
 namespace Hearth\Tests\Components;
 
-use Hearth\Components\RadioButtons;
+use Hearth\Components\Checkboxes;
 use Hearth\Tests\TestCase;
 
-class RadioButtonsTest extends TestCase
+class CheckboxesTest extends TestCase
 {
-    public function test_radio_buttons_component_renders()
+    public function test_checkboxes_component_renders()
     {
         $view = $this->withViewErrors([])
             ->component(
-                RadioButtons::class,
+                Checkboxes::class,
                 [
                     'name' => 'flavour',
                     'options' => [
@@ -25,11 +25,11 @@ class RadioButtonsTest extends TestCase
         $view->assertSee('id="flavour-vanilla"', false);
     }
 
-    public function test_radio_buttons_component_references_hint()
+    public function test_checkboxes_component_references_hint()
     {
         $view = $this->withViewErrors([])
             ->component(
-                RadioButtons::class,
+                Checkboxes::class,
                 [
                     'name' => 'flavour',
                     'options' => [
@@ -43,11 +43,11 @@ class RadioButtonsTest extends TestCase
         $view->assertSee('aria-describedby="flavour-hint"', false);
     }
 
-    public function test_radio_buttons_component_references_custom_hint()
+    public function test_checkboxes_component_references_custom_hint()
     {
         $view = $this->withViewErrors([])
             ->component(
-                RadioButtons::class,
+                Checkboxes::class,
                 [
                     'name' => 'flavour',
                     'options' => [
@@ -61,11 +61,11 @@ class RadioButtonsTest extends TestCase
         $view->assertSee('aria-describedby="favourite-flavour-hint"', false);
     }
 
-    public function test_radio_buttons_component_includes_attribute()
+    public function test_checkboxes_component_includes_attribute()
     {
         $view = $this->withViewErrors([])
             ->blade(
-                '<x-hearth-radio-buttons :name="$name" :options="$options" x-model="flavour" />',
+                '<x-hearth-checkboxes :name="$name" :options="$options" x-model="flavours" />',
                 [
                     'name' => 'flavour',
                     'options' => [
@@ -75,6 +75,6 @@ class RadioButtonsTest extends TestCase
                 ],
             );
 
-        $view->assertSee('x-model="flavour"', false);
+        $view->assertSee('x-model="flavours"', false);
     }
 }
