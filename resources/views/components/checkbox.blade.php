@@ -3,6 +3,7 @@
         'name' => $name,
         'id' => $id,
     ]) !!}
+    value="1"
     {{ $required ? 'required' : '' }}
     {{ $autofocus ? 'autofocus' : '' }}
     {{ $disabled ? 'disabled' : '' }}
