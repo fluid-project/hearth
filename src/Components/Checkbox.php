@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace Hearth\Components;
 
 use Hearth\Traits\AriaDescribable;
 use Hearth\Traits\HandlesValidation;
