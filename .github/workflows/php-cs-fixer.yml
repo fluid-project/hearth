@@ -2,9 +2,9 @@ name: Check & fix styling
 
 on:
   push:
-    paths:
-      - '**.php'
-      - '.php_cs.dist.php'
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   php-cs-fixer:
