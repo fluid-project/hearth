@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/fluid-project/hearth/compare/v1.2.0...v1.3.0) (2021-12-03)
+
+
+### Features
+
+* add Checkbox and Checkboxes components (resolves [#83](https://www.github.com/fluid-project/hearth/issues/83)) ([#86](https://www.github.com/fluid-project/hearth/issues/86)) ([1fbe4a2](https://www.github.com/fluid-project/hearth/commit/1fbe4a2f0d96b42fc2d29ec9e5c228c56f1156de))
+
+
+### Bug Fixes
+
+* handle errors properly for date input (resolves [#84](https://www.github.com/fluid-project/hearth/issues/84)) ([#85](https://www.github.com/fluid-project/hearth/issues/85)) ([43a6dd3](https://www.github.com/fluid-project/hearth/commit/43a6dd34c04ae6c1625ce27e36b1bf0caa4e415c))
+* prevent deletion of user if they are sole organization admin ([#77](https://www.github.com/fluid-project/hearth/issues/77)) ([af81e3e](https://www.github.com/fluid-project/hearth/commit/af81e3e4839459fcce2777b962e2d3216545e5c6))
+* properly handle empty input when adding locales (resolves [#74](https://www.github.com/fluid-project/hearth/issues/74)) ([#76](https://www.github.com/fluid-project/hearth/issues/76)) ([c10ed1f](https://www.github.com/fluid-project/hearth/commit/c10ed1fd9658ebd448ee026fd36681d4a6a2b2f9))
+
+
+### Miscellaneous Chores
+
+* **l10n:** update translations ([#80](https://www.github.com/fluid-project/hearth/issues/80)) ([3a167f8](https://www.github.com/fluid-project/hearth/commit/3a167f81690347fe988c94585774e344ce6625ea))
+
 ## [1.2.0](https://www.github.com/fluid-project/hearth/compare/v1.1.0...v1.2.0) (2021-09-07)
 
 
