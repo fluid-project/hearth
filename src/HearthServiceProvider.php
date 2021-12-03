@@ -5,6 +5,8 @@ namespace Hearth;
 use Hearth\Commands\HearthCommand;
 use Hearth\Components\Alert;
 use Hearth\Components\Button;
+use Hearth\Components\Checkbox;
+use Hearth\Components\Checkboxes;
 use Hearth\Components\DateInput;
 use Hearth\Components\Error;
 use Hearth\Components\Hint;
@@ -38,6 +40,8 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasViewComponent('hearth', Alert::class)
             ->hasViewComponent('hearth', Button::class)
+            ->hasViewComponent('hearth', Checkbox::class)
+            ->hasViewComponent('hearth', Checkboxes::class)
             ->hasViewComponent('hearth', DateInput::class)
             ->hasViewComponent('hearth', Error::class)
             ->hasViewComponent('hearth', Hint::class)

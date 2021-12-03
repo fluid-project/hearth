@@ -7,7 +7,7 @@ use Hearth\Traits\HandlesValidation;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class Input extends Component
+class Checkbox extends Component
 {
     use AriaDescribable;
     use HandlesValidation;
@@ -32,6 +32,13 @@ class Input extends Component
      * @var null|string
      */
     public $bag;
+
+    /**
+     * Whether the checkbox is checked.
+     *
+     * @var bool
+     */
+    public bool $checked;
 
     /**
      * Whether the form input has validation errors.
@@ -77,6 +84,7 @@ class Input extends Component
         $name,
         $id = null,
         $bag = 'default',
+        $checked = false,
         $hinted = false,
         $required = false,
         $disabled = false,
@@ -85,6 +93,7 @@ class Input extends Component
         $this->name = $name;
         $this->id = $id ?? $this->name;
         $this->bag = $bag;
+        $this->checked = $checked;
         $this->hinted = $hinted;
         $this->invalid = $this->hasErrors($this->name, $this->bag);
         $this->required = $required;
@@ -97,6 +106,6 @@ class Input extends Component
      */
     public function render(): View
     {
-        return view('hearth::components.input');
+        return view('hearth::components.checkbox');
     }
 }
