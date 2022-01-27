@@ -52,4 +52,16 @@ class InputTest extends TestCase
         $view->assertSee('aria-describedby="fname-error"', false);
         $view->assertSee('aria-invalid="true"', false);
     }
+
+    public function test_input_component_with_array_name_handles_validation_error()
+    {
+        $view = $this->withViewErrors(['links.0.url' => 'You must enter a valid URL.'])
+            ->component(
+                Input::class,
+                ['name' => 'links[0][url]']
+            );
+
+        $view->assertSee('aria-describedby="links_0_url-error"', false);
+        $view->assertSee('aria-invalid="true"', false);
+    }
 }
