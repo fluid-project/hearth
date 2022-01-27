@@ -21,6 +21,8 @@ trait HandlesValidation
             return request()->session()->get('errors', new ViewErrorBag);
         });
 
+        $name = str_replace(['[', ']'], ['.', ''], $name);
+
         return $errors->getBag($bag)->has($name);
     }
 }

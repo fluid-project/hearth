@@ -18,7 +18,7 @@ trait AriaDescribable
         }
 
         if ($this->invalid) {
-            $descriptors[] = $this->name . '-error';
+            $descriptors[] = str_replace(['[', ']'], ['_', ''], $this->name) . '-error';
         }
 
         return implode(' ', $descriptors);
