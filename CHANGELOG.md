@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/fluid-project/hearth/compare/v1.3.0...v1.3.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* handle validation of fields with array names (fix [#91](https://www.github.com/fluid-project/hearth/issues/91)) ([#92](https://www.github.com/fluid-project/hearth/issues/92)) ([aa746ab](https://www.github.com/fluid-project/hearth/commit/aa746ab42a360cae0ac09cfd157a0ccc5fbac66b))
+
 ## [1.3.0](https://www.github.com/fluid-project/hearth/compare/v1.2.0...v1.3.0) (2021-12-03)
 
 
