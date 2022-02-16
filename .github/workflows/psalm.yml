@@ -2,9 +2,9 @@ name: Psalm
 
 on:
   push:
-    branches: [main, v1, v2]
+    branches: [main, v1]
   pull_request:
-    branches: [main, v1, v2]
+    branches: [main, v1]
 
 jobs:
   psalm:
