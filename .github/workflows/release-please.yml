@@ -2,18 +2,14 @@ name: Publish release
 
 on:
   push:
-    branches: [main, v1, v2]
+    branches:
+      - main
 
 jobs:
   release-please:
-    if: github.repository == 'fluid-project/hearth'
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: google-github-actions/release-please-action@v3
-        id: release
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           release-type: php
           package-name: Hearth
