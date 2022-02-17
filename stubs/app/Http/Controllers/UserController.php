@@ -52,6 +52,10 @@ class UserController extends Controller
 
         Auth::guard('web')->logout();
 
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
         $user->delete();
 
         flash(__('hearth::user.destroy_succeeded'), 'success');
