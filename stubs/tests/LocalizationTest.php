@@ -27,14 +27,11 @@ class LocalizationTest extends TestCase
     {
         $user = User::factory()->create(['locale' => 'fr']);
 
-        $response = $this->post(localized_route('login'), [
+        $response = $this->withCookie('locale', 'fr')->actingAs($user)->from(localized_route('users.edit'))->put(localized_route('user-profile-information.update'), [
+            'name' => $user->name,
             'email' => $user->email,
-            'password' => 'password',
+            'locale' => 'en'
         ]);
-
-        $this->assertAuthenticated();
-
-        $response = $this->withCookie('locale', 'fr')->get(localized_route('users.edit'));
-        $response->assertRedirect(localized_route('users.edit', [], 'fr'));
+        $response->assertRedirect(localized_route('users.edit', [], 'en'));
     }
 }
