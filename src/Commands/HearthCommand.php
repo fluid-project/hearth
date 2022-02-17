@@ -272,7 +272,7 @@ class HearthCommand extends Command
 
         $this->line('');
         $this->info('Hearth scaffolding installed successfully.');
-        $this->comment('Please execute "npm install && npm run dev" to build your assets.');
+        $this->comment('Please execute "npm install" to install and build your assets.');
     }
 
     /**
