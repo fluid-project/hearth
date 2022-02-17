@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 
-class ProfileInformationController extends Controller
+class UserProfileInformationController extends Controller
 {
     /**
      * Update the user's profile information.

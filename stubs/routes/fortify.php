@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileInformationController;
+use App\Http\Controllers\UserProfileInformationController;
 use App\Http\Controllers\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
@@ -83,7 +83,7 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     }
 
     if (Features::enabled(Features::updateProfileInformation())) {
-        Route::multilingual('/account/update', [ProfileInformationController::class, 'update'])
+        Route::multilingual('/account/update', [UserProfileInformationController::class, 'update'])
             ->method('put')
             ->middleware(['auth'])
             ->name('user-profile-information.update');
