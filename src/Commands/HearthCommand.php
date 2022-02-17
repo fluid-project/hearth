@@ -109,6 +109,7 @@ class HearthCommand extends Command
                 'Http/Controllers/OrganizationController.php',
                 'Http/Controllers/ResourceController.php',
                 'Http/Controllers/UserController.php',
+                'Http/Controllers/UserProfileInformationController.php',
                 'Http/Controllers/VerifyEmailController.php',
                 'Http/Middleware/Authenticate.php',
                 'Http/Middleware/RedirectIfAuthenticated.php',
