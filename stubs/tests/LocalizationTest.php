@@ -30,7 +30,7 @@ class LocalizationTest extends TestCase
         $response = $this->withCookie('locale', 'fr')->actingAs($user)->from(localized_route('users.edit'))->put(localized_route('user-profile-information.update'), [
             'name' => $user->name,
             'email' => $user->email,
-            'locale' => 'en'
+            'locale' => 'en',
         ]);
         $response->assertRedirect(localized_route('users.edit', [], 'en'));
     }
