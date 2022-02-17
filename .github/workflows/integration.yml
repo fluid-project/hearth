@@ -60,7 +60,6 @@ jobs:
           php artisan hearth:install --two-factor --organizations --resources --no-interaction
           echo 'MAIL_FROM_ADDRESS=from@example.com' >> .env
           npm install
-          npm run production
 
       - name: Run tests
         env:
