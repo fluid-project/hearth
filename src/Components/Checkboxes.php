@@ -62,9 +62,10 @@ class Checkboxes extends Component
     public function __construct($name, $options, $selected = [], $bag = 'default', $hinted = false)
     {
         $options = array_map(function ($option) {
-            if (!is_array($option)) {
+            if (! is_array($option)) {
                 return ['label' => $option];
             }
+
             return $option;
         }, $options);
 
