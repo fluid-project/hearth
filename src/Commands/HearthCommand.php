@@ -239,7 +239,7 @@ class HearthCommand extends Command
             (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
 
             // Language files...
-            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/lang/', resource_path('lang'));
+            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/lang/', lang_path('lang'));
 
             // Enable two-factor authentication
             if ($this->option('two-factor')) {
