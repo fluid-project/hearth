@@ -61,6 +61,31 @@ class CheckboxesTest extends TestCase
         $view->assertSee('aria-describedby="favourite-flavour-hint"', false);
     }
 
+    public function test_checkboxes_reference_individual_hinst()
+    {
+        $view = $this->withViewErrors([])
+            ->component(
+                Checkboxes::class,
+                [
+                    'name' => 'flavour',
+                    'options' => [
+                        'vanilla' => [
+                            'label' => 'Vanilla',
+                            'hint' => 'Rich and delicate.',
+                        ],
+                        'chocolate' => [
+                            'label' => 'Chocolate',
+                            'hint' => 'Decadent and delicious.',
+                        ],
+                    ],
+                    'hinted' => 'favourite-flavour-hint',
+                ],
+            );
+
+        $view->assertSee('aria-describedby="flavour-chocolate-hint favourite-flavour-hint"', false);
+        $view->assertSee('aria-describedby="flavour-vanilla-hint favourite-flavour-hint"', false);
+    }
+
     public function test_checkboxes_component_includes_attribute()
     {
         $view = $this->withViewErrors([])
