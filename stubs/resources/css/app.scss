@@ -55,19 +55,24 @@
 }
 
 // Dropdown
-.dropdown .dropdown__content {
+.dropdown > ul {
     background-color: var(--ll-background-color);
     border: var(--ll-border-thin);
     border-radius: var(--ll-border-radius);
+    display: none;
     padding: var(--step--5) var(--step--4);
     text-align: start;
+}
+
+.dropdown > [aria-expanded="true"] + ul {
+    display: block;
 }
 
 @media (min-width: 768px) {
     .dropdown {
         position: relative;
 
-        .dropdown__content {
+        > ul {
             height: auto;
             inset-inline-end: 0;
             position: absolute;
