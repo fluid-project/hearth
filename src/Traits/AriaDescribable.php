@@ -7,11 +7,12 @@ trait AriaDescribable
     /**
      * Generate the aria-describedby attribute for the form input.
      *
+     * @param string $hint
      * @return string
      */
-    public function describedBy()
+    public function describedBy($hint = '')
     {
-        $descriptors = [];
+        $descriptors = [$hint];
 
         if ($this->hinted) {
             $descriptors[] = ($this->hinted === true) ? $this->name . '-hint' : $this->hinted;
@@ -21,6 +22,6 @@ trait AriaDescribable
             $descriptors[] = str_replace(['[', ']'], ['_', ''], $this->name) . '-error';
         }
 
-        return implode(' ', $descriptors);
+        return implode(' ', array_filter($descriptors));
     }
 }
