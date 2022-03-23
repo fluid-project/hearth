@@ -5,11 +5,9 @@
 
     <x-slot name="content">
         @foreach ($locales as $key => $locale )
-        <li>
-            <x-nav-link rel="alternate" hreflang="{{ $key }}" :href="current_route($key, route($key . '.welcome'))" :active="request()->routeIs($key . '.*')">
-                {{ $locale }}
-            </x-nav-link>
-        </li>
+        <x-nav-link rel="alternate" hreflang="{{ $key }}" :href="current_route($key, route($key . '.welcome'))" :active="request()->routeIs($key . '.*')">
+            {{ $locale }}
+        </x-nav-link>
         @endforeach
     </x-slot>
 </x-nav-dropdown>
