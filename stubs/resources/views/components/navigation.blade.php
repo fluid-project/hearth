@@ -34,19 +34,18 @@
                 </x-nav-link>
 
                 <!-- Authentication -->
-                <li x-data>
-                    <x-nav-link :href="localized_route('logout')" x-on:click.prevent="$refs.form.submit()">
-                        {{ __('hearth::auth.sign_out') }}
-                    </x-nav-link>
-                    <form method="POST" action="{{ localized_route('logout') }}" x-ref="form">
-                        @csrf
-                    </form>
-                </li>
+                <x-nav-link :href="localized_route('logout')" x-on:click.prevent="$refs.form.submit()">
+                    {{ __('hearth::auth.sign_out') }}
+                </x-nav-link>
+
+                <form method="POST" action="{{ localized_route('logout') }}" x-ref="form">
+                    @csrf
+                </form>
             </x-slot>
         </x-nav-dropdown>
         @endauth
 
         <!-- Language Switcher -->
-        <x-hearth-language-switcher />
+        <x-hearth-language-switcher class="languages" />
     </ul>
 </nav>
