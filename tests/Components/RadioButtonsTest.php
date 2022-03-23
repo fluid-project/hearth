@@ -61,7 +61,7 @@ class RadioButtonsTest extends TestCase
         $view->assertSee('aria-describedby="favourite-flavour-hint"', false);
     }
 
-    public function test_radio_buttons_reference_individual_hinst()
+    public function test_radio_buttons_reference_individual_hints()
     {
         $view = $this->withViewErrors([])
             ->component(
