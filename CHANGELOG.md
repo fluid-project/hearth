@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/fluid-project/hearth/compare/v1.3.1...v2.0.0) (2022-03-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Laravel 9 (#96) (#98)
+
+### Features
+
+* add individual hints to checkbox and radio groups (fix [#90](https://www.github.com/fluid-project/hearth/issues/90)) ([#112](https://www.github.com/fluid-project/hearth/issues/112)) ([4aef125](https://www.github.com/fluid-project/hearth/commit/4aef125a6cad4d7d5bc2c2119f9e3d6e301423d3))
+* add postinstall script (resolves [#95](https://www.github.com/fluid-project/hearth/issues/95)) ([#104](https://www.github.com/fluid-project/hearth/issues/104)) ([feb1834](https://www.github.com/fluid-project/hearth/commit/feb18349d214bde55f244bc1138625f232806419))
+* clean up navigation (resolves [#103](https://www.github.com/fluid-project/hearth/issues/103)) ([#113](https://www.github.com/fluid-project/hearth/issues/113)) ([e3b91ab](https://www.github.com/fluid-project/hearth/commit/e3b91abb3bfcab4be0607e34513d2211aa337826))
+* upgrade to Laravel 9 ([#96](https://www.github.com/fluid-project/hearth/issues/96)) ([#98](https://www.github.com/fluid-project/hearth/issues/98)) ([ef4c881](https://www.github.com/fluid-project/hearth/commit/ef4c8813790bdc476cdb0be9509cbf5b8416ffd8))
+* use checked, selected, and disabled Blade directives (resolves [#114](https://www.github.com/fluid-project/hearth/issues/114)) ([#115](https://www.github.com/fluid-project/hearth/issues/115)) ([c6b4485](https://www.github.com/fluid-project/hearth/commit/c6b44855bcba6e4ec3dd50c63207af8dc4205587))
+
+
+### Bug Fixes
+
+* allow user to switch locale on settings page (resolves [#82](https://www.github.com/fluid-project/hearth/issues/82)) ([#107](https://www.github.com/fluid-project/hearth/issues/107)) ([dcf47cf](https://www.github.com/fluid-project/hearth/commit/dcf47cf3344153027153f859b42a8c0a092ab63c))
+* copy new controller with Hearth installation command ([b896137](https://www.github.com/fluid-project/hearth/commit/b89613758c3d1a62ce1af5a3eedc8ea690935797))
+* destroy session when deleting a user (resolves [#79](https://www.github.com/fluid-project/hearth/issues/79)) ([#106](https://www.github.com/fluid-project/hearth/issues/106)) ([4ca14ea](https://www.github.com/fluid-project/hearth/commit/4ca14ea4fb1f6f3a6e9fb1d723e7177c6a6d95b4))
+* move language resources (resolves [#110](https://www.github.com/fluid-project/hearth/issues/110)) ([#111](https://www.github.com/fluid-project/hearth/issues/111)) ([34a4613](https://www.github.com/fluid-project/hearth/commit/34a4613f5e072bd491ec7f799955b0850a2b4c27))
+* rename controller to avoid a potential class conflict ([#109](https://www.github.com/fluid-project/hearth/issues/109)) ([5584ce2](https://www.github.com/fluid-project/hearth/commit/5584ce21547b22976acb72b067614bcae0e2c807))
+* update console message to reflect postinstall script ([#105](https://www.github.com/fluid-project/hearth/issues/105)) ([2fe988f](https://www.github.com/fluid-project/hearth/commit/2fe988f0a4d57b6c68e52dd4156c4f8a4be068bc))
+
+
+### Miscellaneous Chores
+
+* configure Dependabot ([fcde2ff](https://www.github.com/fluid-project/hearth/commit/fcde2ff57b7ee29c27547e0a6bd8bfbedc71a0a8))
+* **docs:** update README to reflect Laravel version requirement ([#100](https://www.github.com/fluid-project/hearth/issues/100)) ([e62c11b](https://www.github.com/fluid-project/hearth/commit/e62c11b98cd2915150802b088ed173ae430f918d))
+* **l10n:** update translations ([#116](https://www.github.com/fluid-project/hearth/issues/116)) ([30e6cc6](https://www.github.com/fluid-project/hearth/commit/30e6cc62a7b44fd3e7e602ef843f29a9d4d6f703))
+
 ### [1.3.1](https://www.github.com/fluid-project/hearth/compare/v1.3.0...v1.3.1) (2022-01-27)
 
 
