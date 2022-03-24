@@ -102,4 +102,23 @@ class CheckboxesTest extends TestCase
 
         $view->assertSee('x-model="flavours"', false);
     }
+
+    public function test_checkboxes_component_includes_checked_item()
+    {
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-checkboxes :name="$name" :options="$options" :checked="$checked" />',
+                [
+                    'name' => 'flavour',
+                    'options' => [
+                        'vanilla' => 'Vanilla',
+                        'chocolate' => 'Chocolate',
+                    ],
+                    'checked' => ['vanilla'],
+                ],
+            );
+
+        $view->assertSee('value="vanilla"  checked', false);
+        $view->assertDontSee('value="chocolate"  checked', false);
+    }
 }

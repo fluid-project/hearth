@@ -4,7 +4,7 @@
     ]) !!}
     {{ $required ? 'required' : '' }}
     {{ $autofocus ? 'autofocus' : '' }}
-    {{ $disabled ? 'disabled' : '' }}
+    @disabled($disabled)
     {!! $describedBy() ? 'aria-describedby="' . $describedBy() . '"' : '' !!}
     {!! $invalid ? 'aria-invalid="true"' : '' !!}>
     @foreach($locales as $key => $locale)
