@@ -107,7 +107,7 @@ class RadioButtonsTest extends TestCase
     {
         $view = $this->withViewErrors([])
             ->blade(
-                '<x-hearth-radio-buttons :name="$name" :options="$options" checked="vanilla" x-model="flavour" />',
+                '<x-hearth-radio-buttons :name="$name" :options="$options" checked="vanilla" />',
                 [
                     'name' => 'flavour',
                     'options' => [
