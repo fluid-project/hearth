@@ -71,6 +71,6 @@ class CheckboxTest extends TestCase
                 ],
             );
 
-        $view->assertSee('value="1" checked', false);
+        $view->assertSee('checked', false);
     }
 }
