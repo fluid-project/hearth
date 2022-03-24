@@ -5,7 +5,7 @@
     ]) !!}
     {{ $required ? 'required' : '' }}
     {{ $autofocus ? 'autofocus' : '' }}
-    {{ $disabled ? 'disabled' : '' }}
+    @disabled($disabled)
     {!! $describedBy() ? 'aria-describedby="' . $describedBy() . '"' : '' !!}
     {!! $invalid ? 'aria-invalid="true"' : '' !!}
 >

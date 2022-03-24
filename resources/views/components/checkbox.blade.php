@@ -6,7 +6,7 @@
     value="1"
     {{ $required ? 'required' : '' }}
     {{ $autofocus ? 'autofocus' : '' }}
-    {{ $disabled ? 'disabled' : '' }}
+    @disabled($disabled)
     @checked($checked)
     {!! $describedBy() ? 'aria-describedby="' . $describedBy() . '"' : '' !!}
     {!! $invalid ? 'aria-invalid="true"' : '' !!}
