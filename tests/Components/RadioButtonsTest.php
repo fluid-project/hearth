@@ -102,4 +102,22 @@ class RadioButtonsTest extends TestCase
 
         $view->assertSee('x-model="flavour"', false);
     }
+
+    public function test_radio_buttons_component_includes_checked_button()
+    {
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-radio-buttons :name="$name" :options="$options" checked="vanilla" x-model="flavour" />',
+                [
+                    'name' => 'flavour',
+                    'options' => [
+                        'vanilla' => 'Vanilla',
+                        'chocolate' => 'Chocolate',
+                    ],
+                ],
+            );
+
+        $view->assertSee('value="vanilla"  checked', false);
+        $view->assertDontSee('value="chocolate"  checked', false);
+    }
 }
