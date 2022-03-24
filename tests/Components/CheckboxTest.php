@@ -60,4 +60,17 @@ class CheckboxTest extends TestCase
 
         $view->assertSee('x-model="remember"', false);
     }
+
+    public function test_checkbox_component_can_be_checked()
+    {
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-checkbox :name="$name" :checked="true" />',
+                [
+                    'name' => 'remember',
+                ],
+            );
+
+        $view->assertSee('value="1" checked', false);
+    }
 }

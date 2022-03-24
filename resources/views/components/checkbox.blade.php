@@ -3,11 +3,10 @@
         'name' => $name,
         'id' => $id,
     ]) !!}
-    value="1"
+    value="1" @checked($checked)
     {{ $required ? 'required' : '' }}
     {{ $autofocus ? 'autofocus' : '' }}
     {{ $disabled ? 'disabled' : '' }}
-    {{ $checked ? 'checked' : '' }}
     {!! $describedBy() ? 'aria-describedby="' . $describedBy() . '"' : '' !!}
     {!! $invalid ? 'aria-invalid="true"' : '' !!}
 >
