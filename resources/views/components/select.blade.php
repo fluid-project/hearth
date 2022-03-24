@@ -10,11 +10,6 @@
     {!! $invalid ? 'aria-invalid="true"' : '' !!}
 >
     @foreach($options as $option => $label)
-    <option
-        value="{{ $option }}"
-        @if ($option === $selected)
-        selected
-        @endif
-    >{{ $label }}</option>
+    <option value="{{ $option }}" @selected($selected)>{{ $label }}</option>
     @endforeach
 </select>
