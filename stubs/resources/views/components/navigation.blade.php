@@ -1,5 +1,9 @@
 <!-- Primary Navigation Menu -->
-<nav x-data="{ open: false }">
+<nav x-data="{ open: false }" aria-label="{{ 'primary menu' }}" @keyup.escape.window="open = false" @click.outside="open = false" @close.stop="open = false">
+    <button @click="open = ! open" x-bind:aria-expanded="open.toString()">
+        {{ __('Menu') }}
+    </button>
+
     <!-- Navigation Links -->
     <ul role="list" class="nav">
         @auth
@@ -16,44 +20,36 @@
             {{ __('hearth::auth.sign_in') }}
         </x-nav-link>
         @endauth
-    </ul>
 
-    @auth
-    <!-- User Dropdown -->
-    <div class="user">
-        <x-dropdown>
+        @auth
+        <!-- User Dropdown -->
+        <x-nav-dropdown class="user">
             <x-slot name="trigger">
                 {{ Auth::user()->name }}
             </x-slot>
 
             <x-slot name="content">
-                <p>
-                    <x-dropdown-link href="{{ localized_route('users.edit') }}" :active="request()->routeIs(locale() . '.users.edit')">
-                        {{ __('hearth::user.settings') }}
-                    </x-dropdown-link>
-                </p>
+                <x-nav-link href="{{ localized_route('users.edit') }}" :active="request()->routeIs(locale() . '.users.edit')">
+                    {{ __('hearth::user.settings') }}
+                </x-nav-link>
 
-                <p>
-                    <x-dropdown-link href="{{ localized_route('users.admin') }}" :active="request()->routeIs(locale() . '.users.admin')">
-                        {{ __('hearth::user.account') }}
-                    </x-dropdown-link>
-                </p>
+                <x-nav-link href="{{ localized_route('users.admin') }}" :active="request()->routeIs(locale() . '.users.admin')">
+                    {{ __('hearth::user.account') }}
+                </x-nav-link>
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ localized_route('logout') }}">
-                    @csrf
+                <x-nav-link :href="localized_route('logout')" x-on:click.prevent="$refs.form.submit()">
+                    {{ __('hearth::auth.sign_out') }}
+                </x-nav-link>
 
-                    <x-dropdown-link :href="localized_route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('hearth::auth.sign_out') }}
-                    </x-dropdown-link>
+                <form method="POST" action="{{ localized_route('logout') }}" x-ref="form">
+                    @csrf
                 </form>
             </x-slot>
-        </x-dropdown>
-    </div>
-    @endauth
+        </x-nav-dropdown>
+        @endauth
 
-    <!-- Language Switcher -->
-    <x-hearth-language-switcher />
+        <!-- Language Switcher -->
+        <x-hearth-language-switcher class="languages" />
+    </ul>
 </nav>

@@ -29,16 +29,16 @@ class Checkboxes extends Component
     /**
      * The checkbox options.
      *
-     * @var array
+     * @var (string|array)[]
      */
     public array $options;
 
     /**
-     * The selected options.
+     * The checked options.
      *
      * @var array
      */
-    public array $selected;
+    public array $checked;
 
     /**
      * Whether the form input has validation errors.
@@ -59,11 +59,19 @@ class Checkboxes extends Component
      *
      * @return void
      */
-    public function __construct($name, $options, $selected = [], $bag = 'default', $hinted = false)
+    public function __construct($name, $options, $checked = [], $bag = 'default', $hinted = false)
     {
+        $options = array_map(function ($option) {
+            if (! is_array($option)) {
+                return ['label' => $option];
+            }
+
+            return $option;
+        }, $options);
+
         $this->name = $name;
         $this->options = $options;
-        $this->selected = $selected;
+        $this->checked = $checked;
         $this->bag = $bag;
         $this->hinted = $hinted;
         $this->invalid = $this->hasErrors($this->name, $this->bag);

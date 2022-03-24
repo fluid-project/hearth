@@ -29,16 +29,16 @@ class RadioButtons extends Component
     /**
      * The radio button options.
      *
-     * @var array
+     * @var (string|array)[]
      */
     public $options;
 
     /**
-     * The selected option.
+     * The checked option.
      *
      * @var null|string
      */
-    public $selected;
+    public $checked;
 
     /**
      * Whether the form input has validation errors.
@@ -59,11 +59,19 @@ class RadioButtons extends Component
      *
      * @return void
      */
-    public function __construct($name, $options, $selected = null, $bag = 'default', $hinted = false)
+    public function __construct($name, $options, $checked = null, $bag = 'default', $hinted = false)
     {
+        $options = array_map(function ($option) {
+            if (! is_array($option)) {
+                return ['label' => $option];
+            }
+
+            return $option;
+        }, $options);
+
         $this->name = $name;
         $this->options = $options;
-        $this->selected = $selected;
+        $this->checked = $checked;
         $this->bag = $bag;
         $this->hinted = $hinted;
         $this->invalid = $this->hasErrors($this->name, $this->bag);
