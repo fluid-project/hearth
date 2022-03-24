@@ -7,7 +7,7 @@
 }
 
 // Banner
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
     [role="banner"] .wrapper {
         align-items: center;
         display: flex;
@@ -55,31 +55,40 @@
 }
 
 // Dropdown
-.dropdown > ul {
+[aria-expanded] + ul {
+    display: none;
+}
+
+[aria-expanded="true"] + ul {
+    display: flex;
+}
+
+@media (min-width: 48rem) {
+    [aria-expanded] {
+        display: none;
+    }
+}
+
+.dropdown ul {
     background-color: var(--ll-background-color);
     border: var(--ll-border-thin);
     border-radius: var(--ll-border-radius);
-    display: none;
     padding: var(--step--5) var(--step--4);
     text-align: start;
 }
 
-.dropdown > [aria-expanded="true"] + ul {
-    display: block;
-}
-
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
     .dropdown {
         position: relative;
+    }
 
-        > ul {
-            height: auto;
-            inset-inline-end: 0;
-            position: absolute;
-            text-align: end;
-            white-space: nowrap;
-            width: auto;
-        }
+    .dropdown ul {
+        height: auto;
+        inset-inline-end: 0;
+        position: absolute;
+        text-align: end;
+        white-space: nowrap;
+        width: auto;
     }
 }
 
@@ -114,7 +123,7 @@
     margin-block-start: 2em;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
     .modal {
         left: 50%;
         top: 50%;
@@ -127,20 +136,18 @@
 nav {
     display: flex;
     flex-direction: column;
+    gap: var(--step--2);
     margin-block-start: var(--step-2);
 }
 
 nav ul {
-    margin: 0;
+    flex-direction: column;
+    gap: var(--step--2);
     padding-inline-start: 0;
 }
 
-nav > ul {
-    display: none;
-}
-
-nav > [aria-expanded="true"] + ul {
-    display: block;
+nav ul ul {
+    margin-block-start: var(--step--1);
 }
 
 nav ul > li {
@@ -149,10 +156,6 @@ nav ul > li {
 
 nav ul > li::before {
     display: none;
-}
-
-nav > * + * {
-    margin-block-start: var(--step--2);
 }
 
 nav .link {
@@ -167,29 +170,23 @@ nav .icon {
     width: 1em;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
     nav {
         flex-direction: row;
         margin-block-start: 0;
         margin-inline-start: auto;
     }
 
-    nav > [aria-expanded] {
-        display: none;
-    }
-
-    nav > * + * {
-        margin-block-start: 0;
-        margin-inline-start: var(--step--2);
-    }
-
-    nav > ul {
+    nav > [aria-expanded] + ul {
         display: flex;
+    }
+
+    nav ul {
         flex-direction: row;
     }
 
-    nav ul > li + li {
-        margin-inline-start: var(--step--2);
+    nav ul ul {
+        flex-direction: column;
     }
 }
 
