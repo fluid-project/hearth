@@ -114,7 +114,7 @@ class CheckboxesTest extends TestCase
                         'vanilla' => 'Vanilla',
                         'chocolate' => 'Chocolate',
                     ],
-                    'checked' => ['vanilla']
+                    'checked' => ['vanilla'],
                 ],
             );
 
