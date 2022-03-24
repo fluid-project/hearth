@@ -63,12 +63,6 @@
     display: flex;
 }
 
-@media (min-width: 48rem) {
-    [aria-expanded] {
-        display: none;
-    }
-}
-
 .dropdown ul {
     background-color: var(--ll-background-color);
     border: var(--ll-border-thin);
@@ -175,6 +169,10 @@ nav .icon {
         flex-direction: row;
         margin-block-start: 0;
         margin-inline-start: auto;
+    }
+
+    nav > [aria-expanded] {
+        display: none;
     }
 
     nav > [aria-expanded] + ul {
