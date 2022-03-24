@@ -7,7 +7,7 @@
 }
 
 // Banner
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
     [role="banner"] .wrapper {
         align-items: center;
         display: flex;
@@ -55,7 +55,15 @@
 }
 
 // Dropdown
-.dropdown .dropdown__content {
+[aria-expanded] + ul {
+    display: none;
+}
+
+[aria-expanded="true"] + ul {
+    display: flex;
+}
+
+.dropdown ul {
     background-color: var(--ll-background-color);
     border: var(--ll-border-thin);
     border-radius: var(--ll-border-radius);
@@ -63,18 +71,18 @@
     text-align: start;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
     .dropdown {
         position: relative;
+    }
 
-        .dropdown__content {
-            height: auto;
-            inset-inline-end: 0;
-            position: absolute;
-            text-align: end;
-            white-space: nowrap;
-            width: auto;
-        }
+    .dropdown ul {
+        height: auto;
+        inset-inline-end: 0;
+        position: absolute;
+        text-align: end;
+        white-space: nowrap;
+        width: auto;
     }
 }
 
@@ -109,7 +117,7 @@
     margin-block-start: 2em;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
     .modal {
         left: 50%;
         top: 50%;
@@ -122,12 +130,18 @@
 nav {
     display: flex;
     flex-direction: column;
+    gap: var(--step--2);
     margin-block-start: var(--step-2);
 }
 
 nav ul {
-    margin: 0;
+    flex-direction: column;
+    gap: var(--step--2);
     padding-inline-start: 0;
+}
+
+nav ul ul {
+    margin-block-start: var(--step--1);
 }
 
 nav ul > li {
@@ -138,11 +152,7 @@ nav ul > li::before {
     display: none;
 }
 
-nav > * + * {
-    margin-block-start: var(--step--2);
-}
-
-nav .link {
+nav button {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -154,25 +164,27 @@ nav .icon {
     width: 1em;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
     nav {
         flex-direction: row;
         margin-block-start: 0;
         margin-inline-start: auto;
     }
 
-    nav > * + * {
-        margin-block-start: 0;
-        margin-inline-start: var(--step--2);
+    nav > [aria-expanded] {
+        display: none;
+    }
+
+    nav > [aria-expanded] + ul {
+        display: flex;
     }
 
     nav ul {
-        display: flex;
         flex-direction: row;
     }
 
-    nav ul > li + li {
-        margin-inline-start: var(--step--2);
+    nav ul ul {
+        flex-direction: column;
     }
 }
 

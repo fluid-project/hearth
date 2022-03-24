@@ -1,7 +1,7 @@
 <div {{ $attributes->merge(['class' => 'flow']) }} x-data="confirmPassword('{{ route('password.confirmation') }}', '{{ localized_route('password.confirm') }}')">
     {{ $slot }}
     <div class="modal-wrapper" x-show="showingModal">
-        <div class="modal flow" @keydown.escape.window="hideModal()" @click.away="hideModal()">
+        <div class="modal flow" @keydown.escape.window="hideModal()" @click.outside="hideModal()">
             <p>{{ $message }}</p>
 
             <div x-bind:class="validationError ? 'field field--error' : 'field'">

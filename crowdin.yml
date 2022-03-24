@@ -1,6 +1,6 @@
 files:
-  - source: /lang/en/*.php
-    translation: /lang/%two_letters_code%/%file_name%.php
+  - source: /resources/lang/en/*.php
+    translation: /resources/lang/%two_letters_code%/%file_name%.php
   - source: /stubs/lang/en/*.php
     translation: /stubs/lang/%two_letters_code%/%file_name%.php
 pull_request_title: 'chore(l10n): update translations'
