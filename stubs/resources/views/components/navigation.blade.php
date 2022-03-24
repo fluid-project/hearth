@@ -1,5 +1,5 @@
 <!-- Primary Navigation Menu -->
-<nav x-data="{ open: false }" aria-label="{{ 'primary menu' }}">
+<nav x-data="{ open: false }" aria-label="{{ 'primary menu' }}" @keyup.escape.window="open = false" @click.outside="open = false" @close.stop="open = false">
     <button @click="open = ! open" x-bind:aria-expanded="open.toString()">
         {{ __('Menu') }}
     </button>
