@@ -1,5 +1,9 @@
 <!-- Primary Navigation Menu -->
-<nav x-data="{ open: false }">
+<nav x-data="{ open: false }" aria-label="{{ 'primary menu' }}">
+    <button @click="open = ! open" x-bind:aria-expanded="open.toString()">
+        {{ __('Menu') }}
+    </button>
+
     <!-- Navigation Links -->
     <ul role="list" class="nav">
         @auth

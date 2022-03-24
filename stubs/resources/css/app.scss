@@ -135,6 +135,14 @@ nav ul {
     padding-inline-start: 0;
 }
 
+nav > ul {
+    display: none;
+}
+
+nav > [aria-expanded="true"] + ul {
+    display: block;
+}
+
 nav ul > li {
     padding-inline-start: 0;
 }
@@ -166,12 +174,16 @@ nav .icon {
         margin-inline-start: auto;
     }
 
+    nav > [aria-expanded] {
+        display: none;
+    }
+
     nav > * + * {
         margin-block-start: 0;
         margin-inline-start: var(--step--2);
     }
 
-    nav ul {
+    nav > ul {
         display: flex;
         flex-direction: row;
     }
