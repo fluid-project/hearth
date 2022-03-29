@@ -40,5 +40,6 @@ class SelectTest extends TestCase
             );
 
         $view->assertSee('<option value="chocolate" selected', false);
+        $view->assertDontSee('<option value="vanilla" selected', false);
     }
 }
