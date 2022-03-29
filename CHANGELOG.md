@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/fluid-project/hearth/compare/v2.0.0...v2.0.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* resolve issue with improperly selected options in select component ([#117](https://www.github.com/fluid-project/hearth/issues/117)) ([6eb9941](https://www.github.com/fluid-project/hearth/commit/6eb99414883997931a6057fdf380e1ef1021fd5f))
+
 ## [2.0.0](https://www.github.com/fluid-project/hearth/compare/v1.3.1...v2.0.0) (2022-03-24)
 
 
