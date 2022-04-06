@@ -8,8 +8,8 @@ build
 composer.lock
 coverage
 docs
+phpstan.neon
 phpunit.xml
-psalm.xml
 testbench.yaml
 vendor
 node_modules
