@@ -19,7 +19,7 @@ class Button extends Component
      *
      * @return void
      */
-    public function __construct($type = "submit")
+    public function __construct($type = 'submit')
     {
         $this->type = $type;
     }
