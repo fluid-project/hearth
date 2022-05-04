@@ -99,7 +99,6 @@ class DateInput extends Component
         $value = '',
         $id = null,
         $bag = 'default',
-        $hinted = false,
         $hint = null,
         $required = false,
         $disabled = false

@@ -65,6 +65,21 @@ TODO.
 composer test
 ```
 
+To test the code located in the [`stubs`](./stubs) directory you'll need to install Hearth into a Laravel instance and
+run the tests from there.
+
+## Analysis/Linting
+
+The code should pass level 5 testing.
+
+```bash
+composer analyze
+```
+
+To analyze the code located in the [`stubs`](./stubs) directory you'll need to install Hearth into a Laravel instance
+and run the analysis from there. The phpstan configuration is provided as part of the install, but
+[Larastan](https://github.com/nunomaduro/larastan) will need to be manually installed.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

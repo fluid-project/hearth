@@ -233,6 +233,9 @@ class HearthCommand extends Command
             // Mix configuration...
             copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
+            // larastan/phpstan configuration
+            copy(__DIR__ . '/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
+
             // Assets...
             (new Filesystem())->delete(resource_path('css/app.css'));
             (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));

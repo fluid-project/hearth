@@ -69,3 +69,9 @@ jobs:
           cd tests/integration
           php artisan migrate
           vendor/bin/phpunit
+
+      - name: Run lint analysis
+        run: |
+          cd tests/integration
+          composer require nunomaduro/larastan:^2.0 --dev
+          vendor/bin/phpstan analyse
