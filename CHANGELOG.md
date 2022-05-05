@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.2](https://www.github.com/fluid-project/hearth/compare/v2.0.1...v2.0.2) (2022-05-05)
+
+
+### Bug Fixes
+
+* resolve issue with button type not being overridden (fix [#121](https://www.github.com/fluid-project/hearth/issues/121)) ([#122](https://www.github.com/fluid-project/hearth/issues/122)) ([0342d6c](https://www.github.com/fluid-project/hearth/commit/0342d6c1231bf967f138fddca60bdc536e7a2d8f))
+
 ### [2.0.1](https://www.github.com/fluid-project/hearth/compare/v2.0.0...v2.0.1) (2022-03-29)
 
 
