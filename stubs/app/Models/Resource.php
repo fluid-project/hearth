@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
 class Resource extends Model
 {
     use HasFactory;
     use HasSlug;
+    use HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +25,13 @@ class Resource extends Model
         'user_id',
         'summary',
     ];
+
+    /**
+     * The attributes that are translatable.
+     * 
+     * @var array<string>
+     */
+    public $translatable = ['title', 'summary'];
 
     /**
      * Get the options for generating the slug.

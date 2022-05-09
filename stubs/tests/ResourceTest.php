@@ -57,6 +57,20 @@ class ResourceTest extends TestCase
         $response->assertRedirect(localized_route('resources.show', $resource));
     }
 
+    public function test_users_can_translate_resources_belonging_to_them()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create(['user_id' => $user->id]);
+
+        $resource->setTranslation('title', 'en', 'title in English');
+        $response = $this->actingAs($user)->get(localized_route('resources.edit', $resource));
+        $response->assertStatus(250);
+    }
+
     public function test_users_can_not_edit_resources_belonging_to_others()
     {
         if (! config('hearth.resources.enabled')) {
