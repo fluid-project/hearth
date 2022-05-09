@@ -69,15 +69,19 @@ class ResourceTest extends TestCase
         $resource->setTranslation('title', 'en', 'title in English');
         $resource->setTranslation('title', 'fr', 'title in French');
 
-        $this->assertEquals($resource->getTranslation('title', 'en'), 'title in English');
-        $this->assertEquals($resource->getTranslation('title', 'fr'), 'title in French');
+        $this->assertEquals('title in English', $resource->title);
+        App::setLocale('fr');
+        $this->assertEquals('title in French', $resource->title);
 
-        $translationObject = ['en' => 'title in English', 'fr' => 'title in French'];
+        $this->assertEquals('title in English', $resource->getTranslation('title', 'en'));
+        $this->assertEquals('title in French', $resource->getTranslation('title', 'fr'));
 
-        $this->assertEquals($resource->getTranslations('title'), $translationObject);
+        $translations = ['en' => 'title in English', 'fr' => 'title in French'];
 
-        $this->expectExceptionMessage("Cannot translate attribute `language` as it's not one of the translatable attributes: `title, summary`");
-        $resource->setTranslation('language', 'en', 'language in English');
+        $this->assertEquals($translations, $resource->getTranslations('title'));
+
+        $this->expectExceptionMessage("Cannot translate attribute `user_id` as it's not one of the translatable attributes: `title, summary`");
+        $resource->setTranslation('user_id', 'en', 'user_id in English');
     }
 
     public function test_users_can_not_edit_resources_belonging_to_others()
