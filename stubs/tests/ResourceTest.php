@@ -76,8 +76,8 @@ class ResourceTest extends TestCase
 
         $this->assertEquals($resource->getTranslations('title'), $translationObject);
 
-        $resource->setTranslation('language', 'en', 'language in English');
         $this->expectExceptionMessage("Cannot translate attribute `language` as it's not one of the translatable attributes: `title, summary`");
+        $resource->setTranslation('language', 'en', 'language in English');
     }
 
     public function test_users_can_not_edit_resources_belonging_to_others()
