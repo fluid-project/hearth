@@ -26,11 +26,10 @@ class ResourceTest extends TestCase
         $response = $this->actingAs($user)->post(localized_route('resources.create'), [
             'user_id' => $user->id,
             'title' => 'Test resource',
-            'language' => 'en',
             'summary' => 'This is my resource.',
         ]);
 
-        $url = localized_route('resources.show', ['resource' => Str::slug('Test resource')]);
+        $url = localized_route('resources.show', ['resource' => Str::slug($user->id)]);
 
         $response->assertSessionHasNoErrors();
 
@@ -51,7 +50,6 @@ class ResourceTest extends TestCase
 
         $response = $this->actingAs($user)->put(localized_route('resources.update', $resource), [
             'title' => $resource->title,
-            'language' => $resource->language,
             'summary' => 'This is my updated resource.',
         ]);
         $response->assertRedirect(localized_route('resources.show', $resource));
@@ -98,7 +96,6 @@ class ResourceTest extends TestCase
 
         $response = $this->actingAs($user)->put(localized_route('resources.update', $resource), [
             'title' => $resource->title,
-            'language' => $resource->language,
             'summary' => 'This is my updated resource.',
         ]);
         $response->assertStatus(403);
