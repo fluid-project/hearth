@@ -3,7 +3,6 @@
         <h1>
             {{ $resource->title }}
         </h1>
-        <p>{{ get_locale_name($resource->language, locale()) }}</p>
     </x-slot>
 
     {!! Illuminate\Mail\Markdown::parse($resource->summary) !!}
