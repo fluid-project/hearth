@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class ResourceTest extends TestCase
@@ -31,7 +30,7 @@ class ResourceTest extends TestCase
 
         $resource = Resource::where('title->en', 'Test resource')->first();
 
-        $url = localized_route('resources.show', ['resource' => $resource]);
+        $url = localized_route('resources.show', ['resource' => $resource->id]);
 
         $response->assertSessionHasNoErrors();
 
