@@ -69,12 +69,12 @@ class ResourceTest extends TestCase
         $resource->setTranslation('title', 'en', 'title in English');
         $resource->setTranslation('title', 'fr', 'title in French');
 
-        $resource->assertEquals($resource->getTranslation('title', 'en'), 'title in English');
-        $resource->assertEquals($resource->getTranslation('title', 'fr'), 'title in French');
+        $this->assertEquals($resource->getTranslation('title', 'en'), 'title in English');
+        $this->assertEquals($resource->getTranslation('title', 'fr'), 'title in French');
 
         $translationObject = ['en' => 'title in English', 'fr' => 'title in French'];
 
-        $resource->assertEquals($resource->getTranslation(), $translationObject);
+        $this->assertEquals($resource->getTranslation(), $translationObject);
     }
 
     public function test_users_can_not_edit_resources_belonging_to_others()
