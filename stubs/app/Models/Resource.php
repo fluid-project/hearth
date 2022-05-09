@@ -28,7 +28,7 @@ class Resource extends Model
 
     /**
      * The attributes that are translatable.
-     * 
+     *
      * @var array<string>
      */
     public $translatable = ['title', 'summary'];
