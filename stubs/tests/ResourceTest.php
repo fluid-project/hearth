@@ -31,7 +31,7 @@ class ResourceTest extends TestCase
 
         $resource = Resource::where('title', 'Test resource')->first();
 
-        $url = localized_route('resources.show', $resource);
+        $url = localized_route('resources.show', ['resource' => $resource->id]);
 
         $response->assertSessionHasNoErrors();
 
