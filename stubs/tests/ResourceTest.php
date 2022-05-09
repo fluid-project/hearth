@@ -66,8 +66,6 @@ class ResourceTest extends TestCase
         $user = User::factory()->create();
         $resource = Resource::factory()->create(['user_id' => $user->id]);
 
-        $resource->setTranslation('language', 'en', 'language in English');
-
         $resource->setTranslation('title', 'en', 'title in English');
         $resource->setTranslation('title', 'fr', 'title in French');
 
@@ -77,6 +75,9 @@ class ResourceTest extends TestCase
         $translationObject = ['en' => 'title in English', 'fr' => 'title in French'];
 
         $this->assertEquals($resource->getTranslations('title'), $translationObject);
+
+        $resource->setTranslation('language', 'en', 'language in English');
+        $this->expectExceptionMessage("Cannot translate attribute `language` as it's not one of the translatable attributes: `title, summary`");
     }
 
     public function test_users_can_not_edit_resources_belonging_to_others()
