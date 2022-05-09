@@ -67,8 +67,14 @@ class ResourceTest extends TestCase
         $resource = Resource::factory()->create(['user_id' => $user->id]);
 
         $resource->setTranslation('title', 'en', 'title in English');
-        $response = $this->actingAs($user)->get(localized_route('resources.edit', $resource));
-        $response->assertStatus(250);
+        $resource->setTranslation('title', 'fr', 'title in French');
+
+        $resource->assertEquals($resource->getTranslation('title', 'en'), 'title in English');
+        $resource->assertEquals($resource->getTranslation('title', 'fr'), 'title in French');
+
+        $translationObject = ['en' => 'title in English', 'fr' => 'title in French'];
+
+        $resource->assertEquals($resource->getTranslation(), $translationObject);
     }
 
     public function test_users_can_not_edit_resources_belonging_to_others()
