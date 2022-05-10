@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/fluid-project/hearth/compare/v2.0.2...v2.1.0) (2022-05-10)
+
+
+### Features
+
+* add translatable package and make Resources translatable ([#128](https://www.github.com/fluid-project/hearth/issues/128)) ([8fe9e57](https://www.github.com/fluid-project/hearth/commit/8fe9e5758d838e3ec2d41d309ad2310c5fe9c5c8))
+
+
+### Miscellaneous Chores
+
+* document recommended extensions ([faf9495](https://www.github.com/fluid-project/hearth/commit/faf9495f2e05b84f68fd3dd4868a1bc2330f4c65))
+
 ### [2.0.2](https://www.github.com/fluid-project/hearth/compare/v2.0.1...v2.0.2) (2022-05-05)
 
 
