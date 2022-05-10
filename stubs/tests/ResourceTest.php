@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\App;
 use Tests\TestCase;
 
 class ResourceTest extends TestCase
@@ -26,11 +26,12 @@ class ResourceTest extends TestCase
         $response = $this->actingAs($user)->post(localized_route('resources.create'), [
             'user_id' => $user->id,
             'title' => 'Test resource',
-            'language' => 'en',
             'summary' => 'This is my resource.',
         ]);
 
-        $url = localized_route('resources.show', ['resource' => Str::slug('Test resource')]);
+        $resource = Resource::where('title->en', 'Test resource')->first();
+
+        $url = localized_route('resources.show', $resource);
 
         $response->assertSessionHasNoErrors();
 
@@ -51,10 +52,36 @@ class ResourceTest extends TestCase
 
         $response = $this->actingAs($user)->put(localized_route('resources.update', $resource), [
             'title' => $resource->title,
-            'language' => $resource->language,
             'summary' => 'This is my updated resource.',
         ]);
         $response->assertRedirect(localized_route('resources.show', $resource));
+    }
+
+    public function test_users_can_translate_resources_belonging_to_them()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+        $resource = Resource::factory()->create(['user_id' => $user->id]);
+
+        $resource->setTranslation('title', 'en', 'title in English');
+        $resource->setTranslation('title', 'fr', 'title in French');
+
+        $this->assertEquals('title in English', $resource->title);
+        App::setLocale('fr');
+        $this->assertEquals('title in French', $resource->title);
+
+        $this->assertEquals('title in English', $resource->getTranslation('title', 'en'));
+        $this->assertEquals('title in French', $resource->getTranslation('title', 'fr'));
+
+        $translations = ['en' => 'title in English', 'fr' => 'title in French'];
+
+        $this->assertEquals($translations, $resource->getTranslations('title'));
+
+        $this->expectExceptionMessage("Cannot translate attribute `user_id` as it's not one of the translatable attributes: `title, summary`");
+        $resource->setTranslation('user_id', 'en', 'user_id in English');
     }
 
     public function test_users_can_not_edit_resources_belonging_to_others()
@@ -71,7 +98,6 @@ class ResourceTest extends TestCase
 
         $response = $this->actingAs($user)->put(localized_route('resources.update', $resource), [
             'title' => $resource->title,
-            'language' => $resource->language,
             'summary' => 'This is my updated resource.',
         ]);
         $response->assertStatus(403);

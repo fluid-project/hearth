@@ -10,6 +10,6 @@ return [
         ],
     ],
     'resources' => [
-        'enabled' => false,
+        'enabled' => true,
     ],
 ];

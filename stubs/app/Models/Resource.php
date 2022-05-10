@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
 class Resource extends Model
 {
     use HasFactory;
-    use HasSlug;
+    use HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -19,28 +18,17 @@ class Resource extends Model
      */
     protected $fillable = [
         'title',
-        'language',
         'user_id',
         'summary',
     ];
 
     /**
-     * Get the options for generating the slug.
-     */
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
-
-    /**
-     * Get the route key for the model.
+     * The attributes that are translatable.
      *
-     * @return string
+     * @var array<string>
      */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    public $translatable = [
+        'title',
+        'summary',
+    ];
 }
