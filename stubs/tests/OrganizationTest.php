@@ -2,14 +2,15 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
+use App\Models\User;
 use App\Models\Invitation;
 use App\Models\Membership;
-use App\Models\Organization;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
-use Tests\TestCase;
+use App\Models\Organization;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class OrganizationTest extends TestCase
 {
@@ -111,6 +112,32 @@ class OrganizationTest extends TestCase
             'region' => 'NL',
         ]);
         $response->assertStatus(403);
+    }
+
+    public function test_organizations_can_be_translated()
+    {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
+        $organization = Organization::factory()->create();
+
+        $organization->setTranslation('name', 'en', 'Name in English');
+        $organization->setTranslation('name', 'fr', 'Name in French');
+
+        $this->assertEquals('Name in English', $organization->name);
+        App::setLocale('fr');
+        $this->assertEquals('Name in French', $organization->name);
+
+        $this->assertEquals('Name in English', $organization->getTranslation('name', 'en'));
+        $this->assertEquals('Name in French', $organization->getTranslation('name', 'fr'));
+
+        $translations = ['en' => 'Name in English', 'fr' => 'Name in French'];
+
+        $this->assertEquals($translations, $organization->getTranslations('name'));
+
+        $this->expectExceptionMessage("Cannot translate attribute `locality` as it's not one of the translatable attributes: `name`");
+        $organization->setTranslation('locality', 'en', 'Locality in English');
     }
 
     public function test_users_with_admin_role_can_update_other_member_roles()

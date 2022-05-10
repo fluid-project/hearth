@@ -57,7 +57,7 @@ class ResourceTest extends TestCase
         $response->assertRedirect(localized_route('resources.show', $resource));
     }
 
-    public function test_users_can_translate_resources_belonging_to_them()
+    public function test_resources_can_be_translated()
     {
         if (! config('hearth.resources.enabled')) {
             return $this->markTestSkipped('Resource support is not enabled.');
