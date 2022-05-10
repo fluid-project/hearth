@@ -33,10 +33,6 @@ class UpdateResourceRequest extends FormRequest
                 Rule::unique(Resource::class)->ignore($this->resource->id),
 
             ],
-            'language' => [
-                'required',
-                Rule::in(config('locales.supported')),
-            ],
             'summary' => 'required|string',
         ];
     }
