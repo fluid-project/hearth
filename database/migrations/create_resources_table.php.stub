@@ -19,7 +19,6 @@ class CreateResourcesTable extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->json('title');
-            $table->string('slug');
             $table->json('summary');
             $table->timestamps();
         });
