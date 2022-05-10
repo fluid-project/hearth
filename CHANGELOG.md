@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.3](https://www.github.com/fluid-project/hearth/compare/v2.0.2...v2.0.3) (2022-05-10)
+
+
+### Miscellaneous Chores
+
+* document recommended extensions ([faf9495](https://www.github.com/fluid-project/hearth/commit/faf9495f2e05b84f68fd3dd4868a1bc2330f4c65))
+
 ### [2.0.2](https://www.github.com/fluid-project/hearth/compare/v2.0.1...v2.0.2) (2022-05-05)
 
 
