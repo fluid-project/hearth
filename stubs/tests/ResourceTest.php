@@ -21,7 +21,7 @@ class ResourceTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get(localized_route('resources.create'));
-        $response->assertStatus(200);
+        $response->assertOk();
 
         $response = $this->actingAs($user)->post(localized_route('resources.create'), [
             'user_id' => $user->id,
@@ -48,7 +48,7 @@ class ResourceTest extends TestCase
         $resource = Resource::factory()->create(['user_id' => $user->id]);
 
         $response = $this->actingAs($user)->get(localized_route('resources.edit', $resource));
-        $response->assertStatus(200);
+        $response->assertOk();
 
         $response = $this->actingAs($user)->put(localized_route('resources.update', $resource), [
             'title' => $resource->title,
@@ -94,13 +94,13 @@ class ResourceTest extends TestCase
         $resource = Resource::factory()->create();
 
         $response = $this->actingAs($user)->get(localized_route('resources.edit', $resource));
-        $response->assertStatus(403);
+        $response->assertForbidden();
 
         $response = $this->actingAs($user)->put(localized_route('resources.update', $resource), [
             'title' => $resource->title,
             'summary' => 'This is my updated resource.',
         ]);
-        $response->assertStatus(403);
+        $response->assertForbidden();
     }
 
     public function test_users_can_delete_resources_belonging_to_them()
@@ -149,6 +149,6 @@ class ResourceTest extends TestCase
             'current_password' => 'password',
         ]);
 
-        $response->assertStatus(403);
+        $response->assertForbidden();
     }
 }
