@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\App;
 use Tests\TestCase;
 
 class ResourceTest extends TestCase
@@ -22,13 +23,11 @@ class ResourceTest extends TestCase
         $response = $this->actingAs($user)->get(localized_route('resources.create'));
         $response->assertStatus(200);
 
-        $response = $this->actingAs($user)->post(localized_route('resources.create'), 
-            Resource::factory()->create([
-                'user_id' => $user->id,
-                'title' => 'Test resource',
-                'summary' => 'This is my resource.',
-            ])
-        );
+        $response = $this->actingAs($user)->post(localized_route('resources.create'), [
+            'user_id' => $user->id,
+            'title' => 'Test resource',
+            'summary' => 'This is my resource.',
+        ]);
 
         $resource = Resource::where('title->en', 'Test resource')->first();
 
