@@ -8,14 +8,13 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Notifications\Notifiable;
 use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
 class Organization extends Model
 {
     use CascadesDeletes;
     use HasFactory;
-    use HasSlug;
+    use HasTranslations;
     use Notifiable;
 
     /**
@@ -39,34 +38,13 @@ class Organization extends Model
     ];
 
     /**
-     * Get the options for generating the slug.
-     */
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
-    }
-
-    /**
-     * Get the route key for the model.
+     * The attributes that are translatable.
      *
-     * @return string
+     * @var array<string>
      */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
-    /**
-     * Get the route placeholder for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyPlaceholder()
-    {
-        return 'organization';
-    }
+    public $translatable = [
+        'name',
+    ];
 
     /**
      * Get the route prefix for the model.

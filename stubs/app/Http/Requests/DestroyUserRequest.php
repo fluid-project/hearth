@@ -51,7 +51,7 @@ class DestroyUserRequest extends FormRequest
                             'organizations',
                             __(
                                 'organization.error_new_administrator_required_before_user_deletion',
-                                ['organization' => '<a href="' . localized_route('organizations.edit', $organization) . '">' . $organization->name . '</a>'],
+                                ['organization' => '<a href="' . localized_route('organizations.edit', $organization) . '">' . $organization->getTranslation('name', locale()) . '</a>'],
                             )
                         );
                     }
