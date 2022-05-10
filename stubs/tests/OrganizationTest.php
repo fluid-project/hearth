@@ -32,7 +32,9 @@ class OrganizationTest extends TestCase
             'region' => 'NS',
         ]);
 
-        $url = localized_route('organizations.show', ['organization' => Str::slug($user->name . ' Consulting')]);
+        $organization = Organization::where('name->en', $user->name . ' Consulting')->first();
+
+        $url = localized_route('organizations.show', $organization);
 
         $response->assertSessionHasNoErrors();
 
