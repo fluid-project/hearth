@@ -63,8 +63,7 @@ class ResourceTest extends TestCase
             return $this->markTestSkipped('Resource support is not enabled.');
         }
 
-        $user = User::factory()->create();
-        $resource = Resource::factory()->create(['user_id' => $user->id]);
+        $resource = Resource::factory()->create();
 
         $resource->setTranslation('title', 'en', 'title in English');
         $resource->setTranslation('title', 'fr', 'title in French');
