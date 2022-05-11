@@ -18,6 +18,7 @@ use Hearth\Components\PasswordConfirmation;
 use Hearth\Components\RadioButtons;
 use Hearth\Components\Select;
 use Hearth\Components\Textarea;
+use Hearth\Components\TranslatableInput;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -53,6 +54,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasViewComponent('hearth', RadioButtons::class)
             ->hasViewComponent('hearth', Select::class)
             ->hasViewComponent('hearth', Textarea::class)
+            ->hasViewComponent('hearth', TranslatableInput::class)
             ->hasTranslations()
             ->hasMigrations([
                 'create_organizations_table',
