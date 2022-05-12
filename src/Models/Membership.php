@@ -6,6 +6,10 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 
+/**
+ * @property string $membershipable_type
+ * @property int $membershipable_id
+ */
 class Membership extends MorphPivot
 {
     /**
