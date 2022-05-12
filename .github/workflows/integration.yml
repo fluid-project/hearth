@@ -57,7 +57,7 @@ jobs:
         run: |
           cd tests/integration
           composer require fluid-project/hearth:dev-${{ env.hearth_version }} --no-interaction
-          php artisan hearth:install --two-factor --organizations --resources --no-interaction
+          php artisan hearth:install --two-factor --no-interaction
           echo 'MAIL_FROM_ADDRESS=from@example.com' >> .env
           npm install
 
