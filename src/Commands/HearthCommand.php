@@ -133,6 +133,7 @@ class HearthCommand extends Command
                 'Models/User.php',
                 'Models/Organization.php',
                 'Models/Resource.php',
+                'Policies/MembershipPolicy.php',
                 'Policies/OrganizationPolicy.php',
                 'Policies/ResourcePolicy.php',
                 'Policies/UserPolicy.php',
