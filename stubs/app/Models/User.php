@@ -106,6 +106,17 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     }
 
     /**
+     *  Get the user's resource collections.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * 
+     */
+    public function resourceCollections(): HasMany
+    {
+        return $this->hasMany(ResourceCollection::class);
+    }
+
+    /**
      * Get the consulting organizations that belong to this user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany

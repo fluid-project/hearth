@@ -134,6 +134,7 @@ class HearthCommand extends Command
                 'Models/Organization.php',
                 'Models/Membership.php',
                 'Models/Resource.php',
+                'Models/ResourceCollection.php',
                 'Models/Invitation.php',
                 'Policies/OrganizationPolicy.php',
                 'Policies/ResourcePolicy.php',

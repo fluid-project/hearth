@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Resource extends Model
+class ResourceCollection extends Model
 {
     use HasFactory;
     use HasTranslations;
@@ -19,24 +19,32 @@ class Resource extends Model
     protected $fillable = [
         'title',
         'user_id',
-        'summary',
+        'description',
     ];
 
     /**
-     * The attributes that are translatable.
+     * The attributes that are transterms
      *
-     * @var array<string>
+     * @var array
      */
     public $translatable = [
         'title',
-        'summary',
+        'description',
     ];
 
     /**
-     * Get all of the resource collections that has this resource.
+     * Get user of this resource collection
      */
-    public function resourceCollections()
+    public function user()
     {
-        return $this->belongsToMany(ResourceCollection::class);
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get all of the resources that are assigned this collection.
+     */
+    public function resources()
+    {
+        return $this->belongsToMany(Resource::class);
     }
 }
