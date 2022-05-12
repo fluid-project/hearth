@@ -28,7 +28,6 @@ class AcceptInvitation
             $newMember,
             ['role' => $role]
         );
-
     }
 
     /**
