@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Hearth\Models\Membership;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,7 +62,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
      *
      * @var array
      */
-    protected $cascadeDeletes = [
+    protected mixed $cascadeDeletes = [
         'organizations',
     ];
 
@@ -79,7 +81,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
      *
      * @return string
      */
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
@@ -89,57 +91,49 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
      *
      * @return string
      */
-    public function preferredLocale()
+    public function preferredLocale(): string
     {
         return $this->locale;
     }
 
     /**
-     * Get the user's memberships.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     *
+     * @return BelongsToMany
      */
-    public function memberships(): HasMany
+    public function organizations(): BelongsToMany
     {
-        return $this->hasMany(Membership::class);
-    }
-
-    /**
-     * Get the consulting organizations that belong to this user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     *
-     */
-    public function organizations(): MorphToMany
-    {
-        return $this->morphedByMany(Organization::class, 'membership')
-            ->using('\App\Models\Membership')
-            ->withPivot('id')
-            ->withPivot('role')
+        return $this->belongsToMany(Organization::class)
+            ->withPivot(['role', 'id'])
             ->withTimestamps();
     }
 
     /**
-     * Determine if the user is a member of a given memberable.
-     *
-     * @param mixed $memberable
-     * @return bool
+     * @return mixed
      */
-    public function isMemberOf($memberable)
+    public function getOrganizationAttribute(): mixed
     {
-        return $memberable->hasUserWithEmail($this->email);
+        return $this->organizations->first();
     }
 
     /**
-     * Determine if the user is an administrator of a given memberable.
+     * Determine if the user is a member of a given model.
      *
-     * @param mixed $memberable
+     * @param mixed $model
      * @return bool
      */
-    public function isAdministratorOf($memberable)
+    public function isMemberOf(mixed $model): bool
     {
-        return $memberable->hasAdministratorWithEmail($this->email);
+        return $model->hasMemberWithEmail($this->email);
+    }
+
+    /**
+     * Determine if the user is an administrator of a given model.
+     *
+     * @param mixed $model
+     * @return bool
+     */
+    public function isAdministratorOf(mixed $model): bool
+    {
+        return $model->hasAdministratorWithEmail($this->email);
     }
 
     /**
@@ -147,7 +141,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
      *
      * @return bool
      */
-    public function twoFactorAuthEnabled()
+    public function twoFactorAuthEnabled(): bool
     {
         return ! is_null($this->two_factor_secret);
     }

@@ -10,7 +10,7 @@ return [
     'invited_user_already_belongs_to_team' => 'This user already belongs to this team.',
     'cancel_invitation_succeeded' => 'The invitation has been cancelled.',
     'email_not_valid' => 'You are logged in as :email, but this invitation is for a different email address.',
-    'accept_invitation_succeeded' => 'You have joined the :inviteable team.',
+    'accept_invitation_succeeded' => 'You have joined the :invitationable team.',
     'invitations_title' => 'Member invitations',
     'invitation_email' => 'Email',
     'invitation_status' => 'Status',

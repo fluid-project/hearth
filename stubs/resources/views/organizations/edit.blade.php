@@ -49,12 +49,12 @@
             <tr>
                 <td>{{ $user->name }}</td>
                 <td>{{ __('organization.member_active') }}</td>
-                <td>{{ __('roles.' . $user->membership->role) }}</td>
+                <td>{{ __('roles.' . $user->pivot->role) }}</td>
                 <td>
-                    <a aria-label="{{ __('organization.edit_user_role_link_with_name', ['user' => $user->name]) }}" href="{{ localized_route('memberships.edit', $user->membership->id) }}">{{ __('organization.edit_user_role_link') }}</a>
+                    <a aria-label="{{ __('organization.edit_user_role_link_with_name', ['user' => $user->name]) }}" href="{{ localized_route('memberships.edit', $user->pivot->id) }}">{{ __('organization.edit_user_role_link') }}</a>
                 </td>
                 <td>
-                    <form action="{{ route('memberships.destroy', $user->membership->id) }}" method="POST">
+                    <form action="{{ route('memberships.destroy', $user->pivot->id) }}" method="POST">
                         @csrf
                         @method('delete')
                         <x-hearth-button class="link" :aria-label="__('organization.action_remove_member_with_name', ['user' => $user->name, 'organization' => $organization->name])">
@@ -107,9 +107,9 @@
     <form action="{{ localized_route('invitations.create') }}" method="POST" novalidate>
         @csrf
 
-        <x-hearth-input type="hidden" name="inviteable_id" :value="$organization->id"></x-hearth-input>
+        <x-hearth-input type="hidden" name="invitationable_id" :value="$organization->id"></x-hearth-input>
 
-        <x-hearth-input type="hidden" name="inviteable_type" :value="get_class($organization)"></x-hearth-input>
+        <x-hearth-input type="hidden" name="invitationable_type" :value="get_class($organization)"></x-hearth-input>
 
         <div class="field @error('email', 'inviteOrganizationMember') field--error @enderror">
             <x-hearth-label for="email" :value="__('forms.label_email')" />

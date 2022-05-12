@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Invitation;
+use Hearth\Models\Invitation;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -27,8 +27,8 @@ class InvitationFactory extends Factory
         return [
             'email' => $this->faker->unique()->safeEmail(),
             'role' => $roles[$this->faker->numberBetween(0, count($roles) - 1)],
-            'inviteable_id' => Organization::factory(),
-            'inviteable_type' => 'App\Models\Organization',
+            'invitationable_id' => Organization::factory(),
+            'invitationable_type' => 'App\Models\Organization',
         ];
     }
 }

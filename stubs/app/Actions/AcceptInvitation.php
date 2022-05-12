@@ -13,32 +13,33 @@ class AcceptInvitation
     /**
      * Add a new organization member to the given organization.
      *
-     * @param  mixed  $inviteable
+     * @param  mixed  $invitationable
      * @param  string  $email
      * @param  string|null  $role
      * @return void
      */
-    public function accept($inviteable, string $email, string $role = null)
+    public function accept($invitationable, string $email, string $role = null)
     {
-        $this->validate($inviteable, $email, $role);
+        $this->validate($invitationable, $email, $role);
 
         $newMember = User::where('email', $email)->first();
 
-        $inviteable->users()->attach(
+        $invitationable->users()->attach(
             $newMember,
             ['role' => $role]
         );
+
     }
 
     /**
      * Validate the add member operation.
      *
-     * @param  mixed  $inviteable
+     * @param  mixed  $invitationable
      * @param  string  $email
      * @param  string|null  $role
      * @return void|\Illuminate\Http\RedirectResponse
      */
-    protected function validate($inviteable, string $email, ?string $role)
+    protected function validate($invitationable, string $email, ?string $role)
     {
         Validator::make(
             [
@@ -47,7 +48,7 @@ class AcceptInvitation
             ],
             $this->rules()
         )
-            ->after($this->ensureInviteeIsNotAlreadyAMember($inviteable, $email))
+            ->after($this->ensureInviteeIsNotAlreadyAMember($invitationable, $email))
             ->after($this->ensureCurrentUserIsInvitee(Auth::user(), $email))
             ->validateWithBag("acceptInvitation");
     }
@@ -68,15 +69,15 @@ class AcceptInvitation
     /**
      * Ensure that the user is not already on the organization.
      *
-     * @param  mixed  $inviteable
+     * @param  mixed  $invitationable
      * @param  string  $email
      * @return \Closure
      */
-    protected function ensureInviteeIsNotAlreadyAMember($inviteable, string $email)
+    protected function ensureInviteeIsNotAlreadyAMember($invitationable, string $email): \Closure
     {
-        return function ($validator) use ($inviteable, $email) {
+        return function ($validator) use ($invitationable, $email) {
             $validator->errors()->addIf(
-                $inviteable->hasUserWithEmail($email),
+                $invitationable->hasUserWithEmail($email),
                 'email',
                 __('invitation.invited_user_already_belongs_to_team')
             );
@@ -90,7 +91,7 @@ class AcceptInvitation
      * @param  string  $email
      * @return \Closure
      */
-    protected function ensureCurrentUserIsInvitee(User $user, string $email)
+    protected function ensureCurrentUserIsInvitee(User $user, string $email): \Closure
     {
         return function ($validator) use ($user, $email) {
             if ($user->email !== $email) {

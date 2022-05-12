@@ -13,9 +13,9 @@ class NotLastAdmin implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
-        return $value->memberable()->administrators()->count() > 1;
+        return $value->membershipable()->administrators()->count() > 1;
     }
 
     /**
@@ -23,7 +23,7 @@ class NotLastAdmin implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return __('validation.custom.membership.not_last_admin');
     }

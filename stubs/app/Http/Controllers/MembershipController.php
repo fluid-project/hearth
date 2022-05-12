@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Actions\DestroyMembership;
 use App\Actions\UpdateMembership;
-use App\Models\Membership;
+use Hearth\Models\Membership;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class MembershipController extends Controller
 {
     /**
-     * Show the form for editing the specified memberable member.
+     * Show the form for editing the specified membershipable member.
      *
-     * @param  \App\Models\Membership  $membership
+     * @param  Membership  $membership
      * @return mixed
      */
     public function edit(Membership $membership)
@@ -26,7 +27,7 @@ class MembershipController extends Controller
         return view('memberships.edit', [
             'membership' => $membership,
             'user' => $membership->user,
-            'memberable' => $membership->memberable(),
+            'membershipable' => $membership->membershipable(),
             'roles' => $roles,
         ]);
     }
@@ -35,7 +36,7 @@ class MembershipController extends Controller
      * Update the given member's role.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Membership  $membership
+     * @param  \Hearth\Models\Membership  $membership
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Membership $membership)
@@ -48,12 +49,12 @@ class MembershipController extends Controller
 
         if ($request->user()->id === $membership->user->id && $request->input('role') !== 'admin') {
             return redirect(
-                \localized_route($membership->memberable()->getRoutePrefix() . '.show', $membership->memberable())
+                \localized_route($membership->membershipable()->getRoutePrefix() . '.show', $membership->membershipable())
             );
         }
 
         return redirect(
-            \localized_route($membership->memberable()->getRoutePrefix() . '.edit', $membership->memberable())
+            \localized_route($membership->membershipable()->getRoutePrefix() . '.edit', $membership->membershipable())
         );
     }
 
@@ -61,7 +62,7 @@ class MembershipController extends Controller
      * Remove the given member from the organization.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Membership  $membership
+     * @param  \Hearth\Models\Membership  $membership
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request, Membership $membership)
@@ -73,12 +74,12 @@ class MembershipController extends Controller
 
         if ($request->user()->id === $membership->user->id) {
             return redirect(
-                \localized_route($membership->memberable()->getRoutePrefix() . '.show', $membership->memberable())
+                \localized_route($membership->membershipable()->getRoutePrefix() . '.show', $membership->membershipable())
             );
         }
 
         return redirect(
-            \localized_route($membership->memberable()->getRoutePrefix() . '.edit', $membership->memberable())
+            \localized_route($membership->membershipable()->getRoutePrefix() . '.edit', $membership->membershipable())
         );
     }
 }

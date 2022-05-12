@@ -28,7 +28,7 @@ class HearthServiceProvider extends PackageServiceProvider
      *
      * @see https://github.com/spatie/laravel-package-tools
      *
-     * @param \Spatie\LaravelPackageTools\Package $package
+     * @param Package $package
      *
      * @return void
      */
@@ -55,9 +55,8 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasViewComponent('hearth', Textarea::class)
             ->hasTranslations()
             ->hasMigrations([
+                'update_users_table',
                 'create_organizations_table',
-                'create_memberships_table',
-                'create_invitations_table',
                 'create_resources_table',
             ])
             ->hasCommand(HearthCommand::class);
@@ -76,9 +75,6 @@ class HearthServiceProvider extends PackageServiceProvider
             return;
         }
 
-        $this->publishes([
-            __DIR__ . '/../database/migrations/create_users_table.php.stub' =>
-                database_path('migrations/2014_10_12_000000_create_users_table.php'),
-        ], 'hearth-migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 }

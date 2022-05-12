@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace Hearth\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 
@@ -15,7 +16,9 @@ class Membership extends MorphPivot
     protected $table = 'memberships';
 
     /**
-     * Get the user who has this membership.
+     * Return the parent user of the membership.
+     *
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -23,10 +26,12 @@ class Membership extends MorphPivot
     }
 
     /**
-     * Get the belonged-to model.
+     * Retrieve the parent model of the membership.
+     *
+     * @return mixed
      */
-    public function memberable()
+    public function membershipable(): mixed
     {
-        return $this->membership_type::where('id', $this->membership_id)->first();
+        return $this->membershipable_type::where('id', $this->membershipable_id)->first();
     }
 }

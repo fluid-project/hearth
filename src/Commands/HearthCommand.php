@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class HearthCommand extends Command
 {
-    public $signature = 'hearth:install {--two-factor} {--organizations} {--resources}';
+    public $signature = 'hearth:install {--two-factor}';
 
     public $description = 'Install Hearth.';
 
@@ -132,9 +132,7 @@ class HearthCommand extends Command
                 'Mail/Invitation.php',
                 'Models/User.php',
                 'Models/Organization.php',
-                'Models/Membership.php',
                 'Models/Resource.php',
-                'Models/Invitation.php',
                 'Policies/OrganizationPolicy.php',
                 'Policies/ResourcePolicy.php',
                 'Policies/UserPolicy.php',
@@ -205,6 +203,7 @@ class HearthCommand extends Command
             ];
 
             (new Filesystem())->delete(base_path('tests/Feature/ExampleTest.php'));
+            (new Filesystem())->delete(base_path('tests/Unit/ExampleTest.php'));
 
             foreach ($test_stubs as $test) {
                 copy(__DIR__ . "/../../stubs/tests/{$test}", base_path("tests/Feature/{$test}"));
@@ -233,7 +232,7 @@ class HearthCommand extends Command
             // Mix configuration...
             copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
-            // larastan/phpstan configuration
+            // Larastan/PHPStan configuration
             copy(__DIR__ . '/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
 
             // Assets...
@@ -252,26 +251,6 @@ class HearthCommand extends Command
                     config_path('fortify.php')
                 );
             }
-
-            if ($this->option('organizations')) {
-                $this->replaceInFile(
-                    "'organizations' => [
-        'enabled' => false,",
-                    "'organizations' => [
-        'enabled' => true,",
-                    config_path('hearth.php')
-                );
-            }
-
-            if ($this->option('resources')) {
-                $this->replaceInFile(
-                    "'resources' => [
-        'enabled' => false,",
-                    "'resources' => [
-        'enabled' => true,",
-                    config_path('hearth.php')
-                );
-            }
         }
 
         $this->line('');
@@ -282,10 +261,10 @@ class HearthCommand extends Command
     /**
      * Add a new locale to config/locales.php based on user input.
      *
-     * @param  string  $after
+     * @param string $after
      * @return void
      */
-    protected function maybeAddLocale($after = 'fr')
+    protected function maybeAddLocale(string $after = 'fr')
     {
         $continue = $this->confirm('Do you want to add support for an additional locale?', true);
 
@@ -325,11 +304,11 @@ class HearthCommand extends Command
     /**
      * Install the service provider in the application configuration file.
      *
-     * @param  string  $after
-     * @param  string  $name
+     * @param string $after
+     * @param string $name
      * @return void
      */
-    protected function installServiceProviderAfter($after, $name)
+    protected function installServiceProviderAfter(string $after, string $name)
     {
         if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\'.$name.'::class')) {
             file_put_contents(config_path('app.php'), str_replace(
@@ -343,12 +322,12 @@ class HearthCommand extends Command
     /**
      * Install the middleware to a group in the application Http Kernel.
      *
-     * @param  string  $after
-     * @param  string  $name
-     * @param  string  $group
+     * @param string $after
+     * @param string $name
+     * @param string $group
      * @return void
      */
-    protected function installMiddlewareAfter($after, $name, $group = 'web')
+    protected function installMiddlewareAfter(string $after, string $name, string $group = 'web')
     {
         $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
 
@@ -374,10 +353,10 @@ class HearthCommand extends Command
      * Update the "package.json" file.
      *
      * @param  callable  $callback
-     * @param  bool  $dev
+     * @param bool $dev
      * @return void
      */
-    protected static function updateNodePackages(callable $callback, $dev = true)
+    protected static function updateNodePackages(callable $callback, bool $dev = true)
     {
         if (! file_exists(base_path('package.json'))) {
             return;
@@ -422,12 +401,12 @@ class HearthCommand extends Command
     /**
      * Replace a given string within a given file.
      *
-     * @param  string  $search
-     * @param  string  $replace
-     * @param  string  $path
+     * @param string $search
+     * @param string $replace
+     * @param string $path
      * @return void
      */
-    protected function replaceInFile($search, $replace, $path)
+    protected function replaceInFile(string $search, string $replace, string $path)
     {
         file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
     }
