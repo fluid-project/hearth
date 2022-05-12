@@ -107,9 +107,9 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      *  Get the user's resource collections.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     * 
+     *
      */
     public function resourceCollections(): HasMany
     {

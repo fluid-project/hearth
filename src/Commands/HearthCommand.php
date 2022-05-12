@@ -183,6 +183,7 @@ class HearthCommand extends Command
                 'InvitationFactory.php',
                 'OrganizationFactory.php',
                 'ResourceFactory.php',
+                'ResourceCollectionFactory.php',
                 'UserFactory.php',
             ];
 
@@ -202,6 +203,7 @@ class HearthCommand extends Command
                 'PasswordResetTest.php',
                 'RegistrationTest.php',
                 'ResourceTest.php',
+                'ResourceCollectionTest.php',
                 'TwoFactorAuthenticationTest.php',
             ];
 

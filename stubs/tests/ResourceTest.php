@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Resource;
+use App\Models\ResourceCollection;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
@@ -149,5 +150,26 @@ class ResourceTest extends TestCase
         ]);
 
         $response->assertForbidden();
+    }
+
+    public function test_single_resource_can_be_in_many_resource_collections()
+    {
+        $user = User::factory()->create();
+
+        $resource = Resource::factory()->create();
+
+        $resourceCollections = [
+            ResourceCollection::factory()->create(['title' => 'first resource']),
+            ResourceCollection::factory()->create(['title' => 'second resource']),
+            ResourceCollection::factory()->create(['title' => 'third resource']),
+        ];
+
+        foreach ($resourceCollections as $resourceCollection) {
+            $resource->resourceCollections()->sync($resourceCollection->id);
+            $this->assertDatabaseHas('resource_resource_collection', [
+                'resource_collection_id' => $resourceCollection->id,
+                'resource_id' => $resource->id,
+            ]);
+        };
     }
 }
