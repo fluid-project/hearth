@@ -2,7 +2,7 @@
 
 namespace Hearth\Tests\Feature;
 
-use Hearth\Tests\Fixtures\Membership;
+use Hearth\Models\Membership;
 use Hearth\Tests\Fixtures\Organization;
 use Hearth\Tests\Fixtures\User;
 use Hearth\Tests\TestCase;
