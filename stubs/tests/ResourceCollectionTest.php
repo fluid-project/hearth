@@ -78,4 +78,22 @@ class ResourceCollectionTest extends TestCase
             ]);
         };
     }
+
+    public function test_deleting_resource_belong_to_resource_collection()
+    {
+        $user = User::factory()->create();
+
+        $resourceCollection = ResourceCollection::factory()
+            ->for($user)
+            ->create();
+
+        $resource = Resource::factory()->create();
+
+        $resourceCollection->resources()->sync($resource->id);
+        $resource->delete();
+        $this->assertDatabaseMissing('resource_resource_collection', [
+            'resource_collection_id' => $resourceCollection->id,
+            'resource_id' => $resource->id,
+        ]);
+    }
 }

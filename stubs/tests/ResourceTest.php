@@ -159,9 +159,9 @@ class ResourceTest extends TestCase
         $resource = Resource::factory()->create();
 
         $resourceCollections = [
-            ResourceCollection::factory()->create(['title' => 'first resource']),
-            ResourceCollection::factory()->create(['title' => 'second resource']),
-            ResourceCollection::factory()->create(['title' => 'third resource']),
+            ResourceCollection::factory()->create(['title' => 'first resource collection']),
+            ResourceCollection::factory()->create(['title' => 'second resource collection']),
+            ResourceCollection::factory()->create(['title' => 'third resource collection']),
         ];
 
         foreach ($resourceCollections as $resourceCollection) {
@@ -171,5 +171,20 @@ class ResourceTest extends TestCase
                 'resource_id' => $resource->id,
             ]);
         };
+    }
+
+    public function test_deleting_resource_collection_with_resource()
+    {
+        $resource = Resource::factory()->create();
+
+        $resourceCollection = ResourceCollection::factory()->create();
+
+        $resource->resourceCollections()->sync($resourceCollection->id);
+        $resourceCollection->delete();
+
+        $this->assertDatabaseHas('resource_resource_collection', [
+            'resource_collection_id' => null,
+            'resource_id' => $resource->id,
+        ]);
     }
 }
