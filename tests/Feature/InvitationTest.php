@@ -2,9 +2,10 @@
 
 namespace Hearth\Tests\Feature;
 
-use Hearth\Models\Invitation;
 use App\Models\Organization;
 use App\Models\User;
+use Hearth\Models\Invitation;
+
 use Hearth\Tests\TestCase;
 use Illuminate\Support\Facades\Schema;
 
