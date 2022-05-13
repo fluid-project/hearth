@@ -18,9 +18,8 @@ class CreateResourceResourceCollectionsTable extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->foreignId('resource_collection_id')
-                ->nullable()
                 ->constrained()
-                ->onDelete('set null');
+                ->onDelete('cascade');
         });
     }
 

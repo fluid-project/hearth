@@ -182,8 +182,8 @@ class ResourceTest extends TestCase
         $resource->resourceCollections()->sync($resourceCollection->id);
         $resourceCollection->delete();
 
-        $this->assertDatabaseHas('resource_resource_collection', [
-            'resource_collection_id' => null,
+        $this->assertDatabaseMissing('resource_resource_collection', [
+            'resource_collection_id' => $resourceCollection->id,
             'resource_id' => $resource->id,
         ]);
     }
