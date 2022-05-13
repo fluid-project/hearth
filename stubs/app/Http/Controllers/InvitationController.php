@@ -43,6 +43,7 @@ class InvitationController extends Controller
      */
     public function accept(Request $request, Invitation $invitation)
     {
+        /** @var $invitation Invitation */
         app(AcceptInvitation::class)->accept(
             $invitation->invitationable,
             $invitation->email,
