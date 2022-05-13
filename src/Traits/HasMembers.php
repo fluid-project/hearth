@@ -27,6 +27,7 @@ trait HasMembers
     public function administrators(): MorphToMany
     {
         return $this->morphToMany(User::class, 'membershipable', 'memberships')
+            ->as('membership')
             ->wherePivot('role', 'admin')
             ->withPivot('id')
             ->withTimestamps();

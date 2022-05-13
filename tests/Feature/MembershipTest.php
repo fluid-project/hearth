@@ -2,6 +2,7 @@
 
 namespace Hearth\Tests\Feature;
 
+use Hearth\Tests\Fixtures\Membership;
 use Hearth\Tests\Fixtures\Organization;
 use Hearth\Tests\Fixtures\User;
 use Hearth\Tests\TestCase;
@@ -40,9 +41,15 @@ class MembershipTest extends TestCase
 
         $organization->users()->attach($user, ['role' => 'admin']);
 
+        $membership = Membership::where('id', $organization->users->first()->membership->id)->first();
+
         $this->assertEquals(1, $organization->users()->count());
         $this->assertEquals(1, $organization->administrators()->count());
         $this->assertTrue($organization->hasUserWithEmail($user->email));
         $this->assertTrue($organization->hasAdministratorWithEmail($user->email));
+        $this->assertEquals($membership->membershipable_type, get_class($organization));
+        $this->assertEquals($membership->membershipable_id, $organization->id);
+        $this->assertEquals($organization->id, $membership->membershipable()->id);
+        $this->assertEquals($user->id, $membership->user->id);
     }
 }

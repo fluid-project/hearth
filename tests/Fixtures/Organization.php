@@ -18,6 +18,7 @@ class Organization extends Model
     public function users(): MorphToMany
     {
         return $this->morphToMany(User::class, 'membershipable', 'memberships')
+            ->as('membership')
             ->withPivot(['role', 'id'])
             ->withTimestamps();
     }
@@ -30,6 +31,7 @@ class Organization extends Model
     public function administrators(): MorphToMany
     {
         return $this->morphToMany(User::class, 'membershipable', 'memberships')
+            ->as('membership')
             ->wherePivot('role', 'admin')
             ->withPivot('id')
             ->withTimestamps();

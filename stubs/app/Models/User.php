@@ -100,6 +100,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     public function organizations(): MorphToMany
     {
         return $this->morphedByMany(Organization::class, 'membershipable', 'memberships')
+            ->as('membership')
             ->using(Membership::class)
             ->withPivot(['role', 'id'])
             ->withTimestamps();
