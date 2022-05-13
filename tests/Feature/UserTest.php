@@ -2,7 +2,7 @@
 
 namespace Hearth\Tests\Feature;
 
-use Hearth\Tests\Fixtures\User;
+use App\Models\User;
 use Hearth\Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;

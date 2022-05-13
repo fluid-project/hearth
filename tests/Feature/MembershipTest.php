@@ -3,8 +3,8 @@
 namespace Hearth\Tests\Feature;
 
 use Hearth\Models\Membership;
-use Hearth\Tests\Fixtures\Organization;
-use Hearth\Tests\Fixtures\User;
+use App\Models\Organization;
+use App\Models\User;
 use Hearth\Tests\TestCase;
 use Illuminate\Support\Facades\Schema;
 

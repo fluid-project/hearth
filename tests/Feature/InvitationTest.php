@@ -3,9 +3,8 @@
 namespace Hearth\Tests\Feature;
 
 use Hearth\Models\Invitation;
-use Hearth\Models\Membership;
-use Hearth\Tests\Fixtures\Organization;
-use Hearth\Tests\Fixtures\User;
+use App\Models\Organization;
+use App\Models\User;
 use Hearth\Tests\TestCase;
 use Illuminate\Support\Facades\Schema;
 
@@ -34,6 +33,12 @@ class InvitationTest extends TestCase
             'password' => 'secret',
         ]);
 
+        $otherUser = User::forceCreate([
+            'name' => 'Samwise Gamgee',
+            'email' => 'sam@bag-end.net',
+            'password' => 'secret',
+        ]);
+
         $organization = Organization::forceCreate([
             'name' => json_encode(['en' => 'Fellowship']),
             'locality' => 'Rivendell',
@@ -47,6 +52,14 @@ class InvitationTest extends TestCase
             'role' => 'admin',
         ]);
 
+        $otherInvitation = Invitation::forceCreate([
+            'invitationable_id' => $organization->id,
+            'invitationable_type' => get_class($organization),
+            'email' => $otherUser->email,
+            'role' => 'member',
+        ]);
+
+        $this->assertEquals(2, $organization->invitations->count());
         $this->assertEquals($organization->id, $invitation->invitationable->id);
     }
 }
