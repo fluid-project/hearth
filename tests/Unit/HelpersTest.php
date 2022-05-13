@@ -1,19 +1,21 @@
 <?php
 
-namespace Hearth\Tests;
+namespace Hearth\Tests\Unit;
+
+use Hearth\Tests\TestCase;
 
 class HelpersTest extends TestCase
 {
     public function test_get_region_name_in_default_locale()
     {
         $result = get_region_name('NS', ['CA']);
-        $this->assertEquals($result, 'Nova Scotia');
+        $this->assertEquals('Nova Scotia', $result);
     }
 
     public function test_get_region_name_in_alternate_locale()
     {
         $result = get_region_name('NS', ['CA'], 'fr');
-        $this->assertEquals($result, 'Nouvelle-Écosse');
+        $this->assertEquals('Nouvelle-Écosse', $result);
     }
 
     public function test_get_region_name_returns_null_for_invalid_region()
@@ -25,20 +27,20 @@ class HelpersTest extends TestCase
     public function test_get_regions_starts_with_blank_entry()
     {
         $result = get_regions(['CA']);
-        $this->assertEquals(array_key_first($result), '');
-        $this->assertEquals($result[''], '');
+        $this->assertEquals('', array_key_first($result));
+        $this->assertEquals('', $result['']);
     }
 
     public function test_get_regions_in_default_locale()
     {
         $result = get_regions(['CA']);
-        $this->assertEquals($result['NS'], 'Nova Scotia');
+        $this->assertEquals('Nova Scotia', $result['NS']);
     }
 
     public function test_get_regions_in_alternate_locale()
     {
         $result = get_regions(['CA'], 'fr');
-        $this->assertEquals($result['NS'], 'Nouvelle-Écosse');
+        $this->assertEquals('Nouvelle-Écosse', $result['NS']);
     }
 
     public function test_get_region_codes()

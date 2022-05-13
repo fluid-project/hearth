@@ -1,15 +1,28 @@
 <?php
 
-namespace Hearth\Tests;
+namespace Hearth\Tests\Feature;
 
 use Hearth\Tests\Fixtures\User;
+use Hearth\Tests\TestCase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class UserTest extends TestCase
 {
     public function setUp(): void
     {
         parent::setUp();
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        Schema::dropAllTables();
+
+        $create_users_table = include __DIR__ . '/../../database/migrations/create_users_table.php.stub';
+        $update_users_table = include __DIR__ . '/../../database/migrations/update_users_table.php.stub';
+
+        $create_users_table->up();
+        $update_users_table->up();
     }
 
     public function test_user_can_be_created()
@@ -23,17 +36,15 @@ class UserTest extends TestCase
 
     protected function createUser()
     {
-        $user = User::forceCreate([
+        return User::forceCreate([
             'name' => 'Bilbo Baggins',
             'email' => '',
             'password' => 'secret',
         ]);
-
-        return $user;
     }
 
     protected function migrate()
     {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
+        $this->artisan('migrate')->run();
     }
 }

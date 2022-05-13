@@ -1,8 +1,10 @@
 <?php
 
-namespace Hearth\Tests;
+namespace Hearth\Tests\Commands;
 
-class ConsoleTest extends TestCase
+use Hearth\Tests\TestCase;
+
+class InstallTest extends TestCase
 {
     public function test_install_command()
     {
