@@ -71,10 +71,8 @@ class HearthServiceProvider extends PackageServiceProvider
      */
     public function packageBooted()
     {
-        if (! $this->app->runningInConsole()) {
-            return;
+        if ($this->app->runningInConsole()) {
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         }
-
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 }
