@@ -7,6 +7,7 @@ use App\Http\Requests\CreateInvitationRequest;
 use App\Mail\Invitation as InvitationMessage;
 use Hearth\Models\Invitation;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
@@ -16,8 +17,8 @@ class InvitationController extends Controller
     /**
      * Create an invitation.
      *
-     * @param  \App\Http\Requests\CreateInvitationRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param CreateInvitationRequest $request
+     * @return RedirectResponse
      */
     public function create(CreateInvitationRequest $request)
     {
@@ -37,13 +38,13 @@ class InvitationController extends Controller
     /**
      * Accept the specified invitation.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Hearth\Models\Invitation  $invitation
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Invitation $invitation
+     * @return RedirectResponse
      */
     public function accept(Request $request, Invitation $invitation)
     {
-        /** @var $invitation Invitation */
+        /** @mixin Invitation **/
         app(AcceptInvitation::class)->accept(
             $invitation->invitationable,
             $invitation->email,
@@ -63,9 +64,9 @@ class InvitationController extends Controller
     /**
      * Cancel the specified invitation.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Hearth\Models\Invitation  $invitation
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Invitation $invitation
+     * @return RedirectResponse
      */
     public function destroy(Request $request, Invitation $invitation)
     {

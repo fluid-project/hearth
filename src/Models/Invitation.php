@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
+/**
+ * Hearth\Models\Invitation
+ *
+ * @property string $email
+ * @property string $role
+ * @property mixed $invitationable
+ */
 class Invitation extends Model
 {
     use HasFactory;

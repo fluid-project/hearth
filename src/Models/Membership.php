@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 
 /**
+ * Hearth\Models\Membership
+ *
  * @property string $membershipable_type
  * @property int $membershipable_id
  */
