@@ -4,10 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\Resource;
 use App\Models\ResourceCollection;
-use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Tests\TestCase;
-use RefreshDatabase;
 
 class ResourceCollectionTest extends TestCase
 {

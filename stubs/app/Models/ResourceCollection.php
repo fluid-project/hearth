@@ -43,7 +43,7 @@ class ResourceCollection extends Model
 
     /**
      * Get all of the resources that are assigned this collection.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      *
      */

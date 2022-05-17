@@ -35,9 +35,9 @@ class Resource extends Model
 
     /**
      * Get all of the resource collections that include this resource.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     * 
+     *
      */
     public function resourceCollections(): BelongsToMany
     {
