@@ -154,8 +154,6 @@ class ResourceTest extends TestCase
 
     public function test_single_resource_can_be_in_many_resource_collections()
     {
-        $user = User::factory()->create();
-
         $resource = Resource::factory()->create();
 
         $resourceCollections = ResourceCollection::factory(3)->create();

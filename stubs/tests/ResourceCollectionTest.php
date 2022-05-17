@@ -4,11 +4,14 @@ namespace Tests\Feature;
 
 use App\Models\Resource;
 use App\Models\ResourceCollection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
 use Tests\TestCase;
 
 class ResourceCollectionTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_resource_collections_can_be_translated()
     {
         if (! config('hearth.resources.enabled')) {
