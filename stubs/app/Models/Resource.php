@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
 
 class Resource extends Model
@@ -33,9 +34,12 @@ class Resource extends Model
     ];
 
     /**
-     * Get all of the resource collections that has this resource.
+     * Get all of the resource collections that include this resource.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * 
      */
-    public function resourceCollections()
+    public function resourceCollections(): BelongsToMany
     {
         return $this->belongsToMany(ResourceCollection::class);
     }

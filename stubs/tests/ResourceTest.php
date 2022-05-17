@@ -158,11 +158,7 @@ class ResourceTest extends TestCase
 
         $resource = Resource::factory()->create();
 
-        $resourceCollections = [
-            ResourceCollection::factory()->create(['title' => 'first resource collection']),
-            ResourceCollection::factory()->create(['title' => 'second resource collection']),
-            ResourceCollection::factory()->create(['title' => 'third resource collection']),
-        ];
+        $resourceCollections = ResourceCollection::factory(3)->create();
 
         foreach ($resourceCollections as $resourceCollection) {
             $resource->resourceCollections()->sync($resourceCollection->id);
@@ -176,10 +172,18 @@ class ResourceTest extends TestCase
     public function test_deleting_resource_collection_with_resource()
     {
         $resource = Resource::factory()->create();
-
         $resourceCollection = ResourceCollection::factory()->create();
-
         $resource->resourceCollections()->sync($resourceCollection->id);
+
+        $this->assertDatabaseHas('resource_collections', [
+            'id' => $resourceCollection->id,
+        ]);
+
+        $this->assertDatabaseHas('resource_resource_collection', [
+            'resource_collection_id' => $resourceCollection->id,
+            'resource_id' => $resource->id,
+        ]);
+
         $resourceCollection->delete();
 
         $this->assertDatabaseMissing('resource_resource_collection', [
