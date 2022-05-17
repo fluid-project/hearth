@@ -96,7 +96,6 @@ class HearthCommand extends Command
 
             // App stubs...
             $app_stubs = [
-                'Actions/AcceptInvitation.php',
                 'Actions/DestroyMembership.php',
                 'Actions/UpdateMembership.php',
                 'Actions/Fortify/CreateNewUser.php',
@@ -115,6 +114,7 @@ class HearthCommand extends Command
                 'Http/Middleware/RedirectIfAuthenticated.php',
                 'Http/Middleware/RedirectToPreferredLocale.php',
                 'Http/Middleware/RequirePassword.php',
+                'Http/Requests/AcceptInvitationRequest.php',
                 'Http/Requests/Auth/LoginRequest.php',
                 'Http/Requests/DestroyUserRequest.php',
                 'Http/Requests/CreateInvitationRequest.php',

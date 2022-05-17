@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\AcceptInvitation;
+use App\Http\Requests\AcceptInvitationRequest;
 use App\Http\Requests\CreateInvitationRequest;
 use App\Mail\Invitation as InvitationMessage;
 use Hearth\Models\Invitation;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 
@@ -38,18 +39,15 @@ class InvitationController extends Controller
     /**
      * Accept the specified invitation.
      *
-     * @param Request $request
+     * @param AcceptInvitationRequest $request
      * @param Invitation $invitation
      * @return RedirectResponse
      */
-    public function accept(Request $request, Invitation $invitation)
+    public function accept(AcceptInvitationRequest $request, Invitation $invitation)
     {
-        /** @mixin Invitation **/
-        app(AcceptInvitation::class)->accept(
-            $invitation->invitationable,
-            $invitation->email,
-            $invitation->role
-        );
+        $validated = $request->validated();
+
+        $invitation->accept();
 
         $invitation->delete();
 

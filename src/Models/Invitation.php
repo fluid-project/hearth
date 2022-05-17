@@ -2,6 +2,7 @@
 
 namespace Hearth\Models;
 
+use App\Models\User;
 use Database\Factories\InvitationFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,5 +46,20 @@ class Invitation extends Model
     public function invitationable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Accept an invitation.
+     *
+     * @return void
+     */
+    public function accept(): void
+    {
+        $invitee = User::where('email', $this->email)->first();
+
+        $this->invitationable->users()->attach(
+            $invitee,
+            ['role' => $this->role]
+        );
     }
 }
