@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\User;
+use Hearth\Models\Membership;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
@@ -40,12 +41,30 @@ class AcceptInvitationRequest extends FormRequest
     public function withValidator(Validator $validator)
     {
         $validator
+            ->after($this->ensureInviteeHasNoExistingMemberships(Auth::user()))
             ->after($this->ensureInviteeIsNotAlreadyAMember($this->invitation->invitationable, $this->invitation->email))
             ->after($this->ensureCurrentUserIsInvitee(Auth::user(), $this->invitation->email));
     }
 
     /**
-     * Ensure that the user is not already on the organization.
+     * Ensure that the user is not already part of a team.
+     *
+     * @param User $user
+     * @return \Closure
+     */
+    protected function ensureInviteeHasNoExistingMemberships(User $user): \Closure
+    {
+        return function ($validator) use ($user) {
+            $validator->errors()->addIf(
+                Membership::where('user_id', $user->id)->first(),
+                'email',
+                __('invitation.invited_user_already_belongs_to_a_team')
+            );
+        };
+    }
+
+    /**
+     * Ensure that the user is not already part of this team.
      *
      * @param mixed $invitationable
      * @param string $email
@@ -57,7 +76,7 @@ class AcceptInvitationRequest extends FormRequest
             $validator->errors()->addIf(
                 $invitationable->hasUserWithEmail($email),
                 'email',
-                __('invitation.invited_user_already_belongs_to_team')
+                __('invitation.invited_user_already_belongs_to_this_team')
             );
         };
     }
