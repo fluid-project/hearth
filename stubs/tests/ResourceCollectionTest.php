@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Resource;
 use App\Models\ResourceCollection;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
 use Tests\TestCase;
@@ -53,6 +54,15 @@ class ResourceCollectionTest extends TestCase
 
         $resourceCollection->user->delete();
         $this->assertModelMissing($resourceCollection);
+    }
+
+    public function test_single_user_can_have_multiple_resource_collections()
+    {
+        $user = User::factory()->create();
+        $resourceCollection = ResourceCollection::factory(5)
+            ->for($user)
+            ->create();
+        $this->assertCount(5, ResourceCollection::where('user_id', $user->id)->get());
     }
 
     public function test_many_resources_can_belong_in_single_resource_collection()
