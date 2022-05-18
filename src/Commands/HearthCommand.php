@@ -93,69 +93,67 @@ class HearthCommand extends Command
             (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
             (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
             (new Filesystem())->ensureDirectoryExists(app_path('View/Components'));
+            (new Filesystem())->ensureDirectoryExists(lang_path('fr'));
 
             // App stubs...
-            $app_stubs = [
-                'Actions/DestroyMembership.php',
-                'Actions/UpdateMembership.php',
-                'Actions/Fortify/CreateNewUser.php',
-                'Actions/Fortify/PasswordValidationRules.php',
-                'Actions/Fortify/RedirectIfTwoFactorAuthenticatable.php',
-                'Actions/Fortify/UpdateUserPassword.php',
-                'Actions/Fortify/UpdateUserProfileInformation.php',
-                'Http/Controllers/InvitationController.php',
-                'Http/Controllers/MembershipController.php',
-                'Http/Controllers/OrganizationController.php',
-                'Http/Controllers/ResourceController.php',
-                'Http/Controllers/UserController.php',
-                'Http/Controllers/UserProfileInformationController.php',
-                'Http/Controllers/VerifyEmailController.php',
-                'Http/Middleware/Authenticate.php',
-                'Http/Middleware/RedirectIfAuthenticated.php',
-                'Http/Middleware/RedirectToPreferredLocale.php',
-                'Http/Middleware/RequirePassword.php',
-                'Http/Requests/AcceptInvitationRequest.php',
-                'Http/Requests/Auth/LoginRequest.php',
-                'Http/Requests/DestroyUserRequest.php',
-                'Http/Requests/CreateInvitationRequest.php',
-                'Http/Requests/CreateOrganizationRequest.php',
-                'Http/Requests/DestroyOrganizationRequest.php',
-                'Http/Requests/UpdateOrganizationRequest.php',
-                'Http/Requests/CreateResourceRequest.php',
-                'Http/Requests/DestroyResourceRequest.php',
-                'Http/Requests/UpdateResourceRequest.php',
-                'Http/Responses/FailedTwoFactorLoginResponse.php',
-                'Http/Responses/LoginResponse.php',
-                'Http/Responses/PasswordResetResponse.php',
-                'Http/Responses/RegisterResponse.php',
-                'Http/Responses/TwoFactorLoginResponse.php',
-                'Mail/Invitation.php',
-                'Models/User.php',
-                'Models/Organization.php',
-                'Models/Resource.php',
-                'Policies/MembershipPolicy.php',
-                'Policies/OrganizationPolicy.php',
-                'Policies/ResourcePolicy.php',
-                'Policies/UserPolicy.php',
-                'Providers/FortifyServiceProvider.php',
-                'Rules/NotLastAdmin.php',
-                'Rules/Password.php',
-            ];
+            $app_stubs = array_merge(
+                (new Filesystem())->glob(__DIR__ . "/../../stubs/app/**/*.php"),
+                (new Filesystem())->glob(__DIR__ . "/../../stubs/app/**/**/*.php")
+            );
 
-            foreach ($app_stubs as $path) {
-                copy(__DIR__ . "/../../stubs/app/{$path}", app_path($path));
+            foreach ($app_stubs as $stub) {
+                copy($stub, str_replace(__DIR__ . "/../../stubs/app", app_path(), $stub));
             }
 
             // Config stubs...
-            $config_stubs = [
-                'fortify.php',
-                'laravel-multilingual-routes.php',
-                'locales.php',
-            ];
+            $config_stubs = (new Filesystem())->glob(__DIR__ . "/../../stubs/config/*.php");
 
-            foreach ($config_stubs as $config) {
-                copy(__DIR__ . "/../../stubs/config/{$config}", config_path($config));
+            foreach ($config_stubs as $stub) {
+                copy($stub, str_replace(__DIR__ . "/../../stubs/config", config_path(), $stub));
             }
+
+            // Database factories...
+            $factories = (new Filesystem())->glob(__DIR__ . "/../../database/factories/*.php");
+
+            foreach ($factories as $stub) {
+                copy($stub, str_replace(__DIR__ . "/../../database/factories", base_path("database/factories"), $stub));
+            }
+
+            // Language stubs...
+            $lang_stubs = (new Filesystem())->glob(__DIR__ . "/../../stubs/lang/**/*.php");
+
+            foreach ($lang_stubs as $stub) {
+                copy($stub, str_replace(__DIR__ . "/../../stubs/lang", lang_path(), $stub));
+            }
+
+            // Resource stubs...
+            (new Filesystem())->delete(resource_path('css/app.css'));
+            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
+            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
+            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
+
+            // Route stubs...
+            $route_stubs = (new Filesystem())->glob(__DIR__ . "/../../stubs/routes/*.php");
+
+            foreach ($route_stubs as $stub) {
+                copy($stub, str_replace(__DIR__ . "/../../stubs/routes", base_path("routes/"), $stub));
+            }
+
+            // Test stubs...
+            (new Filesystem())->delete(base_path('tests/Feature/ExampleTest.php'));
+            (new Filesystem())->delete(base_path('tests/Unit/ExampleTest.php'));
+
+            $test_stubs = (new Filesystem())->glob(__DIR__ . "/../../stubs/tests/**/*.php");
+
+            foreach ($test_stubs as $stub) {
+                copy($stub, str_replace(__DIR__ . "/../../stubs/tests", base_path("tests"), $stub));
+            }
+
+            // Mix configuration...
+            copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
+
+            // Larastan/PHPStan configuration
+            copy(__DIR__ . '/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
         }
 
         // Add languages
@@ -163,95 +161,20 @@ class HearthCommand extends Command
             $this->maybeAddLocale();
         }
 
-        if (! App::environment('testing')) {
-            // Route stubs...
-            $route_stubs = [
-                'fortify.php',
-                'organizations.php',
-                'resources.php',
-                'web.php',
-            ];
+        // Fonts...
+        $this->replaceInFile(
+            'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400;1,700',
+            'https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+            config_path('google-fonts.php')
+        );
 
-            foreach ($route_stubs as $route) {
-                copy(__DIR__ . "/../../stubs/routes/{$route}", base_path("routes/{$route}"));
-            }
-
-            // Factories...
-            $factories = [
-                'InvitationFactory.php',
-                'OrganizationFactory.php',
-                'ResourceFactory.php',
-                'UserFactory.php',
-            ];
-
-            foreach ($factories as $factory) {
-                copy(__DIR__ . "/../../database/factories/{$factory}", base_path("database/factories/{$factory}"));
-            }
-
-            // Tests...
-            $test_stubs = [
-                'AccountDeletionTest.php',
-                'AuthenticationTest.php',
-                'EmailVerificationTest.php',
-                'LocalizationTest.php',
-                'OrganizationTest.php',
-                'PasswordChangeTest.php',
-                'PasswordConfirmationTest.php',
-                'PasswordResetTest.php',
-                'RegistrationTest.php',
-                'ResourceTest.php',
-                'TwoFactorAuthenticationTest.php',
-            ];
-
-            (new Filesystem())->delete(base_path('tests/Feature/ExampleTest.php'));
-            (new Filesystem())->delete(base_path('tests/Unit/ExampleTest.php'));
-
-            foreach ($test_stubs as $test) {
-                copy(__DIR__ . "/../../stubs/tests/{$test}", base_path("tests/Feature/{$test}"));
-            }
-
-            // Views...
-            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
-
-            // View components...
-            $components = [
-                'AppLayout.php',
-                'GuestLayout.php',
-            ];
-
-            foreach ($components as $component) {
-                copy(__DIR__ . "/../../stubs/app/View/Components/{$component}", app_path("View/Components/{$component}"));
-            }
-
-            // Fonts...
+        // Enable two-factor authentication
+        if ($this->option('two-factor')) {
             $this->replaceInFile(
-                'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400;1,700',
-                'https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&display=swap',
-                config_path('google-fonts.php')
+                "// Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
+                "Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
+                config_path('fortify.php')
             );
-
-            // Mix configuration...
-            copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
-
-            // Larastan/PHPStan configuration
-            copy(__DIR__ . '/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
-
-            // Assets...
-            (new Filesystem())->delete(resource_path('css/app.css'));
-            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
-            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
-
-            // Language files...
-            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/lang/', lang_path('lang'));
-
-            // Enable two-factor authentication
-            if ($this->option('two-factor')) {
-                $this->replaceInFile(
-                    "// Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
-                    "Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
-                    config_path('fortify.php')
-                );
-            }
         }
 
         $this->line('');

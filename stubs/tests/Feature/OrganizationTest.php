@@ -202,10 +202,12 @@ class OrganizationTest extends TestCase
 
         $user = User::factory()->create();
         $other_user = User::factory()->create();
+        $yet_another_user = User::factory()->create();
 
         $organization = Organization::factory()
             ->hasAttached($user, ['role' => 'admin'])
-            ->hasAttached($other_user, ['role' => 'member'])
+            ->hasAttached($other_user, ['role' => 'admin'])
+            ->hasAttached($yet_another_user, ['role' => 'member'])
             ->create();
 
         $membership = Membership::where('user_id', $user->id)
@@ -220,7 +222,22 @@ class OrganizationTest extends TestCase
                 'role' => 'member',
             ]);
 
-        $response->assertSessionHasErrors(['membership']);
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect(localized_route('organizations.show', $organization));
+
+        $membership = Membership::where('user_id', $other_user->id)
+            ->where('membershipable_type', 'App\Models\Organization')
+            ->where('membershipable_id', $organization->id)
+            ->first();
+
+        $response = $this
+            ->actingAs($other_user)
+            ->from(localized_route('memberships.edit', $membership))
+            ->put(localized_route('memberships.update', $membership), [
+                'role' => 'member',
+            ]);
+
+        $response->assertSessionHasErrors(['role']);
         $response->assertRedirect(localized_route('memberships.edit', $membership));
     }
 

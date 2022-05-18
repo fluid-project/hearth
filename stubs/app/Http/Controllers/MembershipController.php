@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\DestroyMembership;
-use App\Actions\UpdateMembership;
+use App\Http\Requests\UpdateMembershipRequest;
 use Hearth\Models\Membership;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -35,17 +36,17 @@ class MembershipController extends Controller
     /**
      * Update the given member's role.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Hearth\Models\Membership  $membership
-     * @return \Illuminate\Http\RedirectResponse
+     * @param UpdateMembershipRequest $request
+     * @param Membership $membership
+     * @return RedirectResponse
      */
-    public function update(Request $request, Membership $membership)
+    public function update(UpdateMembershipRequest $request, Membership $membership): RedirectResponse
     {
-        app(UpdateMembership::class)->update(
-            $request->user(),
-            $membership,
-            $request->input('role')
-        );
+        $validated = $request->validated();
+
+        $membership->membershipable()->users()->updateExistingPivot($membership->user->id, [
+            'role' => $validated['role'],
+        ]);
 
         if ($request->user()->id === $membership->user->id && $request->input('role') !== 'admin') {
             return redirect(
@@ -61,11 +62,11 @@ class MembershipController extends Controller
     /**
      * Remove the given member from the organization.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Hearth\Models\Membership  $membership
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Membership $membership
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, Membership $membership)
+    public function destroy(Request $request, Membership $membership): RedirectResponse
     {
         app(DestroyMembership::class)->destroy(
             $request->user(),
