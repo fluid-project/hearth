@@ -62,7 +62,7 @@ class ResourceCollectionTest extends TestCase
         $resourceCollection = ResourceCollection::factory(5)
             ->for($user)
             ->create();
-        $this->assertCount(5, ResourceCollection::where('user_id', $user->id)->get());
+        $this->assertCount(5, $user->resourceCollections()->get());
     }
 
     public function test_many_resources_can_belong_in_single_resource_collection()
