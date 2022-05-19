@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/fluid-project/hearth/compare/v2.0.2...v3.0.0) (2022-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* limit User model to a single membership (#135)
+* make Organization model translatable (#132)
+* add translatable package and make Resources translatable (#128)
+
+### Features
+
+* add ResourceCollection model and migration (resolves [#134](https://www.github.com/fluid-project/hearth/issues/134)) ([#136](https://www.github.com/fluid-project/hearth/issues/136)) ([dc740d8](https://www.github.com/fluid-project/hearth/commit/dc740d8b4321807457fe98d885eeddf7e38735d5))
+* add translatable package and make Resources translatable ([#128](https://www.github.com/fluid-project/hearth/issues/128)) ([4aac4f6](https://www.github.com/fluid-project/hearth/commit/4aac4f6af828bc4a152aafe225bb037f92ca4d27))
+* limit User model to a single membership ([#135](https://www.github.com/fluid-project/hearth/issues/135)) ([6f06a8d](https://www.github.com/fluid-project/hearth/commit/6f06a8d1329fc18e8ff27f0d21aac925ff6b9bd4))
+* make Organization model translatable ([#132](https://www.github.com/fluid-project/hearth/issues/132)) ([ba4acd3](https://www.github.com/fluid-project/hearth/commit/ba4acd3daf6ce11b46e32b2e64d9990720d86036))
+
+
+### Miscellaneous Chores
+
+* document recommended extensions ([faf9495](https://www.github.com/fluid-project/hearth/commit/faf9495f2e05b84f68fd3dd4868a1bc2330f4c65))
+
 ### [2.0.2](https://www.github.com/fluid-project/hearth/compare/v2.0.1...v2.0.2) (2022-05-05)
 
 
