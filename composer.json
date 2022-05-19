@@ -58,8 +58,6 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\Models\\": "stubs/app/Models",
-            "Database\\Factories\\": "database/factories",
             "Hearth\\": "src"
         },
         "files": [
@@ -68,6 +66,8 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "App\\Models\\": "stubs/app/Models",
+            "Database\\Factories\\": "database/factories",
             "Hearth\\Tests\\": "tests"
         }
     },
