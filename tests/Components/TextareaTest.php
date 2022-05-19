@@ -2,16 +2,16 @@
 
 namespace Hearth\Tests\Components;
 
-use Hearth\Components\TextArea;
+use Hearth\Components\Textarea;
 use Hearth\Tests\TestCase;
 
-class TextAreaTest extends TestCase
+class TextareaTest extends TestCase
 {
     public function test_text_area_component_renders()
     {
         $view = $this->withViewErrors([])
             ->component(
-                TextArea::class,
+                Textarea::class,
                 ['name' => 'bio', 'value' => '']
             );
 
@@ -23,7 +23,7 @@ class TextAreaTest extends TestCase
     {
         $view = $this->withViewErrors([])
             ->component(
-                TextArea::class,
+                Textarea::class,
                 ['name' => 'bio', 'hinted' => true, 'value' => '']
             );
 
@@ -34,7 +34,7 @@ class TextAreaTest extends TestCase
     {
         $view = $this->withViewErrors([])
             ->component(
-                TextArea::class,
+                Textarea::class,
                 ['name' => 'bio', 'hinted' => 'my-hint', 'value' => '']
             );
 
@@ -45,7 +45,7 @@ class TextAreaTest extends TestCase
     {
         $view = $this->withViewErrors(['bio' => 'You must enter your bio.'])
             ->component(
-                TextArea::class,
+                Textarea::class,
                 ['name' => 'bio', 'value' => '']
             );
 
