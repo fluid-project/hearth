@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\DestroyMembership;
 use App\Http\Requests\UpdateMembershipRequest;
+use App\Rules\NotLastAdmin;
 use Hearth\Models\Membership;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 
 class MembershipController extends Controller
 {
@@ -68,10 +70,26 @@ class MembershipController extends Controller
      */
     public function destroy(Request $request, Membership $membership): RedirectResponse
     {
-        app(DestroyMembership::class)->destroy(
-            $request->user(),
-            $membership
+        Gate::forUser($request->user())->authorize('update', $membership->membershipable());
+
+        $validator = Validator::make(
+            [
+                'membership' => $membership,
+            ],
+            []
         );
+
+        $validator->sometimes(
+            'membership',
+            [new NotLastAdmin($membership)],
+            function ($input) {
+                return $input->membership->role === 'admin';
+            }
+        );
+
+        $validator->validate();
+
+        $membership->membershipable()->users()->detach($membership->user->id);
 
         if ($request->user()->id === $membership->user->id) {
             return redirect(
