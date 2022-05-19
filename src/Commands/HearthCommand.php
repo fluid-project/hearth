@@ -59,8 +59,8 @@ class HearthCommand extends Command
             );
 
             // DetectRequestLocale Middleware...
-            $this->installMiddlewareAfter(
-                'VerifyCsrfToken::class',
+            $this->installMiddlewareBefore(
+                '\App\Http\Middleware\EncryptCookies::class',
                 '\ChinLeung\MultilingualRoutes\DetectRequestLocale::class'
             );
 
@@ -248,12 +248,12 @@ class HearthCommand extends Command
     /**
      * Install the middleware to a group in the application Http Kernel.
      *
-     * @param string $after
+     * @param string $before
      * @param string $name
      * @param string $group
      * @return void
      */
-    protected function installMiddlewareAfter(string $after, string $name, string $group = 'web')
+    protected function installMiddlewareBefore(string $before, string $name, string $group = 'web')
     {
         $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
 
@@ -262,8 +262,8 @@ class HearthCommand extends Command
 
         if (! Str::contains($middlewareGroup, $name)) {
             $modifiedMiddlewareGroup = str_replace(
-                $after.',',
-                $after.','.PHP_EOL.'            '.$name.',',
+                $before,
+                $name.','.PHP_EOL.'            '.$before,
                 $middlewareGroup,
             );
 
