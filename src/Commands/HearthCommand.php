@@ -161,12 +161,14 @@ class HearthCommand extends Command
             $this->maybeAddLocale();
         }
 
-        // Fonts...
-        $this->replaceInFile(
-            'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400;1,700',
-            'https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&display=swap',
-            config_path('google-fonts.php')
-        );
+        if (! App::environment('testing')) {
+            // Fonts...
+            $this->replaceInFile(
+                'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400;1,700',
+                'https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+                config_path('google-fonts.php')
+            );
+        }
 
         // Enable two-factor authentication
         if ($this->option('two-factor')) {

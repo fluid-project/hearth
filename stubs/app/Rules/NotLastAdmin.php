@@ -8,6 +8,13 @@ use Illuminate\Contracts\Validation\Rule;
 class NotLastAdmin implements Rule
 {
     /**
+     * The membership under validation.
+     *
+     * @var Membership
+     */
+    private Membership $membership;
+
+    /**
      * Constructor.
      *
      * @param Membership $membership
