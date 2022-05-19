@@ -7,6 +7,7 @@ use App\Models\ResourceCollection;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
+use Spatie\Translatable\Exceptions\AttributeIsNotTranslatable;
 use Tests\TestCase;
 
 class ResourceTest extends TestCase
@@ -80,8 +81,16 @@ class ResourceTest extends TestCase
 
         $this->assertEquals($translations, $resource->getTranslations('title'));
 
-        $this->expectExceptionMessage("Cannot translate attribute `user_id` as it's not one of the translatable attributes: `title, summary`");
+        $this->expectException(AttributeIsNotTranslatable::class);
         $resource->setTranslation('user_id', 'en', 'user_id in English');
+
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/en/resources/title-in-english');
+        $response->assertOk();
+
+        $response = $this->actingAs($user)->get('/fr/resources/title-in-french');
+        $response->assertOk();
     }
 
     public function test_users_can_not_edit_resources_belonging_to_others()

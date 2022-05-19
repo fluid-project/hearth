@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\ResourceCollection;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ResourceCollectionFactory extends Factory
 {
@@ -20,10 +21,13 @@ class ResourceCollectionFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
+        $title = $this->faker->words(3, true);
+
         return [
-            'title' => $this->faker->words(3, true),
+            'title' => $title,
+            'slug' => Str::slug($title),
             'description' => $this->faker->sentence(),
             'user_id' => User::factory(),
         ];
