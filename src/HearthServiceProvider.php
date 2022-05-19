@@ -58,6 +58,8 @@ class HearthServiceProvider extends PackageServiceProvider
                 'update_users_table',
                 'create_organizations_table',
                 'create_resources_table',
+                'create_resource_collections_table',
+                'create_resource_resource_collections_table',
             ])
             ->hasCommand(HearthCommand::class);
     }

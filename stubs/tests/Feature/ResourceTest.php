@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Resource;
+use App\Models\ResourceCollection;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
@@ -149,5 +150,43 @@ class ResourceTest extends TestCase
         ]);
 
         $response->assertForbidden();
+    }
+
+    public function test_single_resource_can_be_in_many_resource_collections()
+    {
+        $resource = Resource::factory()->create();
+
+        $resourceCollections = ResourceCollection::factory(3)->create();
+
+        foreach ($resourceCollections as $resourceCollection) {
+            $resource->resourceCollections()->sync($resourceCollection->id);
+            $this->assertDatabaseHas('resource_resource_collection', [
+                'resource_collection_id' => $resourceCollection->id,
+                'resource_id' => $resource->id,
+            ]);
+        };
+    }
+
+    public function test_deleting_resource_collection_with_resource()
+    {
+        $resource = Resource::factory()->create();
+        $resourceCollection = ResourceCollection::factory()->create();
+        $resource->resourceCollections()->sync($resourceCollection->id);
+
+        $this->assertDatabaseHas('resource_collections', [
+            'id' => $resourceCollection->id,
+        ]);
+
+        $this->assertDatabaseHas('resource_resource_collection', [
+            'resource_collection_id' => $resourceCollection->id,
+            'resource_id' => $resource->id,
+        ]);
+
+        $resourceCollection->delete();
+
+        $this->assertDatabaseMissing('resource_resource_collection', [
+            'resource_collection_id' => $resourceCollection->id,
+            'resource_id' => $resource->id,
+        ]);
     }
 }

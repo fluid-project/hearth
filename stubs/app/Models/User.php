@@ -6,6 +6,7 @@ use Hearth\Models\Membership;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -95,6 +96,19 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     }
 
     /**
+     * Get the user's resource collections.
+     *
+     * @return HasMany
+     *
+     */
+    public function resourceCollections(): HasMany
+    {
+        return $this->hasMany(ResourceCollection::class);
+    }
+
+    /**
+     * Get the organizations that belong to this user.
+     *
      * @return MorphToMany
      */
     public function organizations(): MorphToMany
@@ -107,6 +121,8 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     }
 
     /**
+     * Get the organization that belongs to the user.
+     *
      * @return mixed
      */
     public function getOrganizationAttribute(): mixed
@@ -115,7 +131,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     }
 
     /**
-     * Determine if the user is a member of a given model.
+     * Determine if the user is a member of a given membershipable model.
      *
      * @param mixed $model
      * @return bool
