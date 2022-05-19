@@ -23,7 +23,7 @@ class TestCase extends Orchestra
         );
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             FortifyServiceProvider::class,
@@ -31,19 +31,5 @@ class TestCase extends Orchestra
             LaravelLocalesServiceProvider::class,
             MultilingualRoutesServiceProvider::class,
         ];
-    }
-
-    public function getEnvironmentSetUp($app)
-    {
-        config()->set('database.default', 'testbench');
-
-        config()->set('database.connections.testbench', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
-
-        include_once __DIR__.'/../database/migrations/create_users_table.php.stub';
-        (new \CreateUsersTable())->up();
     }
 }

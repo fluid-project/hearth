@@ -28,7 +28,7 @@ class Resource extends Model
      *
      * @var array<string>
      */
-    public $translatable = [
+    public mixed $translatable = [
         'title',
         'summary',
     ];

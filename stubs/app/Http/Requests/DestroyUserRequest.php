@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Validator;
 
 class DestroyUserRequest extends FormRequest
 {
@@ -12,7 +13,7 @@ class DestroyUserRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -22,7 +23,7 @@ class DestroyUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'current_password' => 'required|string',
@@ -32,10 +33,10 @@ class DestroyUserRequest extends FormRequest
     /**
      * Configure the validator instance.
      *
-     * @param  \Illuminate\Validation\Validator  $validator
+     * @param Validator $validator
      * @return void
      */
-    public function withValidator($validator)
+    public function withValidator(Validator $validator)
     {
         $validator->after(function ($validator) {
             if (! Hash::check($this->current_password, $this->user()->password)) {
@@ -45,16 +46,14 @@ class DestroyUserRequest extends FormRequest
                 );
             }
             if (count($this->user()->organizations) > 0) {
-                foreach ($this->user()->organizations as $organization) {
-                    if ($organization->administrators()->count() === 1 && $this->user()->isAdministratorOf($organization)) {
-                        $validator->errors()->add(
-                            'organizations',
-                            __(
-                                'organization.error_new_administrator_required_before_user_deletion',
-                                ['organization' => '<a href="' . localized_route('organizations.edit', $organization) . '">' . $organization->getTranslation('name', locale()) . '</a>'],
-                            )
-                        );
-                    }
+                if ($this->user->organization->administrators()->count() === 1 && $this->user()->isAdministratorOf($this->user->organization)) {
+                    $validator->errors()->add(
+                        'organizations',
+                        __(
+                            'organization.error_new_administrator_required_before_user_deletion',
+                            ['organization' => '<a href="' . localized_route('organizations.edit', $this->user->organization) . '">' . $this->user->organization->getTranslation('name', locale()) . '</a>'],
+                        )
+                    );
                 }
             }
         })->validateWithBag('destroyAccount');

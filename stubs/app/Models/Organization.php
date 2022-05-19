@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Hearth\Traits\HasInvitations;
+use Hearth\Traits\HasMembers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Notifications\Notifiable;
 use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 use Spatie\Translatable\HasTranslations;
@@ -14,6 +14,8 @@ class Organization extends Model
 {
     use CascadesDeletes;
     use HasFactory;
+    use HasInvitations;
+    use HasMembers;
     use HasTranslations;
     use Notifiable;
 
@@ -33,7 +35,7 @@ class Organization extends Model
      *
      * @var array
      */
-    protected $cascadeDeletes = [
+    protected mixed $cascadeDeletes = [
         'users',
     ];
 
@@ -42,7 +44,7 @@ class Organization extends Model
      *
      * @var array<string>
      */
-    public $translatable = [
+    public array $translatable = [
         'name',
     ];
 
@@ -51,65 +53,8 @@ class Organization extends Model
      *
      * @return string
      */
-    public function getRoutePrefix()
+    public function getRoutePrefix(): string
     {
         return 'organizations';
-    }
-
-    /**
-     * Get the users that are associated with this organization.
-     */
-    public function users(): MorphToMany
-    {
-        return $this->morphToMany(User::class, 'membership')
-            ->using('\App\Models\Membership')
-            ->as('membership')
-            ->withPivot('id')
-            ->withPivot('role')
-            ->withTimestamps();
-    }
-
-    /**
-     * Does the organization have more than one administrator?
-     */
-    public function administrators(): MorphToMany
-    {
-        return $this->morphToMany(User::class, 'membership')
-            ->using('\App\Models\Membership')
-            ->wherePivot('role', 'admin');
-    }
-
-    /**
-     * Determine if the given email address belongs to a user in the organization.
-     *
-     * @param  string  $email
-     * @return bool
-     */
-    public function hasUserWithEmail(string $email)
-    {
-        return $this->users->contains(function ($user) use ($email) {
-            return $user->email === $email;
-        });
-    }
-
-    /**
-     * Determine if the given email address belongs to an administrator in the organization.
-     *
-     * @param  string  $email
-     * @return bool
-     */
-    public function hasAdministratorWithEmail(string $email)
-    {
-        return $this->administrators->contains(function ($user) use ($email) {
-            return $user->email === $email;
-        });
-    }
-
-    /**
-     * Get the invitations associated with this organization.
-     */
-    public function invitations(): MorphMany
-    {
-        return $this->morphMany(Invitation::class, 'inviteable');
     }
 }
