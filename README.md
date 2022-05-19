@@ -61,6 +61,8 @@ TODO.
 
 ## Testing
 
+Prior to testing, you will need to create a MySQL or MariaDB database for testing with credentials which match those in [`phpunit.xml.dist`](phpunit.xml.dist). Then run:
+
 ```bash
 composer test
 ```
