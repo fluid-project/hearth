@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Models\Invitation;
-use App\Models\Membership;
 use App\Models\Organization;
 use App\Models\User;
+use Hearth\Models\Invitation;
+use Hearth\Models\Membership;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
@@ -154,8 +154,8 @@ class OrganizationTest extends TestCase
             ->create();
 
         $membership = Membership::where('user_id', $other_user->id)
-            ->where('membership_type', 'App\Models\Organization')
-            ->where('membership_id', $organization->id)
+            ->where('membershipable_type', 'App\Models\Organization')
+            ->where('membershipable_id', $organization->id)
             ->first();
 
         $response = $this
@@ -180,8 +180,8 @@ class OrganizationTest extends TestCase
             ->create();
 
         $membership = Membership::where('user_id', $user->id)
-            ->where('membership_type', 'App\Models\Organization')
-            ->where('membership_id', $organization->id)
+            ->where('membershipable_type', 'App\Models\Organization')
+            ->where('membershipable_id', $organization->id)
             ->first();
 
         $response = $this
@@ -202,15 +202,17 @@ class OrganizationTest extends TestCase
 
         $user = User::factory()->create();
         $other_user = User::factory()->create();
+        $yet_another_user = User::factory()->create();
 
         $organization = Organization::factory()
             ->hasAttached($user, ['role' => 'admin'])
-            ->hasAttached($other_user, ['role' => 'member'])
+            ->hasAttached($other_user, ['role' => 'admin'])
+            ->hasAttached($yet_another_user, ['role' => 'member'])
             ->create();
 
         $membership = Membership::where('user_id', $user->id)
-            ->where('membership_type', 'App\Models\Organization')
-            ->where('membership_id', $organization->id)
+            ->where('membershipable_type', 'App\Models\Organization')
+            ->where('membershipable_id', $organization->id)
             ->first();
 
         $response = $this
@@ -220,7 +222,22 @@ class OrganizationTest extends TestCase
                 'role' => 'member',
             ]);
 
-        $response->assertSessionHasErrors(['membership']);
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect(localized_route('organizations.show', $organization));
+
+        $membership = Membership::where('user_id', $other_user->id)
+            ->where('membershipable_type', 'App\Models\Organization')
+            ->where('membershipable_id', $organization->id)
+            ->first();
+
+        $response = $this
+            ->actingAs($other_user)
+            ->from(localized_route('memberships.edit', $membership))
+            ->put(localized_route('memberships.update', $membership), [
+                'role' => 'member',
+            ]);
+
+        $response->assertSessionHasErrors(['role']);
         $response->assertRedirect(localized_route('memberships.edit', $membership));
     }
 
@@ -240,8 +257,8 @@ class OrganizationTest extends TestCase
             ->actingAs($user)
             ->from(localized_route('organizations.edit', ['organization' => $organization]))
             ->post(localized_route('invitations.create'), [
-                'inviteable_id' => $organization->id,
-                'inviteable_type' => get_class($organization),
+                'invitationable_id' => $organization->id,
+                'invitationable_type' => get_class($organization),
                 'email' => 'newuser@here.com',
                 'role' => 'member',
             ]);
@@ -265,8 +282,8 @@ class OrganizationTest extends TestCase
             ->actingAs($user)
             ->from(localized_route('organizations.edit', ['organization' => $organization]))
             ->post(localized_route('invitations.create'), [
-                'inviteable_id' => $organization->id,
-                'inviteable_type' => get_class($organization),
+                'invitationable_id' => $organization->id,
+                'invitationable_type' => get_class($organization),
                 'email' => 'newuser@here.com',
                 'role' => 'member',
             ]);
@@ -285,8 +302,8 @@ class OrganizationTest extends TestCase
             ->hasAttached($user, ['role' => 'admin'])
             ->create();
         $invitation = Invitation::factory()->create([
-            'inviteable_id' => $organization->id,
-            'inviteable_type' => get_class($organization),
+            'invitationable_id' => $organization->id,
+            'invitationable_type' => get_class($organization),
             'email' => 'me@here.com',
         ]);
 
@@ -310,8 +327,8 @@ class OrganizationTest extends TestCase
             ->hasAttached($user, ['role' => 'member'])
             ->create();
         $invitation = Invitation::factory()->create([
-            'inviteable_id' => $organization->id,
-            'inviteable_type' => get_class($organization),
+            'invitationable_id' => $organization->id,
+            'invitationable_type' => get_class($organization),
             'email' => 'me@here.com',
         ]);
 
@@ -341,8 +358,8 @@ class OrganizationTest extends TestCase
             ->actingAs($user)
             ->from(localized_route('organizations.edit', ['organization' => $organization]))
             ->post(localized_route('invitations.create'), [
-                'inviteable_id' => $organization->id,
-                'inviteable_type' => get_class($organization),
+                'invitationable_id' => $organization->id,
+                'invitationable_type' => get_class($organization),
                 'email' => $other_user->email,
                 'role' => 'member',
             ]);
@@ -360,8 +377,8 @@ class OrganizationTest extends TestCase
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
         $invitation = Invitation::factory()->create([
-            'inviteable_id' => $organization->id,
-            'inviteable_type' => get_class($organization),
+            'invitationable_id' => $organization->id,
+            'invitationable_type' => get_class($organization),
             'email' => $user->email,
         ]);
 
@@ -371,6 +388,32 @@ class OrganizationTest extends TestCase
 
         $this->assertTrue($organization->fresh()->hasUserWithEmail($user->email));
         $response->assertRedirect(localized_route('organizations.show', $organization));
+    }
+
+    public function test_invitation_cannot_be_accepted_by_user_with_existing_membership()
+    {
+        if (! config('hearth.organizations.enabled')) {
+            return $this->markTestSkipped('Organization support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+        $organization = Organization::factory()
+            ->hasAttached($user, ['role' => 'admin'])
+            ->create();
+        $other_organization = Organization::factory()->create();
+        $invitation = Invitation::factory()->create([
+            'invitationable_id' => $other_organization->id,
+            'invitationable_type' => get_class($other_organization),
+            'email' => $user->email,
+        ]);
+
+        $acceptUrl = URL::signedRoute('invitations.accept', ['invitation' => $invitation]);
+
+        $response = $this->from(localized_route('dashboard'))->actingAs($user)->get($acceptUrl);
+
+        $this->assertFalse($other_organization->fresh()->hasUserWithEmail($user->email));
+        $response->assertSessionHasErrors();
+        $response->assertRedirect(localized_route('dashboard'));
     }
 
     public function test_invitation_cannot_be_accepted_by_different_user()
@@ -385,8 +428,8 @@ class OrganizationTest extends TestCase
             ->hasAttached($other_user, ['role' => 'admin'])
             ->create();
         $invitation = Invitation::factory()->create([
-            'inviteable_id' => $organization->id,
-            'inviteable_type' => get_class($organization),
+            'invitationable_id' => $organization->id,
+            'invitationable_type' => get_class($organization),
             'email' => $user->email,
         ]);
 
@@ -414,8 +457,8 @@ class OrganizationTest extends TestCase
             ->create();
 
         $membership = Membership::where('user_id', $other_user->id)
-            ->where('membership_type', 'App\Models\Organization')
-            ->where('membership_id', $organization->id)
+            ->where('membershipable_type', 'App\Models\Organization')
+            ->where('membershipable_id', $organization->id)
             ->first();
 
         $response = $this
@@ -442,8 +485,8 @@ class OrganizationTest extends TestCase
             ->create();
 
         $membership = Membership::where('user_id', $other_user->id)
-            ->where('membership_type', 'App\Models\Organization')
-            ->where('membership_id', $organization->id)
+            ->where('membershipable_type', 'App\Models\Organization')
+            ->where('membershipable_id', $organization->id)
             ->first();
 
         $response = $this
@@ -467,8 +510,8 @@ class OrganizationTest extends TestCase
             ->create();
 
         $membership = Membership::where('user_id', $user->id)
-            ->where('membership_type', 'App\Models\Organization')
-            ->where('membership_id', $organization->id)
+            ->where('membershipable_type', 'App\Models\Organization')
+            ->where('membershipable_id', $organization->id)
             ->first();
 
         $response = $this

@@ -10,7 +10,7 @@ trait AriaDescribable
      * @param string $hint
      * @return string
      */
-    public function describedBy($hint = '')
+    public function describedBy(string $hint = ''): string
     {
         $descriptors = [$hint];
 

@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('organizations', function (Blueprint $table) {
-            $table->id();
-            $table->json('name');
-            $table->string('locality');
-            $table->string('region');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('slug');
+            $table->string('locale')->default('en');
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organizations');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['slug', 'locale']);
+        });
     }
 };

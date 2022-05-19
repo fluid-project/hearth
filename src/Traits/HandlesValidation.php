@@ -15,7 +15,7 @@ trait HandlesValidation
      *
      * @return bool
      */
-    public function hasErrors($name, $bag)
+    public function hasErrors(string $name, string $bag): bool
     {
         $errors = View::shared('errors', function () {
             return request()->session()->get('errors', new ViewErrorBag);

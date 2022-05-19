@@ -3,7 +3,7 @@
 // Config for Hearth.
 return [
     'organizations' => [
-        'enabled' => false,
+        'enabled' => true,
         'roles' => [
             'member',
             'admin',
