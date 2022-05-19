@@ -49,8 +49,6 @@ class InvitationController extends Controller
 
         $invitation->accept();
 
-        $invitation->delete();
-
         flash(
             __('invitation.accept_invitation_succeeded', ['invitationable' => $invitation->invitationable->name]),
             'success'

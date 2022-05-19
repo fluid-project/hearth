@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Hearth\Models\Membership;
+use App\Rules\NotLastAdmin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
@@ -44,27 +44,11 @@ class UpdateMembershipRequest extends FormRequest
     public function withValidator(Validator $validator)
     {
         $validator
-            ->after($this->ensureLastAdminIsNotLosingPrivileges($this->membership));
-    }
-
-    /**
-     *
-     * @param Membership $membership
-     * @return \Closure
-     */
-    public function ensureLastAdminIsNotLosingPrivileges(Membership $membership): \Closure
-    {
-        return function ($validator) use ($membership) {
-            if (
-                $membership->membershipable()->administrators->count() === 1
-                && $membership->role === 'admin'
-                && $validator->safe()->only('role') !== 'admin'
-            ) {
-                $validator->errors()->add(
-                    'role',
-                    __('validation.custom.membership.not_last_admin')
-                );
-            }
-        };
+            ->sometimes(
+                'role',
+                [new NotLastAdmin($this->membership)],
+                function ($input) {
+                    return $this->membership->role === 'admin' && $input->role !== 'admin';
+                });
     }
 }

@@ -29,7 +29,7 @@ class DestroyMembership
 
         $validator->sometimes(
             'membership',
-            [new NotLastAdmin()],
+            [new NotLastAdmin($membership)],
             function ($input) {
                 return $input->membership->role === 'admin';
             }

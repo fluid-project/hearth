@@ -2,10 +2,21 @@
 
 namespace App\Rules;
 
+use Hearth\Models\Membership;
 use Illuminate\Contracts\Validation\Rule;
 
 class NotLastAdmin implements Rule
 {
+    /**
+     * Constructor.
+     *
+     * @param Membership $membership
+     */
+    public function __construct(Membership $membership)
+    {
+        $this->membership = $membership;
+    }
+
     /**
      * Determine if the validation rule passes.
      *
@@ -15,7 +26,7 @@ class NotLastAdmin implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        return $value->membershipable()->administrators()->count() > 1;
+        return $this->membership->membershipable()->administrators->count() > 1;
     }
 
     /**

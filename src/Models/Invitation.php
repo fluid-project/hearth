@@ -61,5 +61,7 @@ class Invitation extends Model
             $invitee,
             ['role' => $this->role]
         );
+
+        $this->delete();
     }
 }
