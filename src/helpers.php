@@ -2,6 +2,7 @@
 
 use CommerceGuys\Addressing\Subdivision\SubdivisionRepository;
 use CommerceGuys\Intl\Language\LanguageRepository;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 if (! function_exists('get_region_name')) {
@@ -93,5 +94,51 @@ if (! function_exists('get_locale_name')) {
         } catch (CommerceGuys\Intl\Exception\UnknownLanguageException $e) {
             return null;
         }
+    }
+}
+
+if (! function_exists('trans_current_route')) {
+    /**
+     * Retrieve the current route in another locale.
+     *
+     * @param  string|null  $locale
+     * @param  string|null  $fallback
+     * @param  bool  $absolute
+     * @return string
+     */
+    function trans_current_route(string $locale = null, string $fallback = null, bool $absolute = true): string
+    {
+        if (is_null($fallback)) {
+            $fallback = url(request()->server('REQUEST_URI'));
+        }
+
+        $route = Route::getCurrentRoute();
+
+        if (! $route) {
+            return $fallback;
+        }
+
+        $name = Str::replaceFirst(
+            locale().'.',
+            "{$locale}.",
+            $route->getName()
+        );
+
+        if (! $name || ! in_array($locale, locales()) || ! Route::has($name)) {
+            return $fallback;
+        }
+
+        $current = locale();
+
+        locale($locale);
+
+        $url = route($name, array_merge(
+            (array) $route->parameters,
+            (array) request()->getQueryString()
+        ), $absolute);
+
+        locale($current);
+
+        return $url;
     }
 }
