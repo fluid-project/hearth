@@ -14,6 +14,15 @@ class HearthCommand extends Command
 
     public $description = 'Install Hearth.';
 
+    protected Filesystem $filesystem;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->filesystem = new Filesystem();
+    }
+
     public function handle()
     {
         if (! App::environment('testing')) {
@@ -46,6 +55,7 @@ class HearthCommand extends Command
                     'sass-loader' => '^12.1',
                 ] + $packages;
             });
+            $this->flushNodeModules();
 
             // Name...
             $this->replaceInFile('APP_NAME=Laravel', 'APP_NAME=Hearth', base_path('.env'));
@@ -85,20 +95,20 @@ class HearthCommand extends Command
             $this->installServiceProviderAfter('RouteServiceProvider', 'FortifyServiceProvider');
 
             // Ensure folders are in place...
-            (new Filesystem())->ensureDirectoryExists(app_path('Actions/Fortify'));
-            (new Filesystem())->ensureDirectoryExists(app_path('Http/Requests'));
-            (new Filesystem())->ensureDirectoryExists(app_path('Http/Requests/Auth'));
-            (new Filesystem())->ensureDirectoryExists(app_path('Http/Responses'));
-            (new Filesystem())->ensureDirectoryExists(app_path('Mail'));
-            (new Filesystem())->ensureDirectoryExists(app_path('Policies'));
-            (new Filesystem())->ensureDirectoryExists(app_path('Rules'));
-            (new Filesystem())->ensureDirectoryExists(app_path('View/Components'));
-            (new Filesystem())->ensureDirectoryExists(lang_path('fr'));
+            $this->filesystem->ensureDirectoryExists(app_path('Actions/Fortify'));
+            $this->filesystem->ensureDirectoryExists(app_path('Http/Requests'));
+            $this->filesystem->ensureDirectoryExists(app_path('Http/Requests/Auth'));
+            $this->filesystem->ensureDirectoryExists(app_path('Http/Responses'));
+            $this->filesystem->ensureDirectoryExists(app_path('Mail'));
+            $this->filesystem->ensureDirectoryExists(app_path('Policies'));
+            $this->filesystem->ensureDirectoryExists(app_path('Rules'));
+            $this->filesystem->ensureDirectoryExists(app_path('View/Components'));
+            $this->filesystem->ensureDirectoryExists(lang_path('fr'));
 
             // App stubs...
             $app_stubs = array_merge(
-                (new Filesystem())->glob(__DIR__ . "/../../stubs/app/**/*.php"),
-                (new Filesystem())->glob(__DIR__ . "/../../stubs/app/**/**/*.php")
+                $this->filesystem->glob(__DIR__ . "/../../stubs/app/**/*.php"),
+                $this->filesystem->glob(__DIR__ . "/../../stubs/app/**/**/*.php")
             );
 
             foreach ($app_stubs as $stub) {
@@ -106,44 +116,44 @@ class HearthCommand extends Command
             }
 
             // Config stubs...
-            $config_stubs = (new Filesystem())->glob(__DIR__ . "/../../stubs/config/*.php");
+            $config_stubs = $this->filesystem->glob(__DIR__ . "/../../stubs/config/*.php");
 
             foreach ($config_stubs as $stub) {
                 copy($stub, str_replace(__DIR__ . "/../../stubs/config", config_path(), $stub));
             }
 
             // Database factories...
-            $factories = (new Filesystem())->glob(__DIR__ . "/../../database/factories/*.php");
+            $factories = $this->filesystem->glob(__DIR__ . "/../../database/factories/*.php");
 
             foreach ($factories as $stub) {
                 copy($stub, str_replace(__DIR__ . "/../../database/factories", base_path("database/factories"), $stub));
             }
 
             // Language stubs...
-            $lang_stubs = (new Filesystem())->glob(__DIR__ . "/../../stubs/lang/**/*.php");
+            $lang_stubs = $this->filesystem->glob(__DIR__ . "/../../stubs/lang/**/*.php");
 
             foreach ($lang_stubs as $stub) {
                 copy($stub, str_replace(__DIR__ . "/../../stubs/lang", lang_path(), $stub));
             }
 
             // Resource stubs...
-            (new Filesystem())->delete(resource_path('css/app.css'));
-            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
-            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
-            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
+            $this->filesystem->delete(resource_path('css/app.css'));
+            $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
+            $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
+            $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
 
             // Route stubs...
-            $route_stubs = (new Filesystem())->glob(__DIR__ . "/../../stubs/routes/*.php");
+            $route_stubs = $this->filesystem->glob(__DIR__ . "/../../stubs/routes/*.php");
 
             foreach ($route_stubs as $stub) {
                 copy($stub, str_replace(__DIR__ . "/../../stubs/routes", base_path("routes/"), $stub));
             }
 
             // Test stubs...
-            (new Filesystem())->delete(base_path('tests/Feature/ExampleTest.php'));
-            (new Filesystem())->delete(base_path('tests/Unit/ExampleTest.php'));
+            $this->filesystem->delete(base_path('tests/Feature/ExampleTest.php'));
+            $this->filesystem->delete(base_path('tests/Unit/ExampleTest.php'));
 
-            $test_stubs = (new Filesystem())->glob(__DIR__ . "/../../stubs/tests/**/*.php");
+            $test_stubs = $this->filesystem->glob(__DIR__ . "/../../stubs/tests/**/*.php");
 
             foreach ($test_stubs as $stub) {
                 copy($stub, str_replace(__DIR__ . "/../../stubs/tests", base_path("tests"), $stub));
@@ -314,14 +324,11 @@ class HearthCommand extends Command
      *
      * @return void
      */
-    protected static function flushNodeModules()
+    protected function flushNodeModules()
     {
-        tap(new Filesystem(), function ($files) {
-            $files->deleteDirectory(base_path('node_modules'));
-
-            $files->delete(base_path('yarn.lock'));
-            $files->delete(base_path('package-lock.json'));
-        });
+        $this->filesystem->deleteDirectory(base_path('node_modules'));
+        $this->filesystem->delete(base_path('yarn.lock'));
+        $this->filesystem->delete(base_path('package-lock.json'));
     }
 
     /**
