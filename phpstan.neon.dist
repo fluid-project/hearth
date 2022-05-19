@@ -7,8 +7,7 @@ parameters:
         - resources
         - src
     level: 5 # The level 9 is the highest level
-    ignoreErrors:
-        - '#Parameter \#1 $view of function view expects view-string|null, string given.#'
+    ignoreErrors: []
     excludePaths: []
     checkMissingIterableValueType: false
     scanDirectories:
