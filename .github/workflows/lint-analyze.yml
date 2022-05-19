@@ -2,9 +2,10 @@ name: Lint and analyze PHP code
 
 on:
   push:
-    branches: [ main, v1 ]
+    branches: [main]
   pull_request:
-    branches: [ main, v1 ]
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   php-lint-analyze:
