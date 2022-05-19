@@ -49,6 +49,7 @@ class UpdateMembershipRequest extends FormRequest
                 [new NotLastAdmin($this->membership)],
                 function ($input) {
                     return $this->membership->role === 'admin' && $input->role !== 'admin';
-                });
+                }
+            );
     }
 }
