@@ -4,8 +4,8 @@ namespace Hearth\Tests\Feature;
 
 use App\Models\Organization;
 use App\Models\User;
+use Database\Factories\InvitationFactory;
 use Hearth\Models\Invitation;
-
 use Hearth\Tests\TestCase;
 use Illuminate\Support\Facades\Schema;
 
@@ -26,6 +26,14 @@ class InvitationTest extends TestCase
         $create_invitations_table->up();
         $create_memberships_table->up();
         $create_organizations_table->up();
+    }
+
+    public function test_invitation_factory()
+    {
+        $this->assertInstanceOf(
+            InvitationFactory::class,
+            Invitation::factory()
+        );
     }
 
     public function test_invitation_can_be_created_for_organization()
