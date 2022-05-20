@@ -25,6 +25,11 @@ class JoinTest extends TestCase
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(localized_route('organizations.show', $organization));
+
+        $organization = $organization->fresh();
+
+        $this->assertEquals(1, $organization->requestsToJoin->count());
+        $this->assertEquals($user->id, $organization->requestsToJoin->first()->id);
     }
 
     public function test_user_with_outstanding_join_request_cannot_request_to_join_team()
