@@ -14,7 +14,7 @@ if (! function_exists('get_region_name')) {
      *
      * @return null|string The name of the administrative subdivision, if found.
      */
-    function get_region_name($code, $countries = ['CA'], $locale = 'en'): ?string
+    function get_region_name($code, $countries = ['CA'], $locale = 'en')
     {
         $subdivisionRepository = new SubdivisionRepository();
 
@@ -37,7 +37,7 @@ if (! function_exists('get_regions')) {
      *
      * @return array An array of administrative subdivision names keyed by administrative subdivision codes.
      */
-    function get_regions($countries = ['CA'], $locale = 'en'): array
+    function get_regions($countries = ['CA'], $locale = 'en')
     {
         $subdivisionRepository = new SubdivisionRepository();
 
@@ -59,7 +59,7 @@ if (! function_exists('get_region_codes')) {
      *
      * @return array An array of administrative subdivision codes.
      */
-    function get_region_codes($countries = ['CA']): array
+    function get_region_codes($countries = ['CA'])
     {
         $subdivisionRepository = new SubdivisionRepository();
 
@@ -82,7 +82,7 @@ if (! function_exists('get_locale_name')) {
      *
      * @return null|string The localized name of the locale, if found.
      */
-    function get_locale_name($code, $locale = 'en', $capitalize = true): ?string
+    function get_locale_name($code, $locale = 'en', $capitalize = true)
     {
         $languages = new LanguageRepository();
 
