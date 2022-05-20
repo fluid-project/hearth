@@ -59,12 +59,28 @@ properly-formatted email address. For local development, this might be `noreply@
 
 TODO.
 
+## Formatting
+
+To format your code using [php-cs-fixer](https://github.com/FriendsOfPhp/PHP-CS-Fixer), you can run:
+
+```bash
+composer format
+```
+
+This should be done prior to each commit, or at least prior to opening a pull request.
+
 ## Testing
 
 Prior to testing, you will need to create a MySQL or MariaDB database for testing with credentials which match those in [`phpunit.xml.dist`](phpunit.xml.dist). Then run:
 
 ```bash
 composer test
+```
+
+You can get code coverage results if XDebug is installed by running:
+
+```bash
+composer test-coverage
 ```
 
 To test the code located in the [`stubs`](./stubs) directory you'll need to install Hearth into a Laravel instance and
