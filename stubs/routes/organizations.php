@@ -23,6 +23,11 @@ Route::multilingual('/organizations/{organization}', [OrganizationController::cl
     ->middleware(['auth'])
     ->name('organizations.show');
 
+Route::multilingual('/organizations/{organization}/join', [OrganizationController::class, 'join'])
+    ->method('post')
+    ->middleware(['auth', 'can:join,organization'])
+    ->name('organizations.join');
+
 Route::multilingual('/organizations/{organization}/edit', [OrganizationController::class, 'edit'])
     ->middleware(['auth', 'can:update,organization'])
     ->name('organizations.edit');
