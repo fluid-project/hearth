@@ -11,7 +11,7 @@ class JoinTest extends TestCase
 {
     use RefreshDatabase;
 
-    function test_user_can_request_to_join_team()
+    public function test_user_can_request_to_join_team()
     {
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
@@ -27,7 +27,7 @@ class JoinTest extends TestCase
         $response->assertRedirect(localized_route('organizations.show', $organization));
     }
 
-    function test_user_with_outstanding_join_request_cannot_request_to_join_team()
+    public function test_user_with_outstanding_join_request_cannot_request_to_join_team()
     {
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
@@ -44,7 +44,7 @@ class JoinTest extends TestCase
         $response->assertForbidden();
     }
 
-    function test_user_with_existing_membership_cannot_request_to_join_team()
+    public function test_user_with_existing_membership_cannot_request_to_join_team()
     {
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
@@ -61,7 +61,7 @@ class JoinTest extends TestCase
         $response->assertForbidden();
     }
 
-    function test_user_can_cancel_request_to_join_team()
+    public function test_user_can_cancel_request_to_join_team()
     {
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
@@ -80,7 +80,7 @@ class JoinTest extends TestCase
         $this->assertEquals(0, $organization->requestsToJoin->count());
     }
 
-    function test_admin_can_approve_request_to_join_team()
+    public function test_admin_can_approve_request_to_join_team()
     {
         $user = User::factory()->create();
         $admin = User::factory()->create();
@@ -102,7 +102,7 @@ class JoinTest extends TestCase
         $this->assertTrue($organization->hasUserWithEmail($user->email));
     }
 
-    function test_admin_can_deny_request_to_join_team()
+    public function test_admin_can_deny_request_to_join_team()
     {
         $user = User::factory()->create();
         $admin = User::factory()->create();
