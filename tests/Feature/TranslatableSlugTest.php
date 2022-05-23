@@ -9,6 +9,7 @@ use Closure;
 use Hearth\Tests\Fixtures\TranslatableModel;
 use Hearth\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
@@ -61,10 +62,8 @@ class TranslatableSlugTest extends TestCase
         ->middleware(DetectRequestLocale::class)
         ->name('translatables.show');
 
-        $response = $this->get('/translatables/the-fellowship-of-the-ring');
-        $response->assertOk();
+        Route::dispatch(Request::create(localized_route('translatables.show', $translatable)));
 
-        $response = $this->get('/fr/translatables/la-communaute-de-lanneau');
-        $response->assertOk();
+        $this->assertEquals(localized_route('translatables.show', $translatable, 'fr'), trans_current_route('fr'));
     }
 }
