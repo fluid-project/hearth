@@ -6,6 +6,7 @@ use App\Http\Requests\CreateOrganizationRequest;
 use App\Http\Requests\DestroyOrganizationRequest;
 use App\Http\Requests\UpdateOrganizationRequest;
 use App\Models\Organization;
+use Illuminate\Routing\Controller;
 
 class OrganizationController extends Controller
 {
