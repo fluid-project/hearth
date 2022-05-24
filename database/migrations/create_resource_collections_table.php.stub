@@ -19,6 +19,7 @@ class CreateResourceCollectionsTable extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->json('title');
+            $table->json('slug');
             $table->json('description');
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class OrganizationFactory extends Factory
 {
@@ -22,9 +23,11 @@ class OrganizationFactory extends Factory
     public function definition()
     {
         $regions = get_regions(['CA'], config('app.locale'));
+        $name = $this->faker->company();
 
         return [
-            'name' => $this->faker->company(),
+            'name' => $name,
+            'slug' => Str::slug($name),
             'locality' => $this->faker->city(),
             'region' => array_keys($regions)[$this->faker->numberBetween(1, 13)]
         ];

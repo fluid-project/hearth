@@ -19,6 +19,7 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->json('title');
+            $table->json('slug');
             $table->json('summary');
             $table->timestamps();
         });
