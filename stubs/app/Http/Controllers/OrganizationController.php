@@ -9,6 +9,7 @@ use App\Models\Organization;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class OrganizationController extends Controller
 {
@@ -29,8 +30,6 @@ class OrganizationController extends Controller
      */
     public function create(): View
     {
-        $this->authorize('create', Organization::class);
-
         return view('organizations.create', [
             'regions' => get_regions(['CA'], \locale()),
         ]);

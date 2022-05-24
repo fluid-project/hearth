@@ -7,6 +7,7 @@ use App\Models\ResourceCollection;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
+use Spatie\Translatable\Exceptions\AttributeIsNotTranslatable;
 use Tests\TestCase;
 
 class ResourceCollectionTest extends TestCase
@@ -44,7 +45,7 @@ class ResourceCollectionTest extends TestCase
         $this->assertEquals($titleTranslations, $resourceCollection->getTranslations('title'));
         $this->assertEquals($descriptionTranslations, $resourceCollection->getTranslations('description'));
 
-        $this->expectExceptionMessage("Cannot translate attribute `user_id` as it's not one of the translatable attributes: `title, description`");
+        $this->expectException(AttributeIsNotTranslatable::class);
         $resourceCollection->setTranslation('user_id', 'en', 'user_id in English');
     }
 
