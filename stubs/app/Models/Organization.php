@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Hearth\Traits\HasInvitations;
 use Hearth\Traits\HasMembers;
+use Hearth\Traits\HasRequestsToJoin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -18,6 +19,7 @@ class Organization extends Model
     use HasFactory;
     use HasInvitations;
     use HasMembers;
+    use HasRequestsToJoin;
     use HasTranslations;
     use HasTranslatableSlug;
     use Notifiable;

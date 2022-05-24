@@ -19,9 +19,23 @@ class OrganizationPolicy
      */
     public function create(User $user): Response
     {
-        return $user->organizations->isEmpty()
+        return ! $user->joinable && $user->organizations->isEmpty()
             ? Response::allow()
             : Response::deny(__('You already belong to an organization, so you cannot create a new one.'));
+    }
+
+    /**
+     * Determine whether the user can join the model.
+     *
+     * @param User $user
+     * @param Organization $organization
+     * @return Response
+     */
+    public function join(User $user, Organization $organization): Response
+    {
+        return ! $user->joinable && $user->organizations->isEmpty()
+            ? Response::allow()
+            : Response::deny(__('You cannot join this organization.'));
     }
 
     /**
