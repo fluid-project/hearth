@@ -1,26 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace Hearth\Tests\Fixtures;
 
-use Hearth\Traits\HasInvitations;
-use Hearth\Traits\HasMembers;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
-class Organization extends Model
+class TranslatableModel extends Model
 {
-    use CascadesDeletes;
-    use HasFactory;
-    use HasInvitations;
-    use HasMembers;
-    use HasTranslations;
     use HasTranslatableSlug;
-    use Notifiable;
+    use HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -29,17 +19,6 @@ class Organization extends Model
      */
     protected $fillable = [
         'name',
-        'locality',
-        'region',
-    ];
-
-    /**
-     * The relationships that should be deleted when an organization is deleted.
-     *
-     * @var array
-     */
-    protected mixed $cascadeDeletes = [
-        'users',
     ];
 
     /**
@@ -70,15 +49,5 @@ class Organization extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
-    }
-
-    /**
-     * Get the route prefix for the model.
-     *
-     * @return string
-     */
-    public function getRoutePrefix(): string
-    {
-        return 'organizations';
     }
 }

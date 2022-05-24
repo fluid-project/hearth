@@ -9,6 +9,7 @@ use Hearth\Models\Membership;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
+use Spatie\Translatable\Exceptions\AttributeIsNotTranslatable;
 use Tests\TestCase;
 
 class OrganizationTest extends TestCase
@@ -135,8 +136,16 @@ class OrganizationTest extends TestCase
 
         $this->assertEquals($translations, $organization->getTranslations('name'));
 
-        $this->expectExceptionMessage("Cannot translate attribute `locality` as it's not one of the translatable attributes: `name`");
+        $this->expectException(AttributeIsNotTranslatable::class);
         $organization->setTranslation('locality', 'en', 'Locality in English');
+
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/en/organizations/name-in-english');
+        $response->assertOk();
+
+        $response = $this->actingAs($user)->get('/fr/organizations/name-in-french');
+        $response->assertOk();
     }
 
     public function test_users_with_admin_role_can_update_other_member_roles()

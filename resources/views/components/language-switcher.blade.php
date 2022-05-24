@@ -5,7 +5,7 @@
 
     <x-slot name="content">
         @foreach ($locales as $key => $locale )
-        <x-nav-link rel="alternate" hreflang="{{ $key }}" :href="current_route($key, route($key . '.welcome'))" :active="request()->routeIs($key . '.*')">
+        <x-nav-link rel="alternate" hreflang="{{ $key }}" :href="trans_current_route($key, route($key . '.welcome'))" :active="request()->routeIs($key . '.*')">
             {{ $locale }}
         </x-nav-link>
         @endforeach

@@ -10,6 +10,8 @@ parameters:
     ignoreErrors: []
     excludePaths: []
     checkMissingIterableValueType: false
+    scanFiles:
+      - vendor/chinleung/laravel-locales/src/helpers.php
     scanDirectories:
       - database/factories
       - stubs/app/Models
