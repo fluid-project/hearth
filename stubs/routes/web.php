@@ -58,6 +58,7 @@ if (config('hearth.organizations.enabled')) {
 
 if (config('hearth.resources.enabled')) {
     require __DIR__ . '/resources.php';
+    require __DIR__ . '/resource-collections.php';
 }
 
 require __DIR__ . '/fortify.php';
