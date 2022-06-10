@@ -1,6 +1,6 @@
 <div class="field @error($generateErrorId($name, locale())) field--error @enderror">
     <x-hearth-label :for="$generateId($name, locale())" :value="$generateLabelValue($label, locale())" />
-    <x-hearth-input type="text" :id="$generateId($name, locale())" :name="$name . '[' . locale() . ']'" :value="old($generateErrorId($name, locale()), $model ? $model->getTranslation($name, locale()) : '')" />
+    <x-hearth-textarea :id="$generateId($name, locale())" :name="$name . '[' . locale() . ']'" :value="old($generateErrorId($name, locale()), $model ? $model->getTranslation($name, locale()) : '')" />
     <x-hearth-error :for="$generateErrorId($name, locale())" />
 </div>
 @foreach($locales as $locale)
@@ -13,7 +13,7 @@
         </p>
         <span class="badge" id="{{ Str::slug($generateLabelValue($label, $locale)) }}-status" x-show="value && ! expanded" x-text="value ? badgeText : ''"></span>
         <div class="expander__content" x-show="expanded">
-            <x-hearth-input type="text" :id="$generateId($name, $locale)" :name="$name . '[' . $locale . ']'" :value="old($generateErrorId($name, $locale), $model ? $model->getTranslation($name, $locale) : '')" x-model="value" x-on:keyup="badgeText = '{{ __('Content added, unsaved changes') }}'" :aria-labelledby="Str::slug($generateLabelValue($label, $locale))" />
+            <x-hearth-textarea :id="$generateId($name, $locale)" :name="$name . '[' . $locale . ']'" :value="old($generateErrorId($name, $locale), $model ? $model->getTranslation($name, $locale) : '')" x-model="value" x-on:keyup="badgeText = '{{ __('Content added, unsaved changes') }}'" :aria-labelledby="Str::slug($generateLabelValue($label, $locale))" />
             <x-hearth-error :for="$generateErrorId($name, $locale)" />
         </div>
     </div>
