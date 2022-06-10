@@ -6,7 +6,7 @@ use Hearth\Traits\GenerateId;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class TranslatableInput extends Component
+class TranslatableTextarea extends Component
 {
     use GenerateId;
 
@@ -58,6 +58,6 @@ class TranslatableInput extends Component
      */
     public function render(): View
     {
-        return view('hearth::components.translatable-input');
+        return view('hearth::components.translatable-textarea');
     }
 }
