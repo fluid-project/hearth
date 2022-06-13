@@ -36,7 +36,7 @@ class RadioButtons extends Component
     /**
      * The checked option.
      *
-     * @var null|string
+     * @var null|string|int
      */
     public $checked;
 
