@@ -132,7 +132,7 @@ class RadioButtonsTest extends TestCase
                         '1' => 'Yes',
                         '0' => 'No',
                     ],
-                    'checked' => 1
+                    'checked' => 1,
                 ],
             );
 
