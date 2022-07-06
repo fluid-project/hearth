@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1>
-            {{ __('resourceCollection.edit_title') }}
+            {{ __('resource-collection.edit_title') }}
         </h1>
     </x-slot>
 
@@ -13,12 +13,12 @@
         @method('PUT')
 
         <div class="field @error('title') field--error @enderror">
-            <x-hearth-label for="title" :value="__('resourceCollection.label_title')" />
+            <x-hearth-label for="title" :value="__('resource-collection.label_title')" />
             <x-hearth-input id="title" type="text" name="title" :value="old('title', $resourceCollection->title)" required />
             <x-hearth-error for="title" />
             </div>
         <div class="field @error('description') field--error @enderror">
-            <x-hearth-label for="description" :value="__('resourceCollection.label_description')" />
+            <x-hearth-label for="description" :value="__('resource-collection.label_description')" />
             <x-hearth-textarea name="description" :value="old('description', $resourceCollection->description)" required />
             <x-hearth-error for="description" />
         </div>
@@ -27,10 +27,10 @@
     </form>
 
     <h2>
-        {{ __('resourceCollection.delete_title') }}
+        {{ __('resource-collection.delete_title') }}
     </h2>
 
-    <p>{{ __('resourceCollection.delete_intro') }}</p>
+    <p>{{ __('resource-collection.delete_intro') }}</p>
 
     <form action="{{ localized_route('resource-collections.destroy', $resourceCollection) }}" method="POST" novalidate>
         @csrf
@@ -43,7 +43,7 @@
         </div>
 
         <x-hearth-button>
-            {{ __('resourceCollection.action_delete') }}
+            {{ __('resource-collection.action_delete') }}
         </x-hearth-button>
     </form>
 </x-app-layout>

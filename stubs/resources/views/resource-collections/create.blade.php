@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1>
-            {{ __('resourceCollection.create_title') }}
+            {{ __('resource-collection.create_title') }}
         </h1>
     </x-slot>
 
@@ -22,6 +22,6 @@
             <x-hearth-error for="description" />
         </div>
 
-        <x-hearth-button>{{ __('resourceCollection.action_create') }}</x-hearth-button>
+        <x-hearth-button>{{ __('resource-collection.action_create') }}</x-hearth-button>
     </form>
 </x-app-layout>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1>
-            {{ __('resourceCollection.index_title') }}
+            {{ __('resource-collection.index_title') }}
         </h1>
     </x-slot>
 
@@ -13,7 +13,7 @@
         </h2>
     </article>
     @empty
-    <p>{{ __('resourceCollection.none_found') }}</p>
+    <p>{{ __('resource-collection.none_found') }}</p>
     @endforelse
     </div>
 </x-app-layout>

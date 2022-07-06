@@ -41,7 +41,7 @@ class ResourceCollectionController extends Controller
     {
         $resourceCollection = ResourceCollection::create($request->validated());
 
-        flash(__('resourceCollection.create_succeeded'), 'success');
+        flash(__('resource-collection.create_succeeded'), 'success');
 
         return redirect(\localized_route('resource-collections.show', ['resourceCollection' => $resourceCollection]));
     }
@@ -80,7 +80,7 @@ class ResourceCollectionController extends Controller
         $resourceCollection->fill($request->validated());
         $resourceCollection->save();
 
-        flash(__('resourceCollection.update_succeeded'), 'success');
+        flash(__('resource-collection.update_succeeded'), 'success');
 
         return redirect(\localized_route('resource-collections.show', $resourceCollection));
     }
@@ -96,7 +96,7 @@ class ResourceCollectionController extends Controller
     {
         $resourceCollection->delete();
 
-        flash(__('resourceCollection.destroy_succeeded'), 'success');
+        flash(__('resource-collection.destroy_succeeded'), 'success');
 
         return redirect(\localized_route('dashboard'));
     }

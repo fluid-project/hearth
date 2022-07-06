@@ -8,6 +8,6 @@
     {!! Illuminate\Mail\Markdown::parse($resourceCollection->description) !!}
 
     @can('update', $resourceCollection)
-    <p><a href="{{ localized_route('resource-collections.edit', $resourceCollection) }}">{{ __('resourceCollection.edit_resource_collection') }}</a></p>
+    <p><a href="{{ localized_route('resource-collections.edit', $resourceCollection) }}">{{ __('resource-collection.edit_resource_collection') }}</a></p>
     @endcan
 </x-app-layout>
