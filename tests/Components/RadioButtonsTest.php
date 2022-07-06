@@ -139,4 +139,21 @@ class RadioButtonsTest extends TestCase
         $view->assertSee('value="1"  checked', false);
         $view->assertDontSee('value="0"  checked', false);
     }
+
+    public function test_radio_buttons_component_component_has_valid_ids()
+    {
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-radio-buttons :name="$name" :options="$options" />',
+                [
+                    'name' => 'flavour',
+                    'options' => [
+                        'French vanilla' => 'Vanilla',
+                        'chocolate' => 'Chocolate',
+                    ],
+                ],
+            );
+
+        $view->assertSee('id="flavour-french-vanilla"', false);
+    }
 }
