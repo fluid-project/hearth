@@ -14,7 +14,7 @@ class CreateResourceCollectionRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->id === $this->user_id;
+        return true;
     }
 
     /**
