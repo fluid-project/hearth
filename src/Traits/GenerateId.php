@@ -12,7 +12,7 @@ trait GenerateId
      *
      * @return string
      */
-    public function generateId($name, $locale)
+    public function generateFieldId($name, $locale)
     {
         return $name . '_' . $locale;
     }
@@ -38,7 +38,7 @@ trait GenerateId
      *
      * @return string
      */
-    public function generateLabelValue($label, $locale)
+    public function generateLabelString($label, $locale)
     {
         return __(':label (:locale)', ['label' => $label, 'locale' => get_locale_name($locale)]);
     }
