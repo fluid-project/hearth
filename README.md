@@ -61,7 +61,7 @@ TODO.
 
 ## Formatting
 
-To format your code using [php-cs-fixer](https://github.com/FriendsOfPhp/PHP-CS-Fixer), you can run:
+To format your code using [Laravel Pint](https://github.com/laravel/pint), you can run:
 
 ```bash
 composer format
