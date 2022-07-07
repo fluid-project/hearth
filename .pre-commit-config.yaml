@@ -4,6 +4,4 @@ repos:
 - repo: https://github.com/digitalpulp/pre-commit-php.git
   rev: 1.4.0
   hooks:
-  - id: php-cs-fixer
-    args: ["--config=.php_cs.dist.php", "--allow-risky=yes"]
   - id: php-unit

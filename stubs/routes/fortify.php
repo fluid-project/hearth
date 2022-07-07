@@ -40,7 +40,7 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
         ->method('post')
         ->middleware(array_filter([
             'guest',
-            $limiter ? 'throttle:' . $limiter : null,
+            $limiter ? 'throttle:'.$limiter : null,
         ]));
 
     Route::multilingual('/logout', [AuthenticatedSessionController::class, 'destroy'])
@@ -52,7 +52,6 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
         Route::multilingual('/forgot-password', [PasswordResetLinkController::class, 'create'])
             ->middleware('guest')
             ->name('password.request');
-
 
         Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
             ->middleware('guest')
@@ -117,7 +116,7 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
             ->method('post')
             ->middleware(array_filter([
                 'guest:'.config('fortify.guard'),
-                $twoFactorLimiter ? 'throttle:' . $twoFactorLimiter : null,
+                $twoFactorLimiter ? 'throttle:'.$twoFactorLimiter : null,
             ]));
 
         $twoFactorMiddleware = Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')

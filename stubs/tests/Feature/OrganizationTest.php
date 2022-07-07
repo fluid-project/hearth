@@ -28,12 +28,12 @@ class OrganizationTest extends TestCase
         $response->assertOk();
 
         $response = $this->actingAs($user)->post(localized_route('organizations.create'), [
-            'name' => $user->name . ' Consulting',
+            'name' => $user->name.' Consulting',
             'locality' => 'Truro',
             'region' => 'NS',
         ]);
 
-        $organization = Organization::where('name->en', $user->name . ' Consulting')->first();
+        $organization = Organization::where('name->en', $user->name.' Consulting')->first();
 
         $url = localized_route('organizations.show', $organization);
 

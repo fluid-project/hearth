@@ -13,7 +13,7 @@ class JoinController extends Controller
     /**
      * Cancel a request to join a team.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public function cancel(Request $request): RedirectResponse
@@ -27,14 +27,14 @@ class JoinController extends Controller
 
         flash(__('You have cancelled your request to join :team.', ['team' => $joinable->name]), 'success');
 
-        return redirect(\localized_route($joinable->getRoutePrefix() . '.show', $joinable));
+        return redirect(\localized_route($joinable->getRoutePrefix().'.show', $joinable));
     }
 
     /**
      * Approve a request to join a team.
      *
-     * @param Request $request
-     * @param User $user
+     * @param  Request  $request
+     * @param  User  $user
      * @return RedirectResponse
      */
     public function approve(Request $request, User $user): RedirectResponse
@@ -52,14 +52,14 @@ class JoinController extends Controller
 
         flash(__('You have approved :name’s request to join :team and they are now a member.', ['name' => $user->name, 'team' => $joinable->name]), 'success');
 
-        return redirect(\localized_route($joinable->getRoutePrefix() . '.edit', $joinable));
+        return redirect(\localized_route($joinable->getRoutePrefix().'.edit', $joinable));
     }
 
     /**
      * Deny a request to join a team.
      *
-     * @param Request $request
-     * @param User $user
+     * @param  Request  $request
+     * @param  User  $user
      * @return RedirectResponse
      */
     public function deny(Request $request, User $user): RedirectResponse
@@ -75,6 +75,6 @@ class JoinController extends Controller
 
         flash(__('You have denied :name’s request to join :team.', ['name' => $user->name, 'team' => $joinable->name]), 'success');
 
-        return redirect(\localized_route($joinable->getRoutePrefix() . '.edit', $joinable));
+        return redirect(\localized_route($joinable->getRoutePrefix().'.edit', $joinable));
     }
 }
