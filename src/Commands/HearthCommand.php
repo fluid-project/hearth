@@ -48,6 +48,11 @@ class HearthCommand extends Command
                 ] + $packages;
             }, false);
 
+            $this->updateNodePackages(function ($packages) {
+                return [
+                    'sass' => '^1.53',
+                ] + $packages;
+            });
             $this->flushNodeModules();
 
             // Name...
