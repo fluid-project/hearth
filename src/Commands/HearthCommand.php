@@ -309,7 +309,7 @@ class HearthCommand extends Command
 
         ksort($packages[$configurationKey]);
 
-        $packages['scripts']['postinstall'] = 'npm run dev';
+        $packages['scripts']['postinstall'] = 'npm run build';
 
         ksort($packages['scripts']);
 
