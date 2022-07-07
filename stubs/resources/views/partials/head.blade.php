@@ -16,11 +16,10 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- Styles -->
-<link href="{{ mix('css/app.css') }}" rel="stylesheet" />
+@vite('resources/css/app.scss')
 @googlefonts
 
 <!-- Scripts -->
 <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
-<script src="{{ mix('js/manifest.js') }}" defer></script>
-<script src="{{ mix('js/vendor.js') }}" defer></script>
-<script src="{{ mix('js/app.js') }}" defer></script>
+@vite('resources/js/app.js')
+

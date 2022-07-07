@@ -50,9 +50,7 @@ class HearthCommand extends Command
 
             $this->updateNodePackages(function ($packages) {
                 return [
-                    'resolve-url-loader' => '^4.0.0',
-                    'sass' => '^1.35',
-                    'sass-loader' => '^12.1',
+                    'sass' => '^1.53',
                 ] + $packages;
             });
             $this->flushNodeModules();
@@ -159,8 +157,8 @@ class HearthCommand extends Command
                 copy($stub, str_replace(__DIR__.'/../../stubs/tests', base_path('tests'), $stub));
             }
 
-            // Mix configuration...
-            copy(__DIR__.'/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
+            // Vite configuration...
+            copy(__DIR__.'/../../stubs/vite.config.js', base_path('vite.config.js'));
 
             // Larastan/PHPStan configuration
             copy(__DIR__.'/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
@@ -309,7 +307,7 @@ class HearthCommand extends Command
 
         ksort($packages[$configurationKey]);
 
-        $packages['scripts']['postinstall'] = 'npm run dev';
+        $packages['scripts']['postinstall'] = 'npm run build';
 
         ksort($packages['scripts']);
 
