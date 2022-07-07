@@ -2,13 +2,13 @@
 
 namespace Hearth\Components;
 
-use Hearth\Traits\GenerateId;
+use Hearth\Traits\GeneratesTranslatableFieldAttributes;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
 class TranslatableTextarea extends Component
 {
-    use GenerateId;
+    use GeneratesTranslatableFieldAttributes;
 
     /**
      * The name for the input.

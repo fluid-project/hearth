@@ -2,7 +2,7 @@
 
 namespace Hearth\Traits;
 
-trait GenerateId
+trait GeneratesTranslatableFieldAttributes
 {
     /**
      * Generate id for input field and its label
