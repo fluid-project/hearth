@@ -17,8 +17,7 @@ class Label extends Component
     /**
      * Create a new component instance.
      *
-     * @param string $value The label for the form input.
-     *
+     * @param  string  $value The label for the form input.
      * @return void
      */
     public function __construct($value = null)

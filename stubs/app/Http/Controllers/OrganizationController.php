@@ -38,7 +38,7 @@ class OrganizationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CreateOrganizationRequest $request
+     * @param  CreateOrganizationRequest  $request
      * @return RedirectResponse
      */
     public function store(CreateOrganizationRequest $request): RedirectResponse
@@ -58,7 +58,7 @@ class OrganizationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Organization $organization
+     * @param  Organization  $organization
      * @return View
      */
     public function show(Organization $organization): View
@@ -69,7 +69,7 @@ class OrganizationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Organization $organization
+     * @param  Organization  $organization
      * @return View
      */
     public function edit(Organization $organization): View
@@ -77,7 +77,7 @@ class OrganizationController extends Controller
         $roles = [];
 
         foreach (config('hearth.organizations.roles') as $role) {
-            $roles[$role] = __('roles.' . $role);
+            $roles[$role] = __('roles.'.$role);
         }
 
         return view('organizations.edit', [
@@ -90,8 +90,8 @@ class OrganizationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateOrganizationRequest $request
-     * @param Organization $organization
+     * @param  UpdateOrganizationRequest  $request
+     * @param  Organization  $organization
      * @return RedirectResponse
      */
     public function update(UpdateOrganizationRequest $request, Organization $organization): RedirectResponse
@@ -105,8 +105,8 @@ class OrganizationController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Organization $organization
+     * @param  Request  $request
+     * @param  Organization  $organization
      * @return RedirectResponse
      */
     public function join(Request $request, Organization $organization): RedirectResponse
@@ -121,8 +121,8 @@ class OrganizationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param DestroyOrganizationRequest $request
-     * @param Organization $organization
+     * @param  DestroyOrganizationRequest  $request
+     * @param  Organization  $organization
      * @return RedirectResponse
      */
     public function destroy(DestroyOrganizationRequest $request, Organization $organization): RedirectResponse

@@ -173,7 +173,7 @@ class ResourceTest extends TestCase
                 'resource_collection_id' => $resourceCollection->id,
                 'resource_id' => $resource->id,
             ]);
-        };
+        }
     }
 
     public function test_deleting_resource_collection_with_resource()

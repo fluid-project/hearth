@@ -22,7 +22,7 @@ Route::multilingual('/', function () {
 
 Route::multilingual('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified:' . \locale() . '.verification.notice'])->name('dashboard');
+})->middleware(['auth', 'verified:'.\locale().'.verification.notice'])->name('dashboard');
 
 Route::multilingual('/account/edit', [UserController::class, 'edit'])
     ->middleware(['auth'])
@@ -53,12 +53,12 @@ Route::multilingual('/requests/{user:id}/approve', [JoinController::class, 'appr
     ->name('requests.approve');
 
 if (config('hearth.organizations.enabled')) {
-    require __DIR__ . '/organizations.php';
+    require __DIR__.'/organizations.php';
 }
 
 if (config('hearth.resources.enabled')) {
-    require __DIR__ . '/resources.php';
-    require __DIR__ . '/resource-collections.php';
+    require __DIR__.'/resources.php';
+    require __DIR__.'/resource-collections.php';
 }
 
-require __DIR__ . '/fortify.php';
+require __DIR__.'/fortify.php';

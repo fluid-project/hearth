@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'languages' => __('Langues')
+    'languages' => __('Langues'),
 ];

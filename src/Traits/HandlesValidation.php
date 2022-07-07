@@ -10,9 +10,8 @@ trait HandlesValidation
     /**
      * Determine whether a form input has any errors.
      *
-     * @param string $name The name of the form input.
-     * @param string $bag The error bag associated with the form input.
-     *
+     * @param  string  $name The name of the form input.
+     * @param  string  $bag The error bag associated with the form input.
      * @return bool
      */
     public function hasErrors(string $name, string $bag): bool

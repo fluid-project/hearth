@@ -100,7 +100,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
      * Get the user's resource collections.
      *
      * @return HasMany
-     *
      */
     public function resourceCollections(): HasMany
     {
@@ -120,7 +119,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     /**
      * Has the user requested to join a model?
      *
-     * @param mixed $model
+     * @param  mixed  $model
      * @return bool
      */
     public function hasRequestedToJoin(mixed $model)
@@ -155,7 +154,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     /**
      * Determine if the user is a member of a given membershipable model.
      *
-     * @param mixed $model
+     * @param  mixed  $model
      * @return bool
      */
     public function isMemberOf(mixed $model): bool
@@ -166,7 +165,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     /**
      * Determine if the user is an administrator of a given model.
      *
-     * @param mixed $model
+     * @param  mixed  $model
      * @return bool
      */
     public function isAdministratorOf(mixed $model): bool

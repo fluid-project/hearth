@@ -13,10 +13,10 @@ class JoinTest extends TestCase
     {
         Schema::dropAllTables();
 
-        $create_users_table = include __DIR__ . '/../../database/migrations/create_users_table.php.stub';
-        $update_users_table = include __DIR__ . '/../../database/migrations/update_users_table.php.stub';
-        $add_joinable_columns = include __DIR__ . '/../../database/migrations/2021_03_01_000000_add_joinable_columns_to_users_table.php';
-        $create_organizations_table = include __DIR__ . '/../../database/migrations/create_organizations_table.php.stub';
+        $create_users_table = include __DIR__.'/../../database/migrations/create_users_table.php.stub';
+        $update_users_table = include __DIR__.'/../../database/migrations/update_users_table.php.stub';
+        $add_joinable_columns = include __DIR__.'/../../database/migrations/2021_03_01_000000_add_joinable_columns_to_users_table.php';
+        $create_organizations_table = include __DIR__.'/../../database/migrations/create_organizations_table.php.stub';
         $create_users_table->up();
         $update_users_table->up();
         $add_joinable_columns->up();

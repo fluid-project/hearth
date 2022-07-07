@@ -57,6 +57,5 @@ class CreateInvitationRequest extends FormRequest
             );
         })->validateWithBag('inviteMember');
 
-        return;
     }
 }

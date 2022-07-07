@@ -18,7 +18,7 @@ class InvitationController extends Controller
     /**
      * Create an invitation.
      *
-     * @param CreateInvitationRequest $request
+     * @param  CreateInvitationRequest  $request
      * @return RedirectResponse
      */
     public function create(CreateInvitationRequest $request)
@@ -33,14 +33,14 @@ class InvitationController extends Controller
 
         flash(__('invitation.create_invitation_succeeded'), 'success');
 
-        return redirect(\localized_route($invitationable->getRoutePrefix() . '.edit', $invitationable));
+        return redirect(\localized_route($invitationable->getRoutePrefix().'.edit', $invitationable));
     }
 
     /**
      * Accept the specified invitation.
      *
-     * @param AcceptInvitationRequest $request
-     * @param Invitation $invitation
+     * @param  AcceptInvitationRequest  $request
+     * @param  Invitation  $invitation
      * @return RedirectResponse
      */
     public function accept(AcceptInvitationRequest $request, Invitation $invitation)
@@ -54,14 +54,14 @@ class InvitationController extends Controller
             'success'
         );
 
-        return redirect(\localized_route($invitation->invitationable->getRoutePrefix() . '.show', $invitation->invitationable));
+        return redirect(\localized_route($invitation->invitationable->getRoutePrefix().'.show', $invitation->invitationable));
     }
 
     /**
      * Cancel the specified invitation.
      *
-     * @param Request $request
-     * @param Invitation $invitation
+     * @param  Request  $request
+     * @param  Invitation  $invitation
      * @return RedirectResponse
      */
     public function destroy(Request $request, Invitation $invitation)
@@ -74,6 +74,6 @@ class InvitationController extends Controller
 
         flash(__('invitation.cancel_invitation_succeeded'), 'success');
 
-        return redirect(\localized_route($invitation->invitationable->getRoutePrefix() . '.edit', $invitation->invitationable));
+        return redirect(\localized_route($invitation->invitationable->getRoutePrefix().'.edit', $invitation->invitationable));
     }
 }

@@ -193,7 +193,7 @@ class ResourceCollectionTest extends TestCase
         $lengthyTitle = '';
 
         for ($i = 0; $i <= 256; $i++) {
-            $lengthyTitle = $lengthyTitle . 'a';
+            $lengthyTitle = $lengthyTitle.'a';
         }
 
         $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
@@ -244,7 +244,7 @@ class ResourceCollectionTest extends TestCase
         $lengthyTitle = '';
 
         for ($i = 0; $i <= 256; $i++) {
-            $lengthyTitle = $lengthyTitle . 'a';
+            $lengthyTitle = $lengthyTitle.'a';
         }
 
         $response = $this->actingAs($user)->put(localized_route('resource-collections.update', $resourceCollection), [
@@ -326,7 +326,7 @@ class ResourceCollectionTest extends TestCase
                 'resource_collection_id' => $resourceCollection->id,
                 'resource_id' => $resource->id,
             ]);
-        };
+        }
     }
 
     public function test_deleting_resource_belong_to_resource_collection()
