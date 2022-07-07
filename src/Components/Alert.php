@@ -26,11 +26,11 @@ class Alert extends Component
      *
      * @return void
      */
-    public function __construct($title = false, $type = "notice")
+    public function __construct($title = false, $type = 'notice')
     {
         $this->type = $type;
 
-        $this->title = $title ? $title : __("hearth::alert." . $type);
+        $this->title = $title ? $title : __('hearth::alert.'.$type);
     }
 
     /**

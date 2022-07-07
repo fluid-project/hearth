@@ -41,10 +41,10 @@ class ResourceCollection extends Model
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
     }
 
@@ -62,7 +62,6 @@ class ResourceCollection extends Model
      * Get user of this resource collection
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     *
      */
     public function user(): BelongsTo
     {
@@ -73,7 +72,6 @@ class ResourceCollection extends Model
      * Get all of the resources that are assigned this collection.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     *
      */
     public function resources(): BelongsToMany
     {

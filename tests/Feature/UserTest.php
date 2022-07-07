@@ -18,8 +18,8 @@ class UserTest extends TestCase
     {
         Schema::dropAllTables();
 
-        $create_users_table = include __DIR__ . '/../../database/migrations/create_users_table.php.stub';
-        $update_users_table = include __DIR__ . '/../../database/migrations/update_users_table.php.stub';
+        $create_users_table = include __DIR__.'/../../database/migrations/create_users_table.php.stub';
+        $update_users_table = include __DIR__.'/../../database/migrations/update_users_table.php.stub';
 
         $create_users_table->up();
         $update_users_table->up();

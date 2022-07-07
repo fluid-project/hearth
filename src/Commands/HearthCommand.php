@@ -50,9 +50,7 @@ class HearthCommand extends Command
 
             $this->updateNodePackages(function ($packages) {
                 return [
-                    'resolve-url-loader' => '^4.0.0',
-                    'sass' => '^1.35',
-                    'sass-loader' => '^12.1',
+                    'sass' => '^1.53',
                 ] + $packages;
             });
             $this->flushNodeModules();
@@ -107,33 +105,33 @@ class HearthCommand extends Command
 
             // App stubs...
             $app_stubs = array_merge(
-                $this->filesystem->glob(__DIR__ . "/../../stubs/app/**/*.php"),
-                $this->filesystem->glob(__DIR__ . "/../../stubs/app/**/**/*.php")
+                $this->filesystem->glob(__DIR__.'/../../stubs/app/**/*.php'),
+                $this->filesystem->glob(__DIR__.'/../../stubs/app/**/**/*.php')
             );
 
             foreach ($app_stubs as $stub) {
-                copy($stub, str_replace(__DIR__ . "/../../stubs/app", app_path(), $stub));
+                copy($stub, str_replace(__DIR__.'/../../stubs/app', app_path(), $stub));
             }
 
             // Config stubs...
-            $config_stubs = $this->filesystem->glob(__DIR__ . "/../../stubs/config/*.php");
+            $config_stubs = $this->filesystem->glob(__DIR__.'/../../stubs/config/*.php');
 
             foreach ($config_stubs as $stub) {
-                copy($stub, str_replace(__DIR__ . "/../../stubs/config", config_path(), $stub));
+                copy($stub, str_replace(__DIR__.'/../../stubs/config', config_path(), $stub));
             }
 
             // Database factories...
-            $factories = $this->filesystem->glob(__DIR__ . "/../../database/factories/*.php");
+            $factories = $this->filesystem->glob(__DIR__.'/../../database/factories/*.php');
 
             foreach ($factories as $stub) {
-                copy($stub, str_replace(__DIR__ . "/../../database/factories", base_path("database/factories"), $stub));
+                copy($stub, str_replace(__DIR__.'/../../database/factories', base_path('database/factories'), $stub));
             }
 
             // Language stubs...
-            $lang_stubs = $this->filesystem->glob(__DIR__ . "/../../stubs/lang/**/*.php");
+            $lang_stubs = $this->filesystem->glob(__DIR__.'/../../stubs/lang/**/*.php');
 
             foreach ($lang_stubs as $stub) {
-                copy($stub, str_replace(__DIR__ . "/../../stubs/lang", lang_path(), $stub));
+                copy($stub, str_replace(__DIR__.'/../../stubs/lang', lang_path(), $stub));
             }
 
             // Resource stubs...
@@ -143,27 +141,27 @@ class HearthCommand extends Command
             $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
 
             // Route stubs...
-            $route_stubs = $this->filesystem->glob(__DIR__ . "/../../stubs/routes/*.php");
+            $route_stubs = $this->filesystem->glob(__DIR__.'/../../stubs/routes/*.php');
 
             foreach ($route_stubs as $stub) {
-                copy($stub, str_replace(__DIR__ . "/../../stubs/routes", base_path("routes/"), $stub));
+                copy($stub, str_replace(__DIR__.'/../../stubs/routes', base_path('routes/'), $stub));
             }
 
             // Test stubs...
             $this->filesystem->delete(base_path('tests/Feature/ExampleTest.php'));
             $this->filesystem->delete(base_path('tests/Unit/ExampleTest.php'));
 
-            $test_stubs = $this->filesystem->glob(__DIR__ . "/../../stubs/tests/**/*.php");
+            $test_stubs = $this->filesystem->glob(__DIR__.'/../../stubs/tests/**/*.php');
 
             foreach ($test_stubs as $stub) {
-                copy($stub, str_replace(__DIR__ . "/../../stubs/tests", base_path("tests"), $stub));
+                copy($stub, str_replace(__DIR__.'/../../stubs/tests', base_path('tests'), $stub));
             }
 
-            // Mix configuration...
-            copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
+            // Vite configuration...
+            copy(__DIR__.'/../../stubs/vite.config.js', base_path('vite.config.js'));
 
             // Larastan/PHPStan configuration
-            copy(__DIR__ . '/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
+            copy(__DIR__.'/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
         }
 
         // Add languages
@@ -197,7 +195,7 @@ class HearthCommand extends Command
     /**
      * Add a new locale to config/locales.php based on user input.
      *
-     * @param string $after
+     * @param  string  $after
      * @return void
      */
     protected function maybeAddLocale(string $after = 'fr')
@@ -240,8 +238,8 @@ class HearthCommand extends Command
     /**
      * Install the service provider in the application configuration file.
      *
-     * @param string $after
-     * @param string $name
+     * @param  string  $after
+     * @param  string  $name
      * @return void
      */
     protected function installServiceProviderAfter(string $after, string $name)
@@ -258,9 +256,9 @@ class HearthCommand extends Command
     /**
      * Install the middleware to a group in the application Http Kernel.
      *
-     * @param string $before
-     * @param string $name
-     * @param string $group
+     * @param  string  $before
+     * @param  string  $name
+     * @param  string  $group
      * @return void
      */
     protected function installMiddlewareBefore(string $before, string $name, string $group = 'web')
@@ -289,7 +287,7 @@ class HearthCommand extends Command
      * Update the "package.json" file.
      *
      * @param  callable  $callback
-     * @param bool $dev
+     * @param  bool  $dev
      * @return void
      */
     protected static function updateNodePackages(callable $callback, bool $dev = true)
@@ -309,7 +307,7 @@ class HearthCommand extends Command
 
         ksort($packages[$configurationKey]);
 
-        $packages['scripts']['postinstall'] = 'npm run dev';
+        $packages['scripts']['postinstall'] = 'npm run build';
 
         ksort($packages['scripts']);
 
@@ -334,9 +332,9 @@ class HearthCommand extends Command
     /**
      * Replace a given string within a given file.
      *
-     * @param string $search
-     * @param string $replace
-     * @param string $path
+     * @param  string  $search
+     * @param  string  $replace
+     * @param  string  $path
      * @return void
      */
     protected function replaceInFile(string $search, string $replace, string $path)

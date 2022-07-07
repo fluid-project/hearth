@@ -37,7 +37,7 @@ trait HasMembers
     /**
      * Determine if the given email address belongs to a member of the model.
      *
-     * @param  string $email
+     * @param  string  $email
      * @return bool
      */
     public function hasUserWithEmail(string $email): bool
@@ -50,7 +50,7 @@ trait HasMembers
     /**
      * Determine if the given email address belongs to an administrator of the model.
      *
-     * @param  string $email
+     * @param  string  $email
      * @return bool
      */
     public function hasAdministratorWithEmail(string $email): bool

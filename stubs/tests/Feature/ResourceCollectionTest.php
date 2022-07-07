@@ -14,6 +14,254 @@ class ResourceCollectionTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_users_can_create_resource_collections()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(localized_route('resource-collections.create'));
+        $response->assertOk();
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'title' => 'Test resource collection',
+            'description' => 'This is my resource collection.',
+        ]);
+
+        $resourceCollection = ResourceCollection::where('title->en', 'Test resource collection')->first();
+
+        $url = localized_route('resource-collections.show', $resourceCollection);
+
+        $response->assertSessionHasNoErrors();
+
+        $response->assertRedirect($url);
+    }
+
+    public function test_users_can_edit_resource_collections_belonging_to_them()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+        $resourceCollection = ResourceCollection::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->get(localized_route('resource-collections.edit', $resourceCollection));
+        $response->assertOk();
+
+        $response = $this->actingAs($user)->put(localized_route('resource-collections.update', $resourceCollection), [
+            'title' => $resourceCollection->title,
+            'description' => 'This is my updated resource collection.',
+        ]);
+        $response->assertRedirect(localized_route('resource-collections.show', $resourceCollection));
+    }
+
+    public function test_users_can_not_edit_resources_belonging_to_others()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+        $resourceCollection = ResourceCollection::factory()->create();
+
+        $response = $this->actingAs($user)->get(localized_route('resource-collections.edit', $resourceCollection));
+        $response->assertForbidden();
+
+        $response = $this->actingAs($user)->put(localized_route('resource-collections.update', $resourceCollection), [
+            'title' => $resourceCollection->title,
+            'description' => 'This is my updated resource collection.',
+        ]);
+        $response->assertForbidden();
+    }
+
+    public function test_users_can_delete_resource_collections_belonging_to_them()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+        $resourceCollection = ResourceCollection::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->from(localized_route('resource-collections.edit', $resourceCollection))->delete(localized_route('resource-collections.destroy', $resourceCollection), [
+            'current_password' => 'password',
+        ]);
+
+        $response->assertRedirect(localized_route('dashboard'));
+    }
+
+    public function test_users_can_not_delete_resource_collections_belonging_to_them_with_wrong_password()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+        $resourceCollection = ResourceCollection::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->from(localized_route('resource-collections.edit', $resourceCollection))->delete(localized_route('resource-collections.destroy', $resourceCollection), [
+            'current_password' => 'wrong_password',
+        ]);
+
+        $response->assertSessionHasErrors();
+        $response->assertRedirect(localized_route('resource-collections.edit', $resourceCollection));
+    }
+
+    public function test_users_can_not_delete_resource_collections_belonging_to_others()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+        $resourceCollection = ResourceCollection::factory()->create();
+
+        $response = $this->actingAs($user)->from(localized_route('resource-collections.edit', $resourceCollection))->delete(localized_route('resource-collections.destroy', $resourceCollection), [
+            'current_password' => 'password',
+        ]);
+
+        $response->assertForbidden();
+    }
+
+    public function test_resource_collections_can_have_unique_title_for_each_locale()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled');
+        }
+
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'title' => 'unique title',
+            'description' => 'This is my resource collection',
+        ]);
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'title' => 'unique title',
+            'description' => 'This is my resource collection',
+        ]);
+
+        $response->assertSessionHasErrors(['title' => 'The title has already been taken.']);
+
+        App::setLocale('fr');
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'title' => 'unique title',
+            'description' => 'This is my resource collection',
+        ]);
+
+        $response->assertSessionHasNoErrors();
+    }
+
+    public function test_create_resource_collection_validation()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled');
+        }
+
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'title' => 'Test resource collection',
+        ]);
+
+        $response->assertSessionHasErrors(['description' => 'The description field is required.']);
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'title' => 'Test resource collection',
+            'description' => 1,
+        ]);
+
+        $response->assertSessionHasErrors(['description' => 'The description must be a string.']);
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'description' => 'This is my resource collection',
+        ]);
+
+        $response->assertSessionHasErrors(['title' => 'The title field is required.']);
+
+        $lengthyTitle = '';
+
+        for ($i = 0; $i <= 256; $i++) {
+            $lengthyTitle = $lengthyTitle.'a';
+        }
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'title' => $lengthyTitle,
+            'description' => 'This is my resource collection',
+        ]);
+
+        $response->assertSessionHasErrors(['title' => 'The title must not be greater than 255 characters.']);
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'title' => 1,
+            'description' => 'This is my resource collection',
+        ]);
+
+        $response->assertSessionHasErrors(['title' => 'The title must be a string.']);
+    }
+
+    public function test_update_resource_collection_validation()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled');
+        }
+
+        $user = User::factory()->create();
+        $resourceCollection = ResourceCollection::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->put(localized_route('resource-collections.update', $resourceCollection), [
+            'title' => $resourceCollection->title,
+        ]);
+
+        $response->assertSessionHasErrors(['description' => 'The description field is required.']);
+
+        $response = $this->actingAs($user)->put(localized_route('resource-collections.update', $resourceCollection), [
+            'title' => $resourceCollection->title,
+            'description' => 1,
+        ]);
+
+        $response->assertSessionHasErrors(['description' => 'The description must be a string.']);
+
+        $response = $this->actingAs($user)->put(localized_route('resource-collections.update', $resourceCollection), [
+            'description' => 'This is my updated resource collection.',
+        ]);
+
+        $response->assertSessionHasErrors(['title' => 'The title field is required.']);
+
+        $lengthyTitle = '';
+
+        for ($i = 0; $i <= 256; $i++) {
+            $lengthyTitle = $lengthyTitle.'a';
+        }
+
+        $response = $this->actingAs($user)->put(localized_route('resource-collections.update', $resourceCollection), [
+            'title' => $lengthyTitle,
+            'description' => 'This is my updated resource collection.',
+        ]);
+
+        $response->assertSessionHasErrors(['title' => 'The title must not be greater than 255 characters.']);
+
+        $response = $this->actingAs($user)->put(localized_route('resource-collections.update', $resourceCollection), [
+            'title' => 1,
+            'description' => 'This is my updated resource collection.',
+        ]);
+
+        $response->assertSessionHasErrors(['title' => 'The title must be a string.']);
+    }
+
     public function test_resource_collections_can_be_translated()
     {
         if (! config('hearth.resources.enabled')) {
@@ -78,7 +326,7 @@ class ResourceCollectionTest extends TestCase
                 'resource_collection_id' => $resourceCollection->id,
                 'resource_id' => $resource->id,
             ]);
-        };
+        }
     }
 
     public function test_deleting_resource_belong_to_resource_collection()
