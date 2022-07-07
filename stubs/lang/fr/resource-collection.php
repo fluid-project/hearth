@@ -7,7 +7,7 @@ return [
     'label_description' => 'la description de la collecte de ressources',
     'action_create' => 'Créer la collecte de ressources',
     'edit_title' => 'Modifier la collecte de ressources',
-    'edit_resource' => 'Modifier la collecte de ressources',
+    'edit_resource_collection' => 'Modifier la collecte de ressources',
     'action_delete' => 'Supprimer la collecte de ressources',
     'delete_title' => 'Supprimer la collecte de ressources',
     'delete_intro' => 'Votre collecte de ressources sera supprimée et ne pourra pas être récupérée. Si vous voulez toujours supprimer votre collecte de ressources, veuillez entrer votre mot de passe actuel pour continuer.',
