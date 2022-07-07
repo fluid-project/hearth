@@ -7,7 +7,7 @@ return [
     'label_description' => 'Resource collection description',
     'action_create' => 'Create resource collection',
     'edit_title' => 'Edit resource collection',
-    'edit_resource' => 'Edit resource collection',
+    'edit_resource_collection' => 'Edit resource collection',
     'action_delete' => 'Delete resource collection',
     'delete_title' => 'Delete resource collection',
     'delete_intro' => 'Your resource collection will be deleted and cannot be recovered. If you still want to delete your resource collection, please enter your current password to proceed.',
