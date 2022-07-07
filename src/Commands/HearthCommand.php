@@ -48,13 +48,6 @@ class HearthCommand extends Command
                 ] + $packages;
             }, false);
 
-            $this->updateNodePackages(function ($packages) {
-                return [
-                    'resolve-url-loader' => '^4.0.0',
-                    'sass' => '^1.35',
-                    'sass-loader' => '^12.1',
-                ] + $packages;
-            });
             $this->flushNodeModules();
 
             // Name...
@@ -159,8 +152,8 @@ class HearthCommand extends Command
                 copy($stub, str_replace(__DIR__.'/../../stubs/tests', base_path('tests'), $stub));
             }
 
-            // Mix configuration...
-            copy(__DIR__.'/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
+            // Vite configuration...
+            copy(__DIR__.'/../../stubs/vite.config.js', base_path('vite.config.js'));
 
             // Larastan/PHPStan configuration
             copy(__DIR__.'/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
