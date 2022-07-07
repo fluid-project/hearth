@@ -93,7 +93,7 @@ class JoinTest extends TestCase
         $organization->requestsToJoin()->save($user);
 
         $response = $this->actingAs($admin)->get(localized_route('organizations.edit', $organization));
-        $response->assertSee('Approve ' . $user->name . '’s request');
+        $response->assertSee('Approve '.$user->name.'’s request');
 
         $response = $this->actingAs($admin)->post(localized_route('requests.approve', $user));
 
@@ -115,7 +115,7 @@ class JoinTest extends TestCase
         $organization->requestsToJoin()->save($user);
 
         $response = $this->actingAs($admin)->get(localized_route('organizations.edit', $organization));
-        $response->assertSee('Deny ' . $user->name . '’s request');
+        $response->assertSee('Deny '.$user->name.'’s request');
 
         $response = $this->actingAs($admin)->post(localized_route('requests.deny', $user));
 

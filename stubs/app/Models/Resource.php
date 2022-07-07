@@ -40,7 +40,7 @@ class Resource extends Model
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
@@ -61,7 +61,6 @@ class Resource extends Model
      * Get all of the resource collections that include this resource.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     *
      */
     public function resourceCollections(): BelongsToMany
     {

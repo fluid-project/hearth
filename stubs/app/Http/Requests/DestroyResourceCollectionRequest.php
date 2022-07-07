@@ -47,7 +47,5 @@ class DestroyResourceCollectionRequest extends FormRequest
                 );
             }
         })->validateWithBag('destroyResourceCollection');
-
-        return;
     }
 }

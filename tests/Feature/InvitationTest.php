@@ -15,11 +15,11 @@ class InvitationTest extends TestCase
     {
         Schema::dropAllTables();
 
-        $create_users_table = include __DIR__ . '/../../database/migrations/create_users_table.php.stub';
-        $update_users_table = include __DIR__ . '/../../database/migrations/update_users_table.php.stub';
-        $create_invitations_table = include __DIR__ . '/../../database/migrations/2021_03_01_000000_create_invitations_table.php';
-        $create_memberships_table = include __DIR__ . '/../../database/migrations/2021_03_01_000000_create_memberships_table.php';
-        $create_organizations_table = include __DIR__ . '/../../database/migrations/create_organizations_table.php.stub';
+        $create_users_table = include __DIR__.'/../../database/migrations/create_users_table.php.stub';
+        $update_users_table = include __DIR__.'/../../database/migrations/update_users_table.php.stub';
+        $create_invitations_table = include __DIR__.'/../../database/migrations/2021_03_01_000000_create_invitations_table.php';
+        $create_memberships_table = include __DIR__.'/../../database/migrations/2021_03_01_000000_create_memberships_table.php';
+        $create_organizations_table = include __DIR__.'/../../database/migrations/create_organizations_table.php.stub';
 
         $create_users_table->up();
         $update_users_table->up();

@@ -53,7 +53,6 @@ class Textarea extends Component
      */
     public $hinted;
 
-
     /**
      * Whether the form input is disabled.
      *

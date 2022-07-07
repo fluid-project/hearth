@@ -14,7 +14,7 @@ class ResourceCollectionPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
+     * @param  User  $user
      * @return bool
      */
     public function create(User $user): bool
@@ -25,8 +25,8 @@ class ResourceCollectionPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param ResourceCollection $resourceCollection
+     * @param  User  $user
+     * @param  ResourceCollection  $resourceCollection
      * @return Response
      */
     public function update(User $user, ResourceCollection $resourceCollection): Response
@@ -39,8 +39,8 @@ class ResourceCollectionPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
-     * @param ResourceCollection $resourceCollection
+     * @param  User  $user
+     * @param  ResourceCollection  $resourceCollection
      * @return Response
      */
     public function delete(User $user, ResourceCollection $resourceCollection): Response

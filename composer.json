@@ -34,7 +34,7 @@
     },
     "require-dev": {
         "brianium/paratest": "^6.2",
-        "friendsofphp/php-cs-fixer": "^3.0",
+        "laravel/pint": "^0.2.3",
         "nunomaduro/collision": "^6.0",
         "nunomaduro/larastan": "^2.0",
         "orchestra/testbench": "^7.0",
@@ -75,7 +75,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "format": "vendor/bin/php-cs-fixer fix --config=.php_cs.dist.php --allow-risky=yes",
+        "format": "vendor/bin/pint",
         "analyze": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/phpunit --no-coverage",
         "test-coverage": "vendor/bin/phpunit --coverage-clover coverage.xml"
