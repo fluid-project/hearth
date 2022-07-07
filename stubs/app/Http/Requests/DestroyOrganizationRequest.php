@@ -47,6 +47,5 @@ class DestroyOrganizationRequest extends FormRequest
                 );
             }
         })->validateWithBag('destroyOrganization');
-
     }
 }

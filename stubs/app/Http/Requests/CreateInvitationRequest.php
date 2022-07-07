@@ -56,6 +56,5 @@ class CreateInvitationRequest extends FormRequest
                 __('invitation.invited_user_already_belongs_to_team')
             );
         })->validateWithBag('inviteMember');
-
     }
 }
