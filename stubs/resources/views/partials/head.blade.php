@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- Styles -->
-@vite('resources/css/app.css')
+@vite('resources/css/app.scss')
 @googlefonts
 
 <!-- Scripts -->
