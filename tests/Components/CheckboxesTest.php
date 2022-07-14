@@ -121,4 +121,21 @@ class CheckboxesTest extends TestCase
         $view->assertSee('value="vanilla"  checked', false);
         $view->assertDontSee('value="chocolate"  checked', false);
     }
+
+    public function test_checkboxes_component_has_valid_ids()
+    {
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-checkboxes :name="$name" :options="$options" />',
+                [
+                    'name' => 'flavour',
+                    'options' => [
+                        'French vanilla' => 'Vanilla',
+                        'chocolate' => 'Chocolate',
+                    ],
+                ],
+            );
+
+        $view->assertSee('id="flavour-french-vanilla"', false);
+    }
 }
