@@ -1,3 +1,3 @@
-<p class="field__hint" id="{{ $for }}-hint">
-    {{ $slot }}
-</p>
+<div class="field__hint" id="{{ $for }}-hint">
+    {!! Str::markdown($slot) !!}
+</div>
