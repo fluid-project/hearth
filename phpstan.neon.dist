@@ -7,8 +7,7 @@ parameters:
         - resources
         - src
     level: 5 # The level 9 is the highest level
-    ignoreErrors:
-        - '#Call to an undefined static method Illuminate\\Support\\Facades\\Route::multilingual\(\)#'
+    ignoreErrors: []
     excludePaths: []
     checkMissingIterableValueType: false
     scanFiles:
