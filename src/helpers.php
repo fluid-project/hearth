@@ -40,6 +40,8 @@ if (! function_exists('get_regions')) {
     {
         $subdivisionRepository = new SubdivisionRepository();
 
+        $regions = [];
+
         foreach ($subdivisionRepository->getAll($countries) as $region) {
             $regions[] = [
                 'value' => $region->getCode(),
