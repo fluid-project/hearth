@@ -23,9 +23,9 @@ trait HandlesValidation
 
         $name = str_replace(['[', ']'], ['.', ''], $name);
 
-        foreach($errors->getBag($bag)->keys() as $key) {
+        foreach ($errors->getBag($bag)->keys() as $key) {
             if (Str::startsWith($key, $name)) {
-               return true;
+                return true;
             }
         }
 
