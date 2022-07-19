@@ -2,7 +2,6 @@
 
 namespace Hearth\Tests\Components;
 
-use Hearth\Components\Hint;
 use Hearth\Tests\TestCase;
 
 class HintTest extends TestCase
