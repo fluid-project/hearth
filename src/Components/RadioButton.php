@@ -4,6 +4,7 @@ namespace Hearth\Components;
 
 use Hearth\Traits\AriaDescribable;
 use Hearth\Traits\HandlesValidation;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
