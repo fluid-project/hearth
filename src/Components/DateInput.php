@@ -114,18 +114,54 @@ class DateInput extends Component
         $this->required = $required;
         $this->disabled = $disabled;
         $this->months = [
-            '01' => __('forms.month_january'),
-            '02' => __('forms.month_february'),
-            '03' => __('forms.month_march'),
-            '04' => __('forms.month_april'),
-            '05' => __('forms.month_may'),
-            '06' => __('forms.month_june'),
-            '07' => __('forms.month_july'),
-            '08' => __('forms.month_august'),
-            '09' => __('forms.month_september'),
-            '10' => __('forms.month_october'),
-            '11' => __('forms.month_november'),
-            '12' => __('forms.month_december'),
+            [
+                'value' => '01',
+                'label' => __('forms.month_january')
+            ],
+            [
+                'value' => '02',
+                'label' => __('forms.month_february')
+            ],
+            [
+                'value' => '03',
+                'label' => __('forms.month_march')
+            ],
+            [
+                'value' => '04',
+                'label' => __('forms.month_april')
+            ],
+            [
+                'value' => '05',
+                'label' => __('forms.month_may')
+            ],
+            [
+                'value' => '06',
+                'label' => __('forms.month_june')
+            ],
+            [
+                'value' => '07',
+                'label' => __('forms.month_july')
+            ],
+            [
+                'value' => '08',
+                'label' => __('forms.month_august')
+            ],
+            [
+                'value' => '09',
+                'label' => __('forms.month_september')
+            ],
+            [
+                'value' => '10',
+                'label' => __('forms.month_october')
+            ],
+            [
+                'value' => '11',
+                'label' => __('forms.month_november')
+            ],
+            [
+                'value' => '12',
+                'label' => __('forms.month_december')
+            ],
         ];
     }
 

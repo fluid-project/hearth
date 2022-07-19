@@ -15,8 +15,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );
@@ -33,8 +39,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                     'hinted' => true,
                 ],
@@ -51,8 +63,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                     'hinted' => 'favourite-flavour-hint',
                 ],
@@ -69,11 +87,13 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => [
+                        [
+                            'value' => 'vanilla',
                             'label' => 'Vanilla',
                             'hint' => 'Rich and delicate.',
                         ],
-                        'chocolate' => [
+                        [
+                            'value' => 'chocolate',
                             'label' => 'Chocolate',
                             'hint' => 'Decadent and delicious.',
                         ],
@@ -94,8 +114,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );
@@ -111,8 +137,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                     'checked' => ['vanilla'],
                 ],
@@ -130,8 +162,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'French vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'French vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );
