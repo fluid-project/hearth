@@ -31,7 +31,7 @@ class OrganizationController extends Controller
     public function create(): View
     {
         return view('organizations.create', [
-            'regions' => [['value' => '', 'label' => '']] + get_regions(['CA'], \locale()),
+            'regions' => array_merge([['value' => '', 'label' => '']] , get_regions(['CA'], \locale())),
         ]);
     }
 
@@ -77,12 +77,12 @@ class OrganizationController extends Controller
         $roles = [];
 
         foreach (config('hearth.organizations.roles') as $role) {
-            $roles[$role] = __('roles.'.$role);
+            $roles[] = ['value' => $role, 'label' => __('roles.'.$role)];
         }
 
         return view('organizations.edit', [
             'organization' => $organization,
-            'regions' => [['value' => '', 'label' => '']] + get_regions(['CA'], \locale()),
+            'regions' => array_merge([['value' => '', 'label' => '']] , get_regions(['CA'], \locale())),
             'roles' => $roles,
         ]);
     }
