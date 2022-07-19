@@ -31,7 +31,7 @@ class OrganizationController extends Controller
     public function create(): View
     {
         return view('organizations.create', [
-            'regions' => get_regions(['CA'], \locale()),
+            'regions' => [['value' => '', 'label' => '']] + get_regions(['CA'], \locale()),
         ]);
     }
 
@@ -82,7 +82,7 @@ class OrganizationController extends Controller
 
         return view('organizations.edit', [
             'organization' => $organization,
-            'regions' => get_regions(['CA'], \locale()),
+            'regions' => [['value' => '', 'label' => '']] + get_regions(['CA'], \locale()),
             'roles' => $roles,
         ]);
     }

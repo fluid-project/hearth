@@ -24,23 +24,16 @@ class HelpersTest extends TestCase
         $this->assertNull($result);
     }
 
-    public function test_get_regions_starts_with_blank_entry()
-    {
-        $result = get_regions(['CA']);
-        $this->assertEquals('', array_key_first($result));
-        $this->assertEquals('', $result['']);
-    }
-
     public function test_get_regions_in_default_locale()
     {
         $result = get_regions(['CA']);
-        $this->assertEquals('Nova Scotia', $result['NS']);
+        $this->assertContains(['value' => 'NS', 'label' => 'Nova Scotia'], $result);
     }
 
     public function test_get_regions_in_alternate_locale()
     {
         $result = get_regions(['CA'], 'fr');
-        $this->assertEquals('Nouvelle-Écosse', $result['NS']);
+        $this->assertContains(['value' => 'NS', 'label' => 'Nouvelle-Écosse'], $result);
     }
 
     public function test_get_region_codes()
