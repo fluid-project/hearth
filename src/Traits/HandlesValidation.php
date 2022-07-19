@@ -3,6 +3,7 @@
 namespace Hearth\Traits;
 
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Illuminate\Support\ViewErrorBag;
 
 trait HandlesValidation
@@ -22,6 +23,12 @@ trait HandlesValidation
 
         $name = str_replace(['[', ']'], ['.', ''], $name);
 
-        return $errors->getBag($bag)->has($name);
+        foreach($errors->getBag($bag)->keys() as $key) {
+            if (Str::startsWith($key, $name)) {
+               return true;
+            }
+        }
+
+        return false;
     }
 }
