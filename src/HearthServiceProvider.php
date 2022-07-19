@@ -15,6 +15,7 @@ use Hearth\Components\Label;
 use Hearth\Components\LanguageSwitcher;
 use Hearth\Components\LocaleSelect;
 use Hearth\Components\PasswordConfirmation;
+use Hearth\Components\RadioButton;
 use Hearth\Components\RadioButtons;
 use Hearth\Components\Select;
 use Hearth\Components\Textarea;
@@ -51,6 +52,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasViewComponent('hearth', LanguageSwitcher::class)
             ->hasViewComponent('hearth', LocaleSelect::class)
             ->hasViewComponent('hearth', PasswordConfirmation::class)
+            ->hasViewComponent('hearth', RadioButton::class)
             ->hasViewComponent('hearth', RadioButtons::class)
             ->hasViewComponent('hearth', Select::class)
             ->hasViewComponent('hearth', Textarea::class)
