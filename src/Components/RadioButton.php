@@ -92,7 +92,7 @@ class RadioButton extends Component
     ) {
         $this->name = $name;
         $this->value = $value;
-        $this->id = $id ?? $this->name.'-'.$this->value;
+        $this->id = $id ?? $this->name.'-'.Str::slug($value);
         $this->bag = $bag;
         $this->checked = $checked;
         $this->hinted = $hinted;
