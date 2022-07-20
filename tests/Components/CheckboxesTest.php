@@ -187,11 +187,11 @@ class CheckboxesTest extends TestCase
                     'options' => [
                         [
                             'value' => 'French vanilla',
-                            'label' => 'Vanilla'
+                            'label' => 'Vanilla',
                         ],
                         [
                             'value' => 'chocolate',
-                            'label' => 'Chocolate'
+                            'label' => 'Chocolate',
                         ],
                     ],
                 ],
