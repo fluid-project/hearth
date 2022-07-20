@@ -10,6 +10,7 @@ on:
 jobs:
   pint:
     runs-on: ubuntu-latest
+    name: Code formatting
 
     steps:
       - name: Checkout code
