@@ -11,6 +11,7 @@ jobs:
   php-lint-analyze:
 
     runs-on: ubuntu-latest
+    name: Lint and analyze
 
     steps:
     - uses: shivammathur/setup-php@v2
