@@ -176,4 +176,21 @@ class CheckboxesTest extends TestCase
 
         $view->assertSee('id="flavour-french-vanilla"', false);
     }
+
+    public function test_checkboxes_component_handles_validation()
+    {
+        $view = $this->withViewErrors(['flavour.0.required' => 'Vanilla is a required flavour.'])
+            ->blade(
+                '<x-hearth-checkboxes :name="$name" :options="$options" />',
+                [
+                    'name' => 'flavour',
+                    'options' => [
+                        'French vanilla' => 'Vanilla',
+                        'chocolate' => 'Chocolate',
+                    ],
+                ],
+            );
+
+        $view->assertSee('aria-invalid', false);
+    }
 }
