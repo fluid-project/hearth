@@ -29,7 +29,7 @@ class OrganizationFactory extends Factory
             'name' => $name,
             'slug' => Str::slug($name),
             'locality' => $this->faker->city(),
-            'region' => array_keys($regions)[$this->faker->numberBetween(1, 13)],
+            'region' => $regions[$this->faker->numberBetween(0, 12)]['value'],
         ];
     }
 }

@@ -29,7 +29,7 @@ class Checkboxes extends Component
     /**
      * The checkbox options.
      *
-     * @var (string|array)[]
+     * @var array[]
      */
     public array $options;
 
@@ -61,14 +61,6 @@ class Checkboxes extends Component
      */
     public function __construct($name, $options, $checked = [], $bag = 'default', $hinted = false)
     {
-        $options = array_map(function ($option) {
-            if (! is_array($option)) {
-                return ['label' => $option];
-            }
-
-            return $option;
-        }, $options);
-
         $this->name = $name;
         $this->options = $options;
         $this->checked = $checked;
