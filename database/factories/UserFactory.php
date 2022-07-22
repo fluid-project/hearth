@@ -22,10 +22,8 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->name();
-
         return [
-            'name' => $name,
+            'name' => $$this->faker->name(),
             'slug' => function (array $attributes) {
                 return Str::slug($attributes['name']);
             },
