@@ -21,7 +21,7 @@ class Select extends Component
     /**
      * The form input's options.
      *
-     * @var array
+     * @var array[]
      */
     public $options;
 

@@ -1,11 +1,11 @@
-@foreach($options as $value => $atts)
+@foreach($options as $option)
 <div class="field">
-    @php($id = $name . '-' . Str::slug($value))
-    @php($hint = isset($atts['hint']) ? $id . '-hint' : '')
-    <input {!! $attributes !!} type="radio" name="{{ $name }}" id="{{ $id }}" value="{{ $value }}" {!! $describedBy($hint) ? 'aria-describedby="' . $describedBy($hint) . '"' : '' !!} @checked($checked == $value) {!! $invalid ? 'aria-invalid="true"' : '' !!} />
-    <x-hearth-label for="{{ $id }}">{{ $atts['label'] }}</x-hearth-label>
-    @if(isset($atts['hint']))
-    <x-hearth-hint for="{{ $id }}">{{ $atts['hint'] }}</x-hearth-hint>
+    @php($id = $name . '-' . Str::slug($option['value']))
+    @php($hint = isset($option['hint']) ? $id . '-hint' : '')
+    <input {!! $attributes !!} type="radio" name="{{ $name }}" id="{{ $id }}" value="{{ $option['value'] }}" {!! $describedBy($hint) ? 'aria-describedby="' . $describedBy($hint) . '"' : '' !!} @checked($checked == $option['value']) {!! $invalid ? 'aria-invalid="true"' : '' !!} />
+    <x-hearth-label for="{{ $id }}">{{ $option['label'] }}</x-hearth-label>
+    @if(isset($option['hint']) && !empty($option['hint']))
+    <x-hearth-hint for="{{ $id }}">{{ $option['hint'] }}</x-hearth-hint>
     @endif
 </div>
 @endforeach
