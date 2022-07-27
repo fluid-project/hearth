@@ -199,5 +199,25 @@ class RadioButtonsTest extends TestCase
             );
 
         $view->assertSee('id="flavour-french-vanilla"', false);
+
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-radio-buttons :name="$name" :options="$options" />',
+                [
+                    'name' => 'courses[dessert][ice-cream][flavour]',
+                    'options' => [
+                        [
+                            'value' => 'French vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
+                    ],
+                ],
+            );
+
+        $view->assertSee('id="coursesdessertice-creamflavour-french-vanilla"', false);
     }
 }

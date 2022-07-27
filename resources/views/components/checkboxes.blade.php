@@ -1,6 +1,6 @@
 @foreach($options as $option)
 <div class="field">
-    @php($id = $name . '-' . Str::slug($option['value']))
+    @php($id = Str::slug($name) . '-' . Str::slug($option['value']))
     @php($hint = isset($option['hint']) ? $id . '-hint' : '')
     <input {!! $attributes !!} type="checkbox" name="{{ $name }}[]" id="{{ $id }}" value="{{ $option['value'] }}" {!! $describedBy($hint) ? 'aria-describedby="' . $describedBy($hint) . '"' : '' !!} @checked(in_array($option['value'], $checked)) {!! $invalid ? 'aria-invalid="true"' : '' !!} />
     <x-hearth-label for="{{ $id }}">{{ $option['label'] }}</x-hearth-label>
