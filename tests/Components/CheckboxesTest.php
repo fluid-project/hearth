@@ -175,6 +175,26 @@ class CheckboxesTest extends TestCase
             );
 
         $view->assertSee('id="flavour-french-vanilla"', false);
+
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-checkboxes :name="$name" :options="$options" />',
+                [
+                    'name' => 'courses[dessert][ice-cream][flavour]',
+                    'options' => [
+                        [
+                            'value' => 'French vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
+                    ],
+                ],
+            );
+
+        $view->assertSee('id="coursesdessertice-creamflavour-french-vanilla"', false);
     }
 
     public function test_checkboxes_component_handles_validation()
