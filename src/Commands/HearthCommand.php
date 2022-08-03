@@ -95,6 +95,7 @@ class HearthCommand extends Command
             // Ensure folders are in place...
             $this->filesystem->ensureDirectoryExists(app_path('Actions/Fortify'));
             $this->filesystem->ensureDirectoryExists(app_path('Http/Requests'));
+            $this->filesystem->ensureDirectoryExists(app_path('Http/Livewire'));
             $this->filesystem->ensureDirectoryExists(app_path('Http/Requests/Auth'));
             $this->filesystem->ensureDirectoryExists(app_path('Http/Responses'));
             $this->filesystem->ensureDirectoryExists(app_path('Mail'));
@@ -102,7 +103,6 @@ class HearthCommand extends Command
             $this->filesystem->ensureDirectoryExists(app_path('Rules'));
             $this->filesystem->ensureDirectoryExists(app_path('View/Components'));
             $this->filesystem->ensureDirectoryExists(lang_path('fr'));
-            $this->filesystem->ensureDirectoryExists(base_path('tests/Livewire'));
 
             // App stubs...
             $app_stubs = array_merge(
