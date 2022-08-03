@@ -102,6 +102,7 @@ class HearthCommand extends Command
             $this->filesystem->ensureDirectoryExists(app_path('Rules'));
             $this->filesystem->ensureDirectoryExists(app_path('View/Components'));
             $this->filesystem->ensureDirectoryExists(lang_path('fr'));
+            $this->filesystem->ensureDirectoryExists(base_path('tests/Livewire'));
 
             // App stubs...
             $app_stubs = array_merge(
