@@ -25,6 +25,7 @@
         "commerceguys/intl": "^1.1",
         "illuminate/contracts": "^9.0",
         "laravel/fortify": "^1.10",
+        "livewire/livewire": "^2.10",
         "shiftonelabs/laravel-cascade-deletes": "^1.0",
         "spatie/laravel-flash": "^1.9",
         "spatie/laravel-google-fonts": "^1.1",
