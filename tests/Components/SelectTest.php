@@ -15,8 +15,14 @@ class SelectTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );
@@ -33,8 +39,14 @@ class SelectTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );

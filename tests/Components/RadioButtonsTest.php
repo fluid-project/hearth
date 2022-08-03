@@ -15,8 +15,14 @@ class RadioButtonsTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );
@@ -33,8 +39,14 @@ class RadioButtonsTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                     'hinted' => true,
                 ],
@@ -51,8 +63,14 @@ class RadioButtonsTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                     'hinted' => 'favourite-flavour-hint',
                 ],
@@ -69,11 +87,13 @@ class RadioButtonsTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => [
+                        [
+                            'value' => 'vanilla',
                             'label' => 'Vanilla',
                             'hint' => 'Rich and delicate.',
                         ],
-                        'chocolate' => [
+                        [
+                            'value' => 'chocolate',
                             'label' => 'Chocolate',
                             'hint' => 'Decadent and delicious.',
                         ],
@@ -94,8 +114,14 @@ class RadioButtonsTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );
@@ -111,8 +137,14 @@ class RadioButtonsTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );
@@ -129,8 +161,14 @@ class RadioButtonsTest extends TestCase
                 [
                     'name' => 'email_me',
                     'options' => [
-                        '1' => 'Yes',
-                        '0' => 'No',
+                        [
+                            'value' => '1',
+                            'label' => 'Yes',
+                        ],
+                        [
+                            'value' => '0',
+                            'label' => 'No',
+                        ],
                     ],
                     'checked' => 1,
                 ],
@@ -138,5 +176,48 @@ class RadioButtonsTest extends TestCase
 
         $view->assertSee('value="1"  checked', false);
         $view->assertDontSee('value="0"  checked', false);
+    }
+
+    public function test_radio_buttons_component_component_has_valid_ids()
+    {
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-radio-buttons :name="$name" :options="$options" />',
+                [
+                    'name' => 'flavour',
+                    'options' => [
+                        [
+                            'value' => 'French vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
+                    ],
+                ],
+            );
+
+        $view->assertSee('id="flavour-french-vanilla"', false);
+
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-radio-buttons :name="$name" :options="$options" />',
+                [
+                    'name' => 'courses[dessert][ice-cream][flavour]',
+                    'options' => [
+                        [
+                            'value' => 'French vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
+                    ],
+                ],
+            );
+
+        $view->assertSee('id="coursesdessertice-creamflavour-french-vanilla"', false);
     }
 }

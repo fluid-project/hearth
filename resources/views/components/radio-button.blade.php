@@ -1,15 +1,12 @@
-<select
+<input type="radio"
     {!! $attributes->merge([
         'name' => $name,
         'id' => $id,
+        'value' => $value,
     ]) !!}
-    {{ $required ? 'required' : '' }}
     {{ $autofocus ? 'autofocus' : '' }}
     @disabled($disabled)
+    @checked($checked)
     {!! $describedBy() ? 'aria-describedby="' . $describedBy() . '"' : '' !!}
     {!! $invalid ? 'aria-invalid="true"' : '' !!}
 >
-    @foreach($options as $option)
-    <option value="{{ $option['value'] }}" @selected($selected == $option['value'])>{{ $option['label'] }}</option>
-    @endforeach
-</select>

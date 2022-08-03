@@ -4,9 +4,11 @@ namespace Hearth\Components;
 
 use Hearth\Traits\AriaDescribable;
 use Hearth\Traits\HandlesValidation;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
-class Select extends Component
+class RadioButton extends Component
 {
     use AriaDescribable;
     use HandlesValidation;
@@ -19,18 +21,11 @@ class Select extends Component
     public $name;
 
     /**
-     * The form input's options.
+     * The value of the form input.
      *
-     * @var array[]
+     * @var null|string
      */
-    public $options;
-
-    /**
-     * The selected option.
-     *
-     * @var string
-     */
-    public $selected;
+    public $value;
 
     /**
      * The id of the form input.
@@ -45,6 +40,13 @@ class Select extends Component
      * @var null|string
      */
     public $bag;
+
+    /**
+     * Whether the checkbox is checked.
+     *
+     * @var bool
+     */
+    public bool $checked;
 
     /**
      * Whether the form input has validation errors.
@@ -68,13 +70,6 @@ class Select extends Component
     public $disabled;
 
     /**
-     * Whether the form input is required.
-     *
-     * @var bool
-     */
-    public $required;
-
-    /**
      * Whether the form input is should be autofocused.
      *
      * @var bool
@@ -88,34 +83,30 @@ class Select extends Component
      */
     public function __construct(
         $name,
-        $options,
-        $selected = null,
+        $value,
         $id = null,
         $bag = 'default',
+        $checked = false,
         $hinted = false,
-        $required = false,
         $disabled = false,
         $autofocus = false
     ) {
         $this->name = $name;
-        $this->options = $options;
-        $this->selected = $selected;
-        $this->id = $id ?? $this->name;
+        $this->value = $value;
+        $this->id = $id ?? $this->name.'-'.Str::slug($value);
         $this->bag = $bag;
+        $this->checked = $checked;
         $this->hinted = $hinted;
         $this->invalid = $this->hasErrors($this->name, $this->bag);
-        $this->required = $required;
         $this->disabled = $disabled;
         $this->autofocus = $autofocus;
     }
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
-        return view('hearth::components.select');
+        return view('hearth::components.radio-button');
     }
 }

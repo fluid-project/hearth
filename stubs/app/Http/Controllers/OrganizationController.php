@@ -31,7 +31,7 @@ class OrganizationController extends Controller
     public function create(): View
     {
         return view('organizations.create', [
-            'regions' => get_regions(['CA'], \locale()),
+            'regions' => array_merge([['value' => '', 'label' => '']], get_regions(['CA'], \locale())),
         ]);
     }
 
@@ -77,12 +77,12 @@ class OrganizationController extends Controller
         $roles = [];
 
         foreach (config('hearth.organizations.roles') as $role) {
-            $roles[$role] = __('roles.'.$role);
+            $roles[] = ['value' => $role, 'label' => __('roles.'.$role)];
         }
 
         return view('organizations.edit', [
             'organization' => $organization,
-            'regions' => get_regions(['CA'], \locale()),
+            'regions' => array_merge([['value' => '', 'label' => '']], get_regions(['CA'], \locale())),
             'roles' => $roles,
         ]);
     }
@@ -113,7 +113,7 @@ class OrganizationController extends Controller
     {
         $organization->requestsToJoin()->save($request->user());
 
-        flash(__('You have successfully requested to join :organization. You will be notified when an administrator has approved or denied your request.', ['organization' => $organization->name]), 'success');
+        flash(__('You have successfully requested to join :organization. You will be notified when an administrator has approved or denied your request.', ['organization' => $organization->getTranslation('name', locale())]), 'success');
 
         return redirect(\localized_route('organizations.show', $organization));
     }

@@ -15,8 +15,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );
@@ -33,8 +39,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                     'hinted' => true,
                 ],
@@ -51,8 +63,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                     'hinted' => 'favourite-flavour-hint',
                 ],
@@ -69,11 +87,13 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => [
+                        [
+                            'value' => 'vanilla',
                             'label' => 'Vanilla',
                             'hint' => 'Rich and delicate.',
                         ],
-                        'chocolate' => [
+                        [
+                            'value' => 'chocolate',
                             'label' => 'Chocolate',
                             'hint' => 'Decadent and delicious.',
                         ],
@@ -94,8 +114,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                 ],
             );
@@ -111,8 +137,14 @@ class CheckboxesTest extends TestCase
                 [
                     'name' => 'flavour',
                     'options' => [
-                        'vanilla' => 'Vanilla',
-                        'chocolate' => 'Chocolate',
+                        [
+                            'value' => 'vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
                     ],
                     'checked' => ['vanilla'],
                 ],
@@ -120,5 +152,71 @@ class CheckboxesTest extends TestCase
 
         $view->assertSee('value="vanilla"  checked', false);
         $view->assertDontSee('value="chocolate"  checked', false);
+    }
+
+    public function test_checkboxes_component_has_valid_ids()
+    {
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-checkboxes :name="$name" :options="$options" />',
+                [
+                    'name' => 'flavour',
+                    'options' => [
+                        [
+                            'value' => 'French vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
+                    ],
+                ],
+            );
+
+        $view->assertSee('id="flavour-french-vanilla"', false);
+
+        $view = $this->withViewErrors([])
+            ->blade(
+                '<x-hearth-checkboxes :name="$name" :options="$options" />',
+                [
+                    'name' => 'courses[dessert][ice-cream][flavour]',
+                    'options' => [
+                        [
+                            'value' => 'French vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
+                    ],
+                ],
+            );
+
+        $view->assertSee('id="coursesdessertice-creamflavour-french-vanilla"', false);
+    }
+
+    public function test_checkboxes_component_handles_validation()
+    {
+        $view = $this->withViewErrors(['flavour.0.required' => 'Vanilla is a required flavour.'])
+            ->blade(
+                '<x-hearth-checkboxes :name="$name" :options="$options" />',
+                [
+                    'name' => 'flavour',
+                    'options' => [
+                        [
+                            'value' => 'French vanilla',
+                            'label' => 'Vanilla',
+                        ],
+                        [
+                            'value' => 'chocolate',
+                            'label' => 'Chocolate',
+                        ],
+                    ],
+                ],
+            );
+
+        $view->assertSee('aria-invalid', false);
     }
 }
