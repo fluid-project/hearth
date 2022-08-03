@@ -21,7 +21,6 @@ use Hearth\Components\Select;
 use Hearth\Components\Textarea;
 use Hearth\Components\TranslatableInput;
 use Hearth\Components\TranslatableTextarea;
-use Illuminate\View\Compilers\BladeCompiler;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -82,19 +81,5 @@ class HearthServiceProvider extends PackageServiceProvider
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         }
-    }
-
-    /**
-     * Custom logic which should be run at the end of the packageRegistering method of PackageServiceProvider
-     *
-     * @return void
-     */
-    public function packageRegistered()
-    {
-        $this->app->afterResolving(BladeCompiler::class, function () {
-            if (class_exists(Livewire::class)) {
-                Livewire::component('resource-select', ResourceSelect::class);
-            }
-        });
     }
 }
