@@ -25,10 +25,11 @@ class ResourceCollectionTest extends TestCase
         $response = $this->actingAs($user)->get(localized_route('resource-collections.create'));
         $response->assertOk();
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create', []), [
             'user_id' => $user->id,
             'title' => 'Test resource collection',
             'description' => 'This is my resource collection.',
+            'resource_ids' => [],
         ]);
 
         $resourceCollection = ResourceCollection::where('title->en', 'Test resource collection')->first();
@@ -38,6 +39,23 @@ class ResourceCollectionTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         $response->assertRedirect($url);
+    }
+
+    public function test_users_can_add_resources_to_their_new_resource_collection_on_create()
+    {
+        if (! config('hearth.resources.enabled')) {
+            return $this->markTestSkipped('Resource support is not enabled.');
+        }
+
+        $user = User::factory()->create();
+        $resource = Resource::factory(5)->create();
+
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+            'user_id' => $user->id,
+            'title' => 'unique title',
+            'description' => 'This is my resource collection',
+        ]);
+        $response->assertSee('resources', $resource);
     }
 
     public function test_users_can_edit_resource_collections_belonging_to_them()

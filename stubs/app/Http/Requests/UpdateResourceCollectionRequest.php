@@ -33,6 +33,8 @@ class UpdateResourceCollectionRequest extends FormRequest
 
             ],
             'description' => 'required|string',
+            'resource_ids' => 'array',
+            'resource_ids.*' => 'integer',
         ];
     }
 

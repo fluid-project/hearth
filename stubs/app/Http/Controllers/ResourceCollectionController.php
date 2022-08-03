@@ -28,7 +28,9 @@ class ResourceCollectionController extends Controller
     {
         $this->authorize('create', ResourceCollection::class);
 
-        return view('resource-collections.create');
+        return view('resource-collections.create', [
+            'resourceCollectionId' => null,
+        ]);
     }
 
     /**
@@ -39,7 +41,11 @@ class ResourceCollectionController extends Controller
      */
     public function store(CreateResourceCollectionRequest $request)
     {
-        $resourceCollection = ResourceCollection::create($request->validated());
+        $data = $request->validated();
+
+        $resourceCollection = ResourceCollection::create($data);
+
+        $resourceCollection->resources()->attach($data['resource_ids']);
 
         flash(__('resource-collection.create_succeeded'), 'success');
 
@@ -65,7 +71,10 @@ class ResourceCollectionController extends Controller
      */
     public function edit(ResourceCollection $resourceCollection)
     {
-        return view('resource-collections.edit', ['resourceCollection' => $resourceCollection]);
+        return view('resource-collections.edit', [
+            'resourceCollection' => $resourceCollection,
+            'resourceCollectionId' => $resourceCollection->id,
+        ]);
     }
 
     /**
@@ -78,6 +87,7 @@ class ResourceCollectionController extends Controller
     public function update(UpdateResourceCollectionRequest $request, ResourceCollection $resourceCollection)
     {
         $resourceCollection->fill($request->validated());
+        $resourceCollection->resources()->sync($request['resource_ids']);
         $resourceCollection->save();
 
         flash(__('resource-collection.update_succeeded'), 'success');

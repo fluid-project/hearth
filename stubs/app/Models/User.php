@@ -107,6 +107,14 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     }
 
     /**
+     * Get the user's resources.
+     */
+    public function resources()
+    {
+        return $this->hasMany(Resource::class);
+    }
+
+    /**
      * Get the parent joinable model.
      *
      * @return MorphTo
