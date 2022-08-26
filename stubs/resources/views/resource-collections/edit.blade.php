@@ -7,8 +7,6 @@
 
     <!-- Form Validation Errors -->
     @include('partials.validation-errors')
-    @livewireScripts
-
     <form action="{{ localized_route('resource-collections.update', $resourceCollection) }}" method="POST" novalidate>
         @csrf
         @method('PUT')

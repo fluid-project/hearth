@@ -7,7 +7,6 @@
 
     <!-- Form Validation Errors -->
     @include('partials.validation-errors')
-    @livewireScripts
     <form action="{{ localized_route('resource-collections.store') }}" method="POST" novalidate>
         @csrf
         <x-hearth-input id="user_id" type="hidden" name="user_id" :value="Auth::user()->id" required />

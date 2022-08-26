@@ -1,5 +1,8 @@
-<div class="stack">
-    <div role="region" aria-live="assertive" tabindex="0" aria-describedby="selectedResourcesDesc">
+<div class="flow">
+    <div x-data="{message: @entangle('message')}" aria-live="assertive">
+        <p x-text="message"></p>
+    </div>
+    <div role="region" tabindex="0" aria-describedby="selectedResourcesDesc">
         <table>
             <caption id="selectedResourcesDesc">{{ __('resource-select.selected_resources') }}</caption>
             <thead>
@@ -13,15 +16,20 @@
             <tbody>
                 @foreach($selectedResources as $i => $resource)
                 <tr>
-                    <td>{{ $resource['title'][locale()] }}</td>
-                    <td><a target="_blank" href="{{ url('/' . locale() . '/resources/' . str_replace(' ', '-', strtolower($resource['title'][locale()]))) }}">{{ __('resource-select.resource_link') }}</a></td>
+                    <td>{{ $resource->title }}</td>
+                    <td>
+                        <a target="_blank" href="{{ localized_route('resources.show', str_replace(' ', '-', strtolower($resource->title))) }}">
+                            {{ __('resource-select.resource_link') }}
+                            <span class="visually-hidden"> {{ $resource->title }} </span>
+                        </a>
+                    </td>
                     <td>
                         <button type="button" class="secondary" wire:click="removeResource({{ $i }})"  wire:key="remove-resource-{{ $i }}">
                             {{ __('resource-select.remove_resource') }}
-                            <span class="visually-hidden"> {{ $resource['title'][locale()] }} </span>
+                            <span class="visually-hidden"> {{ $resource->title }} </span>
                         </button>
                     </td>
-                    <input type="hidden" name="resource_ids[]" value="{{ $resource['id'] }}" />
+                    <input type="hidden" name="resource_ids[]" value="{{ $resource->id }}" />
                 </tr>
                 @endforeach
             </tbody>
@@ -41,12 +49,17 @@
             <tbody>
                 @foreach($availableResources as $i => $resource)
                 <tr>
-                    <td>{{ $resource['title'][locale()] }}</td>
-                    <td><a target="_blank" href="{{ url('/' . locale() . '/resources/' . str_replace(' ', '-', strtolower($resource['title'][locale()]))) }}">{{ __('resource-select.resource_link') }}</a></td>
+                    <td>{{ $resource->title }}</td>
                     <td>
-                        <button type="button" class="secondary" wire:click="addResource({{ $i }})"  wire:key="add-resource-{{ $resource['title'][locale()] }}">
+                        <a target="_blank" href="{{ localized_route('resources.show', str_replace(' ', '-', strtolower($resource->title))) }}">
+                            {{ __('resource-select.resource_link') }}
+                            <span class="visually-hidden"> {{ $resource->title }} </span>
+                        </a>
+                    </td>
+                    <td>
+                        <button type="button" class="secondary" wire:click="addResource({{ $i }})"  wire:key="add-resource-{{ $resource->title }}">
                             {{ __('resource-select.add_resource') }}
-                            <span class="visually-hidden"> {{ $resource['title'][locale()] }} </span>
+                            <span class="visually-hidden"> {{ $resource->title }} </span>
                         </button>
                     </td>
                 </tr>

@@ -79,7 +79,7 @@ class ResourceSelectTest extends TestCase
         $this->assertEquals(count($resourceSelect->selectedResources), 0);
 
         $resourceSelect->call('addResource', 1);
-        $this->assertTrue($sampleAvailableResource == $resourceSelect->selectedResources[0]);
+        $this->assertTrue($sampleAvailableResource->id == $resourceSelect->selectedResources[0]->id);
 
         $this->assertEquals(count($resourceSelect->availableResources), 4);
         $this->assertEquals(count($resourceSelect->selectedResources), 1);
@@ -103,7 +103,7 @@ class ResourceSelectTest extends TestCase
         $this->assertEquals(count($resourceSelect->selectedResources), 5);
 
         $resourceSelect->call('removeResource', 1);
-        $this->assertTrue($sampleSelectedResource == $resourceSelect->availableResources[3]);
+        $this->assertTrue($sampleSelectedResource->id == $resourceSelect->availableResources[3]->id);
 
         $this->assertEquals(count($resourceSelect->availableResources), 4);
         $this->assertEquals(count($resourceSelect->selectedResources), 4);

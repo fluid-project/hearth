@@ -5,53 +5,45 @@ namespace App\Http\Livewire;
 use App\Models\Resource;
 use App\Models\ResourceCollection;
 use Livewire\Component;
+use Illuminate\Database\Eloquent\Collection;
 
 class ResourceSelect extends Component
 {
-    public array $availableResources = [];
+    public Collection $availableResources;
+    public Collection $selectedResources;
+    public string $message = '';
 
-    public array $selectedResources = [];
 
     public function mount(?int $resourceCollectionId)
     {
+        $this->availableResources = new Collection();
+        $this->selectedResources = new Collection();
         if ($resourceCollectionId != null) {
-            $resourcesInCollection = ResourceCollection::where('id', $resourceCollectionId)
-                ->first()
-                ->resources()
-                ->get();
-
-            $resourceIdsInCollection = [];
-            foreach ($resourcesInCollection as $resource) {
-                array_push($resourceIdsInCollection, $resource->id);
-            }
-
-            foreach (Resource::orderBy('title')->get() as $resource) {
-                if (in_array($resource->id, $resourceIdsInCollection, true)) {
-                    $this->selectedResources[] = $resource->toArray();
-                } else {
-                    $this->availableResources[] = $resource->toArray();
-                }
-            }
+            $resourcesInCollection = ResourceCollection::find($resourceCollectionId)->resources()->get();
+            $this->availableResources = Resource::all()->diff($resourcesInCollection);
+            $this->selectedResources = $resourcesInCollection;
         } else {
-            foreach (Resource::orderBy('title')->get() as $resource) {
-                $this->availableResources[] = $resource->toArray();
-            }
+            $this->availableResources = Resource::orderBy('title')->get();
         }
     }
 
     public function addResource(int $i): void
     {
-        if ($this->availableResources[$i]) {
-            $this->selectedResources[] = $this->availableResources[$i];
-            array_splice($this->availableResources, $i, 1);
+        $resourceToAdd = $this->availableResources->offsetGet($i);
+        if ($resourceToAdd) {
+            $this->selectedResources->push($resourceToAdd);
+            $this->availableResources->splice($i, 1);
+            $this->message = __('Resource ":resource" added to collection.', ['resource' => $resourceToAdd->title]);
         }
     }
 
     public function removeResource(int $i): void
     {
-        if ($this->selectedResources[$i]) {
-            $this->availableResources[] = $this->selectedResources[$i];
-            array_splice($this->selectedResources, $i, 1);
+        $resourceToRemove = $this->selectedResources->offsetGet($i);
+        if ($resourceToRemove) {
+            $this->availableResources->push($resourceToRemove);
+            $this->selectedResources->splice($i, 1);
+            $this->message = __('Resource ":resource" removed from collection.', ['resource' => $resourceToRemove->title]);
         }
     }
 
