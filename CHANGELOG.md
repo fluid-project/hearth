@@ -1,5 +1,58 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/fluid-project/hearth/compare/v2.0.2...v3.0.0) (2022-08-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove button component (resolves #123) (#175)
+* standardize options for checkboxes, radio buttons, and selects (#165)
+* add Vite support (resolves #158) (#157)
+* allow users to request to join membershipable models (#141)
+* add support for multilingual slugs (resolves #137) (#138)
+* limit User model to a single membership (#135)
+* make Organization model translatable (#132)
+* add translatable package and make Resources translatable (#128)
+
+### Features
+
+* add controller, routes, and views for ResourceCollection model (resolves [#142](https://www.github.com/fluid-project/hearth/issues/142)) ([#143](https://www.github.com/fluid-project/hearth/issues/143)) ([eb179f4](https://www.github.com/fluid-project/hearth/commit/eb179f4edfe0dacc148fd1b61ccc55c3005e1619))
+* add ResourceCollection model and migration (resolves [#134](https://www.github.com/fluid-project/hearth/issues/134)) ([#136](https://www.github.com/fluid-project/hearth/issues/136)) ([dc740d8](https://www.github.com/fluid-project/hearth/commit/dc740d8b4321807457fe98d885eeddf7e38735d5))
+* add standalone RadioButton component (resolves [#145](https://www.github.com/fluid-project/hearth/issues/145)) ([#163](https://www.github.com/fluid-project/hearth/issues/163)) ([a87cb27](https://www.github.com/fluid-project/hearth/commit/a87cb2789f348714cff287fecef410934437ea99))
+* add support for multilingual slugs (resolves [#137](https://www.github.com/fluid-project/hearth/issues/137)) ([#138](https://www.github.com/fluid-project/hearth/issues/138)) ([3e27b5f](https://www.github.com/fluid-project/hearth/commit/3e27b5f816f02fca3eb66b2f925f05cc7afa3096))
+* add the ability for users to add resources to their collections ([#171](https://www.github.com/fluid-project/hearth/issues/171)) ([2106b36](https://www.github.com/fluid-project/hearth/commit/2106b36a9f25907e4965420da1b0e6147e27152d))
+* add translatable package and make Resources translatable ([#128](https://www.github.com/fluid-project/hearth/issues/128)) ([4aac4f6](https://www.github.com/fluid-project/hearth/commit/4aac4f6af828bc4a152aafe225bb037f92ca4d27))
+* add TranslatableInput and TranslatableTextarea components (resolves [#127](https://www.github.com/fluid-project/hearth/issues/127)) ([#146](https://www.github.com/fluid-project/hearth/issues/146)) ([97bb1ab](https://www.github.com/fluid-project/hearth/commit/97bb1abf2628d6dee842c6e1d23036f5ba452c70))
+* add Vite support (resolves [#158](https://www.github.com/fluid-project/hearth/issues/158)) ([#157](https://www.github.com/fluid-project/hearth/issues/157)) ([410cb59](https://www.github.com/fluid-project/hearth/commit/410cb59d7ef2248d4b7398f3cb99acad5d7492a7))
+* allow users to request to join membershipable models ([#141](https://www.github.com/fluid-project/hearth/issues/141)) ([c532437](https://www.github.com/fluid-project/hearth/commit/c532437f04ba83a5506dc361b436402106cdd0d0))
+* limit User model to a single membership ([#135](https://www.github.com/fluid-project/hearth/issues/135)) ([6f06a8d](https://www.github.com/fluid-project/hearth/commit/6f06a8d1329fc18e8ff27f0d21aac925ff6b9bd4))
+* make Organization model translatable ([#132](https://www.github.com/fluid-project/hearth/issues/132)) ([ba4acd3](https://www.github.com/fluid-project/hearth/commit/ba4acd3daf6ce11b46e32b2e64d9990720d86036))
+* remove button component (resolves [#123](https://www.github.com/fluid-project/hearth/issues/123)) ([#175](https://www.github.com/fluid-project/hearth/issues/175)) ([8147e23](https://www.github.com/fluid-project/hearth/commit/8147e23b0e0d98cfd7adf51f0f163ecebb689d9e))
+* standardize options for checkboxes, radio buttons, and selects ([#165](https://www.github.com/fluid-project/hearth/issues/165)) ([092a663](https://www.github.com/fluid-project/hearth/commit/092a6636d39f48527a1f4374570e16d723b6fa7e))
+* support Markdown in hints (resolves [#162](https://www.github.com/fluid-project/hearth/issues/162)) ([#166](https://www.github.com/fluid-project/hearth/issues/166)) ([769e655](https://www.github.com/fluid-project/hearth/commit/769e655e2740b555a46ec265a6b1d349beff64d2))
+* switch from PHP CS Fixer to Pint (resolves [#155](https://www.github.com/fluid-project/hearth/issues/155)) ([#156](https://www.github.com/fluid-project/hearth/issues/156)) ([b4e3302](https://www.github.com/fluid-project/hearth/commit/b4e33028376bb37dc02fcfbee9f84512b8e95b19))
+
+
+### Bug Fixes
+
+* don't use strict comparison for radio buttons ([#144](https://www.github.com/fluid-project/hearth/issues/144)) ([49b7b1c](https://www.github.com/fluid-project/hearth/commit/49b7b1c94fc16d98e6850b173b9f8fc3c93ac4c7))
+* handle keyed validation errors (resolves [#149](https://www.github.com/fluid-project/hearth/issues/149)) ([#164](https://www.github.com/fluid-project/hearth/issues/164)) ([1cc2c45](https://www.github.com/fluid-project/hearth/commit/1cc2c45fa16664dd9368f04d9f619a30ea61c93b))
+* normalize ids to more standard characters ([#168](https://www.github.com/fluid-project/hearth/issues/168)) ([b23f9ef](https://www.github.com/fluid-project/hearth/commit/b23f9efb75257da26c2bdd8308ecc0b7ed4631a4))
+* restore integration tests for Laravel >= 9.19 (resolves [#154](https://www.github.com/fluid-project/hearth/issues/154)) ([410cb59](https://www.github.com/fluid-project/hearth/commit/410cb59d7ef2248d4b7398f3cb99acad5d7492a7))
+* sanitize checkbox/radio values for ID generation (resolves [#147](https://www.github.com/fluid-project/hearth/issues/147)) ([#151](https://www.github.com/fluid-project/hearth/issues/151)) ([f8d3ac5](https://www.github.com/fluid-project/hearth/commit/f8d3ac549bfc80ab9568f1cf699c31826a3f204c))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** update laravel/pint requirement from ^0.2.3 to ^1.1.0 ([#169](https://www.github.com/fluid-project/hearth/issues/169)) ([9097611](https://www.github.com/fluid-project/hearth/commit/90976115ce755e532397d05831fad8fa87bc4afd))
+* **docs:** replace PHP CS Fixer with Pint ([5552d7a](https://www.github.com/fluid-project/hearth/commit/5552d7ab9610f7cc7710487f987ea8beeeca380a))
+* document recommended extensions ([faf9495](https://www.github.com/fluid-project/hearth/commit/faf9495f2e05b84f68fd3dd4868a1bc2330f4c65))
+* **l10n:** update translations ([#140](https://www.github.com/fluid-project/hearth/issues/140)) ([793745e](https://www.github.com/fluid-project/hearth/commit/793745eacca27bb9e4f0137309ca86b1056814c4))
+* **l10n:** update translations ([#160](https://www.github.com/fluid-project/hearth/issues/160)) ([ab447f4](https://www.github.com/fluid-project/hearth/commit/ab447f430c2291f8d6315d33d268fb6269a076e3))
+* **l10n:** update translations ([#170](https://www.github.com/fluid-project/hearth/issues/170)) ([652954d](https://www.github.com/fluid-project/hearth/commit/652954d7bcc8e0c0f5cb23ff54193e883dcb3824))
+* **l10n:** update translations ([#173](https://www.github.com/fluid-project/hearth/issues/173)) ([e98ee1d](https://www.github.com/fluid-project/hearth/commit/e98ee1da3ae84b90f46241936ca2280dbdbf6ec9))
+* **l10n:** update translations ([#174](https://www.github.com/fluid-project/hearth/issues/174)) ([41fc0e6](https://www.github.com/fluid-project/hearth/commit/41fc0e6b0154be70c9eda51d935e0793df116912))
+
 ### [2.0.2](https://www.github.com/fluid-project/hearth/compare/v2.0.1...v2.0.2) (2022-05-05)
 
 
