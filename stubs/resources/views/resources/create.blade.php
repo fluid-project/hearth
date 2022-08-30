@@ -23,6 +23,6 @@
             <x-hearth-error for="summary" />
         </div>
 
-        <x-hearth-button>{{ __('resource.action_create') }}</x-hearth-button>
+        <button>{{ __('resource.action_create') }}</button>
     </form>
 </x-app-layout>

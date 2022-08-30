@@ -21,9 +21,9 @@
                 @csrf
 
                 <div>
-                    <x-hearth-button>
+                    <button>
                         {{ __('hearth::auth.resend_verification_email') }}
-                    </x-hearth-button>
+                    </button>
                 </div>
             </form>
 

@@ -43,9 +43,9 @@
             </p>
             @endif
 
-            <x-hearth-button>
+            <button>
                 {{ __('hearth::auth.sign_in') }}
-            </x-hearth-button>
+            </button>
         </form>
     </x-auth-card>
 </x-guest-layout>

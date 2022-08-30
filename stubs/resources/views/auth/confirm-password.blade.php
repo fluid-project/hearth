@@ -23,9 +23,9 @@
                 <x-hearth-error for="password" />
             </div>
 
-            <x-hearth-button>
+            <button>
                 {{ __('hearth::auth.action_confirm') }}
-            </x-hearth-button>
+            </button>
         </form>
     </x-auth-card>
 </x-guest-layout>

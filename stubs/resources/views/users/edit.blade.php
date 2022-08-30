@@ -31,8 +31,8 @@
             <x-hearth-error for="locale" bag="updateProfileInformation" />
         </div>
 
-        <x-hearth-button>
+        <button>
             {{ __('hearth::forms.save_changes') }}
-        </x-hearth-button>
+        </button>
     </form>
 </x-app-layout>
