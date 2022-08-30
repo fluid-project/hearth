@@ -9,5 +9,7 @@
                 {{ $slot }}
             </div>
         </main>
+        @livewireScripts
+        @vite('resources/js/app.js')
     </body>
 </html>

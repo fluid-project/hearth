@@ -22,6 +22,10 @@
             <x-hearth-error for="description" />
         </div>
 
+        <div>
+            <livewire:resource-select :resourceCollectionId='null'/>
+        </div>
+
         <x-hearth-button>{{ __('resource-collection.action_create') }}</x-hearth-button>
     </form>
 </x-app-layout>

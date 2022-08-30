@@ -33,6 +33,8 @@ class CreateResourceCollectionRequest extends FormRequest
             ],
             'description' => 'required|string',
             'user_id' => 'required',
+            'resource_ids' => 'array|nullable',
+            'resource_ids.*' => 'exists:resources,id',
         ];
     }
 

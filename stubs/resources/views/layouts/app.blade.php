@@ -23,5 +23,7 @@
                 </div>
             </article>
         </main>
+        @livewireScripts
+        @vite('resources/js/app.js')
     </body>
 </html>
