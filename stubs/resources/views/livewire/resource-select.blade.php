@@ -1,6 +1,10 @@
 <div class="flow">
-    <div x-data="{message: @entangle('message')}" aria-live="assertive">
-        <p x-text="message"></p>
+    <div aria-live="assertive">
+        @if($message)
+        <p class="visually-hidden">
+            {{ $message }}
+        </p>
+        @endif
     </div>
     <div role="region" tabindex="0" aria-describedby="selectedResourcesDesc">
         <table>

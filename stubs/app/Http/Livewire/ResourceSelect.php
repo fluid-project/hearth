@@ -4,15 +4,16 @@ namespace App\Http\Livewire;
 
 use App\Models\Resource;
 use App\Models\ResourceCollection;
-use Livewire\Component;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Component;
 
 class ResourceSelect extends Component
 {
     public Collection $availableResources;
-    public Collection $selectedResources;
-    public string $message = '';
 
+    public Collection $selectedResources;
+
+    public string $message = '';
 
     public function mount(?int $resourceCollectionId)
     {
@@ -20,7 +21,7 @@ class ResourceSelect extends Component
         $this->selectedResources = new Collection();
         if ($resourceCollectionId != null) {
             $resourcesInCollection = ResourceCollection::find($resourceCollectionId)->resources()->get();
-            $this->availableResources = Resource::all()->diff($resourcesInCollection);
+            $this->availableResources = Resource::whereNotIn('id', $resourcesInCollection->pluck('id'))->get();
             $this->selectedResources = $resourcesInCollection;
         } else {
             $this->availableResources = Resource::orderBy('title')->get();
