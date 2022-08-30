@@ -48,9 +48,9 @@
                 </a>
             </div>
 
-            <x-hearth-button>
+            <button>
                 {{ __('hearth::auth.create_your_account') }}
-            </x-hearth-button>
+            </button>
         </form>
     </x-auth-card>
 </x-guest-layout>

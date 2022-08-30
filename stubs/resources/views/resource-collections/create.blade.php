@@ -26,6 +26,6 @@
             <livewire:resource-select :resourceCollectionId='null'/>
         </div>
 
-        <x-hearth-button>{{ __('resource-collection.action_create') }}</x-hearth-button>
+        <button>{{ __('resource-collection.action_create') }}</button>
     </form>
 </x-app-layout>

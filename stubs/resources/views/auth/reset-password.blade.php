@@ -36,9 +36,9 @@
                 <x-hearth-error for="password_confirmation" />
             </div>
 
-            <x-hearth-button>
+            <button>
                 {{ __('hearth::auth.reset_submit') }}
-            </x-hearth-button>
+            </button>
         </form>
     </x-auth-card>
 </x-guest-layout>

@@ -26,7 +26,7 @@
             <livewire:resource-select :resourceCollectionId='$resourceCollectionId' />
         </div>
 
-        <x-hearth-button>{{ __('forms.save_changes') }}</x-hearth-button>
+        <button>{{ __('forms.save_changes') }}</button>
     </form>
 
     <h2>
@@ -45,8 +45,8 @@
             <x-hearth-error for="current_password" bag="destroyResourceCollection" />
         </div>
 
-        <x-hearth-button>
+        <button>
             {{ __('resource-collection.action_delete') }}
-        </x-hearth-button>
+        </button>
     </form>
 </x-app-layout>

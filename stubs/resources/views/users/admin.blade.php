@@ -32,9 +32,9 @@
             <x-hearth-error for="password_confirmation" bag="updatePassword" />
         </div>
 
-        <x-hearth-button>
+        <button>
             {{ __('hearth::auth.change_password') }}
-        </x-hearth-button>
+        </button>
     </form>
 
     @if(Laravel\Fortify\Features::canManageTwoFactorAuthentication())
@@ -61,18 +61,18 @@
             <form action="{{ route('two-factor.regenerate') }}" method="post" @submit.prevent="submitForm">
                 @csrf
 
-                <x-hearth-button>
+                <button>
                     {{ __('hearth::user.action_regenerate_two_factor_auth_recovery_codes') }}
-                </x-hearth-button>
+                </button>
             </form>
 
             <form action="{{ route('two-factor.disable') }}" method="post" @submit.prevent="submitForm">
                 @csrf
                 @method('DELETE')
 
-                <x-hearth-button>
+                <button>
                     {{ __('hearth::user.action_disable_two_factor_auth') }}
-                </x-hearth-button>
+                </button>
             </form>
         @else
             <p>{{ __('hearth::user.two_factor_auth_not_enabled') }}</p>
@@ -80,9 +80,9 @@
             <form action="{{ route('two-factor.enable') }}" method="post" @submit.prevent="submitForm">
                 @csrf
 
-                <x-hearth-button>
+                <button>
                     {{ __('hearth::user.action_enable_two_factor_auth') }}
-                </x-hearth-button>
+                </button>
             </form>
         @endif
     </x-hearth-password-confirmation>
@@ -102,8 +102,8 @@
             <x-hearth-error for="current_password" bag="destroyAccount" />
         </div>
 
-        <x-hearth-button>
+        <button>
             {{ __('hearth::user.action_delete_account') }}
-        </x-hearth-button>
+        </button>
     </form>
 </x-app-layout>
