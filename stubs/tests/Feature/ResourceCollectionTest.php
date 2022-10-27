@@ -25,7 +25,7 @@ class ResourceCollectionTest extends TestCase
         $response = $this->actingAs($user)->get(localized_route('resource-collections.create'));
         $response->assertOk();
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create', []), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store', []), [
             'user_id' => $user->id,
             'title' => 'Test resource collection',
             'description' => 'This is my resource collection.',
@@ -48,14 +48,19 @@ class ResourceCollectionTest extends TestCase
         }
 
         $user = User::factory()->create();
-        $resource = Resource::factory(5)->create();
+        $resources = Resource::factory(5)->create();
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store'), [
             'user_id' => $user->id,
             'title' => 'unique title',
             'description' => 'This is my resource collection',
+            'resource_ids' => $resources->modelKeys(),
         ]);
-        $response->assertSee('resources', $resource);
+        $response->assertSessionHasNoErrors();
+
+        $resourceCollection = ResourceCollection::first();
+
+        $response->assertRedirect(localized_route('resource-collections.show', ['resourceCollection' => $resourceCollection]));
     }
 
     public function test_users_can_edit_resource_collections_belonging_to_them()
@@ -153,13 +158,13 @@ class ResourceCollectionTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store'), [
             'user_id' => $user->id,
             'title' => 'unique title',
             'description' => 'This is my resource collection',
         ]);
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store'), [
             'user_id' => $user->id,
             'title' => 'unique title',
             'description' => 'This is my resource collection',
@@ -169,7 +174,7 @@ class ResourceCollectionTest extends TestCase
 
         App::setLocale('fr');
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store'), [
             'user_id' => $user->id,
             'title' => 'unique title',
             'description' => 'This is my resource collection',
@@ -186,14 +191,14 @@ class ResourceCollectionTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store'), [
             'user_id' => $user->id,
             'title' => 'Test resource collection',
         ]);
 
         $response->assertSessionHasErrors(['description' => 'The description field is required.']);
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store'), [
             'user_id' => $user->id,
             'title' => 'Test resource collection',
             'description' => 1,
@@ -201,7 +206,7 @@ class ResourceCollectionTest extends TestCase
 
         $response->assertSessionHasErrors(['description' => 'The description must be a string.']);
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store'), [
             'user_id' => $user->id,
             'description' => 'This is my resource collection',
         ]);
@@ -214,7 +219,7 @@ class ResourceCollectionTest extends TestCase
             $lengthyTitle = $lengthyTitle.'a';
         }
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store'), [
             'user_id' => $user->id,
             'title' => $lengthyTitle,
             'description' => 'This is my resource collection',
@@ -222,7 +227,7 @@ class ResourceCollectionTest extends TestCase
 
         $response->assertSessionHasErrors(['title' => 'The title must not be greater than 255 characters.']);
 
-        $response = $this->actingAs($user)->post(localized_route('resource-collections.create'), [
+        $response = $this->actingAs($user)->post(localized_route('resource-collections.store'), [
             'user_id' => $user->id,
             'title' => 1,
             'description' => 'This is my resource collection',
