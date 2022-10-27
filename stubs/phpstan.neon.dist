@@ -16,6 +16,8 @@ parameters:
     # The level 9 is the highest level
     level: 5
 
-    ignoreErrors:
-        - '#Call to an undefined static method Illuminate\\Support\\Facades\\Route::multilingual\(\)#'
+    scanFiles:
+      - vendor/chinleung/laravel-locales/src/helpers.php
+
+    ignoreErrors: []
     checkMissingIterableValueType: false
