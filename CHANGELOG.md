@@ -1,5 +1,22 @@
 # Changelog
 
+### [3.0.1](https://www.github.com/fluid-project/hearth/compare/v3.0.0...v3.0.1) (2023-10-05)
+
+
+### Bug Fixes
+
+* resource collection test fails when APP_DEBUG=false (Resolves [#176](https://www.github.com/fluid-project/hearth/issues/176)) ([#177](https://www.github.com/fluid-project/hearth/issues/177)) ([448cf92](https://www.github.com/fluid-project/hearth/commit/448cf9231d4aa1601b32fd4fc3b3d26617770cf4))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump actions/cache from 2 to 3 ([#185](https://www.github.com/fluid-project/hearth/issues/185)) ([2314de2](https://www.github.com/fluid-project/hearth/commit/2314de2af12ae7134fce34764b513efa15f16ef8))
+* **deps:** bump actions/checkout from 2 to 4 ([#184](https://www.github.com/fluid-project/hearth/issues/184)) ([ce43463](https://www.github.com/fluid-project/hearth/commit/ce43463c18d59cb5a910a6a0c37a6258dde6fb0d))
+* **deps:** bump google-github-actions/release-please-action from 2 to 3 ([#187](https://www.github.com/fluid-project/hearth/issues/187)) ([7a83aea](https://www.github.com/fluid-project/hearth/commit/7a83aea51be986739efbeb60f49edc45d9775389))
+* **deps:** bump pascalgn/automerge-action from 0.14.2 to 0.15.6 ([#186](https://www.github.com/fluid-project/hearth/issues/186)) ([08bfa2b](https://www.github.com/fluid-project/hearth/commit/08bfa2b55d62b40eea3cee8ab3b79d0a7b331b41))
+* **deps:** update codezero/laravel-unique-translation requirement ([#179](https://www.github.com/fluid-project/hearth/issues/179)) ([d5783f0](https://www.github.com/fluid-project/hearth/commit/d5783f07155503f901fa59a3fba342f1b93fb06b))
+* update Dependabot configuration ([7d29898](https://www.github.com/fluid-project/hearth/commit/7d29898c35521998c22e2764c5a5cb1f95ad0990))
+
 ## [3.0.0](https://www.github.com/fluid-project/hearth/compare/v2.0.2...v3.0.0) (2022-08-30)
 
 
