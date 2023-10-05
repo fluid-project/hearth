@@ -41,7 +41,7 @@ class ResourceSelect extends Component
 
     public function removeResource(int $i): void
     {
-        /** @var ?Resource $resourceToAdd */
+        /** @var ?Resource $resourceToRemove */
         $resourceToRemove = $this->selectedResources->offsetGet($i);
         if ($resourceToRemove) {
             $this->availableResources->push($resourceToRemove);
