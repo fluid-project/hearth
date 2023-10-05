@@ -16,7 +16,6 @@ class MembershipController extends Controller
     /**
      * Show the form for editing the specified membershipable member.
      *
-     * @param  Membership  $membership
      * @return mixed
      */
     public function edit(Membership $membership)
@@ -37,10 +36,6 @@ class MembershipController extends Controller
 
     /**
      * Update the given member's role.
-     *
-     * @param  UpdateMembershipRequest  $request
-     * @param  Membership  $membership
-     * @return RedirectResponse
      */
     public function update(UpdateMembershipRequest $request, Membership $membership): RedirectResponse
     {
@@ -63,10 +58,6 @@ class MembershipController extends Controller
 
     /**
      * Remove the given member from the organization.
-     *
-     * @param  Request  $request
-     * @param  Membership  $membership
-     * @return RedirectResponse
      */
     public function destroy(Request $request, Membership $membership): RedirectResponse
     {

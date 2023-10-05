@@ -43,8 +43,6 @@ class RadioButton extends Component
 
     /**
      * Whether the checkbox is checked.
-     *
-     * @var bool
      */
     public bool $checked;
 

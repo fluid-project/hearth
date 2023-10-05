@@ -32,8 +32,6 @@ class Invitation extends Model
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {
@@ -50,8 +48,6 @@ class Invitation extends Model
 
     /**
      * Accept an invitation.
-     *
-     * @return void
      */
     public function accept(): void
     {

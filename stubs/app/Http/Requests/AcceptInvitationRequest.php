@@ -14,8 +14,6 @@ class AcceptInvitationRequest extends FormRequest
 
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -35,7 +33,6 @@ class AcceptInvitationRequest extends FormRequest
     /**
      * Configure the validator instance.
      *
-     * @param  Validator  $validator
      * @return void
      */
     public function withValidator(Validator $validator)
@@ -48,9 +45,6 @@ class AcceptInvitationRequest extends FormRequest
 
     /**
      * Ensure that the user is not already part of a team.
-     *
-     * @param  User  $user
-     * @return \Closure
      */
     protected function ensureInviteeHasNoExistingMemberships(User $user): \Closure
     {
@@ -65,10 +59,6 @@ class AcceptInvitationRequest extends FormRequest
 
     /**
      * Ensure that the user is not already part of this team.
-     *
-     * @param  mixed  $invitationable
-     * @param  string  $email
-     * @return \Closure
      */
     protected function ensureInviteeIsNotAlreadyAMember(mixed $invitationable, string $email): \Closure
     {
@@ -83,10 +73,6 @@ class AcceptInvitationRequest extends FormRequest
 
     /**
      * Ensure that the authenticated user is the user who was invited.
-     *
-     * @param  User  $user
-     * @param  string  $email
-     * @return \Closure
      */
     protected function ensureCurrentUserIsInvitee(User $user, string $email): \Closure
     {

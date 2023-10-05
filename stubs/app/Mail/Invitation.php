@@ -23,7 +23,6 @@ class Invitation extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \Hearth\Models\Invitation  $invitation
      * @return void
      */
     public function __construct(InvitationModel $invitation)

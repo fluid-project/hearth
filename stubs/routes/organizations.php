@@ -43,7 +43,7 @@ Route::multilingual('/organizations/{organization}/delete', [OrganizationControl
     ->name('organizations.destroy');
 
 Route::multilingual('/memberships/{membership}/edit', [MembershipController::class, 'edit'])
-->name('memberships.edit');
+    ->name('memberships.edit');
 
 Route::multilingual('/memberships/{membership}/update', [MembershipController::class, 'update'])
     ->method('put')

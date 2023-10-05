@@ -29,8 +29,6 @@ class ResourceCollection extends Model
 
     /**
      * The attributes that are transterms
-     *
-     * @var array
      */
     public array $translatable = [
         'title',
@@ -50,8 +48,6 @@ class ResourceCollection extends Model
 
     /**
      * Get the route key for the model.
-     *
-     * @return string
      */
     public function getRouteKeyName(): string
     {
@@ -60,8 +56,6 @@ class ResourceCollection extends Model
 
     /**
      * Get user of this resource collection
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -70,8 +64,6 @@ class ResourceCollection extends Model
 
     /**
      * Get all of the resources that are assigned this collection.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function resources(): BelongsToMany
     {

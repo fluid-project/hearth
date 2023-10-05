@@ -12,9 +12,6 @@ class JoinController extends Controller
 {
     /**
      * Cancel a request to join a team.
-     *
-     * @param  Request  $request
-     * @return RedirectResponse
      */
     public function cancel(Request $request): RedirectResponse
     {
@@ -32,10 +29,6 @@ class JoinController extends Controller
 
     /**
      * Approve a request to join a team.
-     *
-     * @param  Request  $request
-     * @param  User  $user
-     * @return RedirectResponse
      */
     public function approve(Request $request, User $user): RedirectResponse
     {
@@ -57,10 +50,6 @@ class JoinController extends Controller
 
     /**
      * Deny a request to join a team.
-     *
-     * @param  Request  $request
-     * @param  User  $user
-     * @return RedirectResponse
      */
     public function deny(Request $request, User $user): RedirectResponse
     {

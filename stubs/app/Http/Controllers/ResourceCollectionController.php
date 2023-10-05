@@ -36,7 +36,6 @@ class ResourceCollectionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\CreateResourceCollectionRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateResourceCollectionRequest $request)
@@ -55,7 +54,6 @@ class ResourceCollectionController extends Controller
     /**
      * Display the specified resource collection.
      *
-     * @param  \App\Models\ResourceCollection  $resourceCollection
      * @return \Illuminate\View\View
      */
     public function show(ResourceCollection $resourceCollection)
@@ -66,7 +64,6 @@ class ResourceCollectionController extends Controller
     /**
      * Show the form for editing the specified resource collection.
      *
-     * @param  \App\Models\ResourceCollection  $resourceCollection
      * @return \Illuminate\View\View
      */
     public function edit(ResourceCollection $resourceCollection)
@@ -80,8 +77,6 @@ class ResourceCollectionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateResourceCollectionRequest  $request
-     * @param  \App\Models\ResourceCollection  $resourceCollection
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateResourceCollectionRequest $request, ResourceCollection $resourceCollection)
@@ -98,8 +93,6 @@ class ResourceCollectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Requests\DestroyResourceCollectionRequest  $request
-     * @param  \App\Models\ResourceCollection  $resourceCollection
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(DestroyResourceCollectionRequest $request, ResourceCollection $resourceCollection)

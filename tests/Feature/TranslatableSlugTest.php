@@ -59,8 +59,8 @@ class TranslatableSlugTest extends TestCase
                 return $translatable->name;
             }
         )
-        ->middleware(DetectRequestLocale::class)
-        ->name('translatables.show');
+            ->middleware(DetectRequestLocale::class)
+            ->name('translatables.show');
 
         Route::dispatch(Request::create(localized_route('translatables.show', $translatable)));
 
