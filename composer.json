@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^8.0|^8.1",
+        "php": "^8.1",
         "chinleung/laravel-locales": "^2.0",
         "chinleung/laravel-multilingual-routes": "^3.0",
         "codezero/laravel-unique-translation": "^4.0",
