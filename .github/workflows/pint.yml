@@ -15,18 +15,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      - name: Cache Composer packages
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: php-${{ hashFiles('**/composer.lock') }}
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
-
+          coverage: none
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
       - name: Run Pint
         run: composer format
-
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

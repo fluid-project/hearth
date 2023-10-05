@@ -38,6 +38,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Cache Composer packages
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: php-${{ hashFiles('**/composer.lock') }}
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
