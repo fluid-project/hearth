@@ -24,7 +24,7 @@ Hearth is a simple starter kit for the Laravel framework. It provides a few thin
 
 ## Installation
 
-Hearth requires PHP >= 8.1 and Laravel >= 9.
+Hearth requires PHP >= 8.1 and Laravel >= 10.
 
 You may use Composer to install Hearth into your new Laravel project:
 
@@ -52,7 +52,7 @@ php artisan storage:link
 
 ### Emails
 
-In order to test emails (for example, using Mailhog with [Laravel Sail](https://laravel.com/docs/8.x/sail#previewing-emails)),
+In order to test emails (for example, using Mailhog with [Laravel Sail](https://laravel.com/docs/10.x/sail#previewing-emails)),
 you must update your Laravel application's `.env` file's `MAIL_FROM_ADDRESS` environment variable with a
 properly-formatted email address. For local development, this might be `noreply@hearth.test` (assuming your local
  application is accessible at `http://hearth.test`).
