@@ -35,7 +35,7 @@ class ResourceSelect extends Component
         if ($resourceToAdd) {
             $this->selectedResources->push($resourceToAdd);
             $this->availableResources->splice($i, 1);
-            $this->message = __('Resource ":resource" added to collection.', ['resource' => $resourceToAdd->title]);
+            $this->message = __('Resource ":resource" added to collection.', ['resource' => $resourceToAdd->getTranslation('title', locale())]);
         }
     }
 
@@ -46,7 +46,7 @@ class ResourceSelect extends Component
         if ($resourceToRemove) {
             $this->availableResources->push($resourceToRemove);
             $this->selectedResources->splice($i, 1);
-            $this->message = __('Resource ":resource" removed from collection.', ['resource' => $resourceToRemove->title]);
+            $this->message = __('Resource ":resource" removed from collection.', ['resource' => $resourceToRemove->getTranslation('title', locale())]);
         }
     }
 
