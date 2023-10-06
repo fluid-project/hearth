@@ -78,7 +78,7 @@
     "scripts": {
         "format": "vendor/bin/pint",
         "analyze": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/phpunit --no-coverage",
+        "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-clover coverage.xml"
     }
 }
