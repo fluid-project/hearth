@@ -34,19 +34,21 @@
         "spatie/laravel-translatable": "^6.0"
     },
     "require-dev": {
-        "brianium/paratest": "^7.0",
         "laravel/pint": "^1.1",
         "nunomaduro/collision": "^7.9",
         "nunomaduro/larastan": "^2.6",
         "orchestra/testbench": "^8.0",
-        "phpunit/phpunit": "^10.0",
+        "pestphp/pest": "^2.21",
         "spatie/laravel-ray": "^1.26"
     },
     "suggest": {
         "nunomaduro/larastan": "The included phpstan configuration requires Larastan"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {
@@ -78,7 +80,7 @@
     "scripts": {
         "format": "vendor/bin/pint",
         "analyze": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --configuration phpunit-coverage.xml.dist --coverage-clover coverage.xml"
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --configuration phpunit-coverage.xml.dist --coverage-clover coverage.xml"
     }
 }
