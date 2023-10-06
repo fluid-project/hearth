@@ -9,8 +9,6 @@ trait HasRequestsToJoin
 {
     /**
      * Get all the model's requests to join.
-     *
-     * @return MorphMany
      */
     public function requestsToJoin(): MorphMany
     {

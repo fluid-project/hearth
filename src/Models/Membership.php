@@ -23,8 +23,6 @@ class Membership extends MorphPivot
 
     /**
      * Return the parent user of the membership.
-     *
-     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -33,8 +31,6 @@ class Membership extends MorphPivot
 
     /**
      * Retrieve the parent model of the membership.
-     *
-     * @return mixed
      */
     public function membershipable(): mixed
     {

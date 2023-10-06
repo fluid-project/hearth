@@ -196,7 +196,6 @@ class HearthCommand extends Command
     /**
      * Add a new locale to config/locales.php based on user input.
      *
-     * @param  string  $after
      * @return void
      */
     protected function maybeAddLocale(string $after = 'fr')
@@ -239,8 +238,6 @@ class HearthCommand extends Command
     /**
      * Install the service provider in the application configuration file.
      *
-     * @param  string  $after
-     * @param  string  $name
      * @return void
      */
     protected function installServiceProviderAfter(string $after, string $name)
@@ -257,9 +254,6 @@ class HearthCommand extends Command
     /**
      * Install the middleware to a group in the application Http Kernel.
      *
-     * @param  string  $before
-     * @param  string  $name
-     * @param  string  $group
      * @return void
      */
     protected function installMiddlewareBefore(string $before, string $name, string $group = 'web')
@@ -287,8 +281,6 @@ class HearthCommand extends Command
     /**
      * Update the "package.json" file.
      *
-     * @param  callable  $callback
-     * @param  bool  $dev
      * @return void
      */
     protected static function updateNodePackages(callable $callback, bool $dev = true)
@@ -333,9 +325,6 @@ class HearthCommand extends Command
     /**
      * Replace a given string within a given file.
      *
-     * @param  string  $search
-     * @param  string  $replace
-     * @param  string  $path
      * @return void
      */
     protected function replaceInFile(string $search, string $replace, string $path)

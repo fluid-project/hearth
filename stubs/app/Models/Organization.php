@@ -20,8 +20,8 @@ class Organization extends Model
     use HasInvitations;
     use HasMembers;
     use HasRequestsToJoin;
-    use HasTranslations;
     use HasTranslatableSlug;
+    use HasTranslations;
     use Notifiable;
 
     /**
@@ -66,8 +66,6 @@ class Organization extends Model
 
     /**
      * Get the route key for the model.
-     *
-     * @return string
      */
     public function getRouteKeyName(): string
     {
@@ -76,8 +74,6 @@ class Organization extends Model
 
     /**
      * Get the route prefix for the model.
-     *
-     * @return string
      */
     public function getRoutePrefix(): string
     {

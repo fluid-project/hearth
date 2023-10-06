@@ -99,11 +99,6 @@ if (! function_exists('get_locale_name')) {
 if (! function_exists('trans_current_route')) {
     /**
      * Retrieve the current route in another locale.
-     *
-     * @param  string|null  $locale
-     * @param  string|null  $fallback
-     * @param  bool  $absolute
-     * @return string
      */
     function trans_current_route(string $locale = null, string $fallback = null, bool $absolute = true): string
     {

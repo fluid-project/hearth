@@ -15,8 +15,6 @@ class OrganizationController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return View
      */
     public function index(): View
     {
@@ -25,8 +23,6 @@ class OrganizationController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return View
      */
     public function create(): View
     {
@@ -37,9 +33,6 @@ class OrganizationController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  CreateOrganizationRequest  $request
-     * @return RedirectResponse
      */
     public function store(CreateOrganizationRequest $request): RedirectResponse
     {
@@ -57,9 +50,6 @@ class OrganizationController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  Organization  $organization
-     * @return View
      */
     public function show(Organization $organization): View
     {
@@ -68,9 +58,6 @@ class OrganizationController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  Organization  $organization
-     * @return View
      */
     public function edit(Organization $organization): View
     {
@@ -89,10 +76,6 @@ class OrganizationController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  UpdateOrganizationRequest  $request
-     * @param  Organization  $organization
-     * @return RedirectResponse
      */
     public function update(UpdateOrganizationRequest $request, Organization $organization): RedirectResponse
     {
@@ -104,11 +87,6 @@ class OrganizationController extends Controller
         return redirect(\localized_route('organizations.show', $organization));
     }
 
-    /**
-     * @param  Request  $request
-     * @param  Organization  $organization
-     * @return RedirectResponse
-     */
     public function join(Request $request, Organization $organization): RedirectResponse
     {
         $organization->requestsToJoin()->save($request->user());
@@ -120,10 +98,6 @@ class OrganizationController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  DestroyOrganizationRequest  $request
-     * @param  Organization  $organization
-     * @return RedirectResponse
      */
     public function destroy(DestroyOrganizationRequest $request, Organization $organization): RedirectResponse
     {

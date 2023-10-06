@@ -33,7 +33,6 @@ class UserController extends Controller
     /**
      * Destroy a given user.
      *
-     * @param  \App\Http\Requests\DestroyUserRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(DestroyUserRequest $request)

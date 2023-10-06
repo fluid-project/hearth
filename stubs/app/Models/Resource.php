@@ -49,8 +49,6 @@ class Resource extends Model
 
     /**
      * Get the route key for the model.
-     *
-     * @return string
      */
     public function getRouteKeyName(): string
     {
@@ -59,8 +57,6 @@ class Resource extends Model
 
     /**
      * Get all of the resource collections that include this resource.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function resourceCollections(): BelongsToMany
     {

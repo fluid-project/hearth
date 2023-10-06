@@ -11,8 +11,6 @@ class UserProfileInformationController extends Controller
     /**
      * Update the user's profile information.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Laravel\Fortify\Contracts\UpdatesUserProfileInformation  $updater
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function update(

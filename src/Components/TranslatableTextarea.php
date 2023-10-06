@@ -12,29 +12,21 @@ class TranslatableTextarea extends Component
 
     /**
      * The name for the input.
-     *
-     * @var string
      */
     public string $name;
 
     /**
      * The label for the input.
-     *
-     * @var string
      */
     public string $label;
 
     /**
      * The locales supported by the input.
-     *
-     * @var array
      */
     public array $locales;
 
     /**
      * The model to which the input field belongs.
-     *
-     * @var mixed
      */
     public mixed $model;
 
@@ -53,8 +45,6 @@ class TranslatableTextarea extends Component
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View
      */
     public function render(): View
     {
