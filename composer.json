@@ -79,6 +79,6 @@
         "format": "vendor/bin/pint",
         "analyze": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-clover coverage.xml"
+        "test-coverage": "vendor/bin/phpunit --configuration phpunit-coverage.xml.dist --coverage-clover coverage.xml"
     }
 }
