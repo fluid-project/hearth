@@ -14,8 +14,6 @@ class Checkboxes extends Component
 
     /**
      * The name of the checkboxes as used in form submission.
-     *
-     * @var string
      */
     public string $name;
 
@@ -35,15 +33,11 @@ class Checkboxes extends Component
 
     /**
      * The checked options.
-     *
-     * @var array
      */
     public array $checked;
 
     /**
      * Whether the form input has validation errors.
-     *
-     * @var bool
      */
     public bool $invalid;
 

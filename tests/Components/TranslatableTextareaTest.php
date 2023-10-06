@@ -10,15 +10,15 @@ class TranslatableTextareaTest extends TestCase
     public function test_translatable_textarea_component_render_in_english()
     {
         $view = $this->withViewErrors([])
-        ->blade(
-            '<x-hearth-translatable-textarea :name="$name" :label="$label" :locales="$locales" :model="$model"> </x-hearth-translatable-textarea>',
-            [
-                'name' => 'resource',
-                'label' => 'test resource',
-                'locales' => ['en', 'fr'],
-                'model' => null,
-            ],
-        );
+            ->blade(
+                '<x-hearth-translatable-textarea :name="$name" :label="$label" :locales="$locales" :model="$model"> </x-hearth-translatable-textarea>',
+                [
+                    'name' => 'resource',
+                    'label' => 'test resource',
+                    'locales' => ['en', 'fr'],
+                    'model' => null,
+                ],
+            );
 
         $view->assertSee('for="resource_en"', false);
         $view->assertSee('name="resource[en]"', false);

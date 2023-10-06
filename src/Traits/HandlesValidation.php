@@ -13,7 +13,6 @@ trait HandlesValidation
      *
      * @param  string  $name The name of the form input.
      * @param  string  $bag The error bag associated with the form input.
-     * @return bool
      */
     public function hasErrors(string $name, string $bag): bool
     {

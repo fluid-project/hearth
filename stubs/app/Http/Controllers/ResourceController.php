@@ -34,7 +34,6 @@ class ResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\CreateResourceRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateResourceRequest $request)
@@ -49,7 +48,6 @@ class ResourceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\View\View
      */
     public function show(Resource $resource)
@@ -60,7 +58,6 @@ class ResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\View\View
      */
     public function edit(Resource $resource)
@@ -71,8 +68,6 @@ class ResourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateResourceRequest  $request
-     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateResourceRequest $request, Resource $resource)
@@ -88,8 +83,6 @@ class ResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Requests\DestroyResourceRequest  $request
-     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(DestroyResourceRequest $request, Resource $resource)

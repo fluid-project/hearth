@@ -10,9 +10,6 @@ class VerifyEmailController extends \Laravel\Fortify\Http\Controllers\VerifyEmai
 {
     /**
      * Mark the authenticated user's email address as verified.
-     *
-     * @param  \Laravel\Fortify\Http\Requests\VerifyEmailRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function __invoke(VerifyEmailRequest $request): RedirectResponse
     {

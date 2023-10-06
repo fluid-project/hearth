@@ -56,7 +56,7 @@ class DateInput extends Component
     /**
      * Whether the form input has a hint associated with it.
      *
-     * @var bool
+     * @var bool|string
      */
     public $hinted;
 

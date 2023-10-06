@@ -24,7 +24,7 @@ Hearth is a simple starter kit for the Laravel framework. It provides a few thin
 
 ## Installation
 
-Hearth requires PHP >= 8 and Laravel >= 9.
+Hearth requires PHP >= 8.1 and Laravel >= 9.
 
 You may use Composer to install Hearth into your new Laravel project:
 

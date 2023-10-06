@@ -81,8 +81,6 @@ class FortifyServiceProvider extends ServiceProvider
 
     /**
      * Register response bindings.
-     *
-     * @return void
      */
     protected function registerResponseBindings(): void
     {

@@ -8,3 +8,11 @@ updates:
       - "greatislander"
     reviewers:
       - "greatislander"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    assignees:
+      - "greatislander"
+    reviewers:
+      - "greatislander"

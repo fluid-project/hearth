@@ -29,9 +29,6 @@ class HearthServiceProvider extends PackageServiceProvider
      * Configure the PackageServiceProvider.
      *
      * @see https://github.com/spatie/laravel-package-tools
-     *
-     * @param  Package  $package
-     * @return void
      */
     public function configurePackage(Package $package): void
     {

@@ -78,8 +78,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Get the route key for the model.
-     *
-     * @return string
      */
     public function getRouteKeyName(): string
     {
@@ -88,8 +86,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Get the user's preferred locale.
-     *
-     * @return string
      */
     public function preferredLocale(): string
     {
@@ -98,8 +94,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Get the user's resource collections.
-     *
-     * @return HasMany
      */
     public function resourceCollections(): HasMany
     {
@@ -116,8 +110,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Get the parent joinable model.
-     *
-     * @return MorphTo
      */
     public function joinable(): MorphTo
     {
@@ -127,7 +119,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     /**
      * Has the user requested to join a model?
      *
-     * @param  mixed  $model
      * @return bool
      */
     public function hasRequestedToJoin(mixed $model)
@@ -137,8 +128,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Get the organizations that belong to this user.
-     *
-     * @return MorphToMany
      */
     public function organizations(): MorphToMany
     {
@@ -151,8 +140,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Get the organization that belongs to the user.
-     *
-     * @return mixed
      */
     public function getOrganizationAttribute(): mixed
     {
@@ -161,9 +148,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Determine if the user is a member of a given membershipable model.
-     *
-     * @param  mixed  $model
-     * @return bool
      */
     public function isMemberOf(mixed $model): bool
     {
@@ -172,9 +156,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Determine if the user is an administrator of a given model.
-     *
-     * @param  mixed  $model
-     * @return bool
      */
     public function isAdministratorOf(mixed $model): bool
     {
@@ -183,8 +164,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
 
     /**
      * Is two-factor authentication enabled for this user?
-     *
-     * @return bool
      */
     public function twoFactorAuthEnabled(): bool
     {
