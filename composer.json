@@ -19,13 +19,12 @@
     "require": {
         "php": "^8.1",
         "chinleung/laravel-locales": "^2.0",
-        "chinleung/laravel-multilingual-routes": "^3.0",
+        "chinleung/laravel-multilingual-routes": "^4.0",
         "codezero/laravel-unique-translation": "^4.0",
         "commerceguys/addressing": "^2.0",
         "commerceguys/intl": "^2.0",
-        "illuminate/contracts": "^9.20",
         "laravel/fortify": "^1.10",
-        "laravel/framework": "^9.21",
+        "laravel/framework": "^10.0",
         "livewire/livewire": "^2.10",
         "shiftonelabs/laravel-cascade-deletes": "^2.0",
         "spatie/laravel-flash": "^1.9",
@@ -35,12 +34,12 @@
         "spatie/laravel-translatable": "^6.0"
     },
     "require-dev": {
-        "brianium/paratest": "^6.2",
+        "brianium/paratest": "^7.0",
         "laravel/pint": "^1.1",
         "nunomaduro/collision": "^7.9",
         "nunomaduro/larastan": "^2.6",
-        "orchestra/testbench": "^7.0",
-        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^8.0",
+        "phpunit/phpunit": "^10.0",
         "spatie/laravel-ray": "^1.26"
     },
     "suggest": {
@@ -79,7 +78,7 @@
     "scripts": {
         "format": "vendor/bin/pint",
         "analyze": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/phpunit --no-coverage",
-        "test-coverage": "vendor/bin/phpunit --coverage-clover coverage.xml"
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --configuration phpunit-coverage.xml.dist --coverage-clover coverage.xml"
     }
 }

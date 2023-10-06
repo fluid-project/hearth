@@ -3,9 +3,11 @@
 .php_cs.cache
 .php-cs-fixer.cache
 .phpunit.result.cache
+.phpunit.cache
 build
 composer.lock
 coverage
+coverage.xml
 docs
 phpstan.neon
 phpunit.xml
