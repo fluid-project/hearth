@@ -1,5 +1,38 @@
 # Changelog
 
+## [4.0.0](https://github.com/fluid-project/hearth/compare/v3.0.0...v4.0.0) (2023-10-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* bump Laravel requirement to 10.x ([#193](https://github.com/fluid-project/hearth/issues/193))
+* bump minimum PHP to 8.1 ([#191](https://github.com/fluid-project/hearth/issues/191))
+
+### Features
+
+* bump Laravel requirement to 10.x ([#193](https://github.com/fluid-project/hearth/issues/193)) ([9d2ae43](https://github.com/fluid-project/hearth/commit/9d2ae431cf0fe3ab65ad010e4f6e647ac90c6ab6))
+* bump minimum PHP to 8.1 ([#191](https://github.com/fluid-project/hearth/issues/191)) ([2bbe244](https://github.com/fluid-project/hearth/commit/2bbe2442c9c69912f8fd915364ab515d8c35e133))
+
+
+### Bug Fixes
+
+* resolve analysis error ([914c52c](https://github.com/fluid-project/hearth/commit/914c52c68a3cb0e8c5049ba50a62e96464a3c6eb))
+* resource collection test fails when APP_DEBUG=false (Resolves [#176](https://github.com/fluid-project/hearth/issues/176)) ([#177](https://github.com/fluid-project/hearth/issues/177)) ([448cf92](https://github.com/fluid-project/hearth/commit/448cf9231d4aa1601b32fd4fc3b3d26617770cf4))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** update nunomaduro/collision requirement from ^6.0 to ^7.9 ([#188](https://github.com/fluid-project/hearth/issues/188)) ([93b2f58](https://github.com/fluid-project/hearth/commit/93b2f58c7126a6c34f5716413d3758b89fa7b517))
+* **deps:** bump actions/cache from 2 to 3 ([#185](https://github.com/fluid-project/hearth/issues/185)) ([2314de2](https://github.com/fluid-project/hearth/commit/2314de2af12ae7134fce34764b513efa15f16ef8))
+* **deps:** bump actions/checkout from 2 to 4 ([#184](https://github.com/fluid-project/hearth/issues/184)) ([ce43463](https://github.com/fluid-project/hearth/commit/ce43463c18d59cb5a910a6a0c37a6258dde6fb0d))
+* **deps:** bump google-github-actions/release-please-action from 2 to 3 ([#187](https://github.com/fluid-project/hearth/issues/187)) ([7a83aea](https://github.com/fluid-project/hearth/commit/7a83aea51be986739efbeb60f49edc45d9775389))
+* **deps:** bump pascalgn/automerge-action from 0.14.2 to 0.15.6 ([#186](https://github.com/fluid-project/hearth/issues/186)) ([08bfa2b](https://github.com/fluid-project/hearth/commit/08bfa2b55d62b40eea3cee8ab3b79d0a7b331b41))
+* **deps:** update codezero/laravel-unique-translation requirement ([#179](https://github.com/fluid-project/hearth/issues/179)) ([d5783f0](https://github.com/fluid-project/hearth/commit/d5783f07155503f901fa59a3fba342f1b93fb06b))
+* **deps:** update commerceguys/addressing requirement from ^1.2 to ^2.0 ([#189](https://github.com/fluid-project/hearth/issues/189)) ([950b8fb](https://github.com/fluid-project/hearth/commit/950b8fb81360d941be08b274a1fc759a1a72f33b))
+* **deps:** update commerceguys/intl requirement from ^1.1 to ^2.0 ([#182](https://github.com/fluid-project/hearth/issues/182)) ([65965c8](https://github.com/fluid-project/hearth/commit/65965c842abeef3260d0f08394119992fa6d53d3))
+* **deps:** update shiftonelabs/laravel-cascade-deletes requirement from ^1.0 to ^2.0 ([#181](https://github.com/fluid-project/hearth/issues/181)) ([96a3eb9](https://github.com/fluid-project/hearth/commit/96a3eb9d5e1d359c4dfb0872fe076841eb1e7919))
+* update Dependabot configuration ([7d29898](https://github.com/fluid-project/hearth/commit/7d29898c35521998c22e2764c5a5cb1f95ad0990))
+
 ## [3.0.0](https://www.github.com/fluid-project/hearth/compare/v2.0.2...v3.0.0) (2022-08-30)
 
 
