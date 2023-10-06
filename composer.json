@@ -22,7 +22,7 @@
         "chinleung/laravel-multilingual-routes": "^3.0",
         "codezero/laravel-unique-translation": "^4.0",
         "commerceguys/addressing": "^2.0",
-        "commerceguys/intl": "^1.1",
+        "commerceguys/intl": "^2.0",
         "illuminate/contracts": "^9.20",
         "laravel/fortify": "^1.10",
         "laravel/framework": "^9.21",
