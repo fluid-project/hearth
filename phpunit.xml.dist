@@ -5,6 +5,11 @@
       <directory>tests</directory>
     </testsuite>
   </testsuites>
+  <source>
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+  </source>
   <coverage>
     <report>
       <html outputDirectory="build/coverage"/>
@@ -22,9 +27,4 @@
     <env name="DB_HOST" value="127.0.0.1"/>
     <env name="DB_PORT" value="3306"/>
   </php>
-  <source>
-    <include>
-      <directory suffix=".php">./src</directory>
-    </include>
-  </source>
 </phpunit>
