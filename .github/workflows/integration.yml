@@ -39,7 +39,7 @@ jobs:
       - name: Install Pest and Livewire
         run: |
           cd tests/integration
-          composer remove phpunit/phpunit
+          composer remove phpunit/phpunit --dev
           composer require pestphp/pest:^2.0 pestphp/pest-plugin-laravel:^2.0 pestphp/pest-plugin-drift --dev
           vendor/bin/pest --init
           vendor/bin/pest --drift
