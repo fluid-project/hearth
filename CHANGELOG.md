@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/fluid-project/hearth/compare/v4.0.0...v4.1.0) (2023-10-12)
+
+
+### Features
+
+* add support for Livewire v3 ([#196](https://github.com/fluid-project/hearth/issues/196)) ([e403e13](https://github.com/fluid-project/hearth/commit/e403e1320ecf267702f5710dff005682be62fbb1))
+
 ## [4.0.0](https://github.com/fluid-project/hearth/compare/v3.0.0...v4.0.0) (2023-10-06)
 
 
