@@ -1,111 +1,102 @@
 <?php
 
-namespace Tests\Feature;
-
-use App\Http\Livewire\ResourceSelect;
+use App\Livewire\ResourceSelect;
 use App\Models\Resource;
 use App\Models\ResourceCollection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
-use Tests\TestCase;
 
-class ResourceSelectTest extends TestCase
-{
-    use RefreshDatabase;
+uses(RefreshDatabase::class);
 
-    public function test_resource_select_when_resourceCollectionId_parameter_is_null()
-    {
-        if (! config('hearth.resources.enabled')) {
-            return $this->markTestSkipped('Resource support is not enabled.');
-        }
-
-        $resources = Resource::factory(5)->create();
-        $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => null]);
-        $this->assertEquals(count($resourceSelect->availableResources), 5);
-        $this->assertEquals(count($resourceSelect->selectedResources), 0);
-
-        $resourceIds = [];
-        foreach ($resources as $resource) {
-            $resourceIds[] = $resource->id;
-        }
-        foreach ($resourceSelect->availableResources as $availableResource) {
-            $this->assertTrue(in_array($availableResource['id'], $resourceIds, true));
-        }
+test('resource select when resource collection id parameter is null', function () {
+    if (! config('hearth.resources.enabled')) {
+        return $this->markTestSkipped('Resource support is not enabled.');
     }
 
-    public function test_resource_select_when_resourceCollectionId_parameter_is_not_null()
-    {
-        if (! config('hearth.resources.enabled')) {
-            return $this->markTestSkipped('Resource support is not enabled.');
-        }
+    $resources = Resource::factory(5)->create();
+    $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => null]);
+    expect(5)->toEqual(count($resourceSelect->availableResources));
+    expect(0)->toEqual(count($resourceSelect->selectedResources));
 
-        $resourceCollection = ResourceCollection::factory()->create();
-        $selectedResources = Resource::factory(5)->create();
-        $resourceCollection->resources()->attach($selectedResources);
+    $resourceIds = [];
+    foreach ($resources as $resource) {
+        $resourceIds[] = $resource->id;
+    }
+    foreach ($resourceSelect->availableResources as $availableResource) {
+        expect(in_array($availableResource['id'], $resourceIds, true))->toBeTrue();
+    }
+});
 
-        $availableResources = Resource::factory(3)->create();
-        $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => $resourceCollection->id]);
-        $this->assertEquals(count($resourceSelect->availableResources), 3);
-        $this->assertEquals(count($resourceSelect->selectedResources), 5);
-
-        $selectedResourceIds = [];
-        foreach ($selectedResources as $selectedResource) {
-            $selectedResourceIds[] = $selectedResource->id;
-        }
-        foreach ($resourceSelect->selectedResources as $selectedResource) {
-            $this->assertTrue(in_array($selectedResource['id'], $selectedResourceIds, true));
-        }
-
-        $availableResourceIds = [];
-        foreach ($availableResources as $availableResource) {
-            $availableResourceIds[] = $availableResource->id;
-        }
-        foreach ($resourceSelect->availableResources as $availableResource) {
-            $this->assertTrue(in_array($availableResource['id'], $availableResourceIds, true));
-        }
+test('resource select when resource collection id parameter is not null', function () {
+    if (! config('hearth.resources.enabled')) {
+        return $this->markTestSkipped('Resource support is not enabled.');
     }
 
-    public function test_addResource()
-    {
-        if (! config('hearth.resources.enabled')) {
-            return $this->markTestSkipped('Resource support is not enabled.');
-        }
+    $resourceCollection = ResourceCollection::factory()->create();
+    $selectedResources = Resource::factory(5)->create();
+    $resourceCollection->resources()->attach($selectedResources);
 
-        $resources = Resource::factory(5)->create();
-        $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => null]);
-        $sampleAvailableResource = $resourceSelect->availableResources[1];
+    $availableResources = Resource::factory(3)->create();
+    $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => $resourceCollection->id]);
+    expect(3)->toEqual(count($resourceSelect->availableResources));
+    expect(5)->toEqual(count($resourceSelect->selectedResources));
 
-        $this->assertEquals(count($resourceSelect->availableResources), 5);
-        $this->assertEquals(count($resourceSelect->selectedResources), 0);
-
-        $resourceSelect->call('addResource', 1);
-        $this->assertTrue($sampleAvailableResource->id == $resourceSelect->selectedResources[0]->id);
-
-        $this->assertEquals(count($resourceSelect->availableResources), 4);
-        $this->assertEquals(count($resourceSelect->selectedResources), 1);
+    $selectedResourceIds = [];
+    foreach ($selectedResources as $selectedResource) {
+        $selectedResourceIds[] = $selectedResource->id;
+    }
+    foreach ($resourceSelect->selectedResources as $selectedResource) {
+        expect(in_array($selectedResource['id'], $selectedResourceIds, true))->toBeTrue();
     }
 
-    public function test_removeResource()
-    {
-        if (! config('hearth.resources.enabled')) {
-            return $this->markTestSkipped('Resource support is not enabled.');
-        }
-
-        $resourceCollection = ResourceCollection::factory()->create();
-        $selectedResources = Resource::factory(5)->create();
-        $resourceCollection->resources()->attach($selectedResources);
-
-        $availableResources = Resource::factory(3)->create();
-        $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => $resourceCollection->id]);
-        $sampleSelectedResource = $resourceSelect->selectedResources[1];
-
-        $this->assertEquals(count($resourceSelect->availableResources), 3);
-        $this->assertEquals(count($resourceSelect->selectedResources), 5);
-
-        $resourceSelect->call('removeResource', 1);
-        $this->assertTrue($sampleSelectedResource->id == $resourceSelect->availableResources[3]->id);
-
-        $this->assertEquals(count($resourceSelect->availableResources), 4);
-        $this->assertEquals(count($resourceSelect->selectedResources), 4);
+    $availableResourceIds = [];
+    foreach ($availableResources as $availableResource) {
+        $availableResourceIds[] = $availableResource->id;
     }
-}
+    foreach ($resourceSelect->availableResources as $availableResource) {
+        expect(in_array($availableResource['id'], $availableResourceIds, true))->toBeTrue();
+    }
+});
+
+test('add resource', function () {
+    if (! config('hearth.resources.enabled')) {
+        return $this->markTestSkipped('Resource support is not enabled.');
+    }
+
+    $resources = Resource::factory(5)->create();
+    $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => null]);
+    $sampleAvailableResource = $resourceSelect->availableResources->offsetGet(1);
+
+    expect(5)->toEqual(count($resourceSelect->availableResources));
+    expect(0)->toEqual(count($resourceSelect->selectedResources));
+
+    $resourceSelect->call('addResource', 1);
+
+    expect($resourceSelect->selectedResources->pluck('id')->toArray())->toContain($sampleAvailableResource->id);
+
+    expect(4)->toEqual(count($resourceSelect->availableResources));
+    expect(1)->toEqual(count($resourceSelect->selectedResources));
+});
+
+test('remove resource', function () {
+    if (! config('hearth.resources.enabled')) {
+        return $this->markTestSkipped('Resource support is not enabled.');
+    }
+
+    $resourceCollection = ResourceCollection::factory()->create();
+    $selectedResources = Resource::factory(5)->create();
+    $resourceCollection->resources()->attach($selectedResources);
+
+    $availableResources = Resource::factory(3)->create();
+    $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => $resourceCollection->id]);
+    $sampleSelectedResource = $resourceSelect->selectedResources[1];
+
+    expect(3)->toEqual(count($resourceSelect->availableResources));
+    expect(5)->toEqual(count($resourceSelect->selectedResources));
+
+    $resourceSelect->call('removeResource', 1);
+    expect($sampleSelectedResource->id == $resourceSelect->availableResources[3]->id)->toBeTrue();
+
+    expect(4)->toEqual(count($resourceSelect->availableResources));
+    expect(4)->toEqual(count($resourceSelect->selectedResources));
+});

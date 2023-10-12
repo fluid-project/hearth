@@ -34,7 +34,8 @@ jobs:
           mysqladmin create laravel --user="root" --password="root"
       - name: Create project
         run: |
-          composer create-project --prefer-dist laravel/laravel:^${{ matrix.laravel }} tests/integration --no-interaction
+          composer global require laravel/installer:^${{ matrix.laravel }}
+          laravel new tests/integration --no-interaction --pest
       - name: Determine Hearth version
         run: |
           echo "hearth_version=${{ github.head_ref }}" >> $GITHUB_ENV
