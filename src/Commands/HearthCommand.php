@@ -94,10 +94,10 @@ class HearthCommand extends Command
 
             // Ensure folders are in place...
             $this->filesystem->ensureDirectoryExists(app_path('Actions/Fortify'));
+            $this->filesystem->ensureDirectoryExists(app_path('Http/Livewire'));
             $this->filesystem->ensureDirectoryExists(app_path('Http/Requests'));
             $this->filesystem->ensureDirectoryExists(app_path('Http/Requests/Auth'));
             $this->filesystem->ensureDirectoryExists(app_path('Http/Responses'));
-            $this->filesystem->ensureDirectoryExists(app_path('Livewire'));
             $this->filesystem->ensureDirectoryExists(app_path('Mail'));
             $this->filesystem->ensureDirectoryExists(app_path('Policies'));
             $this->filesystem->ensureDirectoryExists(app_path('Rules'));

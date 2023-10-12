@@ -15,8 +15,9 @@ jobs:
       matrix:
         php: [8.1, 8.2]
         laravel: [10]
+        livewire: [2, 3]
 
-    name: Integration tests - PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
+    name: Integration tests - PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - Livewire ${{ matrix.livewire }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,6 +37,7 @@ jobs:
         run: |
           composer global require laravel/installer:^${{ matrix.laravel }}
           laravel new tests/integration --no-interaction --pest
+          composer require livewire/livewire:^${{ matrix.livewire }}
       - name: Determine Hearth version
         run: |
           echo "hearth_version=${{ github.head_ref }}" >> $GITHUB_ENV
