@@ -35,8 +35,14 @@ jobs:
           mysqladmin create laravel --user="root" --password="root"
       - name: Create project
         run: |
-          composer global require laravel/installer:^${{ matrix.laravel }}
-          laravel new tests/integration --no-interaction --pest
+          composer create-project --prefer-dist laravel/laravel:^${{ matrix.laravel }} tests/integration --no-interaction
+      - name: Install Pest and Livewire
+        run: |
+          cd tests/integration
+          composer remove phpunit/phpunit
+          composer require pestphp/pest:^2.0 pestphp/pest-plugin-laravel:^2.0 pestphp/pest-plugin-drift --dev
+          vendor/bin/pest --init
+          vendor/bin/pest --drift
           composer require livewire/livewire:^${{ matrix.livewire }}
       - name: Determine Hearth version
         run: |
