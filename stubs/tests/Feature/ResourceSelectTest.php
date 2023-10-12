@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\ResourceSelect;
+use App\Http\Livewire\ResourceSelect;
 use App\Models\Resource;
 use App\Models\ResourceCollection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
