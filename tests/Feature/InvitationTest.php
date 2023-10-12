@@ -1,83 +1,54 @@
 <?php
 
-namespace Hearth\Tests\Feature;
-
 use App\Models\Organization;
 use App\Models\User;
 use Database\Factories\InvitationFactory;
 use Hearth\Models\Invitation;
-use Hearth\Tests\TestCase;
-use Illuminate\Support\Facades\Schema;
 
-class InvitationTest extends TestCase
-{
-    protected function getEnvironmentSetUp($app)
-    {
-        Schema::dropAllTables();
+test('invitation factory', function () {
+    expect(Invitation::factory())->toBeInstanceOf(InvitationFactory::class);
+});
 
-        $create_users_table = include __DIR__.'/../../database/migrations/create_users_table.php.stub';
-        $update_users_table = include __DIR__.'/../../database/migrations/update_users_table.php.stub';
-        $create_invitations_table = include __DIR__.'/../../database/migrations/2021_03_01_000000_create_invitations_table.php';
-        $create_memberships_table = include __DIR__.'/../../database/migrations/2021_03_01_000000_create_memberships_table.php';
-        $create_organizations_table = include __DIR__.'/../../database/migrations/create_organizations_table.php.stub';
+test('invitation can be created for organization', function () {
+    $user = User::forceCreate([
+        'name' => 'Frodo Baggins',
+        'email' => 'frodo@bag-end.net',
+        'password' => 'secret',
+    ]);
 
-        $create_users_table->up();
-        $update_users_table->up();
-        $create_invitations_table->up();
-        $create_memberships_table->up();
-        $create_organizations_table->up();
-    }
+    $otherUser = User::forceCreate([
+        'name' => 'Samwise Gamgee',
+        'email' => 'sam@bag-end.net',
+        'password' => 'secret',
+    ]);
 
-    public function test_invitation_factory()
-    {
-        $this->assertInstanceOf(
-            InvitationFactory::class,
-            Invitation::factory()
-        );
-    }
+    $organization = Organization::forceCreate([
+        'name' => json_encode(['en' => 'Fellowship']),
+        'locality' => 'Rivendell',
+        'region' => 'BC',
+    ]);
 
-    public function test_invitation_can_be_created_for_organization()
-    {
-        $user = User::forceCreate([
-            'name' => 'Frodo Baggins',
-            'email' => 'frodo@bag-end.net',
-            'password' => 'secret',
-        ]);
+    $invitation = Invitation::forceCreate([
+        'invitationable_id' => $organization->id,
+        'invitationable_type' => get_class($organization),
+        'email' => $user->email,
+        'role' => 'admin',
+    ]);
 
-        $otherUser = User::forceCreate([
-            'name' => 'Samwise Gamgee',
-            'email' => 'sam@bag-end.net',
-            'password' => 'secret',
-        ]);
+    $otherInvitation = Invitation::forceCreate([
+        'invitationable_id' => $organization->id,
+        'invitationable_type' => get_class($organization),
+        'email' => $otherUser->email,
+        'role' => 'member',
+    ]);
 
-        $organization = Organization::forceCreate([
-            'name' => json_encode(['en' => 'Fellowship']),
-            'locality' => 'Rivendell',
-            'region' => 'BC',
-        ]);
+    expect($organization->invitations)->toHaveCount(2);
+    expect($invitation->invitationable->id)->toEqual($organization->id);
 
-        $invitation = Invitation::forceCreate([
-            'invitationable_id' => $organization->id,
-            'invitationable_type' => get_class($organization),
-            'email' => $user->email,
-            'role' => 'admin',
-        ]);
+    $invitation->accept();
+    $otherInvitation->accept();
 
-        $otherInvitation = Invitation::forceCreate([
-            'invitationable_id' => $organization->id,
-            'invitationable_type' => get_class($organization),
-            'email' => $otherUser->email,
-            'role' => 'member',
-        ]);
-
-        $this->assertEquals(2, $organization->invitations->count());
-        $this->assertEquals($organization->id, $invitation->invitationable->id);
-
-        $invitation->accept();
-        $otherInvitation->accept();
-
-        $organization = $organization->fresh();
-        $this->assertTrue($organization->hasAdministratorWithEmail($user->email));
-        $this->assertTrue($organization->hasUserWithEmail($otherUser->email));
-    }
-}
+    $organization = $organization->fresh();
+    expect($organization->hasAdministratorWithEmail($user->email))->toBeTrue();
+    expect($organization->hasUserWithEmail($otherUser->email))->toBeTrue();
+});

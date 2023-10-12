@@ -1,55 +1,46 @@
 <?php
 
-namespace Hearth\Tests\Components;
-
+uses(\Hearth\Tests\TestCase::class);
 use Hearth\Components\Textarea;
-use Hearth\Tests\TestCase;
 
-class TextareaTest extends TestCase
-{
-    public function test_text_area_component_renders()
-    {
-        $view = $this->withViewErrors([])
-            ->component(
-                Textarea::class,
-                ['name' => 'bio', 'value' => '']
-            );
+test('text area component renders', function () {
+    $view = $this->withViewErrors([])
+        ->component(
+            Textarea::class,
+            ['name' => 'bio', 'value' => '']
+        );
 
-        $view->assertSee('name="bio"', false);
-        $view->assertSee('id="bio"', false);
-    }
+    $view->assertSee('name="bio"', false);
+    $view->assertSee('id="bio"', false);
+});
 
-    public function test_text_area_component_references_hint()
-    {
-        $view = $this->withViewErrors([])
-            ->component(
-                Textarea::class,
-                ['name' => 'bio', 'hinted' => true, 'value' => '']
-            );
+test('text area component references hint', function () {
+    $view = $this->withViewErrors([])
+        ->component(
+            Textarea::class,
+            ['name' => 'bio', 'hinted' => true, 'value' => '']
+        );
 
-        $view->assertSee('aria-describedby="bio-hint"', false);
-    }
+    $view->assertSee('aria-describedby="bio-hint"', false);
+});
 
-    public function test_text_area_component_references_supplied_hint_id()
-    {
-        $view = $this->withViewErrors([])
-            ->component(
-                Textarea::class,
-                ['name' => 'bio', 'hinted' => 'my-hint', 'value' => '']
-            );
+test('text area component references supplied hint id', function () {
+    $view = $this->withViewErrors([])
+        ->component(
+            Textarea::class,
+            ['name' => 'bio', 'hinted' => 'my-hint', 'value' => '']
+        );
 
-        $view->assertSee('aria-describedby="my-hint"', false);
-    }
+    $view->assertSee('aria-describedby="my-hint"', false);
+});
 
-    public function test_text_area_component_handles_validation_error()
-    {
-        $view = $this->withViewErrors(['bio' => 'You must enter your bio.'])
-            ->component(
-                Textarea::class,
-                ['name' => 'bio', 'value' => '']
-            );
+test('text area component handles validation error', function () {
+    $view = $this->withViewErrors(['bio' => 'You must enter your bio.'])
+        ->component(
+            Textarea::class,
+            ['name' => 'bio', 'value' => '']
+        );
 
-        $view->assertSee('aria-describedby="bio-error"', false);
-        $view->assertSee('aria-invalid="true"', false);
-    }
-}
+    $view->assertSee('aria-describedby="bio-error"', false);
+    $view->assertSee('aria-invalid="true"', false);
+});
