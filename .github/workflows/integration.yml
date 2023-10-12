@@ -72,7 +72,7 @@ jobs:
         run: |
           cd tests/integration
           php artisan migrate
-          vendor/bin/phpunit
+          php artisan test
 
       - name: Run lint analysis
         run: |
