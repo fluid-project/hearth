@@ -65,12 +65,12 @@ test('add resource', function () {
 
     $resources = Resource::factory(5)->create();
     $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => null]);
-    $sampleAvailableResource = $resourceSelect->availableResources->offsetGet(1);
+    $sampleAvailableResource = $resourceSelect->availableResources->first();
 
     expect(5)->toEqual(count($resourceSelect->availableResources));
     expect(0)->toEqual(count($resourceSelect->selectedResources));
 
-    $resourceSelect->call('addResource', 1);
+    $resourceSelect->call('addResource', $sampleAvailableResource->id);
 
     expect($resourceSelect->selectedResources->pluck('id')->toArray())->toContain($sampleAvailableResource->id);
 
@@ -89,13 +89,14 @@ test('remove resource', function () {
 
     $availableResources = Resource::factory(3)->create();
     $resourceSelect = Livewire::test(ResourceSelect::class, ['resourceCollectionId' => $resourceCollection->id]);
-    $sampleSelectedResource = $resourceSelect->selectedResources[1];
+    $sampleSelectedResource = $resourceSelect->selectedResources->first();
 
     expect(3)->toEqual(count($resourceSelect->availableResources));
     expect(5)->toEqual(count($resourceSelect->selectedResources));
 
-    $resourceSelect->call('removeResource', 1);
-    expect($sampleSelectedResource->id == $resourceSelect->availableResources[3]->id)->toBeTrue();
+    $resourceSelect->call('removeResource', $sampleSelectedResource->id);
+
+    expect($resourceSelect->availableResources->pluck('id')->toArray())->toContain($sampleSelectedResource->id);
 
     expect(4)->toEqual(count($resourceSelect->availableResources));
     expect(4)->toEqual(count($resourceSelect->selectedResources));

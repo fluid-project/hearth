@@ -28,7 +28,7 @@
                         </a>
                     </td>
                     <td>
-                        <button type="button" class="secondary" wire:click="removeResource({{ $i }})"  wire:key="remove-resource-{{ $i }}">
+                        <button type="button" class="secondary" wire:click="removeResource({{ $resource->id }})" wire:key="remove-resource-{{ $i }}">
                             {{ __('resource-select.remove_resource') }}
                             <span class="visually-hidden"> {{ $resource->title }} </span>
                         </button>
@@ -61,7 +61,7 @@
                         </a>
                     </td>
                     <td>
-                        <button type="button" class="secondary" wire:click="addResource({{ $i }})"  wire:key="add-resource-{{ $resource->title }}">
+                        <button type="button" class="secondary" wire:click="addResource({{ $resource->id }})"  wire:key="add-resource-{{ $resource->title }}">
                             {{ __('resource-select.add_resource') }}
                             <span class="visually-hidden"> {{ $resource->title }} </span>
                         </button>
