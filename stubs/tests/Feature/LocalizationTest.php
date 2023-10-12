@@ -1,37 +1,29 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class LocalizationTest extends TestCase
-{
-    use RefreshDatabase;
+uses(RefreshDatabase::class);
 
-    public function test_user_is_redirected_to_preferred_locale_on_login()
-    {
-        $user = User::factory()->create(['locale' => 'fr']);
+test('user is redirected to preferred locale on login', function () {
+    $user = User::factory()->create(['locale' => 'fr']);
 
-        $response = $this->post(localized_route('login'), [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+    $response = $this->post(localized_route('login'), [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(localized_route('dashboard', [], 'fr'));
-    }
+    $this->assertAuthenticated();
+    $response->assertRedirect(localized_route('dashboard', [], 'fr'));
+});
 
-    public function test_user_is_redirected_to_preferred_locale_when_editing_profile()
-    {
-        $user = User::factory()->create(['locale' => 'fr']);
+test('user is redirected to preferred locale when editing profile', function () {
+    $user = User::factory()->create(['locale' => 'fr']);
 
-        $response = $this->withCookie('locale', 'fr')->actingAs($user)->from(localized_route('users.edit'))->put(localized_route('user-profile-information.update'), [
-            'name' => $user->name,
-            'email' => $user->email,
-            'locale' => 'en',
-        ]);
-        $response->assertRedirect(localized_route('users.edit', [], 'en'));
-    }
-}
+    $response = $this->withCookie('locale', 'fr')->actingAs($user)->from(localized_route('users.edit'))->put(localized_route('user-profile-information.update'), [
+        'name' => $user->name,
+        'email' => $user->email,
+        'locale' => 'en',
+    ]);
+    $response->assertRedirect(localized_route('users.edit', [], 'en'));
+});

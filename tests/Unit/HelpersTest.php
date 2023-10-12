@@ -1,59 +1,46 @@
 <?php
 
-namespace Hearth\Tests\Unit;
+uses(\Hearth\Tests\TestCase::class);
+test('get region name in default locale', function () {
+    $result = get_region_name('NS', ['CA']);
+    expect($result)->toEqual('Nova Scotia');
+});
 
-use Hearth\Tests\TestCase;
+test('get region name in alternate locale', function () {
+    $result = get_region_name('NS', ['CA'], 'fr');
+    expect($result)->toEqual('Nouvelle-Écosse');
+});
 
-class HelpersTest extends TestCase
-{
-    public function test_get_region_name_in_default_locale()
-    {
-        $result = get_region_name('NS', ['CA']);
-        $this->assertEquals('Nova Scotia', $result);
-    }
+test('get region name returns null for invalid region', function () {
+    $result = get_region_name('NS', ['US']);
+    expect($result)->toBeNull();
+});
 
-    public function test_get_region_name_in_alternate_locale()
-    {
-        $result = get_region_name('NS', ['CA'], 'fr');
-        $this->assertEquals('Nouvelle-Écosse', $result);
-    }
+test('get regions in default locale', function () {
+    $result = get_regions(['CA']);
+    expect($result)->toContain(['value' => 'NS', 'label' => 'Nova Scotia']);
+});
 
-    public function test_get_region_name_returns_null_for_invalid_region()
-    {
-        $result = get_region_name('NS', ['US']);
-        $this->assertNull($result);
-    }
+test('get regions in alternate locale', function () {
+    $result = get_regions(['CA'], 'fr');
+    expect($result)->toContain(['value' => 'NS', 'label' => 'Nouvelle-Écosse']);
+});
 
-    public function test_get_regions_in_default_locale()
-    {
-        $result = get_regions(['CA']);
-        $this->assertContains(['value' => 'NS', 'label' => 'Nova Scotia'], $result);
-    }
+test('get region codes', function () {
+    $result = get_region_codes(['CA']);
+    expect($result)->toContain('NS');
+});
 
-    public function test_get_regions_in_alternate_locale()
-    {
-        $result = get_regions(['CA'], 'fr');
-        $this->assertContains(['value' => 'NS', 'label' => 'Nouvelle-Écosse'], $result);
-    }
+test('get locale name', function () {
+    $result = get_locale_name('fr');
+    expect($result)->toEqual('French');
 
-    public function test_get_region_codes()
-    {
-        $result = get_region_codes(['CA']);
-        $this->assertContains('NS', $result);
-    }
+    $result = get_locale_name('en', 'fr');
+    expect($result)->toEqual('Anglais');
 
-    public function test_get_locale_name()
-    {
-        $result = get_locale_name('fr');
-        $this->assertEquals('French', $result);
+    $result = get_locale_name('en', 'fr', false);
+    expect($result)->toEqual('anglais');
 
-        $result = get_locale_name('en', 'fr');
-        $this->assertEquals('Anglais', $result);
-
-        $result = get_locale_name('en', 'fr', false);
-        $this->assertEquals('anglais', $result);
-
-        $result = get_locale_name('zz');
-        $this->assertNull($result);
-    }
-}
+    $result = get_locale_name('zz');
+    expect($result)->toBeNull();
+});

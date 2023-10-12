@@ -1,76 +1,66 @@
 <?php
 
-namespace Hearth\Tests\Components;
-
+uses(\Hearth\Tests\TestCase::class);
 use Hearth\Components\Checkbox;
-use Hearth\Tests\TestCase;
 
-class CheckboxTest extends TestCase
-{
-    public function test_checkbox_component_renders()
-    {
-        $view = $this->withViewErrors([])
-            ->component(
-                Checkbox::class,
-                [
-                    'name' => 'remember',
-                ],
-            );
+test('checkbox component renders', function () {
+    $view = $this->withViewErrors([])
+        ->component(
+            Checkbox::class,
+            [
+                'name' => 'remember',
+            ],
+        );
 
-        $view->assertSee('id="remember"', false);
-    }
+    $view->assertSee('id="remember"', false);
+});
 
-    public function test_checkbox_component_references_hint()
-    {
-        $view = $this->withViewErrors([])
-            ->component(
-                Checkbox::class,
-                [
-                    'name' => 'remember',
-                    'hinted' => true,
-                ],
-            );
+test('checkbox component references hint', function () {
+    $view = $this->withViewErrors([])
+        ->component(
+            Checkbox::class,
+            [
+                'name' => 'remember',
+                'hinted' => true,
+            ],
+        );
 
-        $view->assertSee('aria-describedby="remember-hint"', false);
-    }
+    $view->assertSee('aria-describedby="remember-hint"', false);
+});
 
-    public function test_checkbox_component_references_custom_hint()
-    {
-        $view = $this->withViewErrors([])
-            ->component(
-                Checkbox::class,
-                [
-                    'name' => 'remember',
-                    'hinted' => 'remember-login-hint',
-                ],
-            );
+test('checkbox component references custom hint', function () {
+    $view = $this->withViewErrors([])
+        ->component(
+            Checkbox::class,
+            [
+                'name' => 'remember',
+                'hinted' => 'remember-login-hint',
+            ],
+        );
 
-        $view->assertSee('aria-describedby="remember-login-hint"', false);
-    }
+    $view->assertSee('aria-describedby="remember-login-hint"', false);
+});
 
-    public function test_checkbox_component_includes_attribute()
-    {
-        $view = $this->withViewErrors([])
-            ->blade(
-                '<x-hearth-checkbox :name="$name" x-model="remember" />',
-                [
-                    'name' => 'remember',
-                ],
-            );
+test('checkbox component includes attribute', function () {
+    $view = $this->withViewErrors([])
+        ->blade(
+            '<x-hearth-checkbox :name="$name" x-model="remember" />',
+            [
+                'name' => 'remember',
+            ],
+        );
 
-        $view->assertSee('x-model="remember"', false);
-    }
+    $view->assertSee('x-model="remember"', false);
+});
 
-    public function test_checkbox_component_can_be_checked()
-    {
-        $view = $this->withViewErrors([])
-            ->blade(
-                '<x-hearth-checkbox :name="$name" :checked="true" />',
-                [
-                    'name' => 'remember',
-                ],
-            );
+test('checkbox component can be checked', function () {
+    $view = $this->withViewErrors([])
+        ->blade(
+            '<x-hearth-checkbox :name="$name" :checked="true" />',
+            [
+                'name' => 'remember',
+            ],
+        );
 
-        $view->assertSee('checked', false);
-    }
-}
+    $view->assertSee('checked', false);
+});

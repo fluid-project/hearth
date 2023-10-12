@@ -1,63 +1,52 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class AuthenticationTest extends TestCase
-{
-    use RefreshDatabase;
+uses(RefreshDatabase::class);
 
-    public function test_login_screen_can_be_rendered()
-    {
-        $response = $this->get(localized_route('login'));
+test('login screen can be rendered', function () {
+    $response = $this->get(localized_route('login'));
 
-        $response->assertOk();
-    }
+    $response->assertOk();
+});
 
-    public function test_users_can_authenticate_using_the_login_screen()
-    {
-        $user = User::factory()->create();
+test('users can authenticate using the login screen', function () {
+    $user = User::factory()->create();
 
-        $response = $this->post(localized_route('login'), [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+    $response = $this->post(localized_route('login'), [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(localized_route('dashboard'));
-    }
+    $this->assertAuthenticated();
+    $response->assertRedirect(localized_route('dashboard'));
+});
 
-    public function test_users_can_not_authenticate_with_invalid_password()
-    {
-        $user = User::factory()->create();
+test('users can not authenticate with invalid password', function () {
+    $user = User::factory()->create();
 
-        $this->post(localized_route('login'), [
-            'email' => $user->email,
-            'password' => 'wrong-password',
-        ]);
+    $this->post(localized_route('login'), [
+        'email' => $user->email,
+        'password' => 'wrong-password',
+    ]);
 
-        $this->assertGuest();
-    }
+    $this->assertGuest();
+});
 
-    public function test_users_can_edit_own_profiles()
-    {
-        $user = User::factory()->create();
+test('users can edit own profiles', function () {
+    $user = User::factory()->create();
 
-        $response = $this->post(localized_route('login'), [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+    $response = $this->post(localized_route('login'), [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
 
-        $response = $this->get(localized_route('users.edit'));
-        $response->assertOk();
-    }
+    $response = $this->get(localized_route('users.edit'));
+    $response->assertOk();
+});
 
-    public function test_guests_can_not_edit_profiles()
-    {
-        $response = $this->get(localized_route('users.edit'));
-        $response->assertRedirect(localized_route('login'));
-    }
-}
+test('guests can not edit profiles', function () {
+    $response = $this->get(localized_route('users.edit'));
+    $response->assertRedirect(localized_route('login'));
+});

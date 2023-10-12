@@ -1,59 +1,50 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class AccountDeletionTest extends TestCase
-{
-    use RefreshDatabase;
+uses(RefreshDatabase::class);
 
-    public function test_users_can_delete_their_own_accounts()
-    {
-        $user = User::factory()->create();
+test('users can delete their own accounts', function () {
+    $user = User::factory()->create();
 
-        $response = $this->post(localized_route('login'), [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+    $response = $this->post(localized_route('login'), [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
 
-        $this->assertAuthenticated();
+    $this->assertAuthenticated();
 
-        $response = $this->from(localized_route('users.admin'))->delete(localized_route('users.destroy'), [
-            'current_password' => 'password',
-        ]);
+    $response = $this->from(localized_route('users.admin'))->delete(localized_route('users.destroy'), [
+        'current_password' => 'password',
+    ]);
 
-        $this->assertGuest();
+    $this->assertGuest();
 
-        $response->assertRedirect(localized_route('welcome'));
-    }
+    $response->assertRedirect(localized_route('welcome'));
+});
 
-    public function test_users_cannot_delete_their_own_accounts_with_incorrect_password()
-    {
-        $user = User::factory()->create();
+test('users cannot delete their own accounts with incorrect password', function () {
+    $user = User::factory()->create();
 
-        $response = $this->post(localized_route('login'), [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+    $response = $this->post(localized_route('login'), [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
 
-        $this->assertAuthenticated();
+    $this->assertAuthenticated();
 
-        $response = $this->from(localized_route('users.admin'))->delete(localized_route('users.destroy'), [
-            'current_password' => 'wrong_password',
-        ]);
+    $response = $this->from(localized_route('users.admin'))->delete(localized_route('users.destroy'), [
+        'current_password' => 'wrong_password',
+    ]);
 
-        $response->assertRedirect(localized_route('users.admin'));
-    }
+    $response->assertRedirect(localized_route('users.admin'));
+});
 
-    public function test_guests_cannot_delete_accounts()
-    {
-        $user = User::factory()->create();
+test('guests cannot delete accounts', function () {
+    $user = User::factory()->create();
 
-        $response = $this->delete(localized_route('users.destroy'));
+    $response = $this->delete(localized_route('users.destroy'));
 
-        $response->assertRedirect(localized_route('login'));
-    }
-}
+    $response->assertRedirect(localized_route('login'));
+});
