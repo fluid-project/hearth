@@ -78,7 +78,7 @@ jobs:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.php == 8.1 && matrix.stability == 'prefer-stable' }}
       - name: Save code coverage to artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: matrix.php == 8.1
         with:
           name: code-coverage
