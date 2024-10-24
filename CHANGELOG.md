@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.1.1](https://github.com/fluid-project/hearth/compare/v4.1.0...v4.1.1) (2024-10-24)
+
+
+### Bug Fixes
+
+* run integration tests with-all-dependencies ([#216](https://github.com/fluid-project/hearth/issues/216)) ([862eeee](https://github.com/fluid-project/hearth/commit/862eeee46bdb2a6e038eab602c7b209c22cfe797))
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/cache action to v4 ([#204](https://github.com/fluid-project/hearth/issues/204)) ([cdc78af](https://github.com/fluid-project/hearth/commit/cdc78afbae89dc82f3a01609e4bd115664cd6192))
+* **deps:** update github artifact actions to v4 ([#211](https://github.com/fluid-project/hearth/issues/211)) ([0a6c096](https://github.com/fluid-project/hearth/commit/0a6c096f0214ded318e1358177163d879bfeb155))
+* **deps:** update mysql docker tag to v9 ([#213](https://github.com/fluid-project/hearth/issues/213)) ([fc54645](https://github.com/fluid-project/hearth/commit/fc54645c56ffd563ceed84f5148d2be314d586d0))
+* **deps:** update pascalgn/automerge-action action to v0.16.4 ([#203](https://github.com/fluid-project/hearth/issues/203)) ([6c23bf6](https://github.com/fluid-project/hearth/commit/6c23bf69737f16e44b8741b2bd571d0b51b79ba5))
+* set up renovate ([#202](https://github.com/fluid-project/hearth/issues/202)) ([fbdc2f5](https://github.com/fluid-project/hearth/commit/fbdc2f51e5e4f56e4931eeb442e8bc0ce25bd64b))
+
 ## [4.1.0](https://github.com/fluid-project/hearth/compare/v4.0.0...v4.1.0) (2023-10-12)
 
 
