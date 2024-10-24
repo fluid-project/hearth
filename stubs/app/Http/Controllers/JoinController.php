@@ -19,7 +19,9 @@ class JoinController extends Controller
         /** @var Organization */
         $joinable = $request->user()->joinable;
 
-        flash(__('You have cancelled your request to join :team.', ['team' => $joinable->name]), 'success');
+        dump($joinable->getTranslation('name', 'en'));
+
+        flash(__('You have cancelled your request to join :team.', ['team' => $joinable->getTranslation('name', 'en')]), 'success');
 
         $request->user()->forceFill([
             'joinable_type' => null,
