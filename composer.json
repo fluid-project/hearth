@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "chinleung/laravel-locales": "^2.0",
         "chinleung/laravel-multilingual-routes": "^4.0",
         "codezero/laravel-unique-translation": "^4.0",
@@ -48,6 +48,9 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
+        },
+        "platform": {
+            "php": "8.2.24"
         }
     },
     "extra": {
