@@ -105,6 +105,7 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     {
         /** @var Organization */
         $joinable = $this->joinable;
+
         return $joinable && $joinable->id === $model->id;
     }
 
