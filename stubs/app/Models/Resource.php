@@ -15,22 +15,12 @@ class Resource extends Model
     use HasTranslatableSlug;
     use HasTranslations;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
     protected $fillable = [
         'title',
         'user_id',
         'summary',
     ];
 
-    /**
-     * The attributes that are translatable.
-     *
-     * @var array<string>
-     */
     public mixed $translatable = [
         'title',
         'slug',

@@ -16,20 +16,12 @@ class ResourceCollection extends Model
     use HasTranslatableSlug;
     use HasTranslations;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
     protected $fillable = [
         'title',
         'user_id',
         'description',
     ];
 
-    /**
-     * The attributes that are transterms
-     */
     public array $translatable = [
         'title',
         'slug',

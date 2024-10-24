@@ -24,11 +24,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -36,11 +31,6 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
         'locale',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -48,20 +38,10 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
         'two_factor_secret',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The relationships that should be deleted when a user is deleted.
-     *
-     * @var array
-     */
     protected mixed $cascadeDeletes = [
         'organizations',
     ];
