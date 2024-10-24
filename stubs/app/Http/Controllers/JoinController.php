@@ -24,6 +24,8 @@ class JoinController extends Controller
             'joinable_id' => null,
         ])->save();
 
+        dump($joinable->name->en);
+
         flash(__('You have cancelled your request to join :team.', ['team' => $joinable->name]), 'success');
 
         return redirect(\localized_route($joinable->getRoutePrefix().'.show', $joinable));
