@@ -38,7 +38,7 @@
         "nunomaduro/collision": "^7.9",
         "nunomaduro/larastan": "^2.6",
         "orchestra/testbench": "^8.0",
-        "pestphp/pest": "^2.21",
+        "pestphp/pest": "^3.0",
         "spatie/laravel-ray": "^1.26"
     },
     "suggest": {
