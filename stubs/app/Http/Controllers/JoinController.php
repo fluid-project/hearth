@@ -24,10 +24,12 @@ class JoinController extends Controller
             'joinable_id' => null,
         ])->save();
 
-        // TODO: Remove this
-        dump($joinable->name);
+        $substitutions = [
+            'team' => $joinable->name,
+        ];
+        dump($substitutions);
 
-        flash(__('You have cancelled your request to join :team.', ['team' => $joinable->name]), 'success');
+        flash(__('You have cancelled your request to join :team.', $substitutions), 'success');
 
         return redirect(\localized_route($joinable->getRoutePrefix().'.show', $joinable));
     }
