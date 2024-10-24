@@ -56,7 +56,7 @@ test('users can authenticate with two factor code', function () {
     ]);
 
     $response = $this->post(localized_route('two-factor.login'), [
-        'code' => (new Google2FA())->getCurrentOtp(decrypt($user->two_factor_secret)),
+        'code' => (new Google2FA)->getCurrentOtp(decrypt($user->two_factor_secret)),
     ]);
 
     $response->assertRedirect(localized_route('dashboard'));

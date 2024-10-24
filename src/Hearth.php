@@ -2,6 +2,4 @@
 
 namespace Hearth;
 
-class Hearth
-{
-}
+class Hearth {}

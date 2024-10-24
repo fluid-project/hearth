@@ -12,7 +12,7 @@ beforeEach(function () {
 });
 
 test('trans current route uses translated slug', function () {
-    $translatable = new TranslatableModel();
+    $translatable = new TranslatableModel;
 
     $translatable->setTranslation('name', 'en', 'The Fellowship of the Ring');
     $translatable->setTranslation('name', 'fr', 'La communauté de l’anneau');

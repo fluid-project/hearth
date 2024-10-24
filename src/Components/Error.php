@@ -31,8 +31,8 @@ class Error extends Component
     /**
      * Create a new component instance.
      *
-     * @param  string  $for The name of the associated form input.
-     * @param  string  $bag The error bag.
+     * @param  string  $for  The name of the associated form input.
+     * @param  string  $bag  The error bag.
      * @return void
      */
     public function __construct($for, $bag = 'default', $field = null)

@@ -9,14 +9,14 @@ if (! function_exists('get_region_name')) {
     /**
      * Get the name of an administrative subdivision from its code.
      *
-     * @param  string  $code An administrative subdivision code.
-     * @param  array  $countries An array of ISO 3166-1 alpha-2 country codes.
-     * @param  string  $locale An ISO 639-1 language code.
+     * @param  string  $code  An administrative subdivision code.
+     * @param  array  $countries  An array of ISO 3166-1 alpha-2 country codes.
+     * @param  string  $locale  An ISO 639-1 language code.
      * @return null|string The name of the administrative subdivision, if found.
      */
     function get_region_name(string $code, array $countries = ['CA'], string $locale = 'en'): ?string
     {
-        $subdivisionRepository = new SubdivisionRepository();
+        $subdivisionRepository = new SubdivisionRepository;
 
         $subdivision = $subdivisionRepository->get($code, $countries);
 
@@ -32,13 +32,13 @@ if (! function_exists('get_regions')) {
     /**
      * Retrieve an array of administrative subdivisions within a country or countries.
      *
-     * @param  array  $countries An array of ISO 3166-1 alpha-2 country codes.
-     * @param  string  $locale An ISO 639-1 language code.
+     * @param  array  $countries  An array of ISO 3166-1 alpha-2 country codes.
+     * @param  string  $locale  An ISO 639-1 language code.
      * @return array An array of administrative subdivision names keyed by administrative subdivision codes.
      */
     function get_regions(array $countries = ['CA'], string $locale = 'en'): array
     {
-        $subdivisionRepository = new SubdivisionRepository();
+        $subdivisionRepository = new SubdivisionRepository;
 
         $regions = [];
 
@@ -57,12 +57,12 @@ if (! function_exists('get_region_codes')) {
     /**
      * Retrieve an array of administrative subdivision codes within a country or countries.
      *
-     * @param  array  $countries An array of ISO 3166-1 alpha-2 country codes.
+     * @param  array  $countries  An array of ISO 3166-1 alpha-2 country codes.
      * @return array An array of administrative subdivision codes.
      */
     function get_region_codes(array $countries = ['CA']): array
     {
-        $subdivisionRepository = new SubdivisionRepository();
+        $subdivisionRepository = new SubdivisionRepository;
 
         $regions = [];
 
@@ -78,13 +78,13 @@ if (! function_exists('get_locale_name')) {
     /**
      * Get the name of a locale from its code.
      *
-     * @param  string  $code An ISO 639-1 language code.
-     * @param  string  $locale An ISO 639-1 language code (in which the locale name should be returned).
+     * @param  string  $code  An ISO 639-1 language code.
+     * @param  string  $locale  An ISO 639-1 language code (in which the locale name should be returned).
      * @return null|string The localized name of the locale, if found.
      */
     function get_locale_name(string $code, string $locale = 'en', $capitalize = true): ?string
     {
-        $languages = new LanguageRepository();
+        $languages = new LanguageRepository;
 
         try {
             $language = $languages->get($code, $locale);
@@ -100,7 +100,7 @@ if (! function_exists('trans_current_route')) {
     /**
      * Retrieve the current route in another locale.
      */
-    function trans_current_route(string $locale = null, string $fallback = null, bool $absolute = true): string
+    function trans_current_route(?string $locale = null, ?string $fallback = null, bool $absolute = true): string
     {
         if (is_null($fallback)) {
             $fallback = url(request()->server('REQUEST_URI'));

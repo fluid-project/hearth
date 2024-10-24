@@ -20,7 +20,7 @@ class HearthCommand extends Command
     {
         parent::__construct();
 
-        $this->filesystem = new Filesystem();
+        $this->filesystem = new Filesystem;
     }
 
     public function handle()
@@ -203,7 +203,7 @@ class HearthCommand extends Command
         $continue = $this->confirm('Do you want to add support for an additional locale?', true);
 
         if ($continue) {
-            $languages = (new LanguageRepository())->getList();
+            $languages = (new LanguageRepository)->getList();
 
             $language = $this->anticipate('Choose a locale', $languages);
 
