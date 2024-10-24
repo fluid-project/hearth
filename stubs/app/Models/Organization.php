@@ -24,31 +24,16 @@ class Organization extends Model
     use HasTranslations;
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
     protected $fillable = [
         'name',
         'locality',
         'region',
     ];
 
-    /**
-     * The relationships that should be deleted when an organization is deleted.
-     *
-     * @var array
-     */
     protected mixed $cascadeDeletes = [
         'users',
     ];
 
-    /**
-     * The attributes that are translatable.
-     *
-     * @var array<string>
-     */
     public array $translatable = [
         'name',
         'slug',

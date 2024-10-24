@@ -40,7 +40,7 @@ jobs:
         run: |
           cd tests/integration
           composer remove phpunit/phpunit --dev
-          composer require pestphp/pest:^2.0 pestphp/pest-plugin-laravel:^2.0 pestphp/pest-plugin-drift:^2.0 --dev
+          composer require pestphp/pest:^2.0 pestphp/pest-plugin-laravel:^2.0 pestphp/pest-plugin-drift:^2.0 --dev -W
           vendor/bin/pest --init
           vendor/bin/pest --drift
           composer require livewire/livewire:^${{ matrix.livewire }}

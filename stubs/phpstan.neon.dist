@@ -20,4 +20,3 @@ parameters:
       - vendor/chinleung/laravel-locales/src/helpers.php
 
     ignoreErrors: []
-    checkMissingIterableValueType: false

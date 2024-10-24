@@ -9,7 +9,6 @@ parameters:
     level: 5 # The level 9 is the highest level
     ignoreErrors: []
     excludePaths: []
-    checkMissingIterableValueType: false
     scanFiles:
       - vendor/chinleung/laravel-locales/src/helpers.php
     scanDirectories:
