@@ -19,6 +19,8 @@ class JoinController extends Controller
         /** @var Organization */
         $joinable = $request->user()->joinable;
 
+        dd($joinable->name);
+
         $request->user()->forceFill([
             'joinable_type' => null,
             'joinable_id' => null,
