@@ -32,6 +32,6 @@ jobs:
       - name: Run Pint
         run: composer format
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "fix: apply code styling rules"
