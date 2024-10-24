@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class JoinController extends Controller
      */
     public function cancel(Request $request): RedirectResponse
     {
+        /** @var Organization */
         $joinable = $request->user()->joinable;
 
         $request->user()->forceFill([
@@ -32,6 +34,7 @@ class JoinController extends Controller
      */
     public function approve(Request $request, User $user): RedirectResponse
     {
+        /** @var Organization */
         $joinable = $user->joinable;
 
         Gate::forUser($request->user())->authorize('update', $joinable);
@@ -53,6 +56,7 @@ class JoinController extends Controller
      */
     public function deny(Request $request, User $user): RedirectResponse
     {
+        /** @var Organization */
         $joinable = $user->joinable;
 
         Gate::forUser($request->user())->authorize('update', $joinable);
