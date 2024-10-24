@@ -25,7 +25,7 @@ class JoinController extends Controller
         ])->save();
 
         // TODO: Remove this
-        dump($joinable->name->en);
+        dump($joinable->name);
 
         flash(__('You have cancelled your request to join :team.', ['team' => $joinable->name]), 'success');
 
