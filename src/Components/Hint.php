@@ -17,7 +17,7 @@ class Hint extends Component
     /**
      * Create a new component instance.
      *
-     * @param  string  $for The name of the associated form input.
+     * @param  string  $for  The name of the associated form input.
      * @return void
      */
     public function __construct($for)

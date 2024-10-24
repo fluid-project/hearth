@@ -17,8 +17,8 @@ class ResourceSelect extends Component
 
     public function mount(?int $resourceCollectionId)
     {
-        $this->availableResources = new Collection();
-        $this->selectedResources = new Collection();
+        $this->availableResources = new Collection;
+        $this->selectedResources = new Collection;
         if ($resourceCollectionId != null) {
             $resourcesInCollection = ResourceCollection::find($resourceCollectionId)->resources()->get();
             $this->availableResources = Resource::whereNotIn('id', $resourcesInCollection->pluck('id'))->get();
