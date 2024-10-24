@@ -11,7 +11,7 @@ jobs:
       - name: Automerge localizations
         uses: "pascalgn/automerge-action@v0.16.4"
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.PAT_FOR_AUTOMERGE }}"
           MERGE_LABELS: localization
           MERGE_METHOD: squash
           MERGE_COMMIT_MESSAGE: pull-request-title
