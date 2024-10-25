@@ -16,11 +16,11 @@ jobs:
         os:
           - ubuntu-latest
         php: [8.2, 8.3]
-        laravel: [10.*]
+        laravel: [11.*]
         stability: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 10.*
-            testbench: 8.*
+          - laravel: 11.*
+            testbench: 9.*
     services:
       mysql:
         image: mysql:9.1
