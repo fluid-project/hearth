@@ -18,7 +18,7 @@ jobs:
         livewire: [3]
         pest: [3]
 
-    name: Integration tests - PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - Livewire ${{ matrix.livewire }}
+    name: Integration tests - PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
