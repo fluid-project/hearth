@@ -54,10 +54,9 @@ class HearthCommand extends Command
             }
 
             // Resource stubs...
-            $this->filesystem->delete(resource_path('css/app.css'));
-            $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
-            $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
-            $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
+            // $this->filesystem->delete(resource_path('css/app.css'));
+            // $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
+            // $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
 
             // Vite configuration...
             copy(__DIR__.'/../../stubs/vite.config.js', base_path('vite.config.js'));
