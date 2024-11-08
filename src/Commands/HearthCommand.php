@@ -6,7 +6,6 @@ use CommerceGuys\Intl\Language\LanguageRepository;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
 class HearthCommand extends Command
