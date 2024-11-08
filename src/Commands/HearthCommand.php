@@ -58,9 +58,6 @@ class HearthCommand extends Command
             // $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
             // $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
 
-            // Vite configuration...
-            copy(__DIR__.'/../../stubs/vite.config.js', base_path('vite.config.js'));
-
             // Larastan/PHPStan configuration
             copy(__DIR__.'/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
         }
