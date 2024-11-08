@@ -123,15 +123,6 @@ class HearthCommand extends Command
             );
         }
 
-        // Enable two-factor authentication
-        if ($this->option('two-factor')) {
-            $this->replaceInFile(
-                "// Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
-                "Features::twoFactorAuthentication([ 'confirmPassword' => true ]),",
-                config_path('fortify.php')
-            );
-        }
-
         $this->line('');
         $this->info('Hearth scaffolding installed successfully.');
         $this->comment('Please execute "npm install" to install and build your assets.');
