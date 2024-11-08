@@ -58,7 +58,7 @@ class HearthCommand extends Command
             $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
             $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
             $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
-            
+
             // Larastan/PHPStan configuration
             copy(__DIR__.'/../../stubs/phpstan.neon.dist', base_path('phpstan.neon.dist'));
         }
