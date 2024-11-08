@@ -3,7 +3,6 @@ includes:
 
 parameters:
     paths:
-        - config
         - resources
         - src
     level: 5 # The level 9 is the highest level
@@ -11,6 +10,3 @@ parameters:
     excludePaths: []
     scanFiles:
       - vendor/chinleung/laravel-locales/src/helpers.php
-    scanDirectories:
-      - database/factories
-      - stubs/app/Models

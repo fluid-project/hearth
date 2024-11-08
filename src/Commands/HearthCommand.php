@@ -6,6 +6,7 @@ use CommerceGuys\Intl\Language\LanguageRepository;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
 class HearthCommand extends Command
@@ -26,18 +27,6 @@ class HearthCommand extends Command
     public function handle()
     {
         if (! App::environment('testing')) {
-            // Publish vendor files...
-            $this->callSilent('vendor:publish', ['--tag' => 'hearth-config', '--force' => true]);
-            $this->callSilent('vendor:publish', ['--tag' => 'hearth-migrations', '--force' => true]);
-            $this->callSilent('vendor:publish', ['--provider' => 'Laravel\Fortify\FortifyServiceProvider']);
-            $this->callSilent('vendor:publish', [
-                '--provider' => 'ChinLeung\LaravelLocales\LaravelLocalesServiceProvider',
-                '--tag' => 'config',
-            ]);
-            $this->callSilent('vendor:publish', [
-                '--provider' => 'Spatie\GoogleFonts\GoogleFontsServiceProvider',
-                '--tag' => 'google-fonts-config',
-            ]);
 
             // Install NPM packages...
             $this->updateNodePackages(function ($packages) {
@@ -63,12 +52,12 @@ class HearthCommand extends Command
             $this->replaceInFile(
                 '// \Illuminate\Session\Middleware\AuthenticateSession::class,',
                 "\Illuminate\Session\Middleware\AuthenticateSession::class,",
-                app_path('Http/Kernel.php')
+                app_path('bootstrap/app.php')
             );
 
             // DetectRequestLocale Middleware...
             $this->installMiddlewareBefore(
-                '\App\Http\Middleware\EncryptCookies::class',
+                '\Illuminate\Cookie\Middleware\EncryptCookies::class',
                 '\ChinLeung\MultilingualRoutes\DetectRequestLocale::class'
             );
 
@@ -89,9 +78,6 @@ class HearthCommand extends Command
                 app_path('Http/Kernel.php')
             );
 
-            // FortifyServiceProvider...
-            $this->installServiceProviderAfter('RouteServiceProvider', 'FortifyServiceProvider');
-
             // Ensure folders are in place...
             $this->filesystem->ensureDirectoryExists(app_path('Actions/Fortify'));
             $this->filesystem->ensureDirectoryExists(app_path('Http/Requests'));
@@ -103,30 +89,6 @@ class HearthCommand extends Command
             $this->filesystem->ensureDirectoryExists(app_path('Rules'));
             $this->filesystem->ensureDirectoryExists(app_path('View/Components'));
             $this->filesystem->ensureDirectoryExists(lang_path('fr'));
-
-            // App stubs...
-            $app_stubs = array_merge(
-                $this->filesystem->glob(__DIR__.'/../../stubs/app/**/*.php'),
-                $this->filesystem->glob(__DIR__.'/../../stubs/app/**/**/*.php')
-            );
-
-            foreach ($app_stubs as $stub) {
-                copy($stub, str_replace(__DIR__.'/../../stubs/app', app_path(), $stub));
-            }
-
-            // Config stubs...
-            $config_stubs = $this->filesystem->glob(__DIR__.'/../../stubs/config/*.php');
-
-            foreach ($config_stubs as $stub) {
-                copy($stub, str_replace(__DIR__.'/../../stubs/config', config_path(), $stub));
-            }
-
-            // Database factories...
-            $factories = $this->filesystem->glob(__DIR__.'/../../database/factories/*.php');
-
-            foreach ($factories as $stub) {
-                copy($stub, str_replace(__DIR__.'/../../database/factories', base_path('database/factories'), $stub));
-            }
 
             // Language stubs...
             $lang_stubs = $this->filesystem->glob(__DIR__.'/../../stubs/lang/**/*.php');
@@ -140,23 +102,6 @@ class HearthCommand extends Command
             $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/css/', resource_path('css'));
             $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/js/', resource_path('js'));
             $this->filesystem->copyDirectory(__DIR__.'/../../stubs/resources/views/', resource_path('views'));
-
-            // Route stubs...
-            $route_stubs = $this->filesystem->glob(__DIR__.'/../../stubs/routes/*.php');
-
-            foreach ($route_stubs as $stub) {
-                copy($stub, str_replace(__DIR__.'/../../stubs/routes', base_path('routes/'), $stub));
-            }
-
-            // Test stubs...
-            $this->filesystem->delete(base_path('tests/Feature/ExampleTest.php'));
-            $this->filesystem->delete(base_path('tests/Unit/ExampleTest.php'));
-
-            $test_stubs = $this->filesystem->glob(__DIR__.'/../../stubs/tests/**/*.php');
-
-            foreach ($test_stubs as $stub) {
-                copy($stub, str_replace(__DIR__.'/../../stubs/tests', base_path('tests'), $stub));
-            }
 
             // Vite configuration...
             copy(__DIR__.'/../../stubs/vite.config.js', base_path('vite.config.js'));
@@ -236,29 +181,13 @@ class HearthCommand extends Command
     }
 
     /**
-     * Install the service provider in the application configuration file.
-     *
-     * @return void
-     */
-    protected function installServiceProviderAfter(string $after, string $name)
-    {
-        if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\'.$name.'::class')) {
-            file_put_contents(config_path('app.php'), str_replace(
-                'App\\Providers\\'.$after.'::class,',
-                'App\\Providers\\'.$after.'::class,'.PHP_EOL.'        App\\Providers\\'.$name.'::class,',
-                $appConfig
-            ));
-        }
-    }
-
-    /**
      * Install the middleware to a group in the application Http Kernel.
      *
      * @return void
      */
     protected function installMiddlewareBefore(string $before, string $name, string $group = 'web')
     {
-        $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
+        $httpKernel = file_get_contents(app_path('bootstrap/app.php'));
 
         $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['), '];');
         $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
@@ -270,7 +199,7 @@ class HearthCommand extends Command
                 $middlewareGroup,
             );
 
-            file_put_contents(app_path('Http/Kernel.php'), str_replace(
+            file_put_contents(app_path('bootstrap/app.php'), str_replace(
                 $middlewareGroups,
                 str_replace($middlewareGroup, $modifiedMiddlewareGroup, $middlewareGroups),
                 $httpKernel

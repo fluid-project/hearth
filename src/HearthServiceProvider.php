@@ -34,7 +34,6 @@ class HearthServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('hearth')
-            ->hasConfigFile()
             ->hasViews()
             ->hasViewComponent('hearth', Alert::class)
             ->hasViewComponent('hearth', Checkbox::class)
@@ -54,13 +53,6 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasViewComponent('hearth', TranslatableInput::class)
             ->hasViewComponent('hearth', TranslatableTextarea::class)
             ->hasTranslations()
-            ->hasMigrations([
-                'update_users_table',
-                'create_organizations_table',
-                'create_resources_table',
-                'create_resource_collections_table',
-                'create_resource_resource_collections_table',
-            ])
             ->hasCommand(HearthCommand::class);
     }
 

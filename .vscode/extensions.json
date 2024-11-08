@@ -1,9 +1,0 @@
-{
-    "recommendations": [
-        "junstyle.php-cs-fixer",
-        "mehedidracula.php-namespace-resolver",
-        "amiralizadeh9480.laravel-extra-intellisense",
-        "shufo.vscode-blade-formatter",
-        "cjhowe7.laravel-blade"
-    ]
-}
