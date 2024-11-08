@@ -15,8 +15,8 @@ jobs:
       matrix:
         php: [8.2, 8.3]
         laravel: [11]
-        livewire: [3]
         pest: [3]
+        livewire: [3]
 
     name: Integration tests - PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
     steps:
@@ -42,8 +42,8 @@ jobs:
           cd tests/integration
           composer remove phpunit/phpunit --dev
           composer require pestphp/pest:^${{ matrix.pest }} pestphp/pest-plugin-laravel:^${{ matrix.pest }} pestphp/pest-plugin-drift:^${{ matrix.pest }} --dev -W
-          vendor/bin/pest --init
-          vendor/bin/pest --drift
+          PEST_NO_SUPPORT=true vendor/bin/pest --init
+          PEST_NO_SUPPORT=true vendor/bin/pest --drift
           composer require livewire/livewire:^${{ matrix.livewire }}
       - name: Determine Hearth version
         run: |
@@ -63,7 +63,7 @@ jobs:
           cd tests/integration
           php artisan lang:publish
           composer require fluid-project/hearth:dev-${{ env.hearth_version }} --no-interaction
-          php artisan hearth:install --two-factor --no-interaction
+          php artisan hearth:install --no-interaction
           echo 'MAIL_FROM_ADDRESS=from@example.com' >> .env
           npm install
       - name: Run tests
@@ -72,9 +72,7 @@ jobs:
           DB_HOST: localhost
         run: |
           cd tests/integration
-          php artisan migrate
           php artisan test
-
       - name: Run lint analysis
         run: |
           cd tests/integration
