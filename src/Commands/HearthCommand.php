@@ -43,50 +43,7 @@ class HearthCommand extends Command
             });
             $this->flushNodeModules();
 
-            // Name...
-            $this->replaceInFile('APP_NAME=Laravel', 'APP_NAME=Hearth', base_path('.env'));
-            $this->replaceInFile('APP_NAME=Laravel', 'APP_NAME=Hearth', base_path('.env.example'));
-
-            // AuthenticateSession Middleware...
-            $this->replaceInFile(
-                '// \Illuminate\Session\Middleware\AuthenticateSession::class,',
-                "\Illuminate\Session\Middleware\AuthenticateSession::class,",
-                app_path('bootstrap/app.php')
-            );
-
-            // DetectRequestLocale Middleware...
-            $this->installMiddlewareBefore(
-                '\Illuminate\Cookie\Middleware\EncryptCookies::class',
-                '\ChinLeung\MultilingualRoutes\DetectRequestLocale::class'
-            );
-
-            // RedirectToPreferredLocale Middleware...
-            if (! Str::contains(file_get_contents(app_path('Http/Kernel.php')), '\App\Http\Middleware\RedirectToPreferredLocale::class')) {
-                $this->replaceInFile(
-                    "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,",
-                    "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'localize' => \App\Http\Middleware\RedirectToPreferredLocale::class,",
-                    app_path('Http/Kernel.php')
-                );
-            }
-
-            // RequirePassword Middleware...
-            $this->replaceInFile(
-                '\Illuminate\Auth\Middleware\RequirePassword::class',
-                '\App\Http\Middleware\RequirePassword::class',
-                app_path('Http/Kernel.php')
-            );
-
             // Ensure folders are in place...
-            $this->filesystem->ensureDirectoryExists(app_path('Actions/Fortify'));
-            $this->filesystem->ensureDirectoryExists(app_path('Http/Requests'));
-            $this->filesystem->ensureDirectoryExists(app_path('Http/Livewire'));
-            $this->filesystem->ensureDirectoryExists(app_path('Http/Requests/Auth'));
-            $this->filesystem->ensureDirectoryExists(app_path('Http/Responses'));
-            $this->filesystem->ensureDirectoryExists(app_path('Mail'));
-            $this->filesystem->ensureDirectoryExists(app_path('Policies'));
-            $this->filesystem->ensureDirectoryExists(app_path('Rules'));
-            $this->filesystem->ensureDirectoryExists(app_path('View/Components'));
             $this->filesystem->ensureDirectoryExists(lang_path('fr'));
 
             // Language stubs...
