@@ -71,15 +71,6 @@ class HearthCommand extends Command
             $this->maybeAddLocale();
         }
 
-        if (! App::environment('testing')) {
-            // Fonts...
-            $this->replaceInFile(
-                'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400;1,700',
-                'https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&display=swap',
-                config_path('google-fonts.php')
-            );
-        }
-
         $this->line('');
         $this->info('Hearth scaffolding installed successfully.');
         $this->comment('Please execute "npm install" to install and build your assets.');
