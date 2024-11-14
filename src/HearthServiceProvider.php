@@ -29,6 +29,7 @@ class HearthServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('hearth')
+            ->hasAssets()
             ->hasViews()
             ->hasViewComponent('hearth', Alert::class)
             ->hasViewComponent('hearth', Checkbox::class)
