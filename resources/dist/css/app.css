@@ -1,0 +1,85 @@
+@import url(https://fonts.bunny.net/css?family=comic-neue:400,400i,700,700i);
+
+[x-cloak] {
+    display: none !important;
+}
+
+.alert {
+    border: var(--ll-border-thin);
+    border-radius: var(--ll-border-radius);
+    padding: var(--step-0) var(--step-1);
+
+    .title {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        font-weight: 700;
+    }
+}
+
+.date {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.date .field + .field {
+    margin-inline-start: var(--step-0);
+}
+
+.date .field--year input {
+    width: 6ch;
+}
+
+.date .field--day input {
+    width: 4ch;
+}
+
+.date .field--month select {
+    display: block;
+    width: auto;
+}
+
+.date legend,
+.date .field__hint,
+.date [x-show="error"] {
+    width: 100%;
+}
+
+.modal-wrapper {
+    background: rgba(0, 0, 0, 0.75);
+    height: 100vh;
+    left: 0;
+    margin-top: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 999;
+}
+
+.modal {
+    background: white;
+    border-radius: var(--ll-border-radius);
+    border: var(--ll-border-thin);
+    display: block;
+    left: var(--step-0);
+    margin-top: 0em;
+    padding: var(--step-0);
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: calc(100vw - (2 * var(--step-0)));
+    z-index: 999;
+}
+
+.modal > * + * {
+    margin-block-start: 2em;
+}
+
+@media (min-width: 48rem) {
+    .modal {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: auto;
+    }
+}

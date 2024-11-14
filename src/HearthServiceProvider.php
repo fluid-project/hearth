@@ -2,7 +2,6 @@
 
 namespace Hearth;
 
-use Hearth\Commands\HearthCommand;
 use Hearth\Components\Alert;
 use Hearth\Components\Checkbox;
 use Hearth\Components\Checkboxes;
@@ -20,16 +19,12 @@ use Hearth\Components\Select;
 use Hearth\Components\Textarea;
 use Hearth\Components\TranslatableInput;
 use Hearth\Components\TranslatableTextarea;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class HearthServiceProvider extends PackageServiceProvider
 {
-    /**
-     * Configure the PackageServiceProvider.
-     *
-     * @see https://github.com/spatie/laravel-package-tools
-     */
     public function configurePackage(Package $package): void
     {
         $package
@@ -53,20 +48,9 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasViewComponent('hearth', TranslatableInput::class)
             ->hasViewComponent('hearth', TranslatableTextarea::class)
             ->hasTranslations()
-            ->hasCommand(HearthCommand::class);
-    }
-
-    /**
-     * Custom logic which should be run at the end of the boot method of PackageServiceProvider
-     *
-     * @see https://github.com/spatie/laravel-package-tools#using-lifecycle-hooks
-     *
-     * @return void
-     */
-    public function packageBooted()
-    {
-        if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        }
+            ->hasInstallCommand(function(InstallCommand $command) {
+                $command
+                    ->publishAssets();
+            });
     }
 }
