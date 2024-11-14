@@ -48,7 +48,7 @@ class HearthServiceProvider extends PackageServiceProvider
             ->hasViewComponent('hearth', TranslatableInput::class)
             ->hasViewComponent('hearth', TranslatableTextarea::class)
             ->hasTranslations()
-            ->hasInstallCommand(function(InstallCommand $command) {
+            ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishAssets();
             });
