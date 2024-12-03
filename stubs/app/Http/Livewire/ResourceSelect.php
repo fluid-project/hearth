@@ -30,7 +30,7 @@ class ResourceSelect extends Component
 
     public function addResource(int $id): void
     {
-        /** @var ?Resource $resourceToAdd */
+        /** @var ?resource $resourceToAdd */
         $resourceToAdd = $this->availableResources->find($id);
         if ($resourceToAdd) {
             $this->selectedResources->push($resourceToAdd);
@@ -41,7 +41,7 @@ class ResourceSelect extends Component
 
     public function removeResource(int $id): void
     {
-        /** @var ?Resource $resourceToRemove */
+        /** @var ?resource $resourceToRemove */
         $resourceToRemove = $this->selectedResources->find($id);
         if ($resourceToRemove) {
             $this->availableResources->push($resourceToRemove);
