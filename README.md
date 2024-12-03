@@ -1,5 +1,7 @@
 # Hearth
 
+**NOTE: This project is no longer maintained. Please use [fluid-project/hearth-components](https://github.com/fluid-project/hearth-components) instead.**
+
 A simple starter kit for the Laravel framework.
 
 [![Latest Version on Packagist](https://badgen.net/packagist/v/fluid-project/hearth/)](https://packagist.org/packages/fluid-project/hearth)
